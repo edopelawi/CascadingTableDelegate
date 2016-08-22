@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		8D754B8C1D6B0F1E00A1DE01 /* PropagatingTableDelegateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8B1D6B0F1E00A1DE01 /* PropagatingTableDelegateSpec.swift */; };
 		A5158932822D6A8BA58CC3B3 /* Pods_CascadingTableDelegate_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */; };
 		F03A78A9FBD9706B82A4287C /* Pods_CascadingTableDelegate_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D2D7BFA611731F227D287C /* Pods_CascadingTableDelegate_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		845A5CBE254927D69FA41AA4 /* Pods-CascadingTableDelegate_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CascadingTableDelegate_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CascadingTableDelegate_Tests/Pods-CascadingTableDelegate_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		8D754B8B1D6B0F1E00A1DE01 /* PropagatingTableDelegateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateSpec.swift; sourceTree = "<group>"; };
 		8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CascadingTableDelegate_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFEEB5D001B8B76D0D49D6D3 /* CascadingTableDelegate.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CascadingTableDelegate.podspec; path = ../CascadingTableDelegate.podspec; sourceTree = "<group>"; };
 		DA842FA81E6668835CBCD685 /* Pods-CascadingTableDelegate_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CascadingTableDelegate_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CascadingTableDelegate_Tests/Pods-CascadingTableDelegate_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				8D754B8A1D6B0F1E00A1DE01 /* CascadingTableDelegate */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -157,6 +160,14 @@
 				01C02335FFE7CD1D19408D6F /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		8D754B8A1D6B0F1E00A1DE01 /* CascadingTableDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				8D754B8B1D6B0F1E00A1DE01 /* PropagatingTableDelegateSpec.swift */,
+			);
+			path = CascadingTableDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				8D754B8C1D6B0F1E00A1DE01 /* PropagatingTableDelegateSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +538,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CascadingTableDelegate_Example.app/CascadingTableDelegate_Example";
 			};
 			name = Debug;
 		};
@@ -541,6 +554,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CascadingTableDelegate_Example.app/CascadingTableDelegate_Example";
 			};
 			name = Release;
 		};
