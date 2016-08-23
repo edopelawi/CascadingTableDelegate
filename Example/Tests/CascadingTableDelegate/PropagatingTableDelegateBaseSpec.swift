@@ -1,5 +1,5 @@
 //
-//  PropagatingTableDelegateSpec.swift
+//  PropagatingTableDelegateBaseSpec.swift
 //  CascadingTableDelegate
 //
 //  Created by Ricardo Pramana Suranta on 8/22/16.
@@ -10,7 +10,7 @@ import Quick
 import Nimble
 @testable import CascadingTableDelegate
 
-class PropagatingTableDelegateSpec: QuickSpec {
+class PropagatingTableDelegateBaseSpec: QuickSpec {
 	
 	override func spec() {
 		
