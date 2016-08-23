@@ -19,3 +19,26 @@ class PropagatingTableDelegate: NSObject {
 	}
 	
 }
+
+extension PropagatingTableDelegate: CascadingTableDelegate {
+	
+	func prepare(tableView tableView: UITableView) {
+		
+		childDelegates.forEach { delegate in
+			delegate.prepare(tableView: tableView)
+		}
+		
+	}
+}
+
+
+extension PropagatingTableDelegate: UITableViewDataSource {
+	
+	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 0
+	}
+	
+	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		return UITableViewCell()
+	}
+}
