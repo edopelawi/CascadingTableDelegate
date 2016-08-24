@@ -12,6 +12,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		8D5F84EA1D6C2D6A003370B6 /* PropagatingTableDelegateDataSourceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F84E91D6C2D6A003370B6 /* PropagatingTableDelegateDataSourceSpec.swift */; };
 		8D754B8C1D6B0F1E00A1DE01 /* PropagatingTableDelegateBaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8B1D6B0F1E00A1DE01 /* PropagatingTableDelegateBaseSpec.swift */; };
 		8D754B901D6B103400A1DE01 /* CascadingTableDelegateStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateStub.swift */; };
 		A5158932822D6A8BA58CC3B3 /* Pods_CascadingTableDelegate_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */; };
@@ -43,6 +44,7 @@
 		607FACE51AFB9204008FA782 /* CascadingTableDelegate_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CascadingTableDelegate_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		845A5CBE254927D69FA41AA4 /* Pods-CascadingTableDelegate_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CascadingTableDelegate_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CascadingTableDelegate_Tests/Pods-CascadingTableDelegate_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		8D5F84E91D6C2D6A003370B6 /* PropagatingTableDelegateDataSourceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateDataSourceSpec.swift; sourceTree = "<group>"; };
 		8D754B8B1D6B0F1E00A1DE01 /* PropagatingTableDelegateBaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateBaseSpec.swift; sourceTree = "<group>"; };
 		8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateStub.swift; sourceTree = "<group>"; };
 		8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CascadingTableDelegate_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,7 @@
 			children = (
 				8D754B8E1D6B101000A1DE01 /* Stubs */,
 				8D754B8B1D6B0F1E00A1DE01 /* PropagatingTableDelegateBaseSpec.swift */,
+				8D5F84E91D6C2D6A003370B6 /* PropagatingTableDelegateDataSourceSpec.swift */,
 			);
 			path = CascadingTableDelegate;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D754B901D6B103400A1DE01 /* CascadingTableDelegateStub.swift in Sources */,
+				8D5F84EA1D6C2D6A003370B6 /* PropagatingTableDelegateDataSourceSpec.swift in Sources */,
 				8D754B8C1D6B0F1E00A1DE01 /* PropagatingTableDelegateBaseSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

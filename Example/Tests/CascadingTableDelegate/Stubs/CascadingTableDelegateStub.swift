@@ -17,7 +17,7 @@ class CascadingTableDelegateStub: NSObject {
 	var passedTableViewOnPrepare: UITableView?
 	
 	/**
-	Stores latest `UITableViewDataSource` or `UITableViewDelegate` method string signature that called as key, and the parameter as the value.
+	Stores latest `UITableViewDataSource` or `UITableViewDelegate` method `selector` that called as key, and the parameter as the value.
  
 	It will store the parameters as tuple with original sequence as value, if the parameter is more than one.
 	
@@ -55,7 +55,7 @@ extension CascadingTableDelegateStub: UITableViewDataSource {
 		
 		latestCalledDelegateFunction = [ selector: (tableView, section) ]
 		
-		return 0
+		return 1
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
