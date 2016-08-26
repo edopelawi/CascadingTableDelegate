@@ -58,6 +58,8 @@ extension PropagatingTableDelegate: CascadingTableDelegate {
 
 extension PropagatingTableDelegate: UITableViewDataSource {
 	
+	// MARK: - Mandatory methods
+	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		if propagationMode == .Row {
@@ -94,4 +96,23 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		
 		return UITableViewCell()
 	}
+	
+	// MARK: - Optional methods
+	
+	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		return propagationMode == .Section ? childDelegates.count : 0
+	}
+	
+	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		
+		let invalidIndex = (section >= childDelegates.count)
+		
+		if propagationMode == .Row || invalidIndex {
+			return nil
+		}
+		
+		return childDelegates[section].tableView?(tableView, titleForHeaderInSection: section)
+	}
+	
+	
 }
