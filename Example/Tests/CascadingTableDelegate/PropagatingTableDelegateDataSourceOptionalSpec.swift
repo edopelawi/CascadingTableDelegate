@@ -125,24 +125,21 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			context("on .Section propagation mode where the corresponding child implements it", { 
 				
 				var sectionNumber: Int!
+				var expectedTitle: String?
 				var headerTitle: String?
 				
 				beforeEach({ 
 					propagatingTableDelegate.propagationMode = .Section
 					
 					sectionNumber = 1
+					
+					expectedTitle = "Hello!"
+					childDelegates[sectionNumber].returnedStringOptional = expectedTitle
+					
 					headerTitle = propagatingTableDelegate.tableView(tableView, titleForHeaderInSection: sectionNumber)
 				})
 				
-				it("should return result from the child's method", closure: { 
-					
-					guard let completeStub = childDelegates[1] as? CascadingTableDelegateCompleteStub else {
-						fail("Something wrong happened.")
-						return
-					}
-					
-					let expectedTitle = completeStub.tableView(tableView, titleForHeaderInSection: sectionNumber)
-					
+				it("should return result from the child's method", closure: {
 					expect(headerTitle).to(equal(expectedTitle))
 				})
 				
