@@ -15,14 +15,14 @@ class PropagatingTableDelegateBaseSpec: QuickSpec {
 	override func spec() {
 		
 		var propagatingTableDelegate: PropagatingTableDelegate!
-		var childDelegates: [CascadingTableDelegateCompleteStub]!
+		var childDelegates: [CascadingTableDelegateStub]!
 		
 		beforeEach {
 			
 			childDelegates = [
-				CascadingTableDelegateCompleteStub(index: 0, childDelegates: []),
-				CascadingTableDelegateCompleteStub(index: 1, childDelegates: []),
-				CascadingTableDelegateCompleteStub(index: 2, childDelegates: [])
+				CascadingTableDelegateBareStub(index: 0, childDelegates: []),
+				CascadingTableDelegateBareStub(index: 0, childDelegates: []),
+				CascadingTableDelegateBareStub(index: 0, childDelegates: [])
 			]
 			
 			
@@ -44,6 +44,14 @@ class PropagatingTableDelegateBaseSpec: QuickSpec {
 			for childDelegate in childDelegates {
 				expect(childDelegate.prepareCalled).to(beTrue())
 				expect(childDelegate.passedTableViewOnPrepare).to(beIdenticalTo(expectedTableView))
+			}
+		}
+		
+		it("should sort out its child delegate's indexes") { 
+			
+			for (expectedIndex, childDelegate) in childDelegates.enumerate() {
+		
+				expect(childDelegate.index).to(equal(expectedIndex))
 			}
 		}
 	}

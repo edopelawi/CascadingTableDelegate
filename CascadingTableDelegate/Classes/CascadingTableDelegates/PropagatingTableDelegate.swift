@@ -38,8 +38,13 @@ class PropagatingTableDelegate: NSObject {
 	}
 	
 	required init(index: Int, childDelegates: [CascadingTableDelegate]) {
+		
 		self.index = index
 		self.childDelegates = childDelegates
+		
+		super.init()
+		
+		validateChildDelegateIndexes()
 	}
 	
 }
