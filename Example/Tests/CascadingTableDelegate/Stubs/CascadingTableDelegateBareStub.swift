@@ -16,13 +16,33 @@ class CascadingTableDelegateBareStub: NSObject {
 	
 	private var _prepareCalled = false
 	
-	/// Holds latest `UITableView` instance that passed on latest `prepare(tableView:)` call.
 	private var _passedTableViewOnPrepare: UITableView?
 	
-	/// Holds returned `UITableViewCell` instance that returned in tableView(_: cellForRowAtIndexPath:)` call.
 	private let _returnedTableCell = UITableViewCell()
 	
 	private var _latestCalledDelegateMethod = [Selector: Any]()
+	
+	var returnedTableCell: UITableViewCell = UITableViewCell()
+	
+	var returnedInt: Int = 0
+	
+	var returnedStringOptional: String? = nil
+	
+	var returnedStringArrayOptional: [String]? = nil
+	
+	var returnedBool: Bool = false
+	
+	var returnedFloat: CGFloat = CGFloat.min
+	
+	var returnedViewOptional: UIView? = nil
+	
+	var returnedIndexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+	
+	var returnedIndexPathOptional: NSIndexPath? = nil
+	
+	var returnedCellEditingStyle: UITableViewCellEditingStyle = .None
+	
+	var returnedRowActions: [UITableViewRowAction]? = nil
 	
 	required init(index: Int, childDelegates: [CascadingTableDelegate]) {
 		self.index = index
@@ -39,10 +59,6 @@ extension CascadingTableDelegateBareStub: CascadingTableDelegateStub {
 	
 	var passedTableViewOnPrepare: UITableView? {
 		return _passedTableViewOnPrepare
-	}
-	
-	var returnedTableCell: UITableViewCell {
-		return _returnedTableCell
 	}
 	
 	var latestCalledDelegateMethod: [Selector: Any] {
@@ -70,7 +86,7 @@ extension CascadingTableDelegateBareStub: UITableViewDataSource {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, section) ]
 		
-		return 1
+		return returnedInt
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

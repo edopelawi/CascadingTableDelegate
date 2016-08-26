@@ -16,13 +16,33 @@ class CascadingTableDelegateCompleteStub: NSObject {
 	
 	private var _prepareCalled = false
 	
-	/// Holds latest `UITableView` instance that passed on latest `prepare(tableView:)` call.
 	private var _passedTableViewOnPrepare: UITableView?
 	
-	/// Holds returned `UITableViewCell` instance that returned in tableView(_: cellForRowAtIndexPath:)` call.
 	private let _returnedTableCell = UITableViewCell()
 	
 	private var _latestCalledDelegateMethod = [Selector: Any]()
+	
+	var returnedTableCell: UITableViewCell = UITableViewCell()
+	
+	var returnedInt: Int = 0
+	
+	var returnedStringOptional: String? = nil
+	
+	var returnedStringArrayOptional: [String]? = nil
+	
+	var returnedBool: Bool = false
+	
+	var returnedFloat: CGFloat = CGFloat.min
+	
+	var returnedViewOptional: UIView? = nil
+	
+	var returnedIndexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+	
+	var returnedIndexPathOptional: NSIndexPath? = nil
+	
+	var returnedCellEditingStyle: UITableViewCellEditingStyle = .None
+	
+	var returnedRowActions: [UITableViewRowAction]? = nil
 	
 	required init(index: Int, childDelegates: [CascadingTableDelegate]) {
 		self.index = index
@@ -39,10 +59,6 @@ extension CascadingTableDelegateCompleteStub: CascadingTableDelegateStub {
 	
 	var passedTableViewOnPrepare: UITableView? {
 		return _passedTableViewOnPrepare
-	}
-	
-	var returnedTableCell: UITableViewCell {
-		return _returnedTableCell
 	}
 	
 	var latestCalledDelegateMethod: [Selector: Any] {
@@ -70,7 +86,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, section) ]
 		
-		return 1
+		return returnedInt
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -88,7 +104,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		
 		_latestCalledDelegateMethod = [ selector: tableView ]
 		
-		return 0
+		return returnedInt
 	}
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -97,7 +113,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, section) ]
 		
-		return nil
+		return returnedStringOptional
 	}
 	
 	func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -106,7 +122,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return false
+		return returnedBool
 	}
 	
 	func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
@@ -115,7 +131,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		
 		_latestCalledDelegateMethod = [ selector: tableView ]
 		
-		return nil
+		return returnedStringArrayOptional
 	}
 	
 	func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
@@ -124,7 +140,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, title, index) ]
 		
-		return 0
+		return returnedInt
 	}
 	
 	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -195,7 +211,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return CGFloat.min
+		return returnedFloat
 	}
 	
 	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -204,7 +220,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, section) ]
 		
-		return CGFloat.min
+		return returnedFloat
 	}
 	
 	func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -213,7 +229,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, section) ]
 		
-		return CGFloat.min
+		return returnedFloat
 	}
 	
 	func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -222,7 +238,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return CGFloat.min
+		return returnedFloat
 	}
 	
 	
@@ -232,7 +248,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, section) ]
 		
-		return CGFloat.min
+		return returnedFloat
 	}
 	
 	func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
@@ -241,7 +257,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, section) ]
 		
-		return CGFloat.min
+		return returnedFloat
 	}
 	
 	
@@ -251,7 +267,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, section) ]
 		
-		return nil
+		return returnedViewOptional
 	}
 	
 	func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -260,7 +276,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, section) ]
 		
-		return nil
+		return returnedViewOptional
 	}
 
 	
@@ -278,7 +294,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return false
+		return returnedBool
 	}
 	
 	func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
@@ -302,7 +318,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return nil
+		return returnedIndexPathOptional
 	}
 	
 	func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -311,7 +327,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return nil
+		return returnedIndexPathOptional
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -334,7 +350,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return UITableViewCellEditingStyle.None
+		return returnedCellEditingStyle
 	}
 	
 	func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
@@ -343,7 +359,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 
-		return nil
+		return returnedStringOptional
 	}
 	
 	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
@@ -352,7 +368,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return nil
+		return returnedRowActions
 	}
 	
 	func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -361,7 +377,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return false
+		return returnedBool
 	}
 	
 	func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
@@ -394,7 +410,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return 0
+		return returnedInt
 	}
 	
 	func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -403,7 +419,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return false
+		return returnedBool
 	}
 	
 	func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
@@ -412,7 +428,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, action, indexPath, sender)]
 		
-		return false
+		return returnedBool
 	}
 	
 	func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
@@ -429,7 +445,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
-		return false
+		return returnedBool
 	}
 	
 	@available(iOS 9.0, *)
@@ -439,7 +455,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, context) ]
 		
-		return false
+		return returnedBool
 	}
 	
 	@available(iOS 9.0, *)
@@ -457,7 +473,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		
 		_latestCalledDelegateMethod = [ selector: tableView ]
 		
-		return nil
+		return returnedIndexPathOptional
 	}
 	
 }
