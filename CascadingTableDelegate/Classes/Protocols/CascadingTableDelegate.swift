@@ -13,6 +13,8 @@ protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
 	/**
 	Index of this instance in its parent.
 	
+	- warning: On implementation, this value should be corresponding to its `index` number in its parent's `childDelegates`.
+	
 	- note: The passed `NSIndexPath` to this instance's `UITableViewDataSource` and `UITableViewDelegate` method will be affected by this value, e.g. `index` value as `section`, or index as `row`.
 	*/
 	var index: Int { get set }
