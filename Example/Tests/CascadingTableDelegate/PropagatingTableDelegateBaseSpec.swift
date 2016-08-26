@@ -15,14 +15,14 @@ class PropagatingTableDelegateBaseSpec: QuickSpec {
 	override func spec() {
 		
 		var propagatingTableDelegate: PropagatingTableDelegate!
-		var childDelegates: [CascadingTableDelegateStub]!
+		var childDelegates: [CascadingTableDelegateCompleteStub]!
 		
 		beforeEach {
 			
 			childDelegates = [
-				CascadingTableDelegateStub(index: 0, childDelegates: []),
-				CascadingTableDelegateStub(index: 1, childDelegates: []),
-				CascadingTableDelegateStub(index: 2, childDelegates: [])
+				CascadingTableDelegateCompleteStub(index: 0, childDelegates: []),
+				CascadingTableDelegateCompleteStub(index: 1, childDelegates: []),
+				CascadingTableDelegateCompleteStub(index: 2, childDelegates: [])
 			]
 			
 			

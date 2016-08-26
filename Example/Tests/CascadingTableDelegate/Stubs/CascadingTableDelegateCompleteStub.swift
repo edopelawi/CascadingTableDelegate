@@ -1,5 +1,5 @@
 //
-//  CascadingTableDelegateStub.swift
+//  CascadingTableDelegateCompleteStub.swift
 //  CascadingTableDelegate
 //
 //  Created by Ricardo Pramana Suranta on 8/22/16.
@@ -8,7 +8,8 @@
 
 @testable import CascadingTableDelegate
 
-class CascadingTableDelegateStub: NSObject {
+/// `CascadingTableDelegate`-compliant class that implements all method of `UITableViewDelegate` and `UITableViewDataSource`.
+class CascadingTableDelegateCompleteStub: NSObject {
 	
 	var index: Int
 	var childDelegates: [CascadingTableDelegate]
@@ -44,7 +45,7 @@ class CascadingTableDelegateStub: NSObject {
 	}
 }
 
-extension CascadingTableDelegateStub: CascadingTableDelegate {
+extension CascadingTableDelegateCompleteStub: CascadingTableDelegate {
 	
 	func prepare(tableView tableView: UITableView) {
 		prepareCalled = true
@@ -52,7 +53,7 @@ extension CascadingTableDelegateStub: CascadingTableDelegate {
 	}
 }
 
-extension CascadingTableDelegateStub: UITableViewDataSource {
+extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 
 	// TODO: Update these implementations to facilitate tests later.
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -135,7 +136,7 @@ extension CascadingTableDelegateStub: UITableViewDataSource {
 	
 }
 
-extension CascadingTableDelegateStub: UITableViewDelegate {
+extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 	
 	
 	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
