@@ -16,8 +16,38 @@ protocol CascadingTableDelegateStub: CascadingTableDelegate {
 	/// Holds latest `UITableView` instance that passed on latest `prepare(tableView:)` call.
 	var passedTableViewOnPrepare: UITableView? { get }
 	
-	/// Holds returned `UITableViewCell` instance that returned in tableView(_: cellForRowAtIndexPath:)` call.
-	var returnedTableCell: UITableViewCell { get }
+	/// Holds returned `UITableViewCell` instance that returned in any method which returns that value.
+	var returnedTableCell: UITableViewCell { get set }
+	
+	/// Holds returned `Int` value that returned in any method which returns that value.
+	var returnedInt: Int { get set }
+	
+	/// Holds returned `String` optional that returned in any method which returns that value.
+	var returnedStringOptional: String? { get set }
+	
+	/// Holds returned array of `[String]` Optional that returned in any method which returns that value.
+	var returnedStringArrayOptional: [String]? { get set }
+	
+	/// Holds returned `Bool` value that returned in any method which returns that value
+	var returnedBool: Bool { get set }
+	
+	/// Holds returned `CGFloat` value that returned in any method that returns `CGFloat`.
+	var returnedFloat: CGFloat { get set }
+	
+	/// Holds returned `UIView` optional that returned in any method that returns it.
+	var returnedViewOptional: UIView? { get set }
+	
+	/// Holds returned `NSIndexPath` value that returned in any methods that returns that type.
+	var returnedIndexPath: NSIndexPath { get set }
+	
+	/// Holds returned `NSIndexPath` optional that returned in any method that returns that type.
+	var returnedIndexPathOptional: NSIndexPath? { get set }
+	
+	/// Holds returned `UITableViewCellEditingStyle` value that returned in any method that returns that type.
+	var returnedCellEditingStyle: UITableViewCellEditingStyle { get set }
+	
+	/// Holds returned `[UITableViewRowAction]` optional that returned in any method that returns that type.
+	var returnedRowActions: [UITableViewRowAction]? { get set }
 	
 	/**
 	Stores latest `UITableViewDataSource` or `UITableViewDelegate` method `selector` that called as key, and the parameter as the value.
