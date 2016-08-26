@@ -62,18 +62,23 @@ extension CascadingTableDelegate {
 		
 		self.init(index: index, childDelegates: childDelegates)
 		
-		populateChildDelegateIndexes()
+		validateChildDelegateIndexes()
 		
 		if let tableView = tableView {
 			childDelegates.forEach({ $0.prepare(tableView: tableView)})
 		}
 	}
 	
-	private func populateChildDelegateIndexes() {
-
+	/**
+	Convenience method for validating child delegate indexes - so each of it has the corresponding index based on their index in this instance's `childDelegates`.
+	*/
+	func validateChildDelegateIndexes() {
+		
 		childDelegates.enumerate()
 		.forEach { (arrayIndex, child) in
+			
 			child.index = arrayIndex
 		}
 	}
+	
 }
