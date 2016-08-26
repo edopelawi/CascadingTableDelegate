@@ -1,5 +1,5 @@
 //
-//  PropagatingTableDelegateDataSourceSpec.swift
+//  PropagatingTableDelegateDataSourceRequiredSpec.swift
 //  CascadingTableDelegate
 //
 //  Created by Ricardo Pramana Suranta on 8/23/16.
@@ -11,7 +11,7 @@ import Nimble
 
 @testable import CascadingTableDelegate
 
-class PropagatingTableDelegateDataSourceSpec: QuickSpec {
+class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 	
 	override func spec() {
 		
