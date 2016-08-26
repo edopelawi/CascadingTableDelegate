@@ -65,7 +65,7 @@ class PropagatingTableDelegateDataSourceSpec: QuickSpec {
 				it("should not call any of its childDelegates' methods", closure: {
 					
 					for childDelegate in childDelegates {
-						expect(childDelegate.latestCalledDelegateFunction).to(beEmpty())
+						expect(childDelegate.latestCalledDelegateMethod).to(beEmpty())
 					}
 				})
 			})
@@ -101,7 +101,7 @@ class PropagatingTableDelegateDataSourceSpec: QuickSpec {
 					
 					it("should call its childDelegate of corresponding index's method with passed parameters ", closure: {
 						
-						let latestCalledFunction = childDelegates[validIndex].latestCalledDelegateFunction
+						let latestCalledFunction = childDelegates[validIndex].latestCalledDelegateMethod
 						
 						guard let calledMethod = latestCalledFunction.keys.first,
 							let parameters = latestCalledFunction[calledMethod] as? (tableView: UITableView, section: Int) else {
@@ -143,7 +143,7 @@ class PropagatingTableDelegateDataSourceSpec: QuickSpec {
 					it("should not call any of its child delegates' method ", closure: {
 						
 						for childDelegate in childDelegates {
-							expect(childDelegate.latestCalledDelegateFunction).to(beEmpty())
+							expect(childDelegate.latestCalledDelegateMethod).to(beEmpty())
 						}
 					})
 					
@@ -174,7 +174,7 @@ class PropagatingTableDelegateDataSourceSpec: QuickSpec {
 				it("should not call any of its child delegates' method", closure: { 
 					
 					for childDelegate in childDelegates {
-						expect(childDelegate.latestCalledDelegateFunction).to(beEmpty())
+						expect(childDelegate.latestCalledDelegateMethod).to(beEmpty())
 					}
 				})
 				
@@ -199,7 +199,7 @@ class PropagatingTableDelegateDataSourceSpec: QuickSpec {
 				it("should call the corresponding method to child with same index of the section using passed parameters", closure: {
 					
 					let childDelegate = childDelegates[0]
-					let calledMethods = childDelegate.latestCalledDelegateFunction
+					let calledMethods = childDelegate.latestCalledDelegateMethod
 					
 					guard let calledMethod = calledMethods.keys.first,
 						let calledParameters = calledMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
@@ -236,7 +236,7 @@ class PropagatingTableDelegateDataSourceSpec: QuickSpec {
 				
 				it("should not call any of its child delegate's methods", closure: {
 					for childDelegate in childDelegates {
-						expect(childDelegate.latestCalledDelegateFunction).to(beEmpty())
+						expect(childDelegate.latestCalledDelegateMethod).to(beEmpty())
 					}
 				})
 				
@@ -260,7 +260,7 @@ class PropagatingTableDelegateDataSourceSpec: QuickSpec {
 				it("should call corresponding method on child delegate with same index with the row using passed parameters", closure: { 
 					
 					let childDelegate = childDelegates[0]
-					let calledMethods = childDelegate.latestCalledDelegateFunction
+					let calledMethods = childDelegate.latestCalledDelegateMethod
 					
 					guard let calledMethod = calledMethods.keys.first,
 						let calledParameters = calledMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
