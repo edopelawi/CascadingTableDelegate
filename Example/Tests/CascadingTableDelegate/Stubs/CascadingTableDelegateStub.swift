@@ -13,8 +13,14 @@ class CascadingTableDelegateStub: NSObject {
 	var index: Int
 	var childDelegates: [CascadingTableDelegate]
 	
+	/// Marks whether this instance's `prepare(tableView:)` method is called.
 	var prepareCalled = false
+	
+	/// Holds latest `UITableView` instance that passed on latest `prepare(tableView:)` call.
 	var passedTableViewOnPrepare: UITableView?
+	
+	/// Holds returned `UITableViewCell` instance that returned in tableView(_: cellForRowAtIndexPath:)` call.
+	let returnedTableCell = UITableViewCell()
 	
 	/**
 	Stores latest `UITableViewDataSource` or `UITableViewDelegate` method `selector` that called as key, and the parameter as the value.
@@ -64,7 +70,7 @@ extension CascadingTableDelegateStub: UITableViewDataSource {
 		
 		latestCalledDelegateFunction = [ selector: (tableView, indexPath) ]
 		
-		return UITableViewCell()
+		return returnedTableCell
 	}
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
