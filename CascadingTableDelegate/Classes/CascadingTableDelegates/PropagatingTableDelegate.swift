@@ -77,6 +77,21 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		
+		let validSectionMode = (propagationMode == .Section) && (indexPath.section < childDelegates.count)
+		let validRowMode = (propagationMode == .Row) && (indexPath.row < childDelegates.count)
+		
+		if validSectionMode  {
+			
+			let indexSection = indexPath.section
+			return childDelegates[indexSection].tableView(tableView, cellForRowAtIndexPath: indexPath)
+		}
+				
+		if validRowMode {
+			let indexRow = indexPath.row
+			return childDelegates[indexRow].tableView(tableView, cellForRowAtIndexPath: indexPath)
+		}
+		
 		return UITableViewCell()
 	}
 }
