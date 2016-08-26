@@ -16,14 +16,14 @@ class PropagatingTableDelegateDataSourceSpec: QuickSpec {
 	override func spec() {
 		
 		var propagatingTableDelegate: PropagatingTableDelegate!
-		var childDelegates: [CascadingTableDelegateCompleteStub]!
+		var childDelegates: [CascadingTableDelegateStub]!
 		
 		beforeEach { 
 			
 			childDelegates = [
-				CascadingTableDelegateCompleteStub(index: 0, childDelegates: []),
-				CascadingTableDelegateCompleteStub(index: 1, childDelegates: []),
-				CascadingTableDelegateCompleteStub(index: 2, childDelegates: [])
+				CascadingTableDelegateBareStub(index: 0, childDelegates: []),
+				CascadingTableDelegateBareStub(index: 1, childDelegates: []),
+				CascadingTableDelegateBareStub(index: 2, childDelegates: [])
 			]
 			
 			propagatingTableDelegate = PropagatingTableDelegate(
