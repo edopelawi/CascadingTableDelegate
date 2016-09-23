@@ -628,10 +628,6 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			})
 		})
 		
-		pending("sectionIndexTitlesForTableView(tableView: )", {})
-		
-		pending("tableView(_: sectionForSectionIndexTitle: atIndex:)", {})
-		
 		describe("tableView(_: commitEditingStyle: forRowAtIndexPath:)", {
 			
 			var tableView: UITableView!
@@ -741,6 +737,11 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			})
 			
 		})
+		
+		
+		pending("sectionIndexTitlesForTableView(_:)", {})
+		
+		pending("tableView(_: sectionForSectionIndexTitle: atIndex:)", {})
 		
 		pending("tableView(_: moveRowAtIndexPath: toIndexPath:)", {})
 		

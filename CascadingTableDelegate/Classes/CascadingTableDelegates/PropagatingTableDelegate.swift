@@ -8,6 +8,16 @@
 
 import Foundation
 
+/** 
+	A `CascadingTableDelegate`-compliant class that propagates any `UITableViewDelegate` or `UITableViewDataSource` it received to its `childDelegates`, depending on its `propagationMode`.
+
+	- warning: Currently, this class doesn't implement: 
+		- `sectionIndexTitlesForTableView(_:)`, 
+		- `tableView(_: sectionForSectionIndexTitle: atIndex:)`, and 
+		- `tableView(_: moveRowAtIndexPath: toIndexPath:)`,
+
+		since it's unclear how to propagate those methods to its childs.
+*/
 class PropagatingTableDelegate: NSObject {
 	
 	enum PropagationMode {
@@ -161,8 +171,6 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return childDelegates[childIndex].tableView?(tableView, canMoveRowAtIndexPath: indexPath) ?? false
 	}
 	
-	// TODO: Revisit on how we should implement sectionIndex-related methods later.
-	
 	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
 		
 		let childIndex = getChildIndex(indexPath: indexPath)
@@ -175,5 +183,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		
 		childDelegates[childIndex].tableView?(tableView, commitEditingStyle: editingStyle, forRowAtIndexPath: indexPath)
 	}
+	
+	// TODO: Revisit on how we should implement sectionIndex-related methods later.
 	
 }
