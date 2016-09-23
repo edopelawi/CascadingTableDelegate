@@ -13,6 +13,8 @@ protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
 	/**
 	Index of this instance in its parent.
 	
+	- warning: On implementation, this value should be corresponding to its `index` number in its parent's `childDelegates`.
+	
 	- note: The passed `NSIndexPath` to this instance's `UITableViewDataSource` and `UITableViewDelegate` method will be affected by this value, e.g. `index` value as `section`, or index as `row`.
 	*/
 	var index: Int { get set }
@@ -60,18 +62,23 @@ extension CascadingTableDelegate {
 		
 		self.init(index: index, childDelegates: childDelegates)
 		
-		populateChildDelegateIndexes()
+		validateChildDelegateIndexes()
 		
 		if let tableView = tableView {
 			childDelegates.forEach({ $0.prepare(tableView: tableView)})
 		}
 	}
 	
-	private func populateChildDelegateIndexes() {
-
+	/**
+	Convenience method for validating child delegate indexes - so each of it has the corresponding index based on their index in this instance's `childDelegates`.
+	*/
+	func validateChildDelegateIndexes() {
+		
 		childDelegates.enumerate()
 		.forEach { (arrayIndex, child) in
+			
 			child.index = arrayIndex
 		}
 	}
+	
 }
