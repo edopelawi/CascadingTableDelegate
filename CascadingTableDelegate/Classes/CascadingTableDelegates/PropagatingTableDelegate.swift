@@ -47,6 +47,11 @@ class PropagatingTableDelegate: NSObject {
 		validateChildDelegateIndexes()
 	}
 	
+	// MARK: - Private methods 
+	
+	private func getChildIndex(indexPath indexPath: NSIndexPath) -> Int {
+		return (propagationMode == .Row) ? indexPath.row : indexPath.section
+	}
 }
 
 extension PropagatingTableDelegate: CascadingTableDelegate {
@@ -132,7 +137,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	
 	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
 		
-		let childIndex = (propagationMode == .Row) ? indexPath.row : indexPath.section
+		let childIndex = getChildIndex(indexPath: indexPath)
 		
 		let invalidIndex = (childIndex >= childDelegates.count)
 		
@@ -141,6 +146,19 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		}
 		
 		return childDelegates[childIndex].tableView?(tableView, canEditRowAtIndexPath: indexPath) ?? false
+	}
+	
+	func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		
+		let childIndex = getChildIndex(indexPath: indexPath)
+		
+		let invalidIndex = (childIndex >= childDelegates.count)
+		
+		if invalidIndex {
+			return false
+		}
+		
+		return childDelegates[childIndex].tableView?(tableView, canMoveRowAtIndexPath: indexPath) ?? false
 	}
 	
 }

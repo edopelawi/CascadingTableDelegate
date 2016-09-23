@@ -447,7 +447,186 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			})
 		})
 		
-		pending("tableView(_: canMoveRowAtIndexPath:)", {})
+		describe("tableView(_: canMoveRowAtIndexPath:)", {
+		
+			var tableView: UITableView!
+			
+			beforeEach({ 
+				tableView = UITableView(frame: CGRectZero)
+			})
+			
+			context("on .Row propagation mode", {
+				
+				beforeEach({
+					propagatingTableDelegate.propagationMode = .Row
+				})
+				
+				context("with invalid indexPath row value", {
+					
+					var invalidIndexPath: NSIndexPath!
+					var result: Bool!
+					
+					beforeEach({
+						invalidIndexPath = NSIndexPath(forRow: 99, inSection: 0)
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: invalidIndexPath)
+					})
+					
+					it("should return false", closure: {
+						expect(result).to(beFalse())
+					})
+					
+					it("should not call any of its child's method", closure: {
+						for childDelegate in childDelegates {
+							expect(childDelegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("with valid indexPath row value where corresponding child doesn't implement it", {
+					
+					var indexPath: NSIndexPath!
+					var result: Bool!
+					
+					beforeEach({
+						indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: indexPath)
+					})
+					
+					it("should return false", closure: {
+						expect(result).to(beFalse())
+					})
+					
+					it("should not call any of its child's method", closure: {
+						for childDelegate in childDelegates {
+							expect(childDelegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("with valid indexPath row value where corresponding child implements it", {
+					
+					var indexPath: NSIndexPath!
+					
+					var expectedResult: Bool!
+					var result: Bool!
+					
+					beforeEach({
+						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						
+						expectedResult = true
+						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
+						
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: indexPath)
+					})
+					
+					it("should return result from the corresponding childs' method", closure: {
+						expect(result).to(equal(expectedResult))
+					})
+					
+					it("should call corresponding child's method and pass the parameters", closure: {
+						
+						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledMethod = latestMethods.keys.first,
+							let parameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+								fail("tableView(_: canMoveRowAtIndexPath) is not called properly")
+								return
+						}
+						
+						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canMoveRowAtIndexPath:))
+						expect(calledMethod).to(equal(expectedMethod))
+						expect(parameters.tableView).to(equal(tableView))
+						expect(parameters.indexPath).to(equal(indexPath))
+					})
+				})
+			})
+			
+			context("on .Section propagation mode", {
+				
+				beforeEach({
+					propagatingTableDelegate.propagationMode = .Section
+				})
+				
+				context("with invalid indexPath section value", {
+					
+					var invalidIndexPath: NSIndexPath!
+					var result: Bool!
+					
+					beforeEach({
+						invalidIndexPath = NSIndexPath(forRow: 0, inSection: 99)
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: invalidIndexPath)
+					})
+					
+					it("should return false", closure: {
+						expect(result).to(beFalse())
+					})
+					
+					it("should not call any of its child's method", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("with valid indexPath section value where corresponding child doesn't implement it", {
+					
+					var indexPath: NSIndexPath!
+					var result: Bool!
+					
+					beforeEach({
+						indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, canEditRowAtIndexPath: indexPath)
+					})
+					
+					it("should return false", closure: {
+						expect(result).to(beFalse())
+					})
+					
+					it("should not call any of its child's method", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("with valid indexPath section value where corresonding child implements it", {
+					
+					var indexPath: NSIndexPath!
+					var expectedResult: Bool!
+					var result: Bool!
+					
+					beforeEach({
+						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						
+						expectedResult = true
+						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
+						
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: indexPath)
+					})
+					
+					it("should call corresponding child's method with passed parameter", closure: {
+						
+						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledMethod = latestMethods.keys.first,
+							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+								fail("tableView(_: canEditRowAtIndexPath) is not called correctly")
+								return
+						}
+						
+						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canMoveRowAtIndexPath:))
+						
+						expect(calledMethod).to(equal(expectedMethod))
+						expect(calledParameters.tableView).to(equal(tableView))
+						expect(calledParameters.indexPath).to(equal(indexPath))
+					})
+					
+					it("should return the result from corresponding child's method", closure: {
+						expect(result).to(equal(expectedResult))
+					})
+				})
+			})
+		})
 		
 		pending("sectionIndexTitlesForTableView(tableView: )", {})
 		
