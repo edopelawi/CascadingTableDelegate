@@ -119,5 +119,15 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return childDelegates[section].tableView?(tableView, titleForHeaderInSection: section)
 	}
 	
+	func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+		
+		let invalidIndex = (section >= childDelegates.count)
+		
+		if propagationMode == .Row || invalidIndex {
+			return nil
+		}
+		
+		return childDelegates[section].tableView?(tableView, titleForFooterInSection: section)
+	}
 	
 }
