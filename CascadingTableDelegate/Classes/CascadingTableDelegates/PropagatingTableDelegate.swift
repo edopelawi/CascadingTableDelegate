@@ -59,8 +59,20 @@ class PropagatingTableDelegate: NSObject {
 	
 	// MARK: - Private methods 
 	
-	private func getChildIndex(indexPath indexPath: NSIndexPath) -> Int {
-		return (propagationMode == .Row) ? indexPath.row : indexPath.section
+	/**
+	Returns corresponding `Int` for passed `indexPath`. Will return `nil` if passed `indexPath` is invalid.
+	
+	- parameter indexPath: `NSIndexPath` value.
+	
+	- returns: `Int` optional.
+	*/
+	private func getValidChildIndex(indexPath indexPath: NSIndexPath) -> Int? {
+		
+		let childIndex = (propagationMode == .Row) ? indexPath.row : indexPath.section
+		
+		let isValidIndex = (childIndex < childDelegates.count)
+		
+		return isValidIndex ? childIndex : nil
 	}
 }
 
@@ -147,11 +159,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	
 	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
 		
-		let childIndex = getChildIndex(indexPath: indexPath)
-		
-		let invalidIndex = (childIndex >= childDelegates.count)
-		
-		if invalidIndex {
+		guard let childIndex = getValidChildIndex(indexPath: indexPath) else {
 			return false
 		}
 		
@@ -160,11 +168,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	
 	func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
 		
-		let childIndex = getChildIndex(indexPath: indexPath)
-		
-		let invalidIndex = (childIndex >= childDelegates.count)
-		
-		if invalidIndex {
+		guard let childIndex = getValidChildIndex(indexPath: indexPath) else {
 			return false
 		}
 		
@@ -173,11 +177,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	
 	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
 		
-		let childIndex = getChildIndex(indexPath: indexPath)
-		
-		let invalidIndex = (childIndex >= childDelegates.count)
-		
-		if invalidIndex {
+		guard let childIndex = getValidChildIndex(indexPath: indexPath) else {
 			return
 		}
 		
