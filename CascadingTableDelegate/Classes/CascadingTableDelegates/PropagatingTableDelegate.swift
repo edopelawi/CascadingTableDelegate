@@ -161,4 +161,19 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return childDelegates[childIndex].tableView?(tableView, canMoveRowAtIndexPath: indexPath) ?? false
 	}
 	
+	// TODO: Revisit on how we should implement sectionIndex-related methods later.
+	
+	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+		let childIndex = getChildIndex(indexPath: indexPath)
+		
+		let invalidIndex = (childIndex >= childDelegates.count)
+		
+		if invalidIndex {
+			return
+		}
+		
+		childDelegates[childIndex].tableView?(tableView, commitEditingStyle: editingStyle, forRowAtIndexPath: indexPath)
+	}
+	
 }

@@ -632,7 +632,115 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 		
 		pending("tableView(_: sectionForSectionIndexTitle: atIndex:)", {})
 		
-		pending("tableView(_: commitEditingStyle: forRowAtIndexPath:)", {})
+		describe("tableView(_: commitEditingStyle: forRowAtIndexPath:)", {
+			
+			var tableView: UITableView!
+			
+			beforeEach({ 
+				tableView = UITableView(frame: CGRectZero)
+			})
+			
+			context("on .Row propagation mode", { 
+				
+				beforeEach({ 
+					propagatingTableDelegate.propagationMode = .Row
+				})
+				
+				it("should not call its child methods if the corresponding child doesn't implement it", closure: { 
+					
+					let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+					
+					propagatingTableDelegate.tableView(
+						tableView,
+						commitEditingStyle: UITableViewCellEditingStyle.None,
+						forRowAtIndexPath: indexPath
+					)
+					
+					for delegate in childDelegates {
+						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+					}
+				})
+				
+				it("should call the corresponding child's method with the parameters if the child implements it", closure: {
+					
+					let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+					
+					propagatingTableDelegate.tableView(
+						tableView,
+						commitEditingStyle: UITableViewCellEditingStyle.None,
+						forRowAtIndexPath: indexPath
+					)
+					
+					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+					
+					guard let calledMethod = latestMethods.keys.first,
+						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: NSIndexPath) else {
+							
+							fail("tableView(_: editingStyle: indexPath:) is not called correctly")
+							return
+					}
+					
+					let expectedMethod = #selector(UITableViewDataSource.tableView(_:commitEditingStyle:forRowAtIndexPath:))
+					
+					expect(calledMethod).to(equal(expectedMethod))
+					
+					expect(calledParameters.tableView).to(equal(tableView))
+					expect(calledParameters.editingStyle).to(equal(UITableViewCellEditingStyle.None))
+					expect(calledParameters.indexPath).to(equal(indexPath))
+				})
+			})
+			
+			context("on .Row propagation mode", {
+				
+				beforeEach({
+					propagatingTableDelegate.propagationMode = .Section
+				})
+				
+				it("should not call its child methods if the corresponding child doesn't implement it", closure: {
+					
+					let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+					
+					propagatingTableDelegate.tableView(
+						tableView,
+						commitEditingStyle: UITableViewCellEditingStyle.None,
+						forRowAtIndexPath: indexPath
+					)
+					
+					for delegate in childDelegates {
+						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+					}
+				})
+				
+				it("should call the corresponding child's method with the parameters if the child implements it", closure: {
+					
+					let indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+					
+					propagatingTableDelegate.tableView(
+						tableView,
+						commitEditingStyle: UITableViewCellEditingStyle.None,
+						forRowAtIndexPath: indexPath
+					)
+					
+					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+					
+					guard let calledMethod = latestMethods.keys.first,
+						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: NSIndexPath) else {
+							
+							fail("tableView(_: editingStyle: indexPath:) is not called correctly")
+							return
+					}
+					
+					let expectedMethod = #selector(UITableViewDataSource.tableView(_:commitEditingStyle:forRowAtIndexPath:))
+					
+					expect(calledMethod).to(equal(expectedMethod))
+					
+					expect(calledParameters.tableView).to(equal(tableView))
+					expect(calledParameters.editingStyle).to(equal(UITableViewCellEditingStyle.None))
+					expect(calledParameters.indexPath).to(equal(indexPath))
+				})
+			})
+			
+		})
 		
 		pending("tableView(_: moveRowAtIndexPath: toIndexPath:)", {})
 		
