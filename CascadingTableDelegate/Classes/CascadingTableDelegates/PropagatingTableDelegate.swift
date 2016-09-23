@@ -130,4 +130,17 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return childDelegates[section].tableView?(tableView, titleForFooterInSection: section)
 	}
 	
+	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		
+		let childIndex = (propagationMode == .Row) ? indexPath.row : indexPath.section
+		
+		let invalidIndex = (childIndex >= childDelegates.count)
+		
+		if invalidIndex {
+			return false
+		}
+		
+		return childDelegates[childIndex].tableView?(tableView, canEditRowAtIndexPath: indexPath) ?? false
+	}
+	
 }
