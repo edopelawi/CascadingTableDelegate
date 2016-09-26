@@ -207,9 +207,109 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 			})
 		})
 		
-		pending("tableView(_: willDisplayHeaderView: forSection:)", {})
+		describe("tableView(_: willDisplayHeaderView: forSection:)", {
+		
+			
+			var tableView: UITableView!
+			var headerView: UIView!
+			
+			beforeEach({ 
+				tableView = UITableView()
+				headerView = UIView()
+			})
+			
+			context("on .Row propagation mode", { 
+				
+				beforeEach({ 
+					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.tableView(
+						tableView,
+						willDisplayHeaderView: headerView,
+						forSection: 0
+					)
+				})
+				
+				it("should not call any of its child method", closure: {
+					for delegate in childDelegates {
+						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+					}
+				})
+			})
+			
+			context("on .Section propagation mode", { 
+				
+				beforeEach({ 
+					propagatingTableDelegate.propagationMode = .Section
+				})
+				
+				it("should not call any of its method for invalid section number", closure: {
+					
+					propagatingTableDelegate.tableView(
+						tableView,
+						willDisplayHeaderView: headerView,
+						forSection: 999
+					)
+					
+					for delegate in childDelegates {
+						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+					}
+				})
+				
+				it("should not call any of its method for invalid section number", closure: {
+					
+					propagatingTableDelegate.tableView(
+						tableView,
+						willDisplayHeaderView: headerView,
+						forSection: 999
+					)
+					
+					for delegate in childDelegates {
+						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+					}
+				})
+				
+				it("should not call any of its method if corresponding child doesn't implement it", closure: { 
+					
+					propagatingTableDelegate.tableView(
+						tableView,
+						willDisplayHeaderView: headerView,
+						forSection: bareChildDelegateIndex
+					)
+					
+					for delegate in childDelegates {
+						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+					}
+				})
+				
+				it("should call its corresponding child method with the passed parameters if it implements the method", closure: { 
+					
+					propagatingTableDelegate.tableView(
+						tableView,
+						willDisplayHeaderView: headerView,
+						forSection: completeChildDelegateIndex
+					)
+					
+					let expectedMethod = #selector(UITableViewDelegate.tableView(_:willDisplayHeaderView:forSection:))
+					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+					
+					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, headerView: UIView, section: Int) else {
+						fail("tableView(_: headerView: forSection:) is not called correctly.")
+						return
+					}
+					
+					expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+					expect(calledParameters.headerView).to(beIdenticalTo(headerView))
+					expect(calledParameters.section).to(equal(completeChildDelegateIndex))
+				})
+			})
+		
+		})
+		
+		pending("tableView(_: willDisplayFooterView: forSection:)", {})
 		
 		pending("tableView(_: didEndDisplayingCell: forRowAtIndexPath:)", {})
+		
+		pending("tableView(_: didEndDisplayingHeaderView: forSection:)", {})
 		
 		pending("tableView(_: didEndDisplayingFooterView: forSection:)", {})
 	}
