@@ -87,6 +87,7 @@ extension PropagatingTableDelegate: CascadingTableDelegate {
 	}
 }
 
+// MARK: - UITableViewDataSource
 
 extension PropagatingTableDelegate: UITableViewDataSource {
 	
@@ -185,5 +186,24 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	}
 	
 	// TODO: Revisit on how we should implement sectionIndex-related methods later.
+	
+}
+
+// MARK: - UITableViewDelegate
+
+extension PropagatingTableDelegate: UITableViewDelegate {
+	
+	
+	// MARK: - Display Customization 
+	
+	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+		guard let childIndex = getValidChildIndex(indexPath: indexPath) else {
+			return
+		}
+		
+		childDelegates[childIndex].tableView?(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
+		
+	}
 	
 }
