@@ -1,8 +1,8 @@
 //
-//  PropagatingTableDelegateDelegationSpec.swift
+//  PropagatingTableDelegateDisplayCustomizationSpec.swift
 //  CascadingTableDelegate
 //
-//  Created by Ricardo Pramana Suranta on 9/23/16.
+//  Created by Ricardo Pramana Suranta on 9/26/16.
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
@@ -10,7 +10,8 @@ import Quick
 import Nimble
 @testable import CascadingTableDelegate
 
-class PropagatingTableDelegateDelegationSpec: QuickSpec {
+
+class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 	
 	override func spec() {
 		
@@ -32,27 +33,25 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 			)
 		}
 		
-		// Display customization
-		
 		describe("tableView(_: willDisplayCell: forRowAtIndexPath:)", {
 			
 			var tableView: UITableView!
 			var tableCell: UITableViewCell!
 			
-			beforeEach({ 
+			beforeEach({
 				tableView = UITableView()
 				tableCell = UITableViewCell()
 			})
 			
 			context("on .Row propagation mode", {
 				
-				beforeEach({ 
+				beforeEach({
 					propagatingTableDelegate.propagationMode = .Row
 				})
 				
 				context("with invalid indexPath row value", {
 					
-					beforeEach({ 
+					beforeEach({
 						
 						let indexPath = NSIndexPath(forRow: 99, inSection: 0)
 						
@@ -73,7 +72,7 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 				
 				context("where corresponding child doesn't implement the method", {
 					
-					beforeEach({ 
+					beforeEach({
 						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
 						
 						propagatingTableDelegate.tableView(
@@ -83,7 +82,7 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 						)
 					})
 					
-					it("should not call any of its child's method", closure: { 
+					it("should not call any of its child's method", closure: {
 						
 						for delegate in childDelegates {
 							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -91,11 +90,11 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 					})
 				})
 				
-				context("where corresponding child implements the method", { 
+				context("where corresponding child implements the method", {
 					
 					var indexPath: NSIndexPath!
 					
-					beforeEach({ 
+					beforeEach({
 						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
 						
 						propagatingTableDelegate.tableView(
@@ -104,7 +103,7 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 							forRowAtIndexPath: indexPath)
 					})
 					
-					it("should call the child's method using the passed parameters", closure: { 
+					it("should call the child's method using the passed parameters", closure: {
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
@@ -126,13 +125,13 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", { 
+			context("on .Section propagation mode", {
 				
-				beforeEach({ 
+				beforeEach({
 					propagatingTableDelegate.propagationMode = .Section
 				})
 				
-				context("with invalid indexPath section value ", { 
+				context("with invalid indexPath section value ", {
 					
 					beforeEach({
 						let indexPath = NSIndexPath(forRow: 0, inSection: 99)
@@ -144,7 +143,7 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 						)
 					})
 					
-					it("should not call any of its child method", closure: { 
+					it("should not call any of its child method", closure: {
 						
 						for delegate in childDelegates {
 							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -154,7 +153,7 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 				
 				context("where corresponding child doesn't implement the method", {
 					
-					beforeEach({ 
+					beforeEach({
 						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
 						
 						propagatingTableDelegate.tableView(
@@ -164,7 +163,7 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 						)
 					})
 					
-					it("should not call any of its child methods", closure: { 
+					it("should not call any of its child methods", closure: {
 						
 						for delegate in childDelegates {
 							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -172,11 +171,11 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 					})
 				})
 				
-				context("where corresponing child implements the method", { 
+				context("where corresponing child implements the method", {
 					
 					var indexPath: NSIndexPath!
 					
-					beforeEach({ 
+					beforeEach({
 						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
 						
 						propagatingTableDelegate.tableView(
@@ -186,7 +185,7 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 						)
 					})
 					
-					it("should call corresponding child's method with passed parameter", closure: { 
+					it("should call corresponding child's method with passed parameter", closure: {
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
@@ -213,76 +212,5 @@ class PropagatingTableDelegateDelegationSpec: QuickSpec {
 		pending("tableView(_: didEndDisplayingCell: forRowAtIndexPath:)", {})
 		
 		pending("tableView(_: didEndDisplayingFooterView: forSection:)", {})
-		
-		// Variable height support
-		
-		pending("tableView(_: heightForRowAtIndexPath:)", {})
-		
-		pending("tableView(_: heightForHeaderInSection:)", {})
-		
-		pending("tableView(_: heightForFooterInSection:)", {})
-		
-		pending("tableView(_: estimatedHeightForRowAtIndexPath:)", {})
-		
-		pending("tableView(_: estimatedHeightForHeaderInSection:)", {})
-		
-		pending("tableView(_: estimatedHeightForFooterInSection:)", {})
-		
-		// Section header and footer information
-		
-		pending("tableView(_: viewForHeaderInSection:)", {})
-		
-		pending("tableView(_: viewForFooterInSection:)", {})
-		
-		pending("tableView(_: accessoryButtonTappdForRowWithIndexPath:)", {})
-		
-		// Selection
-		
-		pending("tableView(_: shouldHighlightRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didHighlightRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didUnhighlightRowAtIndexPath:)", {})
-		
-		pending("tableView(_: willSelectRowAtIndexPath:)", {})
-		
-		pending("tableView(_: willDeselectRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didSelectRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didDeselectRowAtIndexPath:)", {})
-		
-		// Editing
-		
-		pending("tableView(_: editingStyleForRowAtIndexPath:)", {})
-		
-		pending("tableView(_: titleForDeleteConfirmationButtonForRowAtIndexPath:)", {})
-		
-		pending("tableView(_: editActionsForRowAtIndePath:)", {})
-		
-		pending("tableView(_: shouldIndentWhileEditingRowAtIndexPath:)", {})
-		
-		pending("tableView(_: willBeginEditingRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didEndEditingRowAtIndexPath:)", {})
-		
-		// Moving/reordering
-		
-		pending("tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)", {})
-		
-		// Indentation
-		
-		pending("tableView(_: indentationLevelForRowAtIndexPath:)", {})
-		
-		// Copy / Paste
-		pending("tableView(_: shouldShowMenuForRowAtIndexPath:)", {})
-		pending("tableView(_: canPerformAction: forRowAtIndexPath: withSender:)", {})
-		pending("tableView(_: performAction: forRowAtIndexPath: withSender:)", {})
-		
-		// Focus
-		pending("tableView(_: canFocusRowAtIndexPath:)", {})
-		pending("tableView(_: shouldUpdateFocusInContext)", {})
-		pending("tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)", {})
-		pending("indexPathForPreferredFocusedViewInTableView(_:)", {})
 	}
 }

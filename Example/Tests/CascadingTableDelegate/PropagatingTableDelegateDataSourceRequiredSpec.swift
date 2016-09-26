@@ -59,7 +59,7 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 				})
 				
 				it("should return the number of childDelegates as result", closure: {
-					expect(numberOfRows).to(equal(childDelegates.count))
+					expect(numberOfRows).to(equal(childDelegates.count))					
 				})
 				
 				it("should not call any of its childDelegates' methods", closure: {
