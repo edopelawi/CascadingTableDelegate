@@ -305,12 +305,12 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 		
 		})
 		
-		pending("tableView(_: willDisplayFooterView: forSection:)", {})
-		
-		pending("tableView(_: didEndDisplayingCell: forRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didEndDisplayingHeaderView: forSection:)", {})
-		
-		pending("tableView(_: didEndDisplayingFooterView: forSection:)", {})
+//		pending("tableView(_: willDisplayFooterView: forSection:)", {})
+//		
+//		pending("tableView(_: didEndDisplayingCell: forRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: didEndDisplayingHeaderView: forSection:)", {})
+//		
+//		pending("tableView(_: didEndDisplayingFooterView: forSection:)", {})
 	}
 }

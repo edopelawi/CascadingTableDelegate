@@ -14,9 +14,9 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
 	
 	override func spec() {
 		
-		pending("tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)", {})			
-		
-		pending("tableView(_: indentationLevelForRowAtIndexPath:)", {})
+//		pending("tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)", {})			
+//		
+//		pending("tableView(_: indentationLevelForRowAtIndexPath:)", {})
 
 	}
 }

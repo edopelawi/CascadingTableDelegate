@@ -14,21 +14,21 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
 	
 	override func spec() {
 		
-		pending("tableView(_: accessoryButtonTappedForRowWithIndexPath:)", {})
-		
-		pending("tableView(_: shouldHighlightRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didHighlightRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didUnhighlightRowAtIndexPath:)", {})
-		
-		pending("tableView(_: willSelectRowAtIndexPath:)", {})
-		
-		pending("tableView(_: willDeselectRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didSelectRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didDeselectRowAtIndexPath:)", {})
+//		pending("tableView(_: accessoryButtonTappedForRowWithIndexPath:)", {})
+//		
+//		pending("tableView(_: shouldHighlightRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: didHighlightRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: didUnhighlightRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: willSelectRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: willDeselectRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: didSelectRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: didDeselectRowAtIndexPath:)", {})
 	}
 	
 }

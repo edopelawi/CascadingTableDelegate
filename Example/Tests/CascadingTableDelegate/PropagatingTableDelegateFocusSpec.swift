@@ -14,10 +14,10 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
 	
 	override func spec() {
 		
-		pending("tableView(_: canFocusRowAtIndexPath:)", {})
-		pending("tableView(_: shouldUpdateFocusInContext)", {})
-		pending("tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)", {})
-		pending("indexPathForPreferredFocusedViewInTableView(_:)", {})
+//		pending("tableView(_: canFocusRowAtIndexPath:)", {})
+//		pending("tableView(_: shouldUpdateFocusInContext)", {})
+//		pending("tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)", {})
+//		pending("indexPathForPreferredFocusedViewInTableView(_:)", {})
 	}
 	
 }

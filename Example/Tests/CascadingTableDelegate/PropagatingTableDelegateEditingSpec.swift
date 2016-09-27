@@ -14,16 +14,16 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 
 	override func spec() {
 		
-		pending("tableView(_: editingStyleForRowAtIndexPath:)", {})
-		
-		pending("tableView(_: titleForDeleteConfirmationButtonForRowAtIndexPath:)", {})
-		
-		pending("tableView(_: editActionsForRowAtIndePath:)", {})
-		
-		pending("tableView(_: shouldIndentWhileEditingRowAtIndexPath:)", {})
-		
-		pending("tableView(_: willBeginEditingRowAtIndexPath:)", {})
-		
-		pending("tableView(_: didEndEditingRowAtIndexPath:)", {})
+//		pending("tableView(_: editingStyleForRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: titleForDeleteConfirmationButtonForRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: editActionsForRowAtIndePath:)", {})
+//		
+//		pending("tableView(_: shouldIndentWhileEditingRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: willBeginEditingRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: didEndEditingRowAtIndexPath:)", {})
 	}
 }

@@ -13,8 +13,8 @@ import Nimble
 class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
 	
 	override func spec() {		
-		pending("tableView(_: shouldShowMenuForRowAtIndexPath:)", {})
-		pending("tableView(_: canPerformAction: forRowAtIndexPath: withSender:)", {})
-		pending("tableView(_: performAction: forRowAtIndexPath: withSender:)", {})
+//		pending("tableView(_: shouldShowMenuForRowAtIndexPath:)", {})
+//		pending("tableView(_: canPerformAction: forRowAtIndexPath: withSender:)", {})
+//		pending("tableView(_: performAction: forRowAtIndexPath: withSender:)", {})
 	}
 }

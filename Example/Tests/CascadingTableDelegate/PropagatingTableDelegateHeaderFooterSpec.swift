@@ -14,8 +14,8 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 	
 	override func spec() {
 		
-		pending("tableView(_: viewForHeaderInSection:)", {})
-		
-		pending("tableView(_: viewForFooterInSection:)", {})
+//		pending("tableView(_: viewForHeaderInSection:)", {})
+//		
+//		pending("tableView(_: viewForFooterInSection:)", {})
 	}
 }

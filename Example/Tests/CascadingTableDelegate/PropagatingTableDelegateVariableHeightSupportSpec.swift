@@ -14,17 +14,17 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 	
 	override func spec() {
 		
-		pending("tableView(_: heightForRowAtIndexPath:)", {})
+//		pending("tableView(_: heightForRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: heightForHeaderInSection:)", {})
+//		
+//		pending("tableView(_: heightForFooterInSection:)", {})
+//		
+//		pending("tableView(_: estimatedHeightForRowAtIndexPath:)", {})
+//		
+//		pending("tableView(_: estimatedHeightForHeaderInSection:)", {})
+//		
+//		pending("tableView(_: estimatedHeightForFooterInSection:)", {})
 		
-		pending("tableView(_: heightForHeaderInSection:)", {})
-		
-		pending("tableView(_: heightForFooterInSection:)", {})
-		
-		pending("tableView(_: estimatedHeightForRowAtIndexPath:)", {})
-		
-		pending("tableView(_: estimatedHeightForHeaderInSection:)", {})
-		
-		pending("tableView(_: estimatedHeightForFooterInSection:)", {})
-				
 	}
 }
