@@ -250,4 +250,13 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		childDelegates[section].tableView?(tableView, didEndDisplayingHeaderView: view, forSection: section)
 	}
+	
+	func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return
+		}
+		
+		childDelegates[section].tableView?(tableView, didEndDisplayingFooterView: view, forSection: section)
+	}
 }
