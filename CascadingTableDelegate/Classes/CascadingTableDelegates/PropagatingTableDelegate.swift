@@ -74,6 +74,20 @@ class PropagatingTableDelegate: NSObject {
 		
 		return isValidIndex ? childIndex : nil
 	}
+	
+	/**
+	Returns `true` if passed `sectionIndex` and current `propagationMode` is allowed for section-related method call, and `false` otherwise.
+	
+	- parameter sectionIndex: `Int` representation of section index.
+	
+	- returns: `Bool` value.
+	*/
+	private func isSectionMethodAllowed(sectionIndex sectionIndex: Int) -> Bool {
+		
+		let validIndex = (sectionIndex > 0) && (sectionIndex < childDelegates.count)
+		
+		return validIndex && propagationMode == .Section
+	}
 }
 
 extension PropagatingTableDelegate: CascadingTableDelegate {
@@ -138,9 +152,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
-		let invalidIndex = (section >= childDelegates.count)
-		
-		if propagationMode == .Row || invalidIndex {
+		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return nil
 		}
 		
@@ -149,9 +161,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	
 	func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 		
-		let invalidIndex = (section >= childDelegates.count)
-		
-		if propagationMode == .Row || invalidIndex {
+		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return nil
 		}
 		
@@ -207,9 +217,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 	
 	func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 		
-		let validIndex = (section > 0) && (section < childDelegates.count)
-		
-		guard validIndex && propagationMode == .Section else {
+		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return
 		}
 		
@@ -218,9 +226,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 	
 	func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
 		
-		let validIndex = (section > 0) && (section < childDelegates.count)
-		
-		guard validIndex && propagationMode == .Section else {
+		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return
 		}
 		
@@ -234,5 +240,14 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		}
 		
 		childDelegates[validIndex].tableView?(tableView, didEndDisplayingCell: cell, forRowAtIndexPath: indexPath)
+	}
+	
+	func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return
+		}
+		
+		childDelegates[section].tableView?(tableView, didEndDisplayingHeaderView: view, forSection: section)
 	}
 }
