@@ -203,7 +203,28 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		}
 		
 		childDelegates[childIndex].tableView?(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
+	}
+	
+	func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 		
+		let validIndex = (section > 0) && (section < childDelegates.count)
+		
+		guard validIndex && propagationMode == .Section else {
+			return
+		}
+		
+		childDelegates[section].tableView?(tableView, willDisplayHeaderView: view, forSection: section)
+	}
+	
+	func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+		
+		let validIndex = (section > 0) && (section < childDelegates.count)
+		
+		guard validIndex && propagationMode == .Section else {
+			return
+		}
+		
+		childDelegates[section].tableView?(tableView, willDisplayFooterView: view, forSection: section)
 	}
 	
 }
