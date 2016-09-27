@@ -227,4 +227,12 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		childDelegates[section].tableView?(tableView, willDisplayFooterView: view, forSection: section)
 	}
 	
+	func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return
+		}
+		
+		childDelegates[validIndex].tableView?(tableView, didEndDisplayingCell: cell, forRowAtIndexPath: indexPath)
+	}
 }
