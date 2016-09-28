@@ -259,4 +259,17 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		childDelegates[section].tableView?(tableView, didEndDisplayingFooterView: view, forSection: section)
 	}
+	
+	// MARK: - Height Support
+	
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		
+	
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return CGFloat.min
+		}
+		
+		
+		return childDelegates[validIndex].tableView?(tableView, heightForRowAtIndexPath: indexPath) ?? CGFloat.min
+	}
 }
