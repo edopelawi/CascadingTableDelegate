@@ -259,4 +259,62 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		childDelegates[section].tableView?(tableView, didEndDisplayingFooterView: view, forSection: section)
 	}
+	
+	// MARK: - Height Support
+	
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		
+	
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return CGFloat.min
+		}
+		
+		
+		return childDelegates[validIndex].tableView?(tableView, heightForRowAtIndexPath: indexPath) ?? CGFloat.min
+	}
+	
+	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return CGFloat.min
+		}
+		
+		return childDelegates[section].tableView?(tableView, heightForHeaderInSection: section) ?? CGFloat.min
+	}
+	
+	func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return CGFloat.min
+		}
+		
+		return childDelegates[section].tableView?(tableView, heightForFooterInSection: section) ?? CGFloat.min
+	}
+	
+	func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return CGFloat.min
+		}
+		
+		return childDelegates[validIndex].tableView?(tableView, estimatedHeightForRowAtIndexPath: indexPath) ?? CGFloat.min
+	}
+	
+	func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return CGFloat.min
+		}
+		
+		return childDelegates[section].tableView?(tableView, estimatedHeightForHeaderInSection: section) ?? CGFloat.min
+	}
+	
+	func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return CGFloat.min
+		}
+		
+		return childDelegates[section].tableView?(tableView, estimatedHeightForFooterInSection: section) ?? CGFloat.min
+	}
 }
