@@ -458,8 +458,189 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				
 			})
 		})
-//
-//		pending("tableView(_: estimatedHeightForRowAtIndexPath:)", {})
+		
+		describe("tableView(_: estimatedHeightForRowAtIndexPath:)", {
+			
+			var tableView: UITableView!
+			
+			beforeEach({ 
+				tableView = UITableView()
+			})
+			
+			context("on .Row propagation mode", { 
+				
+				beforeEach({ 
+					propagatingTableDelegate.propagationMode = .Row
+				})
+				
+				context("where indexPath's row value is invalid", { 
+					
+					var result: CGFloat!
+					
+					beforeEach({ 
+						
+						let indexPath = NSIndexPath(forRow: 99, inSection: 0)
+						
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return CGFloat.min as result", closure: { 
+						expect(result).to(equal(CGFloat.min))
+					})
+					
+					it("should not call any of its child's method", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where the corresponding child doesn't implement the method", {
+					
+					var result: CGFloat!
+					
+					beforeEach({ 
+						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return CGFloat.min as result", closure: { 
+						expect(result).to(equal(CGFloat.min))
+					})
+					
+					it("should not call any of its child's method", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where corresponding child implements the method", { 
+					
+					var expectedResult: CGFloat!
+					
+					var result: CGFloat!
+					var indexPath: NSIndexPath!
+					
+					beforeEach({ 
+					
+						expectedResult = CGFloat(37)
+						
+						childDelegates[completeChildDelegateIndex].returnedFloat = expectedResult
+						
+						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return the corresponding child's method result", closure: { 
+						expect(result).to(equal(expectedResult))
+					})
+					
+					it("should call corresponding child's method using passed parameters", closure: { 
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAtIndexPath:))
+						
+						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							fail("tableView(_: estimatedHeightForRowAtIndexPath) not called properly.")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.indexPath).to(equal(indexPath))
+					})
+				})
+			})
+			
+			context("on .Section propagation mode", {
+				
+				beforeEach({
+					propagatingTableDelegate.propagationMode = .Section
+				})
+				
+				context("where indexPath's section value is invalid", {
+					
+					var result: CGFloat!
+					
+					beforeEach({
+						
+						let indexPath = NSIndexPath(forRow: 0, inSection: 99)
+						
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return CGFloat.min as result", closure: {
+						expect(result).to(equal(CGFloat.min))
+					})
+					
+					it("should not call any of its child's method", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where the corresponding child doesn't implement the method", {
+					
+					var result: CGFloat!
+					
+					beforeEach({
+						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return CGFloat.min as result", closure: {
+						expect(result).to(equal(CGFloat.min))
+					})
+					
+					it("should not call any of its child's method", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where corresponding child implements the method", {
+					
+					var expectedResult: CGFloat!
+					
+					var result: CGFloat!
+					var indexPath: NSIndexPath!
+					
+					beforeEach({
+						
+						expectedResult = CGFloat(37)
+						
+						childDelegates[completeChildDelegateIndex].returnedFloat = expectedResult
+						
+						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return the corresponding child's method result", closure: {
+						expect(result).to(equal(expectedResult))
+					})
+					
+					it("should call corresponding child's method using passed parameters", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAtIndexPath:))
+						
+						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							fail("tableView(_: estimatedHeightForRowAtIndexPath) not called properly.")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.indexPath).to(equal(indexPath))
+					})
+				})
+			})
+		})
 //		
 //		pending("tableView(_: estimatedHeightForHeaderInSection:)", {})
 //		

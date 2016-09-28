@@ -290,4 +290,13 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		return childDelegates[section].tableView?(tableView, heightForFooterInSection: section) ?? CGFloat.min
 	}
+	
+	func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {				
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return CGFloat.min
+		}
+		
+		return childDelegates[validIndex].tableView?(tableView, estimatedHeightForRowAtIndexPath: indexPath) ?? CGFloat.min
+	}
 }
