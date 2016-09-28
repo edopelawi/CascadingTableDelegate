@@ -304,8 +304,17 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return CGFloat.min
-		}		
+		}
 		
 		return childDelegates[section].tableView?(tableView, estimatedHeightForHeaderInSection: section) ?? CGFloat.min
+	}
+	
+	func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return CGFloat.min
+		}
+		
+		return childDelegates[section].tableView?(tableView, estimatedHeightForFooterInSection: section) ?? CGFloat.min
 	}
 }

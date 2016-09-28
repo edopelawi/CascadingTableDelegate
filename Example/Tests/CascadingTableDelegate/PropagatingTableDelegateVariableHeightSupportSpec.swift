@@ -742,7 +742,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						
 						guard let calledParameter = latestMethods[expectedMethod] as? (tableView: UITableView, section: Int) else {
 
-							fail("tableView(_: section:) is not called correctly")
+							fail("tableView(_: estimatedHeightForHeaderInSection:) is not called correctly")
 							return
 						}
 						
@@ -752,8 +752,118 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				})
 			})
 		})
-//		
-//		pending("tableView(_: estimatedHeightForFooterInSection:)", {})
+
+		describe("tableView(_: estimatedHeightForFooterInSection:)", {
+			
+			var tableView: UITableView!
+			
+			beforeEach({
+				tableView = UITableView()
+			})
+			
+			context("on .Row propagation method", {
+				
+				var result: CGFloat!
+				
+				beforeEach({
+					propagatingTableDelegate.propagationMode = .Row
+					result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: 0)
+				})
+				
+				it("should return CGFloat.min", closure: {
+					expect(result).to(equal(CGFloat.min))
+				})
+				
+				it("should not call any of its child delegate's methods", closure: {
+					for delegate in childDelegates {
+						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+					}
+				})
+			})
+			
+			context("on .Section propagation method", {
+				
+				beforeEach({
+					propagatingTableDelegate.propagationMode = .Section
+				})
+				
+				context("where invalid section", {
+					
+					var result: CGFloat!
+					
+					beforeEach({
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: 99)
+					})
+					
+					it("should return CGFloat.min", closure: {
+						expect(result).to(equal(CGFloat.min))
+					})
+					
+					it("should not call any of its child's methods", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				
+				context("where corresponding child doesn't implement it", {
+					
+					var result: CGFloat!
+					
+					beforeEach({
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: bareChildDelegateIndex)
+					})
+					
+					it("should return CGFloat.min", closure: {
+						expect(result).to(equal(CGFloat.min))
+					})
+					
+					it("should not call any of its child's methods", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where corresponding child implements it", {
+					
+					var expectedResult: CGFloat!
+					var result: CGFloat!
+					
+					beforeEach({
+						
+						expectedResult = CGFloat(77)
+						
+						childDelegates[completeChildDelegateIndex].returnedFloat = expectedResult
+						
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: completeChildDelegateIndex)
+					})
+					
+					it("should return corresponding child's method result", closure: {
+						
+						expect(result).to(equal(expectedResult))
+					})
+					
+					it("should call corresponding child's method with passed parameter", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:))
+						
+						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameter = latestMethods[expectedMethod] as? (tableView: UITableView, section: Int) else {
+							
+							fail("tableView(_: estimatedHeightForFooterInSection:) is not called correctly")
+							return
+						}
+						
+						expect(calledParameter.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameter.section).to(equal(completeChildDelegateIndex))
+					})
+				})
+			})
+			
+		})
 		
 	}
 }
