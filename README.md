@@ -102,7 +102,7 @@ class PropagatingTableDelegate: NSObject {
 }
 
 ```
-This class implements all the major delegate and data source methods and has `propagationMode` that will propagates the call to its child, except section-specific and data-moving methods (e.g. `tableView(_: moveRowAtIndexPath: toIndexPath:)`), since it's unclear how to propagate them.
+This class implements all the major delegate and data source methods and has `propagationMode` that will propagates the call to its child, except section-specific and data-moving methods (e.g. `tableView(_: moveRowAtIndexPath: toIndexPath:)`), since it's unclear how to propagate them. In the future, the propagating-heavy classes should subclass from this class, and call its method in [Chain-of-responsibility](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) style.
 
 This library is still in progress, and I'd love to have other contributors! Just ask me if you want to contribute :)
 
