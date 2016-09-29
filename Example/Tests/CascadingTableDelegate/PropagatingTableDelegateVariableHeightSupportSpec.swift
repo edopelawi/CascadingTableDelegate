@@ -847,7 +847,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					
 					it("should call corresponding child's method with passed parameter", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
