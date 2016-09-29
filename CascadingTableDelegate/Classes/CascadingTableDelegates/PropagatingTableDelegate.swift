@@ -317,4 +317,25 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		return childDelegates[section].tableView?(tableView, estimatedHeightForFooterInSection: section) ?? CGFloat.min
 	}
+	
+	// MARK: - Header and Footer View
+	
+	func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return nil
+		}
+		
+		return childDelegates[section].tableView?(tableView, viewForHeaderInSection: section)
+	}
+	
+	func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return nil
+		}
+		
+		return childDelegates[section].tableView?(tableView, viewForFooterInSection: section)
+	}
+	
 }
