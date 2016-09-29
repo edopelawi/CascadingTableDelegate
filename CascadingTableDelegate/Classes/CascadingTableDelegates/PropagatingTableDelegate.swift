@@ -338,4 +338,14 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[section].tableView?(tableView, viewForFooterInSection: section)
 	}
 	
+	// MARK: - Editing
+	
+	func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return .None
+		}
+		
+		return childDelegates[validIndex].tableView?(tableView, editingStyleForRowAtIndexPath: indexPath) ?? .None
+	}
 }
