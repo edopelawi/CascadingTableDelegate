@@ -223,7 +223,188 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 			
 		})
 		
-//		pending("tableView(_: titleForDeleteConfirmationButtonForRowAtIndexPath:)", {})
+		describe("tableView(_: titleForDeleteConfirmationButtonForRowAtIndexPath:)", {
+			
+			var tableView: UITableView!
+			
+			beforeEach({ 
+				tableView = UITableView()
+			})
+			
+			context("on .Row propagation mode", { 
+				
+				beforeEach({ 
+					propagatingTableDelegate.propagationMode = .Row
+				})
+				
+				context("with invalid indexPath row value", {
+					
+					var result: String?
+					
+					beforeEach({ 
+						let indexPath = NSIndexPath(forRow: 999, inSection: 0)
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return nil as result", closure: { 
+						expect(result).to(beNil())
+					})
+					
+					it("should not call any of its child's methods", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where corresponding child doesn't implement the method", { 
+					
+					var result: String?
+					
+					beforeEach({ 
+						let indexPath = NSIndexPath(
+							forRow: bareChildDelegateIndex,
+							inSection: 0
+						)
+						
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return nil as result", closure: {
+						expect(result).to(beNil())
+					})
+					
+					it("should not call any of its child's methods", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where corresponding child implements the method", { 
+					
+					var expectedResult: String?
+					var result: String?
+					var indexPath: NSIndexPath!
+					
+					beforeEach({ 
+						expectedResult = "Remove this"
+						childDelegates[completeChildDelegateIndex].returnedStringOptional = expectedResult
+						
+						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return the child's method result", closure: { 
+						expect(result).to(equal(expectedResult))
+					})
+					
+					it("should call the child's method with passed parameters", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:))
+						
+						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							fail("tableView(_: titleForDeleteConfirmationButtonForRowAtIndexPath:) not called correctly")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.indexPath).to(equal(indexPath))
+					})
+					
+				})
+			})
+			
+			context("on .Section propagation mode", {
+				
+				beforeEach({
+					propagatingTableDelegate.propagationMode = .Section
+				})
+				
+				context("with invalid indexPath row value", {
+					
+					var result: String?
+					
+					beforeEach({
+						let indexPath = NSIndexPath(forRow: 0, inSection: 999)
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return nil as result", closure: {
+						expect(result).to(beNil())
+					})
+					
+					it("should not call any of its child's methods", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where corresponding child doesn't implement the method", {
+					
+					var result: String?
+					
+					beforeEach({
+						let indexPath = NSIndexPath(
+							forRow: 0,
+							inSection: bareChildDelegateIndex
+						)
+						
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return nil as result", closure: {
+						expect(result).to(beNil())
+					})
+					
+					it("should not call any of its child's methods", closure: {
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where corresponding child implements the method", {
+					
+					var expectedResult: String?
+					var result: String?
+					var indexPath: NSIndexPath!
+					
+					beforeEach({
+						expectedResult = "Remove this"
+						childDelegates[completeChildDelegateIndex].returnedStringOptional = expectedResult
+						
+						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+					})
+					
+					it("should return the child's method result", closure: {
+						expect(result).to(equal(expectedResult))
+					})
+					
+					it("should call the child's method with passed parameters", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:))
+						
+						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							fail("tableView(_: titleForDeleteConfirmationButtonForRowAtIndexPath:) not called correctly")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.indexPath).to(equal(indexPath))
+					})
+					
+				})
+			})
+		})
 		
 		describe("tableView(_: editActionsForRowAtIndexPath:)", {
 			

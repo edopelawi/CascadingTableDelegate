@@ -349,6 +349,15 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[validIndex].tableView?(tableView, editingStyleForRowAtIndexPath: indexPath) ?? .None
 	}
 	
+	func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return nil
+		}
+		
+		return childDelegates[validIndex].tableView?(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+	}
+	
 	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
