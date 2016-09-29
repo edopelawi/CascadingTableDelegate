@@ -137,7 +137,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					propagatingTableDelegate.propagationMode = .Section
 				})
 				
-				context("with invalid indexPath's row value", {
+				context("with invalid indexPath's section value", {
 					
 					var result: UITableViewCellEditingStyle!
 					
@@ -324,7 +324,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					propagatingTableDelegate.propagationMode = .Section
 				})
 				
-				context("with invalid indexPath row value", {
+				context("with invalid indexPath section value", {
 					
 					var result: String?
 					
@@ -506,7 +506,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					propagatingTableDelegate.propagationMode = .Section
 				})
 				
-				context("with invalid indexPath row value", {
+				context("with invalid indexPath section value", {
 					
 					var result: [UITableViewRowAction]?
 					
@@ -586,8 +586,186 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				})
 			})
 		})
-//		
-//		pending("tableView(_: shouldIndentWhileEditingRowAtIndexPath:)", {})
+		
+		describe("tableView(_: shouldIndentWhileEditingRowAtIndexPath:)", {
+			var tableView: UITableView!
+			
+			beforeEach({ 
+				tableView = UITableView()
+			})
+			
+			context("on .Row propagation mode", { 
+				
+				beforeEach({ 
+					propagatingTableDelegate.propagationMode = .Row
+				})
+				
+				context("when indexPath row has invalid value", { 
+					
+					var result: Bool!
+					
+					beforeEach({
+						let indexPath = NSIndexPath(forRow: 99, inSection: 0)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+					})
+					
+					it("should return false as result", closure: { 
+						expect(result).to(beFalse())
+					})
+					
+					it("should not call any of its child method", closure: {
+						
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where corresponding child doesn't implement the method", {
+					
+					var result: Bool!
+					
+					beforeEach({
+						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+					})
+					
+					it("should return false as result", closure: {
+						expect(result).to(beFalse())
+					})
+					
+					it("should not call any of its child method", closure: {
+						
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("when corresponding child implements the method", {
+					
+					var expectedResult: Bool!
+					var result: Bool!
+					
+					var indexPath: NSIndexPath!
+					
+					beforeEach({
+						
+						expectedResult = true
+						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
+						
+						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+					})
+					
+					it("should return child's method result", closure: {
+						expect(result).to(equal(expectedResult))
+					})
+					
+					it("should call its' child method with the passed parameters", closure: { 
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAtIndexPath:))
+						
+						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							fail("tableView(_: shouldIndentWhileEditingRowAtIndexPath:) not called correctly")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.indexPath).to(equal(indexPath))
+					})
+				})
+			})
+			
+			context("on .Section propagation mode", {
+				
+				beforeEach({
+					propagatingTableDelegate.propagationMode = .Section
+				})
+				
+				context("when indexPath section has invalid value", {
+					
+					var result: Bool!
+					
+					beforeEach({
+						let indexPath = NSIndexPath(forRow: 0, inSection: 99)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+					})
+					
+					it("should return false as result", closure: {
+						expect(result).to(beFalse())
+					})
+					
+					it("should not call any of its child method", closure: {
+						
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("where corresponding child doesn't implement the method", {
+					
+					var result: Bool!
+					
+					beforeEach({
+						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+					})
+					
+					it("should return false as result", closure: {
+						expect(result).to(beFalse())
+					})
+					
+					it("should not call any of its child method", closure: {
+						
+						for delegate in childDelegates {
+							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+						}
+					})
+				})
+				
+				context("when corresponding child implements the method", {
+					
+					var expectedResult: Bool!
+					var result: Bool!
+					
+					var indexPath: NSIndexPath!
+					
+					beforeEach({
+						
+						expectedResult = true
+						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
+						
+						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+					})
+					
+					it("should return child's method result", closure: {
+						expect(result).to(equal(expectedResult))
+					})
+					
+					it("should call its' child method with the passed parameters", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAtIndexPath:))
+						
+						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							fail("tableView(_: shouldIndentWhileEditingRowAtIndexPath:) not called correctly")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.indexPath).to(equal(indexPath))
+					})
+				})
+			})
+		})
 //		
 //		pending("tableView(_: willBeginEditingRowAtIndexPath:)", {})
 //		
