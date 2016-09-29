@@ -5,9 +5,16 @@
 [![License](https://img.shields.io/cocoapods/l/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 [![Platform](https://img.shields.io/cocoapods/p/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 
-In common iOS development, `UITableView` have became the bread and butter for building a rich, large pages. To display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`. `UITableView` only allows an object to become the `delegate` and `dataSource` - which might led to a unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/), usually on the `tableView(_: cellForRowAtIndexPath:)` and such.
+## Why is this library made?
+In common iOS development, `UITableView` have became the bread and butter for building a rich, large pages. To display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. 
 
-This library is loosely inspired by [MVVM architecture](https://en.wikipedia.org/wiki/Model–view–viewmodel), a pattern that increasingly become common in iOS development. In MVVM, a `View` may have child `Views`, and the corresponding `ViewModel` may have child `ViewModels`. This allows us to create cleaner code, where each specific `ViewModel` and `View` only knows about themselves. This is a stark contrast against the `UITableViewDataSource` and `UITableViewDelegate` approach that forces the object / class to know **everything** about the `UITableView` needs. Those protocol implementers need to know the `UITableViewCell` object, its height, the headers and footers, and what happened when user interacts with them.
+`UITableView` only allows an object to become the `delegate` and `dataSource` - which might led to a unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). This usually happen on the most used method, such as `tableView(_: cellForRowAtIndexPath:)` and `tableView(_: heightForRowAtIndexPath)`.
+
+# How is this library fixes that?
+
+This library is loosely inspired by [MVVM architecture](https://en.wikipedia.org/wiki/Model–view–viewmodel), a pattern that increasingly become common in iOS development. In MVVM, a `View` may have child `Views`, and the corresponding `ViewModel` may have child `ViewModels`. This allows us to create cleaner code, where each specific `ViewModel` and `View` only knows about themselves. 
+
+MVVM's approach is a stark contrast against the `UITableViewDataSource` and `UITableViewDelegate`. The default approach forces the object / class to know **everything** about the `UITableView` needs, e.g. what `UITableViewCell` object that should be used, its content, its height, the headers and footers, and what happened when user interacts with them.
 
 This library tries to break down the `UITableViewDelegate` and `UITableViewDataSource` into nested, reusable childs by implementing the [Composite pattern](https://en.wikipedia.org/wiki/Composite_pattern), via the `CascadingTableDelegate` protocol:
 
