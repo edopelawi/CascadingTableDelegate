@@ -384,4 +384,13 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		childDelegates[validIndex].tableView?(tableView, willBeginEditingRowAtIndexPath: indexPath)
 	}
+	
+	func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return
+		}
+		
+		childDelegates[validIndex].tableView?(tableView, didEndEditingRowAtIndexPath: indexPath)
+	}
 }
