@@ -317,4 +317,80 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		return childDelegates[section].tableView?(tableView, estimatedHeightForFooterInSection: section) ?? CGFloat.min
 	}
+	
+	// MARK: - Header and Footer View
+	
+	func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return nil
+		}
+		
+		return childDelegates[section].tableView?(tableView, viewForHeaderInSection: section)
+	}
+	
+	func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+		
+		guard isSectionMethodAllowed(sectionIndex: section) else {
+			return nil
+		}
+		
+		return childDelegates[section].tableView?(tableView, viewForFooterInSection: section)
+	}
+	
+	// MARK: - Editing
+	
+	func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return .None
+		}
+		
+		return childDelegates[validIndex].tableView?(tableView, editingStyleForRowAtIndexPath: indexPath) ?? .None
+	}
+	
+	func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return nil
+		}
+		
+		return childDelegates[validIndex].tableView?(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+	}
+	
+	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return nil
+		}
+		
+		return childDelegates[validIndex].tableView?(tableView, editActionsForRowAtIndexPath: indexPath)
+	}
+	
+	func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return false
+		}
+		
+		return childDelegates[validIndex].tableView?(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath) ?? false
+	}
+	
+	func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return
+		}
+		
+		childDelegates[validIndex].tableView?(tableView, willBeginEditingRowAtIndexPath: indexPath)
+	}
+	
+	func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+		
+		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+			return
+		}
+		
+		childDelegates[validIndex].tableView?(tableView, didEndEditingRowAtIndexPath: indexPath)
+	}
 }
