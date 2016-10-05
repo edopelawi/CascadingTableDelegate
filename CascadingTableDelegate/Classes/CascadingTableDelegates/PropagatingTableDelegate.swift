@@ -404,4 +404,14 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         
         childDelegates[validIndex].tableView?(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
     }
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return false
+        }
+        
+        
+        return childDelegates[validIndex].tableView?(tableView, shouldHighlightRowAtIndexPath: indexPath) ?? false
+    }
 }
