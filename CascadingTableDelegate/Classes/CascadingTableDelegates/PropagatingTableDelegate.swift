@@ -393,4 +393,15 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		childDelegates[validIndex].tableView?(tableView, didEndEditingRowAtIndexPath: indexPath)
 	}
+    
+    // MARK: - Selection
+    
+    func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return
+        }
+        
+        childDelegates[validIndex].tableView?(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+    }
 }
