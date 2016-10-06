@@ -455,6 +455,88 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
             })
         })
         
-//		pending("tableView(_: performAction: forRowAtIndexPath: withSender:)", {})
+		describe("tableView(_: performAction: forRowAtIndexPath: withSender:)", {
+            
+            var tableView: UITableView!
+            
+            beforeEach({ 
+                tableView = UITableView()
+            })
+            
+            context("on .Row propagation mode", { 
+                
+                var action: Selector!
+                var sender: AnyObject?
+                
+                beforeEach({
+                    
+                    action = #selector(UIResponder.copy(_:))
+                    sender = NSObject()
+                    
+                    propagatingTableDelegate.propagationMode = .Row
+                })
+                
+                it("should not call any of its child method for invalid indexPath row value", closure: { 
+                    
+                    let indexPath = NSIndexPath(forRow: 999, inSection: 0)
+                    
+                    propagatingTableDelegate.tableView(
+                        tableView,
+                        performAction: action,
+                        forRowAtIndexPath: indexPath,
+                        withSender: sender
+                    )
+                    
+                    for delegate in childDelegates {
+                        expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+                    }
+                })
+                
+                it("should not call any of its child method when corresponding child doesn't implement it", closure: { 
+                    
+                    let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+                    
+                    propagatingTableDelegate.tableView(
+                        tableView,
+                        performAction: action,
+                        forRowAtIndexPath: indexPath,
+                        withSender: sender
+                    )
+                    
+                    for delegate in childDelegates {
+                        expect(delegate.latestCalledDelegateMethod).to(beEmpty())
+                    }
+                })
+                
+                it("should call corresponding child's method with passed parameters if it implements the method", closure: { 
+                    
+                    let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+                    
+                    propagatingTableDelegate.tableView(
+                        tableView,
+                        performAction: action,
+                        forRowAtIndexPath: indexPath,
+                        withSender: sender
+                    )
+                    
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:performAction:forRowAtIndexPath:withSender:))
+                    
+                    let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
+                    
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: NSIndexPath, sender: AnyObject?) else {
+                        
+                        fail("tableView(_: performAction: forRowAtIndexPath: withSender:) not called correctly")
+                        return
+                    }
+                    
+                    expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+                    expect(calledParameters.action).to(equal(action))
+                    expect(calledParameters.indexPath).to(equal(indexPath))
+                    expect(calledParameters.sender).to(beIdenticalTo(sender))
+                })
+            })
+            
+            
+        })
 	}
 }
