@@ -475,10 +475,20 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     
     
     func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return false
         }
         
         return childDelegates[validIndex].tableView?(tableView, shouldShowMenuForRowAtIndexPath: indexPath) ?? false
+    }
+    
+    func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return false
+        }
+        
+        return childDelegates[validIndex].tableView?(tableView, canPerformAction: action, forRowAtIndexPath: indexPath, withSender: sender) ?? false
     }
 }
