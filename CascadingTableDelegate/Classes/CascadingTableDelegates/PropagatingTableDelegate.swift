@@ -501,4 +501,16 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         childDelegates[validIndex].tableView?(tableView, performAction: action, forRowAtIndexPath: indexPath, withSender: sender)   
         
     }
+    
+    // MARK: - Focus
+        
+    @available(iOS 9.0, *)
+    func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return false
+        }
+        
+        return childDelegates[validIndex].tableView?(tableView, canFocusRowAtIndexPath: indexPath) ?? false
+    }
 }
