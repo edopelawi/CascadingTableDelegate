@@ -1,3 +1,4 @@
+
 //
 //  PropagatingTableDelegate.swift
 //  Pods
@@ -440,5 +441,14 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         }
         
         return childDelegates[validIndex].tableView?(tableView, willSelectRowAtIndexPath: indexPath)
+    }
+    
+    func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return nil
+        }
+        
+        return childDelegates[validIndex].tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
     }
 }
