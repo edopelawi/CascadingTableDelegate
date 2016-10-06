@@ -16,6 +16,9 @@ import Foundation
 		- `sectionIndexTitlesForTableView(_:)`, 
 		- `tableView(_: sectionForSectionIndexTitle: atIndex:)`, and 
 		- `tableView(_: moveRowAtIndexPath: toIndexPath:)`,
+        - `tableView(_: shouldUpdateFocusInContext)`,
+        - `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`,
+        - `indexPathForPreferredFocusedViewInTableView(_:)`,
 
 		since it's unclear how to propagate those methods to its childs.
 */

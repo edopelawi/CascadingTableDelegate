@@ -212,9 +212,10 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
             })
         })
         
-        
 //		pending("tableView(_: shouldUpdateFocusInContext)", {})
+//
 //		pending("tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)", {})
+//        
 //		pending("indexPathForPreferredFocusedViewInTableView(_:)", {})
 	}
 	
