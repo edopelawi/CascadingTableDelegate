@@ -470,4 +470,15 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         
         childDelegates[validIndex].tableView?(tableView, didDeselectRowAtIndexPath: indexPath)        
     }
+    
+    // MARK: - Copy & Paste
+    
+    
+    func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return false
+        }
+        
+        return childDelegates[validIndex].tableView?(tableView, shouldShowMenuForRowAtIndexPath: indexPath) ?? false
+    }
 }
