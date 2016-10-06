@@ -1,3 +1,4 @@
+
 //
 //  PropagatingTableDelegate.swift
 //  Pods
@@ -393,4 +394,80 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 		childDelegates[validIndex].tableView?(tableView, didEndEditingRowAtIndexPath: indexPath)
 	}
+    
+    // MARK: - Selection
+    
+    func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return
+        }
+        
+        childDelegates[validIndex].tableView?(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+    }
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return false
+        }
+        
+        
+        return childDelegates[validIndex].tableView?(tableView, shouldHighlightRowAtIndexPath: indexPath) ?? false
+    }
+    
+    func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return
+        }
+        
+        childDelegates[validIndex].tableView?(tableView, didHighlightRowAtIndexPath: indexPath)
+    }
+    
+    func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return
+        }
+        
+        childDelegates[validIndex].tableView?(tableView, didUnhighlightRowAtIndexPath: indexPath)
+    }
+    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return nil
+        }
+        
+        return childDelegates[validIndex].tableView?(tableView, willSelectRowAtIndexPath: indexPath)
+    }
+    
+    func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return nil
+        }
+        
+        return childDelegates[validIndex].tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return
+        }
+        
+        childDelegates[validIndex].tableView?(tableView, didSelectRowAtIndexPath: indexPath)
+    }
+    
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return
+        }
+        
+        childDelegates[validIndex].tableView?(tableView, didDeselectRowAtIndexPath: indexPath)        
+    }
 }
