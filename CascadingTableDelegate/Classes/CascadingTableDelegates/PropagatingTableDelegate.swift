@@ -451,4 +451,13 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         
         return childDelegates[validIndex].tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return
+        }
+        
+        childDelegates[validIndex].tableView?(tableView, didSelectRowAtIndexPath: indexPath)
+    }
 }
