@@ -13,9 +13,13 @@ import Foundation
 	A `CascadingTableDelegate`-compliant class that propagates any `UITableViewDelegate` or `UITableViewDataSource` it received to its `childDelegates`, depending on its `propagationMode`.
 
 	- warning: Currently, this class doesn't implement: 
-		- `sectionIndexTitlesForTableView(_:)`, 
-		- `tableView(_: sectionForSectionIndexTitle: atIndex:)`, and 
-		- `tableView(_: moveRowAtIndexPath: toIndexPath:)`,
+		- `sectionIndexTitlesForTableView(_:)`
+		- `tableView(_: sectionForSectionIndexTitle: atIndex:)`
+		- `tableView(_: moveRowAtIndexPath: toIndexPath:)`
+        - `tableView(_: shouldUpdateFocusInContext)`
+        - `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`
+        - `indexPathForPreferredFocusedViewInTableView(_:)`
+        - `tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
 
 		since it's unclear how to propagate those methods to its childs.
 */
@@ -500,5 +504,29 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         
         childDelegates[validIndex].tableView?(tableView, performAction: action, forRowAtIndexPath: indexPath, withSender: sender)   
         
+    }
+    
+    // MARK: - Focus
+        
+    @available(iOS 9.0, *)
+    func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return false
+        }
+        
+        return childDelegates[validIndex].tableView?(tableView, canFocusRowAtIndexPath: indexPath) ?? false
+    }
+    
+    
+    // MARK: - Reorder
+    
+    func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+        
+        guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
+            return 0
+        }
+        
+        return childDelegates[validIndex].tableView?(tableView, indentationLevelForRowAtIndexPath: indexPath) ?? 0
     }
 }
