@@ -456,7 +456,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 	
 	func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAtIndexPath:withSender:))
+		let selector = #selector(UITableViewDelegate.tableView(_:performAction:forRowAtIndexPath:withSender:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, action, indexPath, sender) ]
 	}
