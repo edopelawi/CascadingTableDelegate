@@ -108,9 +108,8 @@ This library is still in progress, and I'd love to have other contributors! Just
 
 ## TODOs
 
-- Finish `PropagatingTableDelegate`
-- Create root level, ready-to-use `CascadingTableDelegate`-compliant class
-- Update to Swift 3.
+- Create root level, ready-to-use `CascadingTableDelegate`-compliant class.
+- Update to Swift 3 and check for new delegates in iOS 10.
 - Create sample for a page with rich and long content.
 - Publish to GitHub.
 - (Later) Create section and row level `CascadingTableDelegate`-compliant class that enables this library to be used easily.
