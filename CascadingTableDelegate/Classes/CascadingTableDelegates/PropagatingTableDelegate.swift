@@ -23,9 +23,9 @@ A `CascadingTableDelegate`-compliant class that propagates any `UITableViewDeleg
 
  since it's unclear how to propagate those methods to its childs.
 */
-class PropagatingTableDelegate: NSObject {
+public class PropagatingTableDelegate: NSObject {
 	
-	enum PropagationMode {
+	public enum PropagationMode {
 		
 		/** 
 		Uses `section` of passed `indexPath` on this instance methods to choose the index of `childDelegate` that will have its method called.
@@ -42,9 +42,10 @@ class PropagatingTableDelegate: NSObject {
 		case Row
 	}
 	
-	var index: Int
-	var childDelegates: [CascadingTableDelegate]
-	var propagationMode: PropagationMode = .Section
+	public var index: Int
+	public var childDelegates: [CascadingTableDelegate]
+	
+    public var propagationMode: PropagationMode = .Section
 	
 	convenience init(index: Int, childDelegates: [CascadingTableDelegate], propagationMode: PropagationMode) {
 		
@@ -52,7 +53,7 @@ class PropagatingTableDelegate: NSObject {
 		self.propagationMode = propagationMode
 	}
 	
-	required init(index: Int, childDelegates: [CascadingTableDelegate]) {
+	public required init(index: Int, childDelegates: [CascadingTableDelegate]) {
 		
 		self.index = index
 		self.childDelegates = childDelegates
@@ -97,7 +98,7 @@ class PropagatingTableDelegate: NSObject {
 
 extension PropagatingTableDelegate: CascadingTableDelegate {
 	
-	func prepare(tableView tableView: UITableView) {
+	public func prepare(tableView tableView: UITableView) {
 		
 		childDelegates.forEach { delegate in
 			delegate.prepare(tableView: tableView)
@@ -112,7 +113,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	
 	// MARK: - Mandatory methods
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		if propagationMode == .Row {
 			return childDelegates.count
@@ -130,7 +131,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return 0
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
 		let validSectionMode = (propagationMode == .Section) && (indexPath.section < childDelegates.count)
 		let validRowMode = (propagationMode == .Row) && (indexPath.row < childDelegates.count)
@@ -151,11 +152,11 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 	
 	// MARK: - Optional methods
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return propagationMode == .Section ? childDelegates.count : 0
 	}
 	
-	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+	public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return nil
@@ -164,7 +165,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return childDelegates[section].tableView?(tableView, titleForHeaderInSection: section)
 	}
 	
-	func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+	public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return nil
@@ -173,7 +174,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return childDelegates[section].tableView?(tableView, titleForFooterInSection: section)
 	}
 	
-	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
 		
 		guard let childIndex = getValidChildIndex(indexPath: indexPath) else {
 			return false
@@ -182,7 +183,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return childDelegates[childIndex].tableView?(tableView, canEditRowAtIndexPath: indexPath) ?? false
 	}
 	
-	func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	public func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
 		
 		guard let childIndex = getValidChildIndex(indexPath: indexPath) else {
 			return false
@@ -191,7 +192,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return childDelegates[childIndex].tableView?(tableView, canMoveRowAtIndexPath: indexPath) ?? false
 	}
 	
-	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+	public func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
 		
 		guard let childIndex = getValidChildIndex(indexPath: indexPath) else {
 			return
@@ -211,7 +212,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 	
 	// MARK: - Display Customization 
 	
-	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 		
 		guard let childIndex = getValidChildIndex(indexPath: indexPath) else {
 			return
@@ -220,7 +221,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		childDelegates[childIndex].tableView?(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
 	}
 	
-	func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+	public func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return
@@ -229,7 +230,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		childDelegates[section].tableView?(tableView, willDisplayHeaderView: view, forSection: section)
 	}
 	
-	func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+	public func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return
@@ -238,7 +239,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		childDelegates[section].tableView?(tableView, willDisplayFooterView: view, forSection: section)
 	}
 	
-	func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	public func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
 			return
@@ -247,7 +248,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		childDelegates[validIndex].tableView?(tableView, didEndDisplayingCell: cell, forRowAtIndexPath: indexPath)
 	}
 	
-	func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+	public func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return
@@ -256,7 +257,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		childDelegates[section].tableView?(tableView, didEndDisplayingHeaderView: view, forSection: section)
 	}
 	
-	func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+	public func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return
@@ -267,7 +268,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 	
 	// MARK: - Height Support
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
 	
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
@@ -278,7 +279,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[validIndex].tableView?(tableView, heightForRowAtIndexPath: indexPath) ?? CGFloat.min
 	}
 	
-	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return CGFloat.min
@@ -287,7 +288,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[section].tableView?(tableView, heightForHeaderInSection: section) ?? CGFloat.min
 	}
 	
-	func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+	public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return CGFloat.min
@@ -296,7 +297,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[section].tableView?(tableView, heightForFooterInSection: section) ?? CGFloat.min
 	}
 	
-	func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	public func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
 			return CGFloat.min
@@ -305,7 +306,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[validIndex].tableView?(tableView, estimatedHeightForRowAtIndexPath: indexPath) ?? CGFloat.min
 	}
 	
-	func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+	public func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return CGFloat.min
@@ -314,7 +315,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[section].tableView?(tableView, estimatedHeightForHeaderInSection: section) ?? CGFloat.min
 	}
 	
-	func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+	public func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return CGFloat.min
@@ -325,7 +326,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 	
 	// MARK: - Header and Footer View
 	
-	func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return nil
@@ -334,7 +335,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[section].tableView?(tableView, viewForHeaderInSection: section)
 	}
 	
-	func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+	public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		
 		guard isSectionMethodAllowed(sectionIndex: section) else {
 			return nil
@@ -345,7 +346,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 	
 	// MARK: - Editing
 	
-	func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+	public func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
 			return .None
@@ -354,7 +355,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[validIndex].tableView?(tableView, editingStyleForRowAtIndexPath: indexPath) ?? .None
 	}
 	
-	func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+	public func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
 			return nil
@@ -363,7 +364,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[validIndex].tableView?(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
 	}
 	
-	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+	public func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
 			return nil
@@ -372,7 +373,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[validIndex].tableView?(tableView, editActionsForRowAtIndexPath: indexPath)
 	}
 	
-	func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	public func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
 			return false
@@ -381,7 +382,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		return childDelegates[validIndex].tableView?(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath) ?? false
 	}
 	
-	func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
+	public func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
 			return
@@ -390,7 +391,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		childDelegates[validIndex].tableView?(tableView, willBeginEditingRowAtIndexPath: indexPath)
 	}
 	
-	func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+	public func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
 			return
@@ -401,7 +402,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     
     // MARK: - Selection
     
-    func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+    public func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return
@@ -410,7 +411,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         childDelegates[validIndex].tableView?(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
     }
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return false
@@ -420,7 +421,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         return childDelegates[validIndex].tableView?(tableView, shouldHighlightRowAtIndexPath: indexPath) ?? false
     }
     
-    func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+    public func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return
@@ -429,7 +430,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         childDelegates[validIndex].tableView?(tableView, didHighlightRowAtIndexPath: indexPath)
     }
     
-    func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+    public func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return
@@ -438,7 +439,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         childDelegates[validIndex].tableView?(tableView, didUnhighlightRowAtIndexPath: indexPath)
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    public func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return nil
@@ -447,7 +448,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         return childDelegates[validIndex].tableView?(tableView, willSelectRowAtIndexPath: indexPath)
     }
     
-    func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    public func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return nil
@@ -456,7 +457,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         return childDelegates[validIndex].tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
      
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return
@@ -466,7 +467,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     }
     
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    public func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return
@@ -478,7 +479,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     // MARK: - Copy & Paste
     
     
-    func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return false
@@ -487,7 +488,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         return childDelegates[validIndex].tableView?(tableView, shouldShowMenuForRowAtIndexPath: indexPath) ?? false
     }
     
-    func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+    public func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return false
@@ -496,7 +497,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
         return childDelegates[validIndex].tableView?(tableView, canPerformAction: action, forRowAtIndexPath: indexPath, withSender: sender) ?? false
     }
     
-    func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+    public func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return
@@ -509,7 +510,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     // MARK: - Focus
         
     @available(iOS 9.0, *)
-    func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return false
@@ -521,7 +522,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     
     // MARK: - Reorder
     
-    func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+    public func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
             return 0

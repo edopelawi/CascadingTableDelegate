@@ -8,12 +8,12 @@
 
 import Foundation
 
-class CascadingRootTableDelegate: PropagatingTableDelegate {
+public class CascadingRootTableDelegate: PropagatingTableDelegate {
     
     // MARK: - Public properties
     
     /// This value will always be set as `.Section`, no matter what new value is assigned.
-    override var propagationMode: PropagatingTableDelegate.PropagationMode {
+    override public var propagationMode: PropagatingTableDelegate.PropagationMode {
 
         didSet {
             
@@ -23,7 +23,7 @@ class CascadingRootTableDelegate: PropagatingTableDelegate {
         }
     }
     
-    override var childDelegates: [CascadingTableDelegate] {
+    override public var childDelegates: [CascadingTableDelegate] {
         didSet {
             
             if reloadOnChildDelegatesChanged {
@@ -41,7 +41,7 @@ class CascadingRootTableDelegate: PropagatingTableDelegate {
     
     // MARK: - Initializers
     
-    required init(index: Int, childDelegates: [CascadingTableDelegate]) {
+    required public init(index: Int, childDelegates: [CascadingTableDelegate]) {
         
         super.init(index: index, childDelegates: childDelegates)
         self.propagationMode = .Section
@@ -57,7 +57,7 @@ class CascadingRootTableDelegate: PropagatingTableDelegate {
     
     // MARK: - Public methods
     
-    override func prepare(tableView tableView: UITableView) {
+    override public func prepare(tableView tableView: UITableView) {
         
         super.prepare(tableView: tableView)
         

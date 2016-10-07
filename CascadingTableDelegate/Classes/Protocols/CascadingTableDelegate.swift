@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
+public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
 	
 	/**
 	Index of this instance in its parent.
@@ -58,7 +58,7 @@ extension CascadingTableDelegate {
 	
 	- returns: This class' instance.
 	*/
-	init(index:Int, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
+	public init(index:Int, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
 		
 		self.init(index: index, childDelegates: childDelegates)
 		
@@ -72,7 +72,7 @@ extension CascadingTableDelegate {
 	/**
 	Convenience method for validating child delegate indexes - so each of it has the corresponding index based on their index in this instance's `childDelegates`.
 	*/
-	func validateChildDelegateIndexes() {
+	public func validateChildDelegateIndexes() {
 		
 		childDelegates.enumerate()
 		.forEach { (arrayIndex, child) in
