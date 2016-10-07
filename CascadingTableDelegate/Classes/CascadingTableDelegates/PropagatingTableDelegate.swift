@@ -10,18 +10,18 @@
 import Foundation
 
 /** 
-	A `CascadingTableDelegate`-compliant class that propagates any `UITableViewDelegate` or `UITableViewDataSource` it received to its `childDelegates`, depending on its `propagationMode`.
+A `CascadingTableDelegate`-compliant class that propagates any `UITableViewDelegate` or `UITableViewDataSource` it received to its `childDelegates`, depending on its `propagationMode`.
 
-	- warning: Currently, this class doesn't implement: 
-		- `sectionIndexTitlesForTableView(_:)`
-		- `tableView(_: sectionForSectionIndexTitle: atIndex:)`
-		- `tableView(_: moveRowAtIndexPath: toIndexPath:)`
-        - `tableView(_: shouldUpdateFocusInContext)`
-        - `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`
-        - `indexPathForPreferredFocusedViewInTableView(_:)`
-        - `tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
+- warning: Currently, this class doesn't implement:
+ - `sectionIndexTitlesForTableView(_:)`
+ - `tableView(_: sectionForSectionIndexTitle: atIndex:)`
+ - `tableView(_: moveRowAtIndexPath: toIndexPath:)`
+ - `tableView(_: shouldUpdateFocusInContext)`
+ - `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`
+ - `indexPathForPreferredFocusedViewInTableView(_:)`
+ - `tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
 
-		since it's unclear how to propagate those methods to its childs.
+ since it's unclear how to propagate those methods to its childs.
 */
 class PropagatingTableDelegate: NSObject {
 	
