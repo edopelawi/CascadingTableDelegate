@@ -27,6 +27,8 @@
 		B71684ED1DA7312800666F45 /* PropagatingTableDelegateIndentationReorderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684E21DA7312800666F45 /* PropagatingTableDelegateIndentationReorderSpec.swift */; };
 		B71684EE1DA7312800666F45 /* PropagatingTableDelegateSelectionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684E31DA7312800666F45 /* PropagatingTableDelegateSelectionSpec.swift */; };
 		B71684EF1DA7312800666F45 /* PropagatingTableDelegateVariableHeightSupportSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684E41DA7312800666F45 /* PropagatingTableDelegateVariableHeightSupportSpec.swift */; };
+		B71684F31DA7321100666F45 /* CascadingRootTableDelegateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684F21DA7321100666F45 /* CascadingRootTableDelegateSpec.swift */; };
+		B71684F71DA73A8800666F45 /* TestableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684F61DA73A8800666F45 /* TestableTableView.swift */; };
 		F03A78A9FBD9706B82A4287C /* Pods_CascadingTableDelegate_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D2D7BFA611731F227D287C /* Pods_CascadingTableDelegate_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,8 @@
 		B71684E21DA7312800666F45 /* PropagatingTableDelegateIndentationReorderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateIndentationReorderSpec.swift; sourceTree = "<group>"; };
 		B71684E31DA7312800666F45 /* PropagatingTableDelegateSelectionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateSelectionSpec.swift; sourceTree = "<group>"; };
 		B71684E41DA7312800666F45 /* PropagatingTableDelegateVariableHeightSupportSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateVariableHeightSupportSpec.swift; sourceTree = "<group>"; };
+		B71684F21DA7321100666F45 /* CascadingRootTableDelegateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingRootTableDelegateSpec.swift; sourceTree = "<group>"; };
+		B71684F61DA73A8800666F45 /* TestableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableTableView.swift; sourceTree = "<group>"; };
 		BFEEB5D001B8B76D0D49D6D3 /* CascadingTableDelegate.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CascadingTableDelegate.podspec; path = ../CascadingTableDelegate.podspec; sourceTree = "<group>"; };
 		DA842FA81E6668835CBCD685 /* Pods-CascadingTableDelegate_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CascadingTableDelegate_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CascadingTableDelegate_Tests/Pods-CascadingTableDelegate_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E783B233EDB3195714A40415 /* Pods-CascadingTableDelegate_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CascadingTableDelegate_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CascadingTableDelegate_Example/Pods-CascadingTableDelegate_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,7 +193,9 @@
 			isa = PBXGroup;
 			children = (
 				8D754B8E1D6B101000A1DE01 /* Stubs */,
+				B71684F51DA73A4600666F45 /* TestHelpers */,
 				B71684D91DA7312800666F45 /* PropagatingTableDelegateSpecs */,
+				B71684F21DA7321100666F45 /* CascadingRootTableDelegateSpec.swift */,
 			);
 			path = CascadingTableDelegate;
 			sourceTree = "<group>";
@@ -220,6 +226,14 @@
 				B71684E41DA7312800666F45 /* PropagatingTableDelegateVariableHeightSupportSpec.swift */,
 			);
 			path = PropagatingTableDelegateSpecs;
+			sourceTree = "<group>";
+		};
+		B71684F51DA73A4600666F45 /* TestHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				B71684F61DA73A8800666F45 /* TestableTableView.swift */,
+			);
+			path = TestHelpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,10 +449,12 @@
 				B71684ED1DA7312800666F45 /* PropagatingTableDelegateIndentationReorderSpec.swift in Sources */,
 				B71684EF1DA7312800666F45 /* PropagatingTableDelegateVariableHeightSupportSpec.swift in Sources */,
 				B71684E71DA7312800666F45 /* PropagatingTableDelegateDataSourceOptionalSpec.swift in Sources */,
+				B71684F31DA7321100666F45 /* CascadingRootTableDelegateSpec.swift in Sources */,
 				B71684EB1DA7312800666F45 /* PropagatingTableDelegateFocusSpec.swift in Sources */,
 				B71684E91DA7312800666F45 /* PropagatingTableDelegateDisplayCustomizationSpec.swift in Sources */,
 				8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */,
 				B71684EA1DA7312800666F45 /* PropagatingTableDelegateEditingSpec.swift in Sources */,
+				B71684F71DA73A8800666F45 /* TestableTableView.swift in Sources */,
 				B71684E61DA7312800666F45 /* PropagatingTableDelegateCopyPasteSpec.swift in Sources */,
 				8D06329A1D70529500BE5056 /* CascadingTableDelegateBareStub.swift in Sources */,
 				B71684E51DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift in Sources */,
