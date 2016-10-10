@@ -54,6 +54,8 @@ extension CascadingTableDelegate {
 	
 	- note: This will call this class / implementer's `init(index:childDelegates:)` method.
 	
+	- note: As noted on above, this will set *this instance* as passed `tableView`'s `delegate` and `dataSource`.
+	
 	- warning: As noted on the top, this `init` method will call this instance's and its child's `prepare(tableView:)` method. This might cause multiple `prepare(tableView:)` calls if you call it on your `init(index:childDelegates:)` method.
 	
 	- returns: This class' instance.
@@ -67,6 +69,9 @@ extension CascadingTableDelegate {
 		if let tableView = tableView {
 			childDelegates.forEach({ $0.prepare(tableView: tableView)})
 		}
+		
+		tableView?.delegate = self
+		tableView?.dataSource = self
 	}
 	
 	/**
