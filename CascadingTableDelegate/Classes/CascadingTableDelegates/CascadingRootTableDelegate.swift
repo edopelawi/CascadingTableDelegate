@@ -8,6 +8,20 @@
 
 import Foundation
 
+/**
+A `CascadingTableDelegate`-compliant class that will propagate any `UITableViewDelegate` or `UITableViewDataSource` method it received to its class, based on received `NSIndexPath`'s `section` value.
+
+- warning: Currently, this class doesn't implement:
+- `sectionIndexTitlesForTableView(_:)`
+- `tableView(_: sectionForSectionIndexTitle: atIndex:)`
+- `tableView(_: moveRowAtIndexPath: toIndexPath:)`
+- `tableView(_: shouldUpdateFocusInContext)`
+- `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`
+- `indexPathForPreferredFocusedViewInTableView(_:)`
+- `tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
+
+since it's unclear how to propagate those methods to its childs. Should you need to implement those, kindly subclass this class.
+*/
 public class CascadingRootTableDelegate: PropagatingTableDelegate {
     
     // MARK: - Public properties
