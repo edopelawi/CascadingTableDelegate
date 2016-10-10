@@ -57,8 +57,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return CGFloat.min as the result", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as the result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child method", closure: { 
@@ -81,8 +81,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return CGFloat.min as the result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as the result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child method", closure: {
@@ -154,8 +154,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return CGFloat.min as the result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as the result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child method", closure: {
@@ -178,8 +178,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return CGFloat.min as the result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as the result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child method", closure: {
@@ -256,8 +256,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					}
 				})
 				
-				it("should return CGFloat.min as result", closure: { 
-					expect(result).to(equal(CGFloat.min))
+				it("should return 0 as result", closure: { 
+					expect(result).to(equal(0))
 				})
 			})
 			
@@ -275,8 +275,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, heightForHeaderInSection: 999)
 					})
 					
-					it("should return CGFloat.min as result", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: { 
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -295,8 +295,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, heightForHeaderInSection: bareChildDelegateIndex)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -370,8 +370,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					}
 				})
 				
-				it("should return CGFloat.min as result", closure: {
-					expect(result).to(equal(CGFloat.min))
+				it("should return 0 as result", closure: {
+					expect(result).to(equal(0))
 				})
 			})
 			
@@ -389,8 +389,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, heightForFooterInSection: 999)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -409,8 +409,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, heightForFooterInSection: bareChildDelegateIndex)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -484,8 +484,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return CGFloat.min as result", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: { 
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's method", closure: {
@@ -504,8 +504,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return CGFloat.min as result", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: { 
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's method", closure: {
@@ -571,8 +571,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's method", closure: {
@@ -591,8 +591,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's method", closure: {
@@ -659,8 +659,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					result = propagatingTableDelegate.tableView(tableView, estimatedHeightForHeaderInSection: 0)
 				})
 				
-				it("should return CGFloat.min", closure: { 
-					expect(result).to(equal(CGFloat.min))
+				it("should return 0", closure: { 
+					expect(result).to(equal(0))
 				})
 				
 				it("should not call any of its child delegate's methods", closure: { 
@@ -684,8 +684,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForHeaderInSection: 99)
 					})
 					
-					it("should return CGFloat.min", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0", closure: { 
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: { 
@@ -704,8 +704,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForHeaderInSection: bareChildDelegateIndex)
 					})
 					
-					it("should return CGFloat.min", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -770,8 +770,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: 0)
 				})
 				
-				it("should return CGFloat.min", closure: {
-					expect(result).to(equal(CGFloat.min))
+				it("should return 0", closure: {
+					expect(result).to(equal(0))
 				})
 				
 				it("should not call any of its child delegate's methods", closure: {
@@ -795,8 +795,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: 99)
 					})
 					
-					it("should return CGFloat.min", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -815,8 +815,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: bareChildDelegateIndex)
 					})
 					
-					it("should return CGFloat.min", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
