@@ -11,6 +11,8 @@ import Foundation
 /**
 A `CascadingTableDelegate`-compliant class that will propagate any `UITableViewDelegate` or `UITableViewDataSource` method it received to its class, based on received `NSIndexPath`'s `section` value.
 
+In a way, this instance's child `CascadingTableDelegate`s acts as section-based `UITableViewDelegate`s and `UITableViewDataSource`s.
+
 - warning: Currently, this class doesn't implement:
 - `sectionIndexTitlesForTableView(_:)`
 - `tableView(_: sectionForSectionIndexTitle: atIndex:)`
