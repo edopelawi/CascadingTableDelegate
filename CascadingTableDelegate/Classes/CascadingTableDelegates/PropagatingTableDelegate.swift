@@ -94,6 +94,30 @@ public class PropagatingTableDelegate: NSObject {
 		
 		return validIndex && propagationMode == .Section
 	}
+	
+	public override func respondsToSelector(aSelector: Selector) -> Bool {
+	
+		// TODO: Revisit this later if the estimated-height methods still causes layout breaks for the childDelegates.
+		
+		let specialSelectors: [Selector] = [
+			#selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAtIndexPath:)),
+			#selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:)),
+			#selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:))
+		]
+		
+		guard specialSelectors.contains(aSelector) else {
+			return super.respondsToSelector(aSelector)
+		}
+		
+		for delegate in childDelegates {
+			
+			if delegate.respondsToSelector(aSelector) {
+				return true
+			}
+		}
+		
+		return false
+	}
 }
 
 extension PropagatingTableDelegate: CascadingTableDelegate {
