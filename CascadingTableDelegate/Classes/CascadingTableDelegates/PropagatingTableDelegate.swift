@@ -296,11 +296,11 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 	
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-			return CGFloat(0)
+			return UITableViewAutomaticDimension
 		}
 		
 		
-		return childDelegates[validIndex].tableView?(tableView, heightForRowAtIndexPath: indexPath) ?? CGFloat(0)
+		return childDelegates[validIndex].tableView?(tableView, heightForRowAtIndexPath: indexPath) ?? UITableViewAutomaticDimension
 	}
 	
 	public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -324,10 +324,10 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 	public func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-			return CGFloat(0)
+			return UITableViewAutomaticDimension
 		}
 		
-		return childDelegates[validIndex].tableView?(tableView, estimatedHeightForRowAtIndexPath: indexPath) ?? CGFloat(0)
+		return childDelegates[validIndex].tableView?(tableView, estimatedHeightForRowAtIndexPath: indexPath) ?? UITableViewAutomaticDimension
 	}
 	
 	public func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {

@@ -57,8 +57,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return 0 as the result", closure: {
-						expect(result).to(equal(0))
+					it("should return UITableViewAutomaticDimension as the result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child method", closure: { 
@@ -81,8 +81,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return 0 as the result", closure: {
-						expect(result).to(equal(0))
+					it("should return UITableViewAutomaticDimension as the result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child method", closure: {
@@ -154,8 +154,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return 0 as the result", closure: {
-						expect(result).to(equal(0))
+					it("should return UITableViewAutomaticDimension as the result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child method", closure: {
@@ -178,8 +178,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return 0 as the result", closure: {
-						expect(result).to(equal(0))
+					it("should return UITableViewAutomaticDimension as the result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child method", closure: {
@@ -484,8 +484,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return 0 as result", closure: { 
-						expect(result).to(equal(0))
+					it("should return UITableViewAutomaticDimension as result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child's method", closure: {
@@ -504,8 +504,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return 0 as result", closure: { 
-						expect(result).to(equal(0))
+					it("should return UITableViewAutomaticDimension as result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child's method", closure: {
@@ -571,8 +571,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return 0 as result", closure: {
-						expect(result).to(equal(0))
+					it("should return UITableViewAutomaticDimension as result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child's method", closure: {
@@ -591,8 +591,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return 0 as result", closure: {
-						expect(result).to(equal(0))
+					it("should return UITableViewAutomaticDimension as result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child's method", closure: {
