@@ -15,6 +15,7 @@
 		8D0632981D704F0900BE5056 /* CascadingTableDelegateStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0632961D704D3600BE5056 /* CascadingTableDelegateStub.swift */; };
 		8D06329A1D70529500BE5056 /* CascadingTableDelegateBareStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0632991D70529500BE5056 /* CascadingTableDelegateBareStub.swift */; };
 		8D1F13571DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F13561DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift */; };
+		8D1F135C1DB5E43400571053 /* CascadingTableDelegatePartialHeightStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F135B1DB5E43400571053 /* CascadingTableDelegatePartialHeightStub.swift */; };
 		8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */; };
 		A5158932822D6A8BA58CC3B3 /* Pods_CascadingTableDelegate_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */; };
 		B71684E51DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */; };
@@ -61,6 +62,7 @@
 		8D0632961D704D3600BE5056 /* CascadingTableDelegateStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateStub.swift; sourceTree = "<group>"; };
 		8D0632991D70529500BE5056 /* CascadingTableDelegateBareStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateBareStub.swift; sourceTree = "<group>"; };
 		8D1F13561DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateSelectorResponseSpec.swift; sourceTree = "<group>"; };
+		8D1F135B1DB5E43400571053 /* CascadingTableDelegatePartialHeightStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegatePartialHeightStub.swift; sourceTree = "<group>"; };
 		8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateCompleteStub.swift; sourceTree = "<group>"; };
 		8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CascadingTableDelegate_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateBaseSpec.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				8D0632961D704D3600BE5056 /* CascadingTableDelegateStub.swift */,
 				8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */,
+				8D1F135B1DB5E43400571053 /* CascadingTableDelegatePartialHeightStub.swift */,
 				8D0632991D70529500BE5056 /* CascadingTableDelegateBareStub.swift */,
 			);
 			path = Stubs;
@@ -454,6 +457,7 @@
 				B71684E71DA7312800666F45 /* PropagatingTableDelegateDataSourceOptionalSpec.swift in Sources */,
 				B71684F31DA7321100666F45 /* CascadingRootTableDelegateSpec.swift in Sources */,
 				B71684EB1DA7312800666F45 /* PropagatingTableDelegateFocusSpec.swift in Sources */,
+				8D1F135C1DB5E43400571053 /* CascadingTableDelegatePartialHeightStub.swift in Sources */,
 				8D1F13571DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift in Sources */,
 				B71684E91DA7312800666F45 /* PropagatingTableDelegateDisplayCustomizationSpec.swift in Sources */,
 				8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */,
