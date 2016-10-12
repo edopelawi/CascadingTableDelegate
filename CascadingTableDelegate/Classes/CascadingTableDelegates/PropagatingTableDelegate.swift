@@ -338,7 +338,9 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 			return CGFloat(0)
 		}
 		
-		return childDelegates[section].tableView?(tableView, estimatedHeightForHeaderInSection: section) ?? CGFloat(0)
+		return childDelegates[section].tableView?(tableView, estimatedHeightForHeaderInSection: section) ??
+			childDelegates[section].tableView?(tableView, heightForHeaderInSection: section) ??
+			CGFloat(0)
 	}
 	
 	public func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
