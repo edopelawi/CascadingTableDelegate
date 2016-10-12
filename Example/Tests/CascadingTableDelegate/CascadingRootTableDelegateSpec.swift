@@ -75,11 +75,21 @@ class CascadingRootTableDelegateSpec: QuickSpec {
             })
             
         }
+		
+		it("should sort out its child delegate's indexes again when its childDelegates is changed") {
+			
+			let newDelegate = CascadingTableDelegateBareStub(index: 0, childDelegates: [])
+			rootTableDelegate.childDelegates.append(newDelegate)
+			
+			let expectedIndex = rootTableDelegate.childDelegates.count - 1
+			let lastDelegateIndex = rootTableDelegate.childDelegates.last?.index
+			expect(lastDelegateIndex).to(equal(expectedIndex))
+		}
         
         describe("reloadOnChildDelegateChanged") { 
             
             var testableTableView: TestableTableView!
-            
+			
             beforeEach({
                 testableTableView = TestableTableView()
                 rootTableDelegate.prepare(tableView: testableTableView)

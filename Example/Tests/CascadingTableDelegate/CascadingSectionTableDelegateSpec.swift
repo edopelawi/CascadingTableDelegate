@@ -76,6 +76,17 @@ class CascadingSectionTableDelegateSpec: QuickSpec {
 			
 		}
 		
+		
+		it("should sort out its child delegate's indexes again when its childDelegates is changed") {
+			
+			let newDelegate = CascadingTableDelegateBareStub(index: 0, childDelegates: [])
+			sectionTableDelegate.childDelegates.append(newDelegate)
+			
+			let expectedIndex = sectionTableDelegate.childDelegates.count - 1
+			let lastDelegateIndex = sectionTableDelegate.childDelegates.last?.index
+			expect(lastDelegateIndex).to(equal(expectedIndex))
+		}
+		
 		describe("reloadOnChildDelegateChanged") {
 			
 			var testableTableView: TestableTableView!
