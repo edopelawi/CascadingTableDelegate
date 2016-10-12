@@ -13,14 +13,18 @@ A `CascadingTableDelegate`-compliant class that will propagate any `UITableViewD
 
 In a way, this instance's child `CascadingTableDelegate`s acts as section-based `UITableViewDelegate`s and `UITableViewDataSource`s.
 
+- warning: This class implements optional `estimatedHeightFor...` methods, which will be propagated to all of its `childDelegates` if *any* of its child implements it.
+
+It is advised for the `childDelegates` to implement the `estimatedHeightFor...` methods, too. Should they not implement it, this class' instance will fall back to the normal `heightFor...` methods to prevent incorrect layouts.
+
 - warning: Currently, this class doesn't implement:
-- `sectionIndexTitlesForTableView(_:)`
-- `tableView(_: sectionForSectionIndexTitle: atIndex:)`
-- `tableView(_: moveRowAtIndexPath: toIndexPath:)`
-- `tableView(_: shouldUpdateFocusInContext)`
-- `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`
-- `indexPathForPreferredFocusedViewInTableView(_:)`
-- `tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
+	- `sectionIndexTitlesForTableView(_:)`
+	- `tableView(_: sectionForSectionIndexTitle: atIndex:)`
+	- `tableView(_: moveRowAtIndexPath: toIndexPath:)`
+	- `tableView(_: shouldUpdateFocusInContext)`
+	- `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`
+	- `indexPathForPreferredFocusedViewInTableView(_:)`
+	- `tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
 
 since it's unclear how to propagate those methods to its childs. Should you need to implement those, kindly subclass this class.
 */
