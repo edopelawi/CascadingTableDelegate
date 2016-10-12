@@ -327,7 +327,9 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 			return UITableViewAutomaticDimension
 		}
 		
-		return childDelegates[validIndex].tableView?(tableView, estimatedHeightForRowAtIndexPath: indexPath) ?? UITableViewAutomaticDimension
+		return childDelegates[validIndex].tableView?(tableView, estimatedHeightForRowAtIndexPath: indexPath) ??
+		childDelegates[validIndex].tableView?(tableView, heightForRowAtIndexPath: indexPath) ??
+		UITableViewAutomaticDimension
 	}
 	
 	public func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
