@@ -524,16 +524,17 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
                 
                 context("with invalid indexPath row value", closure: {
-                    
+					
+					var indexPath: NSIndexPath!
                     var result: NSIndexPath?
-                    
-                    beforeEach({ 
-                        let indexPath = NSIndexPath(forRow: 999, inSection: 0)
+					
+                    beforeEach({
+                        indexPath = NSIndexPath(forRow: 999, inSection: 0)
                         result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
                     })
                     
-                    it("should return nil", closure: { 
-                        expect(result).to(beNil())
+                    it("should return the passed indexPath", closure: {
+                        expect(result).to(equal(indexPath))
                     })
                     
                     it("should not call any of its child methods", closure: {
@@ -545,17 +546,18 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
                 
                 context("where corresponding child doesn't implements the method", closure: { 
-                    
+					
+					var indexPath: NSIndexPath!
                     var result: NSIndexPath?
                     
                     beforeEach({ 
-                        let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+                        indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
                         result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
                         
                     })
                     
-                    it("should return nil", closure: { 
-                        expect(result).to(beNil())
+                    it("should return the passed indexPath", closure: {
+                        expect(result).to(equal(indexPath))
                     })
                     
                     it("should not call any of its child method", closure: { 
@@ -611,16 +613,17 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
                 
                 context("with invalid indexPath section value", closure: {
-                    
+					
+					var indexPath: NSIndexPath!
                     var result: NSIndexPath?
-                    
+					
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: 999)
+                        indexPath = NSIndexPath(forRow: 0, inSection: 999)
                         result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
                     })
                     
-                    it("should return nil", closure: {
-                        expect(result).to(beNil())
+                    it("should return the passed indexPath", closure: {
+                        expect(result).to(equal(indexPath))
                     })
                     
                     it("should not call any of its child methods", closure: {
@@ -632,17 +635,18 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
                 
                 context("where corresponding child doesn't implements the method", closure: {
-                    
+					
+					var indexPath: NSIndexPath!
                     var result: NSIndexPath?
-                    
+					
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+						
+                        indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
                         result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
-                        
                     })
                     
-                    it("should return nil", closure: {
-                        expect(result).to(beNil())
+                    it("should return the passed indexPath", closure: {
+                        expect(result).to(equal(indexPath))
                     })
                     
                     it("should not call any of its child method", closure: {
@@ -709,14 +713,15 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 context("with invalid indexPath row value", closure: {
                     
                     var result: NSIndexPath?
-                    
+					var indexPath: NSIndexPath!
+					
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 999, inSection: 0)
+                        indexPath = NSIndexPath(forRow: 999, inSection: 0)
                         result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
                     })
                     
-                    it("should return nil", closure: {
-                        expect(result).to(beNil())
+                    it("should return the passed indexPath", closure: {
+                        expect(result).to(equal(indexPath))
                     })
                     
                     it("should not call any of its child methods", closure: {
@@ -730,15 +735,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 context("where corresponding child doesn't implements the method", closure: {
                     
                     var result: NSIndexPath?
-                    
+					var indexPath: NSIndexPath!
+					
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+                        indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
                         result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
                         
                     })
                     
-                    it("should return nil", closure: {
-                        expect(result).to(beNil())
+                    it("should return the passed indexPath", closure: {
+                        expect(result).to(equal(indexPath))
                     })
                     
                     it("should not call any of its child method", closure: {
@@ -796,14 +802,15 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 context("with invalid indexPath section value", closure: {
                     
                     var result: NSIndexPath?
-                    
+					var indexPath: NSIndexPath!
+					
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: 999)
+                        indexPath = NSIndexPath(forRow: 0, inSection: 999)
                         result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
                     })
                     
-                    it("should return nil", closure: {
-                        expect(result).to(beNil())
+                    it("should return the passed NSIndexPath", closure: {
+                        expect(result).to(equal(indexPath))
                     })
                     
                     it("should not call any of its child methods", closure: {
@@ -817,15 +824,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 context("where corresponding child doesn't implements the method", closure: {
                     
                     var result: NSIndexPath?
-                    
+					var indexPath: NSIndexPath!
+					
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+                        indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
                         result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
                         
                     })
                     
-                    it("should return nil", closure: {
-                        expect(result).to(beNil())
+                    it("should return the passed indexPath", closure: {
+                        expect(result).to(equal(indexPath))
                     })
                     
                     it("should not call any of its child method", closure: {

@@ -482,19 +482,33 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     public func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-            return nil
+            return indexPath
         }
-        
-        return childDelegates[validIndex].tableView?(tableView, willSelectRowAtIndexPath: indexPath)
+		
+		let expectedSelector = #selector(UITableViewDelegate.tableView(_:willSelectRowAtIndexPath:))
+		let expectedDelegate = childDelegates[validIndex]
+		
+		if expectedDelegate.respondsToSelector(expectedSelector) {
+			return expectedDelegate.tableView?(tableView, willSelectRowAtIndexPath: indexPath)
+		} else {
+			return indexPath
+		}
     }
     
     public func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-            return nil
+            return indexPath
         }
-        
-        return childDelegates[validIndex].tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
+		
+		let expectedSelector = #selector(UITableViewDelegate.tableView(_:willDeselectRowAtIndexPath:))
+		let expectedDelegate = childDelegates[validIndex]
+		
+		if expectedDelegate.respondsToSelector(expectedSelector) {
+			return expectedDelegate.tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
+		} else {
+			return indexPath
+		}        
     }
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
