@@ -63,5 +63,12 @@ class PropagatingTableDelegateBaseSpec: QuickSpec {
 			let expectedIndex = propagatingTableDelegate.childDelegates.count - 1
 			expect(propagatingTableDelegate.childDelegates.last?.index).to(equal(expectedIndex))
 		}
+		
+		it("should set its child delegate's parentDelegates to itself") { 
+			
+			for delegate in childDelegates {
+				expect(delegate.parentDelegate).to(beIdenticalTo(propagatingTableDelegate))
+			}
+		}
 	}
 }

@@ -49,9 +49,11 @@ public class PropagatingTableDelegate: NSObject {
 	public var index: Int
 	public var childDelegates: [CascadingTableDelegate] {
 		didSet {
-			validateChildDelegateIndexes()
+			validateChildDelegates()
 		}
 	}
+	
+	public weak var parentDelegate: CascadingTableDelegate?
 	
     public var propagationMode: PropagationMode = .Section
 	
@@ -68,7 +70,7 @@ public class PropagatingTableDelegate: NSObject {
 		
 		super.init()
 		
-		validateChildDelegateIndexes()
+		validateChildDelegates()
 	}
 	
 	// MARK: - Private methods 
