@@ -911,7 +911,6 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					})
 				})
 				
-				
 				context("where corresponding child doesn't implement it", {
 					
 					var result: CGFloat!
@@ -929,7 +928,40 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
 						}
 					})
-				})								
+				})
+				
+				context("where the corresponding child only implements tableView(_: heightForFooterInSection:)", {
+					
+					var expectedResult: CGFloat!
+					var result: CGFloat!
+					
+					beforeEach({
+						expectedResult = CGFloat(55)
+						childDelegates[partialChildDelegateIndex].returnedFloat = expectedResult
+						
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: partialChildDelegateIndex)
+					})
+					
+					it("should call child's tableView(_: heightForFooterInSection:) and using passed parameters", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:))
+						
+						let latestMethods = childDelegates[partialChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, section: Int) else {
+							
+							fail("tableView(_: estimatedHeightForFooterInSection:) doesn't fall back to tableView(_: heightForFooterInSection:)")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.section).to(equal(partialChildDelegateIndex))
+					})
+					
+					it("should return result of child's tableView(_: heightForFooterInSection:)", closure: {
+						expect(result).to(equal(expectedResult))
+					})
+				})
 				
 				context("where corresponding child implements it", {
 					

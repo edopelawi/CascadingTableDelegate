@@ -349,7 +349,9 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 			return CGFloat(0)
 		}
 		
-		return childDelegates[section].tableView?(tableView, estimatedHeightForFooterInSection: section) ?? CGFloat(0)
+		return childDelegates[section].tableView?(tableView, estimatedHeightForFooterInSection: section) ??
+			childDelegates[section].tableView?(tableView, heightForFooterInSection: section) ??
+			CGFloat(0)
 	}
 	
 	// MARK: - Header and Footer View
