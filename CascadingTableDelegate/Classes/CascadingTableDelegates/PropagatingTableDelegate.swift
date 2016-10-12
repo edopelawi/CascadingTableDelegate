@@ -47,7 +47,11 @@ public class PropagatingTableDelegate: NSObject {
 	}
 	
 	public var index: Int
-	public var childDelegates: [CascadingTableDelegate]
+	public var childDelegates: [CascadingTableDelegate] {
+		didSet {
+			validateChildDelegateIndexes()
+		}
+	}
 	
     public var propagationMode: PropagationMode = .Section
 	
