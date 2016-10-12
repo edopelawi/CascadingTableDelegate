@@ -76,7 +76,13 @@ public class CascadingRootTableDelegate: PropagatingTableDelegate {
     }
     
     // MARK: - Public methods
-    
+	
+	
+	/**
+	Propagates the `prepare(tableView :)` call to its `childDelegates`, then sets this instace as `delegate` and `dataSource` of the passed `tableView`.
+	
+	- parameter tableView: `UITableView` instance.
+	*/
     override public func prepare(tableView tableView: UITableView) {
         
         super.prepare(tableView: tableView)
