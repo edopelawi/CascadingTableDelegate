@@ -454,11 +454,10 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-            return false
+            return true
         }
-        
-        
-        return childDelegates[validIndex].tableView?(tableView, shouldHighlightRowAtIndexPath: indexPath) ?? false
+		
+        return childDelegates[validIndex].tableView?(tableView, shouldHighlightRowAtIndexPath: indexPath) ?? true
     }
     
     public func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {

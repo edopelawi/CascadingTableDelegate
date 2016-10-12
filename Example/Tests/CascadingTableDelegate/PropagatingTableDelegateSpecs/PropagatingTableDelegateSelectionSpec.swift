@@ -155,8 +155,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
                     })
                     
-                    it("shoul return false ", closure: {
-                        expect(result).to(beFalse())
+                    it("shoul return true ", closure: {
+                        expect(result).to(beTrue())
                     })
                     
                     it("should not call any of its' child method", closure: { 
@@ -175,8 +175,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
                     })
                     
-                    it("should return false", closure: {
-                        expect(result).to(beFalse())
+                    it("should return true", closure: {
+                        expect(result).to(beTrue())
                     })
                     
                     it("should not call any of its' child method", closure: {
@@ -240,8 +240,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
                     })
                     
-                    it("shoul return false ", closure: {
-                        expect(result).to(beFalse())
+                    it("shoul return true ", closure: {
+                        expect(result).to(beTrue())
                     })
                     
                     it("should not call any of its' child method", closure: {
@@ -260,8 +260,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
                     })
                     
-                    it("should return false", closure: {
-                        expect(result).to(beFalse())
+                    it("should return true", closure: {
+                        expect(result).to(beTrue())
                     })
                     
                     it("should not call any of its' child method", closure: {
