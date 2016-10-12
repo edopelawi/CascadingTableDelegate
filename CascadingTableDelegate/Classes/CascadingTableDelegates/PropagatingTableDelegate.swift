@@ -12,6 +12,10 @@ import Foundation
 /** 
 A `CascadingTableDelegate`-compliant class that propagates any `UITableViewDelegate` or `UITableViewDataSource` it received to its `childDelegates`, depending on its `propagationMode`.
 
+- warning: This class implements optional `estimatedHeightFor...` methods, which will be propagated to all of its `childDelegates` if *any* of its child implements it.
+
+	It is advised for the `childDelegates` to implement the `estimatedHeightFor...` methods, too. Should they not implement it, this class' instance will fall back to the normal `heightFor...` methods to prevent incorrect layouts.
+
 - warning: Currently, this class doesn't implement:
  - `sectionIndexTitlesForTableView(_:)`
  - `tableView(_: sectionForSectionIndexTitle: atIndex:)`
