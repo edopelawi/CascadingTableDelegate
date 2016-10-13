@@ -6,111 +6,112 @@
 [![Platform](https://img.shields.io/cocoapods/p/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 
 ## Why is this library made?
-In common iOS development, `UITableView` have became the bread and butter for building a rich, large pages. To display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. 
 
-`UITableView` only allows an object to become the `delegate` and `dataSource` - which might led to a unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). This usually happen on the most used method, such as `tableView(_: cellForRowAtIndexPath:)` and `tableView(_: heightForRowAtIndexPath)`.
+In common iOS development, `UITableView` have became the bread and butter for building a rich, large pages. To display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. Still, using `UITableView` has its own problems.
 
-# How is this library fixes that?
+`UITableView` only allows one object to become the `delegate` and `dataSource` - which might led to a unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). This usually happen on the most used method, such as `tableView(_: cellForRowAtIndexPath:)` and `tableView(_: heightForRowAtIndexPath)`. There are times when I thought "hey, it might be nice if we could split the delegate and data source into each section or row."
 
-This library is loosely inspired by [MVVM architecture](https://en.wikipedia.org/wiki/Model–view–viewmodel), a pattern that increasingly become common in iOS development. In MVVM, a `View` may have child `Views`, and the corresponding `ViewModel` may have child `ViewModels`. This allows us to create cleaner code, where each specific `ViewModel` and `View` only knows about themselves. 
+# Meet CascadingTableDelegate.
 
-MVVM's approach is a stark contrast against the `UITableViewDataSource` and `UITableViewDelegate`. The default approach forces the object / class to know **everything** about the `UITableView` needs, e.g. what `UITableViewCell` object that should be used, its content, its height, the headers and footers, and what happened when user interacts with them.
-
-This library tries to break down the `UITableViewDelegate` and `UITableViewDataSource` into nested, reusable childs by implementing the [Composite pattern](https://en.wikipedia.org/wiki/Composite_pattern), via the `CascadingTableDelegate` protocol:
+`CascadingTableDelegate` is an approach to break down `UITableViewDelegate` and `UITableViewDataSource` into tree structure, inspired by the [Composite pattern](https://en.wikipedia.org/wiki/Composite_pattern). Here's the simplified structure of the protocol (with less documentation):
 
 ```
+public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
 
-protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
-	
-	/**
-	Index of this instance in its parent.
-	
-	- warning: On implementation, this value should be corresponding to its `index` number in its parent's `childDelegates`.
-	
-	- note: The passed `NSIndexPath` to this instance's `UITableViewDataSource` and `UITableViewDelegate` method will be affected by this value, e.g. `index` value as `section`, or index as `row`.
-	*/
+	/// Index of this instance in its parent's `childDelegates`. Will be set by the parent.
 	var index: Int { get set }
-	
+
 	/// Array of child `CascadingTableDelegate` instances.
 	var childDelegates: [CascadingTableDelegate] { get set }
-	
+
+	/// Weak reference to this instance's parent `CascadingTableDelegate`.
+	weak var parentDelegate: CascadingTableDelegate? { get set }
+
 	/**
 	Base initializer for this instance.
-	
-	- parameter index:          `index` value for this instance. May be changed later.
+
+	- parameter index:          `index` value for this instance. May be changed later, including this instance's `parentDelegate`.
 	- parameter childDelegates: Array of child `CascadingTableDelegate`s.
-	
+
 	- returns: This class' instance.
 	*/
 	init(index: Int, childDelegates: [CascadingTableDelegate])
-	
+
 	/**
 	Preparation method that will be called by this instance's parent, normally in the first time.
-	
+
 	- note: This method could be used for a wide range of purposes, e.g. registering table view cells.
 	- note: If this called manually, it should call this instance child's `prepare(tableView:)` method.
-	
+
 	- parameter tableView: `UITableView` instance.
 	*/
 	func prepare(tableView tableView: UITableView)
 }
-```
-In a sense, `CascadingTableDelegate` allows its implementer to have `childDelegates`, where they could propagate the called delegate or data source methods to the corresponding `childDelegate`, based on the passed `NSIndexPath` or section index. If needed, they could handle the method call itself instead of propagating it (e.g. leaf objects).
-
-Knowing that `UITableViewDataSource` and `UITableViewDelegate` has a lot methods to be propagated, we did the heavy lifting by implementing `PropagatingTableDelegate`:
-
 
 ```
-class PropagatingTableDelegate: NSObject {
-	
-	enum PropagationMode {
-		
-		/** 
-		Uses `section` of passed `indexPath` on this instance methods to choose the index of `childDelegate` that will have its method called.
-		
-		- note: This will also make the instance return the number of `childDelegates` as `UITableView`'s `numberOfSections`, and call the  `childDelegate` with matching index's `numberOfRowsInSection` when the corresponding method is called.
-		*/
-		case Section
-		
-		/**
-		Uses `row` of passed `indexPath` on this instance methods to choose the index of of `childDelegate` that will have its method called.
-		
-		- note: This will also make the instance return the number `childDelegates` as `UITableView`'s `numberOfRowsInSection:`, and return undefined results for section-related method calls.
-		*/
-		case Row
-	}
-	
-	var index: Int
-	var childDelegates: [CascadingTableDelegate]
-	var propagationMode: PropagationMode = .Section
-	
-	convenience init(index: Int, childDelegates: [CascadingTableDelegate], propagationMode: PropagationMode) {
-		
-		self.init(index: index, childDelegates: childDelegates)
-		self.propagationMode = propagationMode
-	}
-	
-	required init(index: Int, childDelegates: [CascadingTableDelegate]) {
-		
-		self.index = index
-		self.childDelegates = childDelegates
-		
-		super.init()
-		
-		validateChildDelegateIndexes()
-	}
-}
 
-```
-This class implements all the major delegate and data source methods and has `propagationMode` that will propagates the call to its child, except section-specific and data-moving methods (e.g. `tableView(_: moveRowAtIndexPath: toIndexPath:)`), since it's unclear how to propagate them. In the future, the propagating-heavy classes should subclass from this class, and call its method in [Chain-of-responsibility](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) style.
+Long story short, this protocol allows us to propagate any `UITableViewDelegate` or `UITableViewDataSource` method call it receives to its child, based on the `section` or `row` value of the passed `NSIndexPath`.
 
-This library is still in progress, and I'd love to have other contributors! Just ask me if you want to contribute :)
+**But UITableViewDelegate and UITableViewDataSource has tons of methods! Who will propagate all those calls?**
+
+Worry not, we already done the heavy lifting by creating **two ready-to-use classes**, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate`. Both implements `CascasdingTableDelegate` protocol and the propagating logic, but with different use case:
+
+- `CascadingRootTableDelegate`:
+	- 	Acts as main `UITableViewDelegate` and `UITableViewDataSource` for the `UITableView`.
+	-  Propagates **almost** all of delegate and dataSource calls to its `childDelegates`, based on `section` value of the passed `NSIndexPath` and the child's `index`.
+	-  Returns number of its `childDelegates` for `numberOfSectionsInTableView(_:)` call.
+
+
+-  `CascadingSectionTableDelegate`:
+	-  	Does not sets itself as `UITableViewDelegate` and `UITableViewDataSource` of the passed `UITableView`, but waits for its `parendDelegate` calls.
+	-  Just like `CascadingRootTableDelegate`, it also propagates **almost** all of delegate and dataSource calls to its `childDelegates`, but based by the `row` of passed `NSIndexPath`.
+	-  Returns number of its `childDelegates` for `tableView(_:numberOfRowsInSection:)` call.
+
+Both classes also accepts your custom implementations of `CascadingTableDelegate` (which is only `UITableViewDataSource` and `UITableViewDelegate` with few new properties and methods, really) as their `childDelegates`. Plus, you could subclass any of them and call `super` on the overriden methods to let them do the propagation - [Chain-of-responsibility](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern)-esque style. Check out the sample project to see both of them in action! 😉
+
+## Limitations
+
+### Unpropagated methods
+
+As you know, not all `UITableViewDelegate` methods uses single `NSIndexPath` as their parameter, which makes propagating their calls less intuitive. Based on this reasoning, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` doesn't implement these `UITableViewDelegate` methods:
+
+ - `sectionIndexTitlesForTableView(_:)`
+ - `tableView(_: sectionForSectionIndexTitle: atIndex:)`
+ - `tableView(_: moveRowAtIndexPath: toIndexPath:)`
+ - `tableView(_: shouldUpdateFocusInContext)`
+ - `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`
+ - `indexPathForPreferredFocusedViewInTableView(_:)`
+ - `tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
+
+ Should you need to implement any of those, feel free to subclass both of them and add your own implementations! 😁
+
+### `tableView(_: estimatedHeightFor...:)` method handlings
+
+There are three optional `UITableViewDelegate` methods that used to estimate heights:
+
+- `tableView(_: estimatedHeightForRowAtIndexPath:)`,
+- `tableView(_: estimatedHeightForHeaderInSection:)`, and
+- `tableView(_: estimatedHeightForFooterInSection:)`.
+
+`CascadingRootTableDelegate` and `CascadingSectionTableDelegate` implements those calls for propagating it to the `childDelegates`. And since both of them implements those, the `UITableView` will **always** call those methods when rendering its rows, headers, and footers.
+
+To prevent layout breaks, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` will call its childDelegate's `tableView(_: heightFor...:)` counterpart, so the `UITableView` will render it correctly. If your `tableView(_: heightFor...:)` methods use heavy calculations, it is advised to implement the `tableView(_: estimatedHeightFor...:)` counterpart of them.
+
+Should both method not implemented by the `childDelegate`, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` will return `UITableViewAutomaticDimension` for `tableView(_: estimatedHeightForRowAtIndexPath:)`, and `0` for `tableView(_: estimatedHeightForHeaderInSection:)`, and `tableView(_: estimatedHeightForFooterInSection:)`.
+
+### `weak` declaration for `parentDelegate`
+
+Somehow, Xcode won't add `weak` modifier when you're implementing your own `CascadingTableDelegate` and autocompleting the `parentDelegate` property. Kindly add the `weak` modifier manually to prevent retain cycles. 😁
 
 ## TODOs
 
-- Create sample for a page with rich and long content.
-- Publish to GitHub.
+- Add the sample page with rich and long content.
+- Use the sample page in README.md.
 - Add `CONTRIBUTING.md`.
+- Add `DefaultReturnValues.md`.
+- Publish to GitHub.
+- Publish to Cocoapods.
+- Add Carthage support.
 - Update to Swift 3 and check for new delegate / datasource methods in iOS 10.
 - (Later) Create easier abstraction that allows easier and clearer use for this lib. Something like [Shoyu-esque](https://github.com/yukiasai/Shoyu).
 
