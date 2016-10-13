@@ -7,9 +7,12 @@
 
 ## Why is this library made?
 
-In common iOS development, `UITableView` have became the bread and butter for building a rich, large pages. To display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. Still, using `UITableView` has its own problems.
+In common iOS development, `UITableView` has became the bread and butter for building a rich, large pages. Still, using `UITableView` has its own problems.
 
-`UITableView` only allows one object to become the `delegate` and `dataSource` - which might led to a unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). This usually happen on the most used method, such as `tableView(_: cellForRowAtIndexPath:)` and `tableView(_: heightForRowAtIndexPath)`. There are times when I thought "hey, it might be nice if we could split the delegate and data source into each section or row."
+As you know, to display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. This often became the cause of my headache when working on such pages. `UITableView` only allows one object to become the `delegate` and `dataSource` - which might led to a unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). This usually happen on the most used ones, such as `tableView(_: cellForRowAtIndexPath:)`, `tableView(_: heightForRowAtIndexPath)`, and `tableView(_: didSelectRowAtIndexPath:)`.
+
+Because of this, there are times when I had thoughts like this:
+> Hey, it might be nice if we could split the `delegate` and `dataSource` into each section or row.
 
 # Meet CascadingTableDelegate.
 
@@ -111,7 +114,7 @@ Somehow, Xcode won't add `weak` modifier when you're implementing your own `Casc
 - Add `DefaultReturnValues.md`.
 - Publish to GitHub.
 - Publish to Cocoapods.
-- Add Carthage support.
+- Add Carthage installation guide (it's already supported).
 - Update to Swift 3 and check for new delegate / datasource methods in iOS 10.
 - (Later) Create easier abstraction that allows easier and clearer use for this lib. Something like [Shoyu-esque](https://github.com/yukiasai/Shoyu).
 
