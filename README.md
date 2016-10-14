@@ -13,8 +13,7 @@
 
 In common iOS development, `UITableView` has became the bread and butter for building a rich, large pages. Still, using `UITableView` has its own problems.
 
-As you know, to display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. This often became the cause of my headache, since `UITableView` **only allows one object** to become the `delegate` and `dataSource`. These limitations might led to an unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). Some common victims of this problems are `tableView(_: cellForRowAtIndexPath:)`, `tableView(_: heightForRowAtIndexPath)`, and `tableView(_: didSelectRowAtIndexPath:)`. 
-
+As you know, to display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. This often became the cause of my headache, since `UITableView` **only allows one object** to become the `delegate` and `dataSource`. These limitations might led to an unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). Some common victims of this problems are `tableView(_:cellForRowAtIndexPath:)`, `tableView(_:heightForRowAtIndexPath)`, and `tableView(_:didSelectRowAtIndexPath:)`. 
 
 Because of this, there are times when I had thoughts like this:
 > Hey, it might be nice if we could split the `delegate` and `dataSource` into each section or row.
@@ -96,28 +95,28 @@ With CascadingTableDelegate, we could:
 As you know, not all `UITableViewDelegate` methods uses single `NSIndexPath` as their parameter, which makes propagating their calls less intuitive. Based on this reasoning, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` doesn't implement these `UITableViewDelegate` methods:
 
  - `sectionIndexTitlesForTableView(_:)`
- - `tableView(_: sectionForSectionIndexTitle: atIndex:)`
- - `tableView(_: moveRowAtIndexPath: toIndexPath:)`
- - `tableView(_: shouldUpdateFocusInContext)`
- - `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`
+ - `tableView(_:sectionForSectionIndexTitle:atIndex:)`
+ - `tableView(_:moveRowAtIndexPath:toIndexPath:)`
+ - `tableView(_:shouldUpdateFocusInContext:)`
+ - `tableView(_:didUpdateFocusInContext: withAnimationCoordinator:)`
  - `indexPathForPreferredFocusedViewInTableView(_:)`
- - `tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
+ - `tableView(_:targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
 
  Should you need to implement any of those, feel free to subclass both of them and add your own implementations! 😁
  
-#### 2. `tableView(_: estimatedHeightFor...:)` method handlings
+#### 2. `tableView(_:estimatedHeightFor...:)` method handlings
  
 There are three optional `UITableViewDelegate` methods that used to estimate heights:
 
-- `tableView(_: estimatedHeightForRowAtIndexPath:)`,
-- `tableView(_: estimatedHeightForHeaderInSection:)`, and
-- `tableView(_: estimatedHeightForFooterInSection:)`.
+- `tableView(_:estimatedHeightForRowAtIndexPath:)`,
+- `tableView(_:estimatedHeightForHeaderInSection:)`, and
+- `tableView(_:estimatedHeightForFooterInSection:)`.
 
 `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` implements those calls for propagating it to the `childDelegates`. And since both of them implements those, the `UITableView` will **always** call those methods when rendering its rows, headers, and footers.
 
-To prevent layout breaks, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` will call its childDelegate's `tableView(_: heightFor...:)` counterpart, so the `UITableView` will render it correctly. If your `tableView(_: heightFor...:)` methods use heavy calculations, it is advised to implement the `tableView(_: estimatedHeightFor...:)` counterpart of them.
+To prevent layout breaks, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` will call its childDelegate's `tableView(_:heightFor...:)` counterpart, so the `UITableView` will render it correctly. If your `tableView(_:heightFor...:)` methods use heavy calculations, it is advised to implement the `tableView(_:estimatedHeightFor...:)` counterpart of them.
 
-Should both method not implemented by the `childDelegate`, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` will return `UITableViewAutomaticDimension` for `tableView(_: estimatedHeightForRowAtIndexPath:)`, and `0` for `tableView(_: estimatedHeightForHeaderInSection:)`, and `tableView(_: estimatedHeightForFooterInSection:)`.
+Should both method not implemented by the `childDelegate`, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` will return `UITableViewAutomaticDimension` for `tableView(_:estimatedHeightForRowAtIndexPath:)`, and `0` for `tableView(_:estimatedHeightForHeaderInSection:)`, and `tableView(_:estimatedHeightForFooterInSection:)`.
  
 #### 3. `weak` declaration for `parentDelegate`
 

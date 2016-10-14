@@ -33,7 +33,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             )
         }
         
-		describe("tableView(_: accessoryButtonTappedForRowWithIndexPath:)", {
+		describe("tableView(_:accessoryButtonTappedForRowWithIndexPath:)", {
             
             var tableView: UITableView!
             
@@ -77,7 +77,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_: accessoryButtonTappedForRowAtIndexPath:) is not called correctly.")
+                        fail("tableView(_:accessoryButtonTappedForRowAtIndexPath:) is not called correctly.")
                         return
                     }
                     
@@ -122,7 +122,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_: accessoryButtonTappedForRowAtIndexPath:) is not called correctly.")
+                        fail("tableView(_:accessoryButtonTappedForRowAtIndexPath:) is not called correctly.")
                         return
                     }
                     
@@ -132,7 +132,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 		
-		describe("tableView(_: shouldHighlightRowAtIndexPath:)", {
+		describe("tableView(_:shouldHighlightRowAtIndexPath:)", {
             
             var tableView: UITableView!
             
@@ -214,7 +214,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: shouldHighlightRowAtIndexPath:) not called properly")
+                            fail("tableView(_:shouldHighlightRowAtIndexPath:) not called properly")
                             return
                         }
                         
@@ -299,7 +299,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: shouldHighlightRowAtIndexPath:) not called properly")
+                            fail("tableView(_:shouldHighlightRowAtIndexPath:) not called properly")
                             return
                         }
                         
@@ -311,7 +311,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 
-		describe("tableView(_: didHighlightRowAtIndexPath:)", {
+		describe("tableView(_:didHighlightRowAtIndexPath:)", {
         
             var tableView: UITableView!
             
@@ -355,7 +355,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_: didHighlightRowAtIndexPath:) is not called correctly.")
+                        fail("tableView(_:didHighlightRowAtIndexPath:) is not called correctly.")
                         return
                     }
                     
@@ -400,7 +400,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_: didHighlightRowAtIndexPath:) is not called correctly.")
+                        fail("tableView(_:didHighlightRowAtIndexPath:) is not called correctly.")
                         return
                     }
                     
@@ -410,7 +410,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 		
-		describe("tableView(_: didUnhighlightRowAtIndexPath:)", {
+		describe("tableView(_:didUnhighlightRowAtIndexPath:)", {
             
             var tableView: UITableView!
             
@@ -454,7 +454,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_: didHighlightRowAtIndexPath:) is not called correctly.")
+                        fail("tableView(_:didHighlightRowAtIndexPath:) is not called correctly.")
                         return
                     }
                     
@@ -499,7 +499,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_: didUnhighlightRowAtIndexPath:) is not called correctly.")
+                        fail("tableView(_:didUnhighlightRowAtIndexPath:) is not called correctly.")
                         return
                     }
                     
@@ -509,7 +509,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 		
-        describe("tableView(_: willSelectRowAtIndexPath:)", {
+        describe("tableView(_:willSelectRowAtIndexPath:)", {
             
             var tableView: UITableView!
             
@@ -595,7 +595,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: willSelectRowAtIndexPath:) not called correctly.")
+                            fail("tableView(_:willSelectRowAtIndexPath:) not called correctly.")
                             return
                         }
                         
@@ -684,7 +684,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: willSelectRowAtIndexPath:) not called correctly.")
+                            fail("tableView(_:willSelectRowAtIndexPath:) not called correctly.")
                             return
                         }
                         
@@ -696,7 +696,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 
-		describe("tableView(_: willDeselectRowAtIndexPath:)", {
+		describe("tableView(_:willDeselectRowAtIndexPath:)", {
         
             var tableView: UITableView!
             
@@ -782,7 +782,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: willDeselectRowAtIndexPath:) not called correctly.")
+                            fail("tableView(_:willDeselectRowAtIndexPath:) not called correctly.")
                             return
                         }
                         
@@ -871,7 +871,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: willDeselectRowAtIndexPath:) not called correctly.")
+                            fail("tableView(_:willDeselectRowAtIndexPath:) not called correctly.")
                             return
                         }
                         
@@ -883,7 +883,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 		
-        describe("tableView(_: didSelectRowAtIndexPath:)", {
+        describe("tableView(_:didSelectRowAtIndexPath:)", {
             
             var tableView: UITableView!
             
@@ -928,7 +928,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
 
-                        fail("tableView(_: didSelectRowAtIndexPath:) not called correctly")
+                        fail("tableView(_:didSelectRowAtIndexPath:) not called correctly")
                         return
                     }
                     
@@ -974,7 +974,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
                         
-                        fail("tableView(_: didSelectRowAtIndexPath:) not called correctly")
+                        fail("tableView(_:didSelectRowAtIndexPath:) not called correctly")
                         return
                     }
                     
@@ -984,7 +984,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 
-		describe("tableView(_: didDeselectRowAtIndexPath:)", {
+		describe("tableView(_:didDeselectRowAtIndexPath:)", {
         
             
             var tableView: UITableView!
@@ -1030,7 +1030,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
                         
-                        fail("tableView(_: didDeselectRowAtIndexPath:) not called correctly")
+                        fail("tableView(_:didDeselectRowAtIndexPath:) not called correctly")
                         return
                     }
                     
@@ -1076,7 +1076,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
                         
-                        fail("tableView(_: didDeselectRowAtIndexPath:) not called correctly")
+                        fail("tableView(_:didDeselectRowAtIndexPath:) not called correctly")
                         return
                     }
                     

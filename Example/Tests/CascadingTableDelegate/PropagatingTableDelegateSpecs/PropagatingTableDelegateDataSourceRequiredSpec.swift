@@ -33,7 +33,7 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 		}
 		
 		
-		describe("tableView(_: numberOfRowsInSection:)") {
+		describe("tableView(_:numberOfRowsInSection:)") {
 			
 			var expectedTableView: UITableView!
 			
@@ -151,7 +151,7 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 			})
 		}
 		
-		describe("tableView(_: cellForRowAtindexPath:)") { 
+		describe("tableView(_:cellForRowAtindexPath:)") { 
 			
 			var expectedTableView: UITableView!
 			

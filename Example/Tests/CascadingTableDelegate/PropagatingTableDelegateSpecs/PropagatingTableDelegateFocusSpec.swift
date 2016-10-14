@@ -33,7 +33,7 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
             )
         }
         
-		describe("tableView(_: canFocusRowAtIndexPath:)", {
+		describe("tableView(_:canFocusRowAtIndexPath:)", {
             
             var tableView: UITableView!
             
@@ -115,7 +115,7 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: canFocusRowAtIndexPath:) not called properly")
+                            fail("tableView(_:canFocusRowAtIndexPath:) not called properly")
                             return
                         }
                         
@@ -200,7 +200,7 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: canFocusRowAtIndexPath:) not called properly")
+                            fail("tableView(_:canFocusRowAtIndexPath:) not called properly")
                             return
                         }
                         
@@ -212,9 +212,9 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
             })
         })
         
-//		pending("tableView(_: shouldUpdateFocusInContext)", {})
+//		pending("tableView(_:shouldUpdateFocusInContext:)", {})
 //
-//		pending("tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)", {})
+//		pending("tableView(_:didUpdateFocusInContext: withAnimationCoordinator:)", {})
 //        
 //		pending("indexPathForPreferredFocusedViewInTableView(_:)", {})
 	}
