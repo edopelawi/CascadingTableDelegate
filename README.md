@@ -118,6 +118,8 @@ To prevent layout breaks, `CascadingRootTableDelegate` and `CascadingSectionTabl
 
 Should both method not implemented by the `childDelegate`, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` will return `UITableViewAutomaticDimension` for `tableView(_:estimatedHeightForRowAtIndexPath:)`, and `0` for `tableView(_:estimatedHeightForHeaderInSection:)`, and `tableView(_:estimatedHeightForFooterInSection:)`.
  
+For details of all method return values, please refer to the [Default Return Value documentation](Documentation/DefaultReturnValues.md).
+
 #### 3. `weak` declaration for `parentDelegate`
 
 Somehow, Xcode won't add `weak` modifier when you're implementing your own `CascadingTableDelegate` and autocompleting the `parentDelegate` property. Kindly add the `weak` modifier manually to prevent retain cycles 😁
@@ -126,8 +128,6 @@ Somehow, Xcode won't add `weak` modifier when you're implementing your own `Casc
 
 - Add the sample page with rich and long content.
 - Use the sample page in README.md.
-- Update `CONTRIBUTING.md`.
-- Add `DefaultReturnValues.md`.
 - Publish to GitHub.
 - Publish to Cocoapods.
 - Add Carthage in installation section.
