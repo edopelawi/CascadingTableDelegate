@@ -2,6 +2,7 @@
 
 [![CI Status](http://img.shields.io/travis/Ricardo Pramana Suranta/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/Ricardo Pramana Suranta/CascadingTableDelegate)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 [![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 [![License](https://img.shields.io/cocoapods/l/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 [![Platform](https://img.shields.io/cocoapods/p/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
@@ -130,6 +131,7 @@ Somehow, Xcode won't add `weak` modifier when you're implementing your own `Casc
 - Use the sample page in README.md.
 - Publish to GitHub.
 - Publish to Cocoapods.
+- Research on proper location to put the Spec files - instead in the sample project.
 - Update to Swift 3 and check for new delegate / datasource methods in iOS 10.
 
 ## Example
