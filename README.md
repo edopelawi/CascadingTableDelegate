@@ -85,6 +85,9 @@ With CascadingTableDelegate, we could:
 
 - Break down `UITableViewDataSource` and `UITableViewDelegate` methods to each section or row, resulting to cleaner, well separated code.
 - Use the familiar `UITableViewDataSource` and `UITableViewDelegate` methods that we have been used all along, allowing easier migrations for the old code.
+
+Other pros:
+
 - All implemented methods on `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` are unit tested! To run the tests, kindly open the sample project and run the available tests 😁
 - Available through Cocoapods and Carthage! 😉
 
