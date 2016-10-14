@@ -130,9 +130,7 @@ Somehow, Xcode won't add `weak` modifier when you're implementing your own `Casc
 - Use the sample page in README.md.
 - Publish to GitHub.
 - Publish to Cocoapods.
-- Add Carthage in installation section.
 - Update to Swift 3 and check for new delegate / datasource methods in iOS 10.
-- (Later) Create easier abstraction that allows easier and clearer use for this lib. Something like [Shoyu-esque](https://github.com/yukiasai/Shoyu).
 
 ## Example
 
@@ -142,11 +140,24 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-CascadingTableDelegate is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+### Cocoapods
+
+To install CascadingTableDelegate using [CocoaPods](http://cocoapods.org), simply add the following line to your Podfile:
+
+<!-- TODO: Update this to proper pod syntax later. -->
 
 ```ruby
-pod "CascadingTableDelegate"
+pod "CascadingTableDelegate", :git => "https://bitbucket.org/edopelawi/cascadingtabledelegate", :branch => "develop"
+```
+
+### Carthage
+
+To install CascadingTableDelegate using [Carthage](https://github.com/Carthage/Carthage), simply add the following line to your Cartfile:
+
+<!-- TODO: Update this to GitHub link later. -->
+
+```
+git "https://bitbucket.org/edopelawi/cascadingtabledelegate" "develop"
 ```
 
 ## Author
