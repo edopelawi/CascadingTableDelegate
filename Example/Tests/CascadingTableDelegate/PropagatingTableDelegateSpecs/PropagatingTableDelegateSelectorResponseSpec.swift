@@ -14,11 +14,9 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 	
 	override func spec() {
 		var propagatingTableDelegate: PropagatingTableDelegate!
-		var tableView: UITableView!
 		
 		beforeEach({
 			propagatingTableDelegate = PropagatingTableDelegate(index: 0, childDelegates: [])
-			tableView = UITableView()
 		})
 		
 		describe("respondsToSelector(_:) for tableView(_:estimatedHeightForRowAtIndexPath:)") { 
