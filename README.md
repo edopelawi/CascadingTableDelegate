@@ -1,6 +1,7 @@
 # CascadingTableDelegate
 
 [![CI Status](http://img.shields.io/travis/Ricardo Pramana Suranta/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/Ricardo Pramana Suranta/CascadingTableDelegate) 
+
 [![Swift 2.2](https://img.shields.io/badge/Swift-2.2-yellow.svg)](https://swift.org)
 
 [![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
@@ -136,7 +137,6 @@ Somehow, Xcode won't add `weak` modifier when you're implementing your own `Casc
 - Use the sample page in README.md.
 - Publish to GitHub.
 - Publish to Cocoapods.
-- Research on proper location to put the Spec files - instead in the sample project.
 - Update to Swift 3 and check for new delegate / datasource methods in iOS 10.
 
 ## Example
@@ -151,8 +151,6 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 To install CascadingTableDelegate using [CocoaPods](http://cocoapods.org), simply add the following line to your Podfile:
 
-<!-- TODO: Update this to proper pod syntax later. -->
-
 ```ruby
 pod "CascadingTableDelegate", :git => "https://bitbucket.org/edopelawi/cascadingtabledelegate", :branch => "develop"
 ```
@@ -160,8 +158,6 @@ pod "CascadingTableDelegate", :git => "https://bitbucket.org/edopelawi/cascading
 ### Carthage
 
 To install CascadingTableDelegate using [Carthage](https://github.com/Carthage/Carthage), simply add the following line to your Cartfile:
-
-<!-- TODO: Update this to GitHub link later. -->
 
 ```
 git "https://bitbucket.org/edopelawi/cascadingtabledelegate" "develop"
