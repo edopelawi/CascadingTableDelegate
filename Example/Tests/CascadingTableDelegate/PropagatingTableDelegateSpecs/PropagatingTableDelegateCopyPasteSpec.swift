@@ -32,7 +32,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
             )
         }
         
-		describe("tableView(_: shouldShowMenuForRowAtIndexPath:)", {
+		describe("tableView(_:shouldShowMenuForRowAtIndexPath:)", {
             
             var tableView: UITableView!
             
@@ -114,7 +114,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: shouldShowMenuForRowAtIndexPath:) not called properly")
+                            fail("tableView(_:shouldShowMenuForRowAtIndexPath:) not called properly")
                             return
                         }
                         
@@ -199,7 +199,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: shouldShowMenuForRowAtIndexPath:) not called properly")
+                            fail("tableView(_:shouldShowMenuForRowAtIndexPath:) not called properly")
                             return
                         }
                         
@@ -212,7 +212,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
 
         })
         
-		describe("tableView(_: canPerformAction: forRowAtIndexPath: withSender:)", {
+		describe("tableView(_:canPerformAction:forRowAtIndexPath:withSender:)", {
             
             var tableView: UITableView!
             
@@ -324,7 +324,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: NSIndexPath, sender: AnyObject?) else {
-                            fail("tableView(_: canPerformAction: forRowAtIndexPath: withSender:) is not called correctly")
+                            fail("tableView(_:canPerformAction:forRowAtIndexPath:withSender:) is not called correctly")
                             return
                         }
                         
@@ -441,7 +441,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: NSIndexPath, sender: AnyObject?) else {
-                            fail("tableView(_: canPerformAction: forRowAtIndexPath: withSender:) is not called correctly")
+                            fail("tableView(_:canPerformAction:forRowAtIndexPath:withSender:) is not called correctly")
                             return
                         }
                         
@@ -455,7 +455,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
             })
         })
         
-		describe("tableView(_: performAction: forRowAtIndexPath: withSender:)", {
+		describe("tableView(_:performAction:forRowAtIndexPath:withSender:)", {
             
             var tableView: UITableView!
             
@@ -525,7 +525,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: NSIndexPath, sender: AnyObject?) else {
                         
-                        fail("tableView(_: performAction: forRowAtIndexPath: withSender:) not called correctly")
+                        fail("tableView(_:performAction:forRowAtIndexPath:withSender:) not called correctly")
                         return
                     }
                     

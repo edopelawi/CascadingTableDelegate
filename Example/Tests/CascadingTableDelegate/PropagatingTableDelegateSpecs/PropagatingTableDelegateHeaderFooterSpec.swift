@@ -35,7 +35,7 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 			)
 		}
 		
-		describe("tableView(_: viewForHeaderInSection:)", {
+		describe("tableView(_:viewForHeaderInSection:)", {
 			
 			context("on .Row propagation mode", {
 				
@@ -129,7 +129,7 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 						let latestMethods = childDelegates[sectionIndex].latestCalledDelegateMethod
 						
 						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, section: Int) else {
-							fail("tableview(_: viewForHeaderInSection is not called correctly)")
+							fail("tableView(_:viewForHeaderInSection is not called correctly)")
 							return
 						}
 						
@@ -142,7 +142,7 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_: viewForFooterInSection:)", {
+		describe("tableView(_:viewForFooterInSection:)", {
 
 			context("on .Row propagation mode", {
 				
@@ -237,7 +237,7 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 						let latestMethods = childDelegates[sectionIndex].latestCalledDelegateMethod
 						
 						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, section: Int) else {
-							fail("tableview(_: viewForFooterInSection is not called correctly)")
+							fail("tableView(_:viewForFooterInSection is not called correctly)")
 							return
 						}
 						

@@ -60,7 +60,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			})
 		}
 		
-		describe("tableView(_: titleForHeaderInSection:)") { 
+		describe("tableView(_:titleForHeaderInSection:)") { 
 			
 			var tableView: UITableView!
 			
@@ -152,7 +152,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					
 					guard let calledMethod = calledMethods.keys.first,
 						let calledParameters = calledMethods[calledMethod] as? (tableView: UITableView, section: Int) else {
-							fail("tableView(_: titleForHeaderInSection:) not called correctly")
+							fail("tableView(_:titleForHeaderInSection:) not called correctly")
 							return
 					}
 					
@@ -164,7 +164,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			})
 		}
 		
-		describe("tableView(_: titleForFooterInSection:)", {
+		describe("tableView(_:titleForFooterInSection:)", {
 			
 			var tableView: UITableView!
 			
@@ -254,7 +254,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					
 					guard let calledMethod = calledMethods.keys.first,
 						let calledParameters = calledMethods[calledMethod] as? (tableView: UITableView, section: Int) else {
-							fail("tableView(_: titleForFooterInSection:) not called correctly")
+							fail("tableView(_:titleForFooterInSection:) not called correctly")
 							return
 					}
 					
@@ -266,7 +266,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			
 		})
 		
-		describe("tableView(_: canEditRowAtIndexPath:)", {
+		describe("tableView(_:canEditRowAtIndexPath:)", {
 			
 			var tableView: UITableView!
 			
@@ -348,7 +348,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 						
 						guard let calledMethod = latestMethods.keys.first,
 							let parameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-								fail("tableView(_: canEditRowAtIndexPath) is not called properly")
+								fail("tableView(_:canEditRowAtIndexPath) is not called properly")
 								return
 						}
 						
@@ -429,7 +429,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 						
 						guard let calledMethod = latestMethods.keys.first,
 							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-								fail("tableView(_: canEditRowAtIndexPath) is not called correctly")
+								fail("tableView(_:canEditRowAtIndexPath) is not called correctly")
 								return
 						}
 						
@@ -447,7 +447,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_: canMoveRowAtIndexPath:)", {
+		describe("tableView(_:canMoveRowAtIndexPath:)", {
 		
 			var tableView: UITableView!
 			
@@ -529,7 +529,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 						
 						guard let calledMethod = latestMethods.keys.first,
 							let parameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-								fail("tableView(_: canMoveRowAtIndexPath) is not called properly")
+								fail("tableView(_:canMoveRowAtIndexPath) is not called properly")
 								return
 						}
 						
@@ -610,7 +610,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 						
 						guard let calledMethod = latestMethods.keys.first,
 							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-								fail("tableView(_: canEditRowAtIndexPath) is not called correctly")
+								fail("tableView(_:canEditRowAtIndexPath) is not called correctly")
 								return
 						}
 						
@@ -628,7 +628,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_: commitEditingStyle: forRowAtIndexPath:)", {
+		describe("tableView(_:commitEditingStyle:forRowAtIndexPath:)", {
 			
 			var tableView: UITableView!
 			
@@ -672,7 +672,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					guard let calledMethod = latestMethods.keys.first,
 						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: NSIndexPath) else {
 							
-							fail("tableView(_: editingStyle: indexPath:) is not called correctly")
+							fail("tableView(_:editingStyle:indexPath:) is not called correctly")
 							return
 					}
 					
@@ -722,7 +722,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					guard let calledMethod = latestMethods.keys.first,
 						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: NSIndexPath) else {
 							
-							fail("tableView(_: editingStyle: indexPath:) is not called correctly")
+							fail("tableView(_:editingStyle:indexPath:) is not called correctly")
 							return
 					}
 					
@@ -741,9 +741,9 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 		
 //		pending("sectionIndexTitlesForTableView(_:)", {})
 //		
-//		pending("tableView(_: sectionForSectionIndexTitle: atIndex:)", {})
+//		pending("tableView(_:sectionForSectionIndexTitle:atIndex:)", {})
 //		
-//		pending("tableView(_: moveRowAtIndexPath: toIndexPath:)", {})
+//		pending("tableView(_:moveRowAtIndexPath:toIndexPath:)", {})
 		
 	}
 	

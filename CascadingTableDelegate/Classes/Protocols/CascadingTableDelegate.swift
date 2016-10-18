@@ -23,10 +23,21 @@ public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelega
 	var childDelegates: [CascadingTableDelegate] { get set }
 	
 	/**
+	Weak reference to this instance's parent `CascadingTableDelegate`.
+	
+	- note: In implementation, it's best to let the parent set this property.
+	
+	- warning: Autocompleting this field in Xcode might not add the `weak` keyword. Kindly add this manually to prevent retain cycle from happening.
+	*/
+	weak var parentDelegate: CascadingTableDelegate? { get set }
+	
+	/**
 	Base initializer for this instance.
 	
 	- parameter index:          `index` value for this instance. May be changed later.
 	- parameter childDelegates: Array of child `CascadingTableDelegate`s.
+	
+	- note: This instance should set the passed `childDelegate`'s `parentDelegate` to itself.
 	
 	- returns: This class' instance.
 	*/
@@ -46,7 +57,7 @@ public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelega
 extension CascadingTableDelegate {
 	
 	/**
-	Convenience initializer for this protocol, that will assign `index`es of the passed `childDelegates` and call this instance and its child's `prepare(tableView:)` method.
+	Convenience initializer for this protocol, that will assign `index`es of the passed `childDelegates`, set their `parentDelegate` to this instance, and call this instance and its child's `prepare(tableView:)` method.
 	
 	- parameter index:          `index` value for this instance. May be changed later.
 	- parameter childDelegates: Array of child `CascadingTableDelegate`s.
@@ -64,7 +75,7 @@ extension CascadingTableDelegate {
 		
 		self.init(index: index, childDelegates: childDelegates)
 		
-		validateChildDelegateIndexes()
+		validateChildDelegates()
 		
 		if let tableView = tableView {
 			childDelegates.forEach({ $0.prepare(tableView: tableView)})
@@ -75,14 +86,15 @@ extension CascadingTableDelegate {
 	}
 	
 	/**
-	Convenience method for validating child delegate indexes - so each of it has the corresponding index based on their index in this instance's `childDelegates`.
+	Convenience method for validating child delegates - setting their `parentDelegate` to this instance's weak reference and set their indexes, so each of it has the corresponding index based on their index in this instance's `childDelegates` array sequence.
 	*/
-	public func validateChildDelegateIndexes() {
+	public func validateChildDelegates() {
 		
 		childDelegates.enumerate()
 		.forEach { (arrayIndex, child) in
 			
 			child.index = arrayIndex
+			child.parentDelegate = self
 		}
 	}
 	

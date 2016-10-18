@@ -1,0 +1,6 @@
+framework module Pods_CascadingTableDelegate_Example {
+  umbrella header "Pods-CascadingTableDelegate_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

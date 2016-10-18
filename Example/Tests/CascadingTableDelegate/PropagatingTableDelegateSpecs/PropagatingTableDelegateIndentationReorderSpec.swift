@@ -32,7 +32,7 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
             )
         }
         
-        describe("tableView(_: indentationLevelForRowAtIndexPath:)", {
+        describe("tableView(_:indentationLevelForRowAtIndexPath:)", {
             
             var tableView: UITableView!
             
@@ -114,7 +114,7 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: indentationLevelForRowAtIndexPath:) not called properly")
+                            fail("tableView(_:indentationLevelForRowAtIndexPath:) not called properly")
                             return
                         }
                         
@@ -199,7 +199,7 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
                         guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_: indentationLevelForRowAtIndexPath:) not called properly")
+                            fail("tableView(_:indentationLevelForRowAtIndexPath:) not called properly")
                             return
                         }
                         
@@ -213,7 +213,7 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
         })
         
         
-//		pending("tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)", {})
+//		pending("tableView(_:targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)", {})
 
 	}
 }

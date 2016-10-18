@@ -18,12 +18,12 @@ A `CascadingTableDelegate`-compliant class that propagates any `UITableViewDeleg
 
 - warning: Currently, this class doesn't implement:
  - `sectionIndexTitlesForTableView(_:)`
- - `tableView(_: sectionForSectionIndexTitle: atIndex:)`
- - `tableView(_: moveRowAtIndexPath: toIndexPath:)`
- - `tableView(_: shouldUpdateFocusInContext)`
- - `tableView(_: didUpdateFocusInContext: withAnimationCoordinator:)`
+ - `tableView(_:sectionForSectionIndexTitle:atIndex:)`
+ - `tableView(_:moveRowAtIndexPath:toIndexPath:)`
+ - `tableView(_:shouldUpdateFocusInContext:)`
+ - `tableView(_:didUpdateFocusInContext: withAnimationCoordinator:)`
  - `indexPathForPreferredFocusedViewInTableView(_:)`
- - `tableView(_: targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
+ - `tableView(_:targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
 
  since it's unclear how to propagate those methods to its childs.
 */
@@ -49,9 +49,11 @@ public class PropagatingTableDelegate: NSObject {
 	public var index: Int
 	public var childDelegates: [CascadingTableDelegate] {
 		didSet {
-			validateChildDelegateIndexes()
+			validateChildDelegates()
 		}
 	}
+	
+	public weak var parentDelegate: CascadingTableDelegate?
 	
     public var propagationMode: PropagationMode = .Section
 	
@@ -68,7 +70,7 @@ public class PropagatingTableDelegate: NSObject {
 		
 		super.init()
 		
-		validateChildDelegateIndexes()
+		validateChildDelegates()
 	}
 	
 	// MARK: - Private methods 
@@ -452,11 +454,10 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-            return false
+            return true
         }
-        
-        
-        return childDelegates[validIndex].tableView?(tableView, shouldHighlightRowAtIndexPath: indexPath) ?? false
+		
+        return childDelegates[validIndex].tableView?(tableView, shouldHighlightRowAtIndexPath: indexPath) ?? true
     }
     
     public func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
@@ -480,19 +481,33 @@ extension PropagatingTableDelegate: UITableViewDelegate {
     public func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-            return nil
+            return indexPath
         }
-        
-        return childDelegates[validIndex].tableView?(tableView, willSelectRowAtIndexPath: indexPath)
+		
+		let expectedSelector = #selector(UITableViewDelegate.tableView(_:willSelectRowAtIndexPath:))
+		let expectedDelegate = childDelegates[validIndex]
+		
+		if expectedDelegate.respondsToSelector(expectedSelector) {
+			return expectedDelegate.tableView?(tableView, willSelectRowAtIndexPath: indexPath)
+		} else {
+			return indexPath
+		}
     }
     
     public func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
         guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-            return nil
+            return indexPath
         }
-        
-        return childDelegates[validIndex].tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
+		
+		let expectedSelector = #selector(UITableViewDelegate.tableView(_:willDeselectRowAtIndexPath:))
+		let expectedDelegate = childDelegates[validIndex]
+		
+		if expectedDelegate.respondsToSelector(expectedSelector) {
+			return expectedDelegate.tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
+		} else {
+			return indexPath
+		}        
     }
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

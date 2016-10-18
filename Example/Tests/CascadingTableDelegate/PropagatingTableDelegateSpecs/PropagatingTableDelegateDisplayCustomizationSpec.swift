@@ -33,7 +33,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 			)
 		}
 		
-		describe("tableView(_: willDisplayCell: forRowAtIndexPath:)", {
+		describe("tableView(_:willDisplayCell:forRowAtIndexPath:)", {
 			
 			var tableView: UITableView!
 			var tableCell: UITableViewCell!
@@ -110,7 +110,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 						guard let calledMethod = latestMethods.keys.first,
 							let calledParameters =  latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: NSIndexPath) else {
 								
-								fail("tableView(_: willDIsplayCell: forRowAtIndexPath:) not called correctly")
+								fail("tableView(_:willDisplayCell:forRowAtIndexPath:) not called correctly")
 								return
 						}
 						
@@ -192,7 +192,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 						guard let calledMethod = latestMethods.keys.first,
 							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: NSIndexPath) else {
 								
-								fail("tableView(_: willDisplayCell: forRowAtIndexpath:) is not called correctly")
+								fail("tableView(_:willDisplayCell:forRowAtIndexPath:) is not called correctly")
 								return
 						}
 						
@@ -207,7 +207,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_: willDisplayHeaderView: forSection:)", {
+		describe("tableView(_:willDisplayHeaderView:forSection:)", {
 			
 			var tableView: UITableView!
 			var headerView: UIView!
@@ -279,7 +279,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
 					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, headerView: UIView, section: Int) else {
-						fail("tableView(_: willDisplayHeaderView: forSection:) is not called correctly.")
+						fail("tableView(_:willDisplayHeaderView:forSection:) is not called correctly.")
 						return
 					}
 					
@@ -291,7 +291,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 		
 		})
 		
-		describe("tableView(_: willDisplayFooterView: forSection:)", {
+		describe("tableView(_:willDisplayFooterView:forSection:)", {
 		
 			var tableView: UITableView!
 			var footerView: UIView!
@@ -363,7 +363,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
 					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, footerView: UIView, section: Int) else {
-						fail("tableView(_: willDisplayFooterView: forSection:) is not called correctly.")
+						fail("tableView(_:willDisplayFooterView:forSection:) is not called correctly.")
 						return
 					}
 					
@@ -374,7 +374,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 			})
 		})
 
-		describe("tableView(_: didEndDisplayingCell: forRowAtIndexPath:)", {
+		describe("tableView(_:didEndDisplayingCell:forRowAtIndexPath:)", {
 			
 			var tableView: UITableView!
 			var tableCell: UITableViewCell!
@@ -453,7 +453,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 						guard let calledMethod = latestMethods.keys.first,
 							let calledParameters =  latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: NSIndexPath) else {
 								
-								fail("tableView(_: didEndDisplayingCell: forRowAtIndexPath:) not called correctly")
+								fail("tableView(_:didEndDisplayingCell:forRowAtIndexPath:) not called correctly")
 								return
 						}
 						
@@ -535,7 +535,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 						guard let calledMethod = latestMethods.keys.first,
 							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: NSIndexPath) else {
 								
-								fail("tableView(_: didEndDisplayingCell: forRowAtIndexpath:) is not called correctly")
+								fail("tableView(_:didEndDisplayingCell:forRowAtIndexPath:) is not called correctly")
 								return
 						}
 						
@@ -550,7 +550,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_: didEndDisplayingHeaderView: forSection:)", {
+		describe("tableView(_:didEndDisplayingHeaderView:forSection:)", {
 			
 			var tableView: UITableView!
 			var headerView: UIView!
@@ -622,7 +622,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
 					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, headerView: UIView, section: Int) else {
-						fail("tableView(_: didEndDisplayingHeaderView: forSection:) is not called correctly.")
+						fail("tableView(_:didEndDisplayingHeaderView:forSection:) is not called correctly.")
 						return
 					}
 					
@@ -633,7 +633,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 			})
 		})
 
-		describe("tableView(_: didEndDisplayingFooterView: forSection:)", {
+		describe("tableView(_:didEndDisplayingFooterView:forSection:)", {
 			var tableView: UITableView!
 			var footerView: UIView!
 			
@@ -704,7 +704,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
 					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, footerView: UIView, section: Int) else {
-						fail("tableView(_: didEndDisplayingFooterView: forSection:) is not called correctly.")
+						fail("tableView(_:didEndDisplayingFooterView:forSection:) is not called correctly.")
 						return
 					}
 					

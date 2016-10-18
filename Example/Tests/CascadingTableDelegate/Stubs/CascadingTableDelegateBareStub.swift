@@ -13,6 +13,7 @@ class CascadingTableDelegateBareStub: NSObject {
 	
 	var index: Int
 	var childDelegates: [CascadingTableDelegate]
+	weak var parentDelegate: CascadingTableDelegate?
 	
 	private var _prepareCalled = false
 	
