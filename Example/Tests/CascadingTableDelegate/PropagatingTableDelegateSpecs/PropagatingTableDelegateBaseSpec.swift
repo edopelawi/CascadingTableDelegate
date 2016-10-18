@@ -54,5 +54,14 @@ class PropagatingTableDelegateBaseSpec: QuickSpec {
 				expect(childDelegate.index).to(equal(expectedIndex))
 			}
 		}
+		
+		it("should sort out its child delegate's indexes again when its childDelegates is changed") { 
+			
+			let newDelegate = CascadingTableDelegateBareStub(index: 0, childDelegates: [])
+			propagatingTableDelegate.childDelegates.append(newDelegate)
+			
+			let expectedIndex = propagatingTableDelegate.childDelegates.count - 1
+			expect(propagatingTableDelegate.childDelegates.last?.index).to(equal(expectedIndex))
+		}
 	}
 }

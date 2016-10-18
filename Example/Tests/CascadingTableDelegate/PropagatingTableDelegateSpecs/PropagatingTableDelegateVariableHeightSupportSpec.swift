@@ -18,11 +18,13 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 		var childDelegates: [CascadingTableDelegateStub]!
 		
 		let bareChildDelegateIndex = 0
-		let completeChildDelegateIndex = 1
+		let partialChildDelegateIndex = 1
+		let completeChildDelegateIndex = 2
 		
 		beforeEach {
 			childDelegates = [
 				CascadingTableDelegateBareStub(index: bareChildDelegateIndex, childDelegates: []),
+				CascadingTableDelegatePartialHeightStub(index: partialChildDelegateIndex, childDelegates: []),
 				CascadingTableDelegateCompleteStub(index: completeChildDelegateIndex, childDelegates: [])
 			]
 			
@@ -57,8 +59,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return CGFloat.min as the result", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return UITableViewAutomaticDimension as the result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child method", closure: { 
@@ -81,8 +83,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return CGFloat.min as the result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return UITableViewAutomaticDimension as the result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child method", closure: {
@@ -154,8 +156,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return CGFloat.min as the result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return UITableViewAutomaticDimension as the result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child method", closure: {
@@ -178,8 +180,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						)
 					})
 					
-					it("should return CGFloat.min as the result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return UITableViewAutomaticDimension as the result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child method", closure: {
@@ -256,8 +258,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					}
 				})
 				
-				it("should return CGFloat.min as result", closure: { 
-					expect(result).to(equal(CGFloat.min))
+				it("should return 0 as result", closure: { 
+					expect(result).to(equal(0))
 				})
 			})
 			
@@ -275,8 +277,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, heightForHeaderInSection: 999)
 					})
 					
-					it("should return CGFloat.min as result", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: { 
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -295,8 +297,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, heightForHeaderInSection: bareChildDelegateIndex)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -370,8 +372,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					}
 				})
 				
-				it("should return CGFloat.min as result", closure: {
-					expect(result).to(equal(CGFloat.min))
+				it("should return 0 as result", closure: {
+					expect(result).to(equal(0))
 				})
 			})
 			
@@ -389,8 +391,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, heightForFooterInSection: 999)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -409,8 +411,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, heightForFooterInSection: bareChildDelegateIndex)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0 as result", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -484,8 +486,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return CGFloat.min as result", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return UITableViewAutomaticDimension as result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child's method", closure: {
@@ -504,14 +506,49 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return CGFloat.min as result", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return UITableViewAutomaticDimension as result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child's method", closure: {
 						for delegate in childDelegates {
 							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
 						}
+					})
+				})
+				
+				context("where the corresponding child only implements tableView(_: heightForRowAtIndexPath:)", {
+					
+					var expectedResult: CGFloat!
+					var result: CGFloat!
+					var indexPath: NSIndexPath!
+					
+					beforeEach({
+						expectedResult = CGFloat(55)
+						childDelegates[partialChildDelegateIndex].returnedFloat = expectedResult
+						
+						indexPath = NSIndexPath(forRow: partialChildDelegateIndex, inSection: 0)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+					})
+					
+					it("should call child's tableView(_: heightForRowAtIndexPath:) and using passed parameters", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))
+						
+						let latestMethods = childDelegates[partialChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+
+							fail("tableView(_: estimatedHeightForRowAtIndexPath:) doesn't fall back to tableView(_: heightForRowAtIndexPath:)")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.indexPath).to(equal(indexPath))
+					})
+					
+					it("should return result of child's tableView(_: heightForRowAtIndexPath:)", closure: { 
+						expect(result).to(equal(expectedResult))
 					})
 				})
 				
@@ -571,8 +608,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return UITableViewAutomaticDimension as result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child's method", closure: {
@@ -591,14 +628,49 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
 					})
 					
-					it("should return CGFloat.min as result", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return UITableViewAutomaticDimension as result", closure: {
+						expect(result).to(equal(UITableViewAutomaticDimension))
 					})
 					
 					it("should not call any of its child's method", closure: {
 						for delegate in childDelegates {
 							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
 						}
+					})
+				})
+				
+				context("where the corresponding child only implements tableView(_: heightForRowAtIndexPath:)", {
+					
+					var expectedResult: CGFloat!
+					var result: CGFloat!
+					var indexPath: NSIndexPath!
+					
+					beforeEach({
+						expectedResult = CGFloat(55)
+						childDelegates[partialChildDelegateIndex].returnedFloat = expectedResult
+						
+						indexPath = NSIndexPath(forRow: 0, inSection: partialChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+					})
+					
+					it("should call child's tableView(_: heightForRowAtIndexPath:) and using passed parameters", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))
+						
+						let latestMethods = childDelegates[partialChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							
+							fail("tableView(_: estimatedHeightForRowAtIndexPath:) doesn't fall back to tableView(_: heightForRowAtIndexPath:)")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.indexPath).to(equal(indexPath))
+					})
+					
+					it("should return result of child's tableView(_: heightForRowAtIndexPath:)", closure: {
+						expect(result).to(equal(expectedResult))
 					})
 				})
 				
@@ -659,8 +731,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					result = propagatingTableDelegate.tableView(tableView, estimatedHeightForHeaderInSection: 0)
 				})
 				
-				it("should return CGFloat.min", closure: { 
-					expect(result).to(equal(CGFloat.min))
+				it("should return 0", closure: { 
+					expect(result).to(equal(0))
 				})
 				
 				it("should not call any of its child delegate's methods", closure: { 
@@ -684,8 +756,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForHeaderInSection: 99)
 					})
 					
-					it("should return CGFloat.min", closure: { 
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0", closure: { 
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: { 
@@ -704,14 +776,47 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForHeaderInSection: bareChildDelegateIndex)
 					})
 					
-					it("should return CGFloat.min", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
 						for delegate in childDelegates {
 							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
 						}
+					})
+				})
+				
+				context("where the corresponding child only implements tableView(_: heightForHeaderInSection:)", {
+					
+					var expectedResult: CGFloat!
+					var result: CGFloat!
+					
+					beforeEach({
+						expectedResult = CGFloat(55)
+						childDelegates[partialChildDelegateIndex].returnedFloat = expectedResult
+						
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForHeaderInSection: partialChildDelegateIndex)
+					})
+					
+					it("should call child's tableView(_: heightForRowAtIndexPath:) and using passed parameters", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:))
+						
+						let latestMethods = childDelegates[partialChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, section: Int) else {
+							
+							fail("tableView(_: estimatedHeightForHeaderInSection:) doesn't fall back to tableView(_: heightForHeaderInSection:)")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.section).to(equal(partialChildDelegateIndex))
+					})
+					
+					it("should return result of child's tableView(_: heightForHeaderInSection:)", closure: {
+						expect(result).to(equal(expectedResult))
 					})
 				})
 				
@@ -770,8 +875,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: 0)
 				})
 				
-				it("should return CGFloat.min", closure: {
-					expect(result).to(equal(CGFloat.min))
+				it("should return 0", closure: {
+					expect(result).to(equal(0))
 				})
 				
 				it("should not call any of its child delegate's methods", closure: {
@@ -795,8 +900,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: 99)
 					})
 					
-					it("should return CGFloat.min", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -806,7 +911,6 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					})
 				})
 				
-				
 				context("where corresponding child doesn't implement it", {
 					
 					var result: CGFloat!
@@ -815,14 +919,47 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: bareChildDelegateIndex)
 					})
 					
-					it("should return CGFloat.min", closure: {
-						expect(result).to(equal(CGFloat.min))
+					it("should return 0", closure: {
+						expect(result).to(equal(0))
 					})
 					
 					it("should not call any of its child's methods", closure: {
 						for delegate in childDelegates {
 							expect(delegate.latestCalledDelegateMethod).to(beEmpty())
 						}
+					})
+				})
+				
+				context("where the corresponding child only implements tableView(_: heightForFooterInSection:)", {
+					
+					var expectedResult: CGFloat!
+					var result: CGFloat!
+					
+					beforeEach({
+						expectedResult = CGFloat(55)
+						childDelegates[partialChildDelegateIndex].returnedFloat = expectedResult
+						
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: partialChildDelegateIndex)
+					})
+					
+					it("should call child's tableView(_: heightForFooterInSection:) and using passed parameters", closure: {
+						
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:))
+						
+						let latestMethods = childDelegates[partialChildDelegateIndex].latestCalledDelegateMethod
+						
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, section: Int) else {
+							
+							fail("tableView(_: estimatedHeightForFooterInSection:) doesn't fall back to tableView(_: heightForFooterInSection:)")
+							return
+						}
+						
+						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
+						expect(calledParameters.section).to(equal(partialChildDelegateIndex))
+					})
+					
+					it("should return result of child's tableView(_: heightForFooterInSection:)", closure: {
+						expect(result).to(equal(expectedResult))
 					})
 				})
 				

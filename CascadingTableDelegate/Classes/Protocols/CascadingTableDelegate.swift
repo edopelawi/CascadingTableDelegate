@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
+public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
 	
 	/**
 	Index of this instance in its parent.
@@ -54,11 +54,13 @@ extension CascadingTableDelegate {
 	
 	- note: This will call this class / implementer's `init(index:childDelegates:)` method.
 	
+	- note: As noted on above, this will set *this instance* as passed `tableView`'s `delegate` and `dataSource`.
+	
 	- warning: As noted on the top, this `init` method will call this instance's and its child's `prepare(tableView:)` method. This might cause multiple `prepare(tableView:)` calls if you call it on your `init(index:childDelegates:)` method.
 	
 	- returns: This class' instance.
 	*/
-	init(index:Int, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
+	public init(index:Int, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
 		
 		self.init(index: index, childDelegates: childDelegates)
 		
@@ -67,12 +69,15 @@ extension CascadingTableDelegate {
 		if let tableView = tableView {
 			childDelegates.forEach({ $0.prepare(tableView: tableView)})
 		}
+		
+		tableView?.delegate = self
+		tableView?.dataSource = self
 	}
 	
 	/**
 	Convenience method for validating child delegate indexes - so each of it has the corresponding index based on their index in this instance's `childDelegates`.
 	*/
-	func validateChildDelegateIndexes() {
+	public func validateChildDelegateIndexes() {
 		
 		childDelegates.enumerate()
 		.forEach { (arrayIndex, child) in
