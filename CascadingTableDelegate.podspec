@@ -1,42 +1,23 @@
-#
-# Be sure to run `pod lib lint CascadingTableDelegate.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'CascadingTableDelegate'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of CascadingTableDelegate.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.version          = '1.0.0'
+  s.summary          = 'A no-nonsense way to write cleaner `UITableViewDelegate` and `UITableViewDataSource`.'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+CascadingTableDelegate allows you to propagate `UITableViewDelegate` and `UITableViewDataSource` method calls to several objects, based by the `NSIndexPath` of the method's parameter.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/CascadingTableDelegate'
+  s.homepage         = 'https://github.com/edopelawi/CascadingTableDelegate'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Ricardo Pramana Suranta' => 'ricardo@icehousecorp.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/CascadingTableDelegate.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { 'Ricardo Pramana Suranta' => 'ricardo.pramana@gmail.com' }
+  s.source           = { :git => 'https://github.com/edopelawi/CascadingTableDelegate.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/edopelawi'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'CascadingTableDelegate/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'CascadingTableDelegate' => ['CascadingTableDelegate/Assets/*.png']
-  # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.frameworks = 'UIKit'
+
 end
