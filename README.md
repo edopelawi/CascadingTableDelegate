@@ -73,7 +73,7 @@ Worry not, we already done the heavy lifting by creating **two ready-to-use clas
 
 	
 -  `CascadingSectionTableDelegate`:
-	-  	Does not sets itself as `UITableViewDelegate` and `UITableViewDataSource` of the passed `UITableView`, but waits for its `parendDelegate` calls.
+	-  	Does not sets itself as `UITableViewDelegate` and `UITableViewDataSource` of the passed `UITableView`, but waits for its `parentDelegate` calls.
 	-  Just like `CascadingRootTableDelegate`, it also propagates **almost** all of delegate and dataSource calls to its `childDelegates`, but based by the `row` of passed `NSIndexPath`.
 	-  Returns number of its `childDelegates` for `tableView(_:numberOfRowsInSection:)` call.
 	
