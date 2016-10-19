@@ -1,6 +1,6 @@
 # CascadingTableDelegate
 
-[![CI Status](http://img.shields.io/travis/Ricardo Pramana Suranta/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/Ricardo Pramana Suranta/CascadingTableDelegate) 
+[![CI Status](http://img.shields.io/travis/edopelawi/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/edopelawi/CascadingTableDelegate) 
 [![Swift 2.2](https://img.shields.io/badge/Swift-2.2-yellow.svg)](https://swift.org)
 
 [![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
@@ -73,7 +73,7 @@ Worry not, we already done the heavy lifting by creating **two ready-to-use clas
 
 	
 -  `CascadingSectionTableDelegate`:
-	-  	Does not sets itself as `UITableViewDelegate` and `UITableViewDataSource` of the passed `UITableView`, but waits for its `parendDelegate` calls.
+	-  	Does not sets itself as `UITableViewDelegate` and `UITableViewDataSource` of the passed `UITableView`, but waits for its `parentDelegate` calls.
 	-  Just like `CascadingRootTableDelegate`, it also propagates **almost** all of delegate and dataSource calls to its `childDelegates`, but based by the `row` of passed `NSIndexPath`.
 	-  Returns number of its `childDelegates` for `tableView(_:numberOfRowsInSection:)` call.
 	
@@ -136,8 +136,6 @@ Somehow, Xcode won't add `weak` modifier when you're implementing your own `Casc
 
 - Add sample page in the example with rich and long content.
 - Use the sample page in README.md.
-- Publish to GitHub.
-- Publish to Cocoapods.
 - Update to Swift 3 and check for new delegate / datasource methods in iOS 10.
 
 ## Example
