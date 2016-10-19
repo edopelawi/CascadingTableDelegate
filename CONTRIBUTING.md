@@ -9,7 +9,7 @@ Still, there are some rules that need to be followed for contributing:
 
 - Use [GitHub's Swift style guide](https://github.com/github/swift-style-guide) for any pull request, since this project follows it.
 - Open issues for big features, so we can discuss to plan it out.
-- Use [Vincent Driessen's Git branching model](). This means every feature and fixes should be merged to `develop` first before merged to `master`.
+- Use [Vincent Driessen's Git branching model](). This means every pull request should be from `develop` branch. Every feature and fixes will be merged to `develop` first before merged to `master`.
 - Make sure current tests pass for every changes, and add new tests for new features.
 
 This project is still made on Swift 2.2, so my current concern is upgrading this library and its sample to Swift 3. Until then, I might give delayed response to your questions / ideas.
