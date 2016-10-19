@@ -1,7 +1,6 @@
 # CascadingTableDelegate
 
 [![CI Status](http://img.shields.io/travis/Ricardo Pramana Suranta/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/Ricardo Pramana Suranta/CascadingTableDelegate) 
-
 [![Swift 2.2](https://img.shields.io/badge/Swift-2.2-yellow.svg)](https://swift.org)
 
 [![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
@@ -17,10 +16,10 @@
 
 In common iOS development, `UITableView` has became the bread and butter for building a rich, large pages. Still, using `UITableView` has its own problems.
 
-As you know, to display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. This often became the cause of my headache, since `UITableView` **only allows one object** to become the `delegate` and `dataSource`. These limitations might led to an unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). Some common victims of this problems are `tableView(_:cellForRowAtIndexPath:)`, `tableView(_:heightForRowAtIndexPath)`, and `tableView(_:didSelectRowAtIndexPath:)`. 
+As you know, to display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. This often became the cause of my headache since `UITableView` **only allows one object** to become the `delegate` and `dataSource`. These limitations might led to an unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). Some common victims of this problems are `tableView(_:cellForRowAtIndexPath:)`, `tableView(_:heightForRowAtIndexPath)`, and `tableView(_:didSelectRowAtIndexPath:)`. 
 
-Because of this, there are times when I had thoughts like this:
-> Hey, it might be nice if we could split the `delegate` and `dataSource` into each section or row.
+Because of this, there are times when I had these thought:
+> Hey, it might be nice if we could split the `delegate` and `dataSource` method calls into each section or row.
 
 # Meet CascadingTableDelegate.
 
@@ -63,7 +62,7 @@ public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelega
 
 Long story short, this protocol allows us to propagate any `UITableViewDelegate` or `UITableViewDataSource` method call it receives to its child, based on the `section` or `row` value of the passed `NSIndexPath`.
 
-**But UITableViewDelegate and UITableViewDataSource has tons of methods! Who will propagate all those calls?**
+###But UITableViewDelegate and UITableViewDataSource has tons of methods! Who will propagate all those calls?
 
 Worry not, we already done the heavy lifting by creating **two ready-to-use classes**, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate`. Both implements `CascasdingTableDelegate` protocol and the propagating logic, but with different use case:
 
@@ -91,8 +90,10 @@ With CascadingTableDelegate, we could:
 
 Other pros:
 
-- All implemented methods on `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` are unit tested! To run the tests, kindly open the sample project and run the available tests 😁
-- Available through Cocoapods and Carthage! 😉
+- **All implemented methods** on `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` are unit tested! To run the tests, you could:
+	-  Open the sample project and run the available tests, or
+	-  Run this command on your terminal: `xcodebuild test -workspace Example/CascadingTableDelegate.xcworkspace -scheme CascadingTableDelegate-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty`
+- This library is available through Cocoapods and Carthage! 😉
 
 
 ### Cons
@@ -133,7 +134,7 @@ Somehow, Xcode won't add `weak` modifier when you're implementing your own `Casc
 
 ## TODOs
 
-- Add the sample page with rich and long content.
+- Add sample page in the example with rich and long content.
 - Use the sample page in README.md.
 - Publish to GitHub.
 - Publish to Cocoapods.
