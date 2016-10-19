@@ -53,7 +53,7 @@ public class CascadingSectionTableDelegate: PropagatingTableDelegate {
 	}
 	
 	/// Marks whether this instance should reload its corresponding `tableView` if its `childDelegates` changed.
-	var reloadOnChildDelegatesChanged = false
+	public var reloadOnChildDelegatesChanged = false
 	
 	// MARK: - Private properties
 	
