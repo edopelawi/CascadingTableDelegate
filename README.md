@@ -153,7 +153,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 To install CascadingTableDelegate using [CocoaPods](http://cocoapods.org), simply add the following line to your Podfile:
 
 ```ruby
-pod "CascadingTableDelegate", :git => "https://bitbucket.org/edopelawi/cascadingtabledelegate", :branch => "develop"
+pod "CascadingTableDelegate", "~> 1.0"
 ```
 
 ### Carthage
@@ -161,7 +161,7 @@ pod "CascadingTableDelegate", :git => "https://bitbucket.org/edopelawi/cascading
 To install CascadingTableDelegate using [Carthage](https://github.com/Carthage/Carthage), simply add the following line to your Cartfile:
 
 ```
-git "https://bitbucket.org/edopelawi/cascadingtabledelegate" "develop"
+git "edopelawi/CascadingTableDelegate" ~> 1.0
 ```
 
 ## Author
