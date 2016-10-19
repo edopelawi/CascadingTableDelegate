@@ -92,7 +92,7 @@ Other pros:
 
 - **All implemented methods** on `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` are unit tested! To run the tests, you could:
 	-  Open the sample project and run the available tests, or
-	-  Run this command on your terminal: `xcodebuild test -workspace Example/CascadingTableDelegate.xcworkspace -scheme CascadingTableDelegate-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty`
+	-  Execute `run_tests.sh` in your terminal.
 - This library is available through Cocoapods and Carthage! 😉
 
 
