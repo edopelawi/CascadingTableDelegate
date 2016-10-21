@@ -86,7 +86,7 @@ public class PropagatingTableDelegate: NSObject {
 		
 		let childIndex = (propagationMode == .Row) ? indexPath.row : indexPath.section
 		
-		let isValidIndex = (childIndex < childDelegates.count)
+		let isValidIndex = (childIndex >= 0) && (childIndex < childDelegates.count)
 		
 		return isValidIndex ? childIndex : nil
 	}
@@ -100,9 +100,9 @@ public class PropagatingTableDelegate: NSObject {
 	*/
 	private func isSectionMethodAllowed(sectionIndex sectionIndex: Int) -> Bool {
 		
-		let validIndex = (sectionIndex > 0) && (sectionIndex < childDelegates.count)
+		let validIndex = (sectionIndex >= 0) && (sectionIndex < childDelegates.count)
 		
-		return validIndex && propagationMode == .Section
+		return validIndex && (propagationMode == .Section)
 	}
 	
 	public override func respondsToSelector(aSelector: Selector) -> Bool {
