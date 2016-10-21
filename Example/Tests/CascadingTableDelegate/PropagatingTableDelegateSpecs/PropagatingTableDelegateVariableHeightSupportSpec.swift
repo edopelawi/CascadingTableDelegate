@@ -17,15 +17,14 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 		var propagatingTableDelegate: PropagatingTableDelegate!
 		var childDelegates: [CascadingTableDelegateStub]!
 		
-		let bareChildDelegateIndex = 0
+		let bareChildDelegateIndex = 2
 		let partialChildDelegateIndex = 1
-		let completeChildDelegateIndex = 2
+		let completeChildDelegateIndex = 0
 		
 		beforeEach {
 			childDelegates = [
-				CascadingTableDelegateBareStub(index: bareChildDelegateIndex, childDelegates: []),
-				CascadingTableDelegatePartialHeightStub(index: partialChildDelegateIndex, childDelegates: []),
-				CascadingTableDelegateCompleteStub(index: completeChildDelegateIndex, childDelegates: [])
+				CascadingTableDelegateCompleteStub(index: completeChildDelegateIndex, childDelegates: []),CascadingTableDelegatePartialHeightStub(index: partialChildDelegateIndex, childDelegates: []),
+                CascadingTableDelegateBareStub(index: bareChildDelegateIndex, childDelegates: [])
 			]
 			
 			propagatingTableDelegate = PropagatingTableDelegate(index: 0, childDelegates: childDelegates.map({ $0 as CascadingTableDelegate}))
