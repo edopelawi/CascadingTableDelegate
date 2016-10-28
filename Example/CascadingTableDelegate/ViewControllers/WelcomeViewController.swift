@@ -10,6 +10,11 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.navigationController?.navigationBarHidden = true
+	}
 	
 	@IBAction func nextButtonTapped(sender: AnyObject) {
 		

@@ -16,16 +16,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOI-yB-yBf" userLabel="WrapperView">
-                    <rect key="frame" x="19" y="227" width="562" height="146"/>
+                    <rect key="frame" x="0.0" y="227" width="600" height="146"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Cascading UITableView Delegate Sample." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eH-US-Y1E">
-                            <rect key="frame" x="20" y="0.0" width="522" height="33"/>
+                            <rect key="frame" x="20" y="0.0" width="560" height="33"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prs-6h-Bmk">
-                            <rect key="frame" x="20" y="113" width="522" height="33"/>
+                            <rect key="frame" x="20" y="113" width="560" height="33"/>
                             <color key="backgroundColor" red="0.17254901959999999" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                             <state key="normal" title="Show me the good stuff.">
@@ -53,15 +53,20 @@
                 <constraint firstAttribute="trailing" secondItem="wOI-yB-yBf" secondAttribute="trailing" id="8yd-A0-2HX"/>
                 <constraint firstItem="wOI-yB-yBf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="B4L-xo-Nwn"/>
                 <constraint firstItem="wOI-yB-yBf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HTm-FY-PS6"/>
+                <constraint firstItem="wOI-yB-yBf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="MTc-9B-JPf"/>
                 <constraint firstItem="wOI-yB-yBf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="SSt-XQ-VD6"/>
                 <constraint firstItem="wOI-yB-yBf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Vh6-ov-UcJ"/>
+                <constraint firstItem="wOI-yB-yBf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WZt-YG-rQO"/>
                 <constraint firstAttribute="bottom" secondItem="wOI-yB-yBf" secondAttribute="bottom" id="f2p-aK-uiQ"/>
+                <constraint firstAttribute="trailing" secondItem="wOI-yB-yBf" secondAttribute="trailing" id="i0r-nT-6FN"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="8yd-A0-2HX"/>
                     <exclude reference="B4L-xo-Nwn"/>
                     <exclude reference="HTm-FY-PS6"/>
+                    <exclude reference="SSt-XQ-VD6"/>
+                    <exclude reference="Vh6-ov-UcJ"/>
                     <exclude reference="f2p-aK-uiQ"/>
                 </mask>
             </variation>
