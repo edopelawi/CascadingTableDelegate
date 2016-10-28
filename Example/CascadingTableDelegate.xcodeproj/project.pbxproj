@@ -12,6 +12,8 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		8D0632981D704F0900BE5056 /* CascadingTableDelegateStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0632961D704D3600BE5056 /* CascadingTableDelegateStub.swift */; };
 		8D06329A1D70529500BE5056 /* CascadingTableDelegateBareStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0632991D70529500BE5056 /* CascadingTableDelegateBareStub.swift */; };
+		8D1BCAA91DC33ED900826B1D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1BCAA71DC33ED900826B1D /* WelcomeViewController.swift */; };
+		8D1BCAAA1DC33ED900826B1D /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1BCAA81DC33ED900826B1D /* WelcomeViewController.xib */; };
 		8D1F13571DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F13561DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift */; };
 		8D1F135C1DB5E43400571053 /* CascadingTableDelegatePartialHeightStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F135B1DB5E43400571053 /* CascadingTableDelegatePartialHeightStub.swift */; };
 		8D1F135E1DB5E53C00571053 /* CascadingSectionTableDelegateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F135D1DB5E53C00571053 /* CascadingSectionTableDelegateSpec.swift */; };
@@ -58,6 +60,8 @@
 		845A5CBE254927D69FA41AA4 /* Pods-CascadingTableDelegate_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CascadingTableDelegate_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CascadingTableDelegate_Tests/Pods-CascadingTableDelegate_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D0632961D704D3600BE5056 /* CascadingTableDelegateStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateStub.swift; sourceTree = "<group>"; };
 		8D0632991D70529500BE5056 /* CascadingTableDelegateBareStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateBareStub.swift; sourceTree = "<group>"; };
+		8D1BCAA71DC33ED900826B1D /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		8D1BCAA81DC33ED900826B1D /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		8D1F13561DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateSelectorResponseSpec.swift; sourceTree = "<group>"; };
 		8D1F135B1DB5E43400571053 /* CascadingTableDelegatePartialHeightStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegatePartialHeightStub.swift; sourceTree = "<group>"; };
 		8D1F135D1DB5E53C00571053 /* CascadingSectionTableDelegateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingSectionTableDelegateSpec.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 		607FACD21AFB9204008FA782 /* Example for CascadingTableDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				8D1BCAA61DC33EBA00826B1D /* ViewControllers */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -187,6 +192,15 @@
 				01C02335FFE7CD1D19408D6F /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		8D1BCAA61DC33EBA00826B1D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8D1BCAA71DC33ED900826B1D /* WelcomeViewController.swift */,
+				8D1BCAA81DC33ED900826B1D /* WelcomeViewController.xib */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		8D754B8A1D6B0F1E00A1DE01 /* CascadingTableDelegate */ = {
@@ -328,6 +342,7 @@
 			files = (
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				8D1BCAAA1DC33ED900826B1D /* WelcomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				8D1BCAA91DC33ED900826B1D /* WelcomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
