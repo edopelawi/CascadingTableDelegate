@@ -48,11 +48,16 @@ class DestinationViewController: UIViewController {
 	private func createRootDelegate() {
 		
 		// TODO: Fill up the `childDelegates` later.
+		
+		let childDelegates: [CascadingTableDelegate] = [
+			DestinationHeaderSectionDelegate()
+		]
+				
 		// TODO: Perhaps we could add a non-indexed initializer later... the index seems irrelevant at this phase.
 		
 		rootDelegate = CascadingRootTableDelegate(
 			index: 0,
-			childDelegates: [],
+			childDelegates: childDelegates,
 			tableView: tableView
 		)
 	}
