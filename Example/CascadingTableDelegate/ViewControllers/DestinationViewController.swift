@@ -12,6 +12,10 @@ import CascadingTableDelegate
 class DestinationViewController: UIViewController {
 
 	@IBOutlet weak private var tableView: UITableView!
+	
+	private let refreshControl = UIRefreshControl()
+	private let viewModel = DestinationViewModel()
+	
 	private var rootDelegate: CascadingRootTableDelegate?
 	
     override func viewDidLoad() {
@@ -19,13 +23,16 @@ class DestinationViewController: UIViewController {
 		
 		title = "Destination"
 		
+		configureRefreshControl()
 		configureNavBarStyle()
+		
 		createRootDelegate()
     }
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		navigationController?.navigationBarHidden = false
+		refreshData()
 	}
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -33,6 +40,11 @@ class DestinationViewController: UIViewController {
 	}
 	
 	// MARK: - Private methods
+	
+	private func configureRefreshControl() {
+		tableView.addSubview(refreshControl)
+		refreshControl.addTarget(self, action: #selector(DestinationViewController.refreshData), forControlEvents: .ValueChanged)
+	}
 	
 	private func configureNavBarStyle() {
 		
@@ -50,7 +62,7 @@ class DestinationViewController: UIViewController {
 		// TODO: Fill up the `childDelegates` later.
 		
 		let childDelegates: [CascadingTableDelegate] = [
-			DestinationHeaderSectionDelegate()
+			DestinationHeaderSectionDelegate(viewModel: viewModel)
 		]
 				
 		// TODO: Perhaps we could add a non-indexed initializer later... the index seems irrelevant at this phase.
@@ -61,4 +73,21 @@ class DestinationViewController: UIViewController {
 			tableView: tableView
 		)
 	}
+	
+	@objc private func refreshData() {
+		
+		viewModel.refreshData { [weak self] in
+			self?.refreshControl.endRefreshing()
+		}
+		
+		if refreshControl.refreshing {
+			return
+		}
+		
+		// TODO: Make the tableview show the refresh control here.
+		
+		refreshControl.beginRefreshing()
+		refreshControl.hidden = false
+	}
+	
 }
