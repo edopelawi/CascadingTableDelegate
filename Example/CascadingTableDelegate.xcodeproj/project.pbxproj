@@ -22,6 +22,7 @@
 		8D4D12C51DC706B200B273F9 /* UIColor+CSTAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12C41DC706B200B273F9 /* UIColor+CSTAdditions.swift */; };
 		8D4D12C91DC708CC00B273F9 /* DestinationTopPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12C71DC708CC00B273F9 /* DestinationTopPhotoCell.swift */; };
 		8D4D12CA1DC708CC00B273F9 /* DestinationTopPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D12C81DC708CC00B273F9 /* DestinationTopPhotoCell.xib */; };
+		8D4D12CC1DC709C000B273F9 /* UITableViewCell+NibIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12CB1DC709C000B273F9 /* UITableViewCell+NibIdentifier.swift */; };
 		8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */; };
 		A5158932822D6A8BA58CC3B3 /* Pods_CascadingTableDelegate_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */; };
 		B71684E51DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */; };
@@ -75,6 +76,7 @@
 		8D4D12C41DC706B200B273F9 /* UIColor+CSTAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CSTAdditions.swift"; sourceTree = "<group>"; };
 		8D4D12C71DC708CC00B273F9 /* DestinationTopPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationTopPhotoCell.swift; sourceTree = "<group>"; };
 		8D4D12C81DC708CC00B273F9 /* DestinationTopPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationTopPhotoCell.xib; sourceTree = "<group>"; };
+		8D4D12CB1DC709C000B273F9 /* UITableViewCell+NibIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+NibIdentifier.swift"; sourceTree = "<group>"; };
 		8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateCompleteStub.swift; sourceTree = "<group>"; };
 		8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CascadingTableDelegate_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateBaseSpec.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				8D4D12C41DC706B200B273F9 /* UIColor+CSTAdditions.swift */,
+				8D4D12CB1DC709C000B273F9 /* UITableViewCell+NibIdentifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				8D4D12C11DC7033400B273F9 /* DestinationViewController.swift in Sources */,
 				8D4D12C51DC706B200B273F9 /* UIColor+CSTAdditions.swift in Sources */,
 				8D4D12C91DC708CC00B273F9 /* DestinationTopPhotoCell.swift in Sources */,
+				8D4D12CC1DC709C000B273F9 /* UITableViewCell+NibIdentifier.swift in Sources */,
 				8D1BCAA91DC33ED900826B1D /* WelcomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
