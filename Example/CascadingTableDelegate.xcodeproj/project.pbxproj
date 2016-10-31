@@ -28,6 +28,7 @@
 		8D4D12D61DC7191E00B273F9 /* String+DisplayHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12D51DC7191E00B273F9 /* String+DisplayHeight.swift */; };
 		8D4D12D91DC7194B00B273F9 /* DestinationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12D71DC7194B00B273F9 /* DestinationDescriptionCell.swift */; };
 		8D4D12DA1DC7194B00B273F9 /* DestinationDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D12D81DC7194B00B273F9 /* DestinationDescriptionCell.xib */; };
+		8D4D12DD1DC7267700B273F9 /* DestinationHeaderSectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12DC1DC7267700B273F9 /* DestinationHeaderSectionDelegate.swift */; };
 		8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */; };
 		A5158932822D6A8BA58CC3B3 /* Pods_CascadingTableDelegate_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */; };
 		B71684E51DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */; };
@@ -87,6 +88,7 @@
 		8D4D12D51DC7191E00B273F9 /* String+DisplayHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+DisplayHeight.swift"; sourceTree = "<group>"; };
 		8D4D12D71DC7194B00B273F9 /* DestinationDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationDescriptionCell.swift; sourceTree = "<group>"; };
 		8D4D12D81DC7194B00B273F9 /* DestinationDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationDescriptionCell.xib; sourceTree = "<group>"; };
+		8D4D12DC1DC7267700B273F9 /* DestinationHeaderSectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationHeaderSectionDelegate.swift; sourceTree = "<group>"; };
 		8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateCompleteStub.swift; sourceTree = "<group>"; };
 		8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CascadingTableDelegate_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateBaseSpec.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				8D1BCAA61DC33EBA00826B1D /* ViewControllers */,
 				8D4D12C61DC7088600B273F9 /* TableViewCells */,
+				8D4D12DB1DC7261A00B273F9 /* SectionTableDelegates */,
 				8D4D12C31DC7068800B273F9 /* Extensions */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -250,6 +253,14 @@
 				8D4D12D81DC7194B00B273F9 /* DestinationDescriptionCell.xib */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		8D4D12DB1DC7261A00B273F9 /* SectionTableDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				8D4D12DC1DC7267700B273F9 /* DestinationHeaderSectionDelegate.swift */,
+			);
+			path = SectionTableDelegates;
 			sourceTree = "<group>";
 		};
 		8D754B8A1D6B0F1E00A1DE01 /* CascadingTableDelegate */ = {
@@ -508,6 +519,7 @@
 			files = (
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				8D4D12C11DC7033400B273F9 /* DestinationViewController.swift in Sources */,
+				8D4D12DD1DC7267700B273F9 /* DestinationHeaderSectionDelegate.swift in Sources */,
 				8D4D12C51DC706B200B273F9 /* UIColor+CSTAdditions.swift in Sources */,
 				8D4D12CF1DC70AB900B273F9 /* DestinationNameCell.swift in Sources */,
 				8D4D12C91DC708CC00B273F9 /* DestinationTopPhotoCell.swift in Sources */,
