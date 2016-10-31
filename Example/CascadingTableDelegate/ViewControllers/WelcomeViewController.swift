@@ -13,13 +13,14 @@ class WelcomeViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		self.navigationController?.navigationBarHidden = true
+		navigationController?.navigationBarHidden = true
 	}
 	
 	@IBAction func nextButtonTapped(sender: AnyObject) {
 		
-		// TODO: Add navigation code here.
-		print("Next Button tapped!")
+		let destinationViewController = DestinationViewController()
+		navigationController?.pushViewController(destinationViewController, animated: true)
+		
 	}
 
 }
