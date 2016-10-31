@@ -23,6 +23,8 @@
 		8D4D12C91DC708CC00B273F9 /* DestinationTopPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12C71DC708CC00B273F9 /* DestinationTopPhotoCell.swift */; };
 		8D4D12CA1DC708CC00B273F9 /* DestinationTopPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D12C81DC708CC00B273F9 /* DestinationTopPhotoCell.xib */; };
 		8D4D12CC1DC709C000B273F9 /* UITableViewCell+NibIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12CB1DC709C000B273F9 /* UITableViewCell+NibIdentifier.swift */; };
+		8D4D12CF1DC70AB900B273F9 /* DestinationNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12CD1DC70AB900B273F9 /* DestinationNameCell.swift */; };
+		8D4D12D01DC70AB900B273F9 /* DestinationNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D12CE1DC70AB900B273F9 /* DestinationNameCell.xib */; };
 		8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */; };
 		A5158932822D6A8BA58CC3B3 /* Pods_CascadingTableDelegate_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */; };
 		B71684E51DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */; };
@@ -77,6 +79,8 @@
 		8D4D12C71DC708CC00B273F9 /* DestinationTopPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationTopPhotoCell.swift; sourceTree = "<group>"; };
 		8D4D12C81DC708CC00B273F9 /* DestinationTopPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationTopPhotoCell.xib; sourceTree = "<group>"; };
 		8D4D12CB1DC709C000B273F9 /* UITableViewCell+NibIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+NibIdentifier.swift"; sourceTree = "<group>"; };
+		8D4D12CD1DC70AB900B273F9 /* DestinationNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationNameCell.swift; sourceTree = "<group>"; };
+		8D4D12CE1DC70AB900B273F9 /* DestinationNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationNameCell.xib; sourceTree = "<group>"; };
 		8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateCompleteStub.swift; sourceTree = "<group>"; };
 		8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CascadingTableDelegate_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateBaseSpec.swift; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 			children = (
 				8D4D12C71DC708CC00B273F9 /* DestinationTopPhotoCell.swift */,
 				8D4D12C81DC708CC00B273F9 /* DestinationTopPhotoCell.xib */,
+				8D4D12CD1DC70AB900B273F9 /* DestinationNameCell.swift */,
+				8D4D12CE1DC70AB900B273F9 /* DestinationNameCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -375,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				8D4D12D01DC70AB900B273F9 /* DestinationNameCell.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				8D4D12CA1DC708CC00B273F9 /* DestinationTopPhotoCell.xib in Resources */,
 				8D1BCAAA1DC33ED900826B1D /* WelcomeViewController.xib in Resources */,
@@ -492,6 +499,7 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				8D4D12C11DC7033400B273F9 /* DestinationViewController.swift in Sources */,
 				8D4D12C51DC706B200B273F9 /* UIColor+CSTAdditions.swift in Sources */,
+				8D4D12CF1DC70AB900B273F9 /* DestinationNameCell.swift in Sources */,
 				8D4D12C91DC708CC00B273F9 /* DestinationTopPhotoCell.swift in Sources */,
 				8D4D12CC1DC709C000B273F9 /* UITableViewCell+NibIdentifier.swift in Sources */,
 				8D1BCAA91DC33ED900826B1D /* WelcomeViewController.swift in Sources */,
