@@ -16,14 +16,34 @@ class DestinationViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		title = "Destination"
+		
+		configureNavBarStyle()
 		createRootDelegate()
     }
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		navigationController?.navigationBarHidden = false
+	}
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
 		return .LightContent
 	}
 	
 	// MARK: - Private methods
+	
+	private func configureNavBarStyle() {
+		
+		let navigationBar = self.navigationController?.navigationBar
+		
+		navigationBar?.barTintColor = UIColor.cst_DarkBlueGrey
+		navigationBar?.tintColor = UIColor.whiteColor()
+		navigationBar?.titleTextAttributes = [ NSForegroundColorAttributeName: UIColor.whiteColor() ]
+		
+		navigationBar?.barStyle = .Black
+	}
 
 	private func createRootDelegate() {
 		
