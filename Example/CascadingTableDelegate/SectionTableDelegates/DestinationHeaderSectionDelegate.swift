@@ -9,7 +9,7 @@
 import UIKit
 import CascadingTableDelegate
 
-protocol DestinationHeaderSectionViewModel {
+protocol DestinationHeaderSectionViewModel: class {
 	
 	var topPhoto: UIImage? { get }
 	
@@ -24,10 +24,10 @@ protocol DestinationHeaderSectionViewModel {
 
 class DestinationHeaderSectionDelegate: NSObject {
 
-	enum Section: Int {
+	enum Row: Int {
 		case TopPhoto = 0, Name, Description
 		
-		static let allValues: [Section] = [ .TopPhoto, .Name, .Description ]
+		static let allValues: [Row] = [ .TopPhoto, .Name, .Description ]
 		
 		var cellIdentifier: String {
 			switch self {
@@ -82,7 +82,7 @@ extension DestinationHeaderSectionDelegate: CascadingTableDelegate {
 	
 	private func registerNibs(tableView tableView: UITableView) {
 	
-		Section.allValues.map({ $0.cellIdentifier })
+		Row.allValues.map({ $0.cellIdentifier })
 			.forEach { identifier in
 				
 				let nib = UINib(nibName: identifier, bundle: nil)
@@ -94,17 +94,17 @@ extension DestinationHeaderSectionDelegate: CascadingTableDelegate {
 extension DestinationHeaderSectionDelegate: UITableViewDataSource {
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return Section.allValues.count
+		return Row.allValues.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
 		
-		guard let section = Section(rawValue: indexPath.section) else {
+		guard let row = Row(rawValue: indexPath.row) else {
 			return UITableViewCell()
 		}
 		
-		return tableView.dequeueReusableCellWithIdentifier(section.cellIdentifier, forIndexPath: indexPath)
+		return tableView.dequeueReusableCellWithIdentifier(row.cellIdentifier, forIndexPath: indexPath)
 	}
 }
 
@@ -113,11 +113,11 @@ extension DestinationHeaderSectionDelegate: UITableViewDelegate {
 
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
-		guard let section = Section(rawValue: indexPath.section) else {
+		guard let row = Row(rawValue: indexPath.row) else {
 			return CGFloat(0)
 		}
 		
-		switch section {
+		switch row {
 
 		case .TopPhoto: return DestinationTopPhotoCell.preferredHeight()
 		case .Name: return DestinationNameCell.preferredHeight()
@@ -127,19 +127,19 @@ extension DestinationHeaderSectionDelegate: UITableViewDelegate {
 	
 	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 		
-		guard let section = Section(rawValue: indexPath.section) else {
+		guard let row = Row(rawValue: indexPath.section) else {
 			return
 		}
 		
-		if let cell = cell as? DestinationTopPhotoCell where section == .TopPhoto {
+		if let cell = cell as? DestinationTopPhotoCell where row == .TopPhoto {
 			cell.configure(image: viewModel?.topPhoto)
 		}
 		
-		if let cell = cell as? DestinationNameCell where section == .Name {
+		if let cell = cell as? DestinationNameCell where row == .Name {
 			cell.configure(destinationName: viewModel?.destinationName, locationText: viewModel?.locationName)
 		}
 		
-		if let cell = cell as? DestinationDescriptionCell where section == .Description {
+		if let cell = cell as? DestinationDescriptionCell where row == .Description {
 			cell.configure(description: viewModel?.description)
 		}
 		
