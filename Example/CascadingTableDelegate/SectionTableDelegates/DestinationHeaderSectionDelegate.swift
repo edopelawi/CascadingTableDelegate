@@ -110,6 +110,14 @@ extension DestinationHeaderSectionDelegate: UITableViewDataSource {
 
 extension DestinationHeaderSectionDelegate: UITableViewDelegate {
 
+	
+	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return CGFloat.min
+	}
+	
+	func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return CGFloat.min
+	}
 
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
@@ -127,7 +135,7 @@ extension DestinationHeaderSectionDelegate: UITableViewDelegate {
 	
 	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 		
-		guard let row = Row(rawValue: indexPath.section) else {
+		guard let row = Row(rawValue: indexPath.row) else {
 			return
 		}
 		
