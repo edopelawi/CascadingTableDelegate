@@ -20,6 +20,8 @@
 		8D4D12C11DC7033400B273F9 /* DestinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12BF1DC7033400B273F9 /* DestinationViewController.swift */; };
 		8D4D12C21DC7033400B273F9 /* DestinationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D12C01DC7033400B273F9 /* DestinationViewController.xib */; };
 		8D4D12C51DC706B200B273F9 /* UIColor+CSTAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12C41DC706B200B273F9 /* UIColor+CSTAdditions.swift */; };
+		8D4D12C91DC708CC00B273F9 /* DestinationTopPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D12C71DC708CC00B273F9 /* DestinationTopPhotoCell.swift */; };
+		8D4D12CA1DC708CC00B273F9 /* DestinationTopPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D12C81DC708CC00B273F9 /* DestinationTopPhotoCell.xib */; };
 		8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */; };
 		A5158932822D6A8BA58CC3B3 /* Pods_CascadingTableDelegate_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */; };
 		B71684E51DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */; };
@@ -71,6 +73,8 @@
 		8D4D12BF1DC7033400B273F9 /* DestinationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationViewController.swift; sourceTree = "<group>"; };
 		8D4D12C01DC7033400B273F9 /* DestinationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationViewController.xib; sourceTree = "<group>"; };
 		8D4D12C41DC706B200B273F9 /* UIColor+CSTAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CSTAdditions.swift"; sourceTree = "<group>"; };
+		8D4D12C71DC708CC00B273F9 /* DestinationTopPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationTopPhotoCell.swift; sourceTree = "<group>"; };
+		8D4D12C81DC708CC00B273F9 /* DestinationTopPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationTopPhotoCell.xib; sourceTree = "<group>"; };
 		8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateCompleteStub.swift; sourceTree = "<group>"; };
 		8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CascadingTableDelegate_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateBaseSpec.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1BCAA61DC33EBA00826B1D /* ViewControllers */,
+				8D4D12C61DC7088600B273F9 /* TableViewCells */,
 				8D4D12C31DC7068800B273F9 /* Extensions */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -218,6 +223,15 @@
 				8D4D12C41DC706B200B273F9 /* UIColor+CSTAdditions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8D4D12C61DC7088600B273F9 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				8D4D12C71DC708CC00B273F9 /* DestinationTopPhotoCell.swift */,
+				8D4D12C81DC708CC00B273F9 /* DestinationTopPhotoCell.xib */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		8D754B8A1D6B0F1E00A1DE01 /* CascadingTableDelegate */ = {
@@ -359,6 +373,7 @@
 			files = (
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				8D4D12CA1DC708CC00B273F9 /* DestinationTopPhotoCell.xib in Resources */,
 				8D1BCAAA1DC33ED900826B1D /* WelcomeViewController.xib in Resources */,
 				8D4D12C21DC7033400B273F9 /* DestinationViewController.xib in Resources */,
 			);
@@ -474,6 +489,7 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				8D4D12C11DC7033400B273F9 /* DestinationViewController.swift in Sources */,
 				8D4D12C51DC706B200B273F9 /* UIColor+CSTAdditions.swift in Sources */,
+				8D4D12C91DC708CC00B273F9 /* DestinationTopPhotoCell.swift in Sources */,
 				8D1BCAA91DC33ED900826B1D /* WelcomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
