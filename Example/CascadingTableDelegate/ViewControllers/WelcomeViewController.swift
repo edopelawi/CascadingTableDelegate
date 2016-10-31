@@ -16,7 +16,13 @@ class WelcomeViewController: UIViewController {
 		navigationController?.navigationBarHidden = true
 	}
 	
-	@IBAction func nextButtonTapped(sender: AnyObject) {
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .LightContent
+	}
+	
+	// MARK: - Private methods
+	
+	@IBAction private func nextButtonTapped(sender: AnyObject) {
 		
 		let destinationViewController = DestinationViewController()
 		navigationController?.pushViewController(destinationViewController, animated: true)

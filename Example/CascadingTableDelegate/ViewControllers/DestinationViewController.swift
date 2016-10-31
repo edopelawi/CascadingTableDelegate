@@ -19,6 +19,10 @@ class DestinationViewController: UIViewController {
 		createRootDelegate()
     }
 	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .LightContent
+	}
+	
 	// MARK: - Private methods
 
 	private func createRootDelegate() {
