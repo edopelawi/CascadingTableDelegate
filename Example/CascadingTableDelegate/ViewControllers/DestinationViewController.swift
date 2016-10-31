@@ -21,7 +21,7 @@ class DestinationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		title = "Destination"
+		updateTitle()
 		
 		configureRefreshControl()
 		configureNavBarStyle()
@@ -41,9 +41,15 @@ class DestinationViewController: UIViewController {
 	
 	// MARK: - Private methods
 	
+	private func updateTitle() {
+		title = viewModel.destinationTitle ?? "Destination"
+	}
+	
 	private func configureRefreshControl() {
-		tableView.addSubview(refreshControl)
+		
 		refreshControl.addTarget(self, action: #selector(DestinationViewController.refreshData), forControlEvents: .ValueChanged)
+		
+		tableView.addSubview(refreshControl)
 	}
 	
 	private func configureNavBarStyle() {
@@ -77,6 +83,7 @@ class DestinationViewController: UIViewController {
 	@objc private func refreshData() {
 		
 		viewModel.refreshData { [weak self] in
+			self?.updateTitle()
 			self?.refreshControl.endRefreshing()
 		}
 		
