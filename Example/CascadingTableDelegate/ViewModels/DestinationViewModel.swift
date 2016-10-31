@@ -37,7 +37,7 @@ class DestinationViewModel {
 			self._topPhoto = UIImage(named: "vacation-place")
 			self._description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed placerat tincidunt aliquet. Quisque dictum nisi felis, vel aliquet metus congue ac. Curabitur dui arcu, sagittis vel urna non, faucibus pellentesque sem."
 			self._destinationName = "Camp Under The Stars"
-			self._locationName = "Hyrum, Utah"
+			self._locationName = "Hyrum State Park, Utah"
 			
 			dispatch_async(dispatch_get_main_queue(), {
 				self.executeUpdateClosures()
