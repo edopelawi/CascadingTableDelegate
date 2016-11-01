@@ -38,6 +38,8 @@
 		8D50BE771DC8535F00B0C427 /* DestinationMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D50BE751DC8535F00B0C427 /* DestinationMapCell.swift */; };
 		8D50BE781DC8535F00B0C427 /* DestinationMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D50BE761DC8535F00B0C427 /* DestinationMapCell.xib */; };
 		8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */; };
+		8DDD582A1DC8C8DE00328981 /* DestinationReviewRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDD58281DC8C8DE00328981 /* DestinationReviewRatingCell.swift */; };
+		8DDD582B1DC8C8DE00328981 /* DestinationReviewRatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DDD58291DC8C8DE00328981 /* DestinationReviewRatingCell.xib */; };
 		A5158932822D6A8BA58CC3B3 /* Pods_CascadingTableDelegate_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */; };
 		B71684E51DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */; };
 		B71684E61DA7312800666F45 /* PropagatingTableDelegateCopyPasteSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71684DB1DA7312800666F45 /* PropagatingTableDelegateCopyPasteSpec.swift */; };
@@ -106,6 +108,8 @@
 		8D50BE751DC8535F00B0C427 /* DestinationMapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationMapCell.swift; sourceTree = "<group>"; };
 		8D50BE761DC8535F00B0C427 /* DestinationMapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationMapCell.xib; sourceTree = "<group>"; };
 		8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateCompleteStub.swift; sourceTree = "<group>"; };
+		8DDD58281DC8C8DE00328981 /* DestinationReviewRatingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationReviewRatingCell.swift; sourceTree = "<group>"; };
+		8DDD58291DC8C8DE00328981 /* DestinationReviewRatingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationReviewRatingCell.xib; sourceTree = "<group>"; };
 		8F0A465F97314BF19FD1CD61 /* Pods_CascadingTableDelegate_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CascadingTableDelegate_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71684DA1DA7312800666F45 /* PropagatingTableDelegateBaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateBaseSpec.swift; sourceTree = "<group>"; };
 		B71684DB1DA7312800666F45 /* PropagatingTableDelegateCopyPasteSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateCopyPasteSpec.swift; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 				8D50BE761DC8535F00B0C427 /* DestinationMapCell.xib */,
 				8D1309691DC8601700FEF9C3 /* DestinationInfoCell.swift */,
 				8D13096A1DC8601700FEF9C3 /* DestinationInfoCell.xib */,
+				8DDD58281DC8C8DE00328981 /* DestinationReviewRatingCell.swift */,
+				8DDD58291DC8C8DE00328981 /* DestinationReviewRatingCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DDD582B1DC8C8DE00328981 /* DestinationReviewRatingCell.xib in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				8D4D12DA1DC7194B00B273F9 /* DestinationDescriptionCell.xib in Resources */,
 				8D4D12D01DC70AB900B273F9 /* DestinationNameCell.xib in Resources */,
@@ -575,6 +582,7 @@
 				8D1309681DC8596100FEF9C3 /* DestinationInfoSectionDelegate.swift in Sources */,
 				8D4D12D61DC7191E00B273F9 /* String+DisplayHeight.swift in Sources */,
 				8D1BCAA91DC33ED900826B1D /* WelcomeViewController.swift in Sources */,
+				8DDD582A1DC8C8DE00328981 /* DestinationReviewRatingCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
