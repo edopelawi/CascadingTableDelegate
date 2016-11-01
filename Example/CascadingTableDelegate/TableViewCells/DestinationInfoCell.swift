@@ -11,7 +11,7 @@ import UIKit
 class DestinationInfoCell: UITableViewCell {
 
 	@IBOutlet private weak var infoTypeLabel: UILabel!
-	@IBOutlet private weak var infoTextView: UITextView!
+	@IBOutlet private weak var infoTextLabel: UILabel!
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,14 +46,14 @@ class DestinationInfoCell: UITableViewCell {
 	
 	func configure(infoType infoType: String?, infoText: String?) {
 		infoTypeLabel.text = infoType
-		infoTextView.text = infoText
+		infoTextLabel.text = infoText
 	}
 	
 	// MARK: - Private methods
 	
 	private func resetLabels() {
 		infoTypeLabel.text = nil
-		infoTextView.text = nil
+		infoTextLabel.text = nil
 	}
     
 }
