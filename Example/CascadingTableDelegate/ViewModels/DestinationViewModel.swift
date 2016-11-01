@@ -16,6 +16,7 @@ class DestinationViewModel {
 	var destinationTitle: String?
 	var headerDataChanged: (Void -> Void)?
 	var infoDataChanged: (Void -> Void)?
+	var reviewRatingDataUpdated: (Void -> Void)?
 	
 	// MARK: - Private properties
 	
@@ -27,6 +28,8 @@ class DestinationViewModel {
 	
 	private var _locationCoordinate: CLLocationCoordinate2D?
 	private var _locationInfo = [DestinationInfo]()
+	
+	private var _averageRating = 0
 	
 	// MARK: - Public methods
 	
@@ -42,6 +45,7 @@ class DestinationViewModel {
 			
 			self.updateHeaderSectionProperties()
 			self.updateInfoSectionProperties()
+			self.updateReviewSectionProperties()
 			
 			dispatch_async(dispatch_get_main_queue(), {
 				self.executeUpdateClosures()
@@ -80,11 +84,16 @@ class DestinationViewModel {
 		})
 	}
 	
+	private func updateReviewSectionProperties() {
+		_averageRating = 4
+	}
+	
 	private func executeUpdateClosures() {
 		
 		// TODO: Execute more closures here
 		headerDataChanged?()
 		infoDataChanged?()
+		reviewRatingDataUpdated?()
 	}
 }
 
@@ -116,6 +125,14 @@ extension DestinationViewModel: DestinationInfoSectionViewModel {
 	
 	var locationInfo: [DestinationInfo] {
 		return _locationInfo
+	}
+	
+}
+
+extension DestinationViewModel: DestinationReviewRatingSectionViewModel {
+	
+	var averageRating: Int {
+		return _averageRating
 	}
 	
 }
