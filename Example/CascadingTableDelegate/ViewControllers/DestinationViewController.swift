@@ -68,7 +68,8 @@ class DestinationViewController: UIViewController {
 		// TODO: Fill up the `childDelegates` later.
 		
 		let childDelegates: [CascadingTableDelegate] = [
-			DestinationHeaderSectionDelegate(viewModel: viewModel)
+			DestinationHeaderSectionDelegate(viewModel: viewModel),
+			DestinationInfoSectionDelegate(viewModel: viewModel)
 		]
 				
 		// TODO: Perhaps we could add a non-indexed initializer later... the index seems irrelevant at this phase.
@@ -90,8 +91,6 @@ class DestinationViewController: UIViewController {
 		if refreshControl.refreshing {
 			return
 		}
-		
-		// TODO: Make the tableview show the refresh control here.
 		
 		refreshControl.beginRefreshing()
 		refreshControl.hidden = false
