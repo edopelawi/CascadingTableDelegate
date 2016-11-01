@@ -10,13 +10,18 @@ import Foundation
 import CascadingTableDelegate
 import CoreLocation
 
+struct DestinationInfo {
+	let type: String
+	let text: String
+}
+
 protocol DestinationInfoSectionViewModel: class {
 	
 	/// Stores location coordinate.
 	var locationCoordinate: CLLocationCoordinate2D? { get }
 	
-	/// Stores `Dictionary` of `String`s of the location info, where the `key` is the human-readable info type, and the `value` is human-readable info text.
-	var locationInfo: [String: String] { get }
+	/// Stores array of `DestinationInfo`.
+	var locationInfo: [DestinationInfo] { get }
 	
 	/// Executed when any property info of this instance is updated.
 	var infoDataChanged: (Void -> Void)? { get set }
@@ -130,13 +135,10 @@ extension DestinationInfoSectionDelegate: UITableViewDelegate {
 			return CGFloat.min
 		}
 		
-		let infoTypes = Array(viewModel.locationInfo.keys)
 		let infoRow = indexPath.row - 1
+		let info = viewModel.locationInfo[infoRow]
 		
-		let infoType = infoTypes[infoRow]
-		let infoText = viewModel.locationInfo[infoType]
-		
-		return DestinationInfoCell.preferredHeight(infoType: infoType, infoText: infoText)
+		return DestinationInfoCell.preferredHeight(infoType: info.type, infoText: info.text)
 	}
 	
 	
@@ -165,11 +167,8 @@ extension DestinationInfoSectionDelegate: UITableViewDelegate {
 		}
 		
 		let infoRow = indexPath.row - 1
-		let infoTypes = Array(locationInfo.keys)
+		let info = locationInfo[infoRow]
 		
-		let infoType = infoTypes[infoRow]
-		let infoText = locationInfo[infoType]
-		
-		infoCell.configure(infoType: infoType, infoText: infoText)
+		infoCell.configure(infoType: info.type, infoText: info.text)
 	}
 }
