@@ -26,7 +26,7 @@ class DestinationViewModel {
 	
 	
 	private var _locationCoordinate: CLLocationCoordinate2D?
-	private var _locationInfo = [String: String]()
+	private var _locationInfo = [DestinationInfo]()
 	
 	// MARK: - Public methods
 	
@@ -69,11 +69,15 @@ class DestinationViewModel {
 			longitude: -111.8602992
 		)
 		
-		_locationInfo = [
-			"Address": "Hyrum State Park, 405 W 300 S, Hyrum, UT 84319",
-			"Website": "stateparks.utah.gov",
-			"Phone": "+1 435-245-6866"
+		let info = [
+			("Address", "Hyrum State Park, 405 W 300 S, Hyrum, UT 84319"),
+			("Website", "stateparks.utah.gov"),
+			("Phone", "+1 435-245-6866")
 		]
+		
+		_locationInfo = info.map({ type, text -> DestinationInfo in
+			return DestinationInfo(type: type, text: text)
+		})
 	}
 	
 	private func executeUpdateClosures() {
@@ -109,7 +113,7 @@ extension DestinationViewModel: DestinationInfoSectionViewModel {
 		return _locationCoordinate
 	}
 	
-	var locationInfo: [String : String] {
+	var locationInfo: [DestinationInfo] {
 		return _locationInfo
 	}
 	
