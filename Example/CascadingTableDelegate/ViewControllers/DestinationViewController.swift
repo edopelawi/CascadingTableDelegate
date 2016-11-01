@@ -69,7 +69,8 @@ class DestinationViewController: UIViewController {
 		
 		let childDelegates: [CascadingTableDelegate] = [
 			DestinationHeaderSectionDelegate(viewModel: viewModel),
-			DestinationInfoSectionDelegate(viewModel: viewModel)
+			DestinationInfoSectionDelegate(viewModel: viewModel),
+			DestinationReviewRatingSectionDelegate(viewModel: viewModel)
 		]
 				
 		// TODO: Perhaps we could add a non-indexed initializer later... the index seems irrelevant at this phase.
