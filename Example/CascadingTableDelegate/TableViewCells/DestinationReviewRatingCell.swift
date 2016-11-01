@@ -18,7 +18,7 @@ class DestinationReviewRatingCell: UITableViewCell {
     }
 	
 	override func prepareForReuse() {
-		self.prepareForReuse()
+		super.prepareForReuse()
 		configure(rating: 0)
 	}
 		
@@ -36,8 +36,8 @@ class DestinationReviewRatingCell: UITableViewCell {
 		starImageViews.enumerate()
 		.forEach { index, imageView in
 			
-			let insideRating = index < (rating - 1)
-			let starImage = insideRating ? UIImage.greyStar() : UIImage.yellowStar()
+			let insideRating = index < rating
+			let starImage = insideRating ? UIImage.yellowStar() : UIImage.greyStar()
 			
 			imageView.image = starImage
 		}
