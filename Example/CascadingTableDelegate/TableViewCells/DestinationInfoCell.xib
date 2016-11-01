@@ -18,13 +18,13 @@
                         <rect key="frame" x="10" y="0.0" width="400" height="115.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info Type" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gm9-5Y-RMk" userLabel="Info Type Label">
-                                <rect key="frame" x="10" y="10" width="380" height="17"/>
+                                <rect key="frame" x="10" y="0.0" width="380" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info text, whatever you want this to be" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Cc-AR-7l5" userLabel="Info Text Label">
-                                <rect key="frame" x="10" y="37" width="380" height="17"/>
+                                <rect key="frame" x="10" y="27" width="380" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                             <constraint firstAttribute="trailing" secondItem="Gm9-5Y-RMk" secondAttribute="trailing" constant="10" id="CMx-kK-8M4"/>
                             <constraint firstItem="0Cc-AR-7l5" firstAttribute="top" secondItem="Gm9-5Y-RMk" secondAttribute="bottom" constant="10" id="CeM-kw-Enl"/>
                             <constraint firstItem="0Cc-AR-7l5" firstAttribute="leading" secondItem="Gm9-5Y-RMk" secondAttribute="leading" id="aqs-Xp-Be9"/>
-                            <constraint firstItem="Gm9-5Y-RMk" firstAttribute="top" secondItem="QgY-Vk-4iI" secondAttribute="top" constant="10" id="ldo-On-aBR"/>
+                            <constraint firstItem="Gm9-5Y-RMk" firstAttribute="top" secondItem="QgY-Vk-4iI" secondAttribute="top" id="ldo-On-aBR"/>
                             <constraint firstItem="Gm9-5Y-RMk" firstAttribute="leading" secondItem="QgY-Vk-4iI" secondAttribute="leading" constant="10" id="zzm-9y-M1Y"/>
                         </constraints>
                     </view>

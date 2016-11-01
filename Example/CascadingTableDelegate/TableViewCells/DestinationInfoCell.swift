@@ -41,7 +41,7 @@ class DestinationInfoCell: UITableViewCell {
 		
 		let verticalPadding = CGFloat(10)
 		
-		return infoTypeHeight + infoTextHeight + (verticalPadding * 3.0)
+		return infoTypeHeight + infoTextHeight + (verticalPadding * 2.0)
 	}
 	
 	func configure(infoType infoType: String?, infoText: String?) {

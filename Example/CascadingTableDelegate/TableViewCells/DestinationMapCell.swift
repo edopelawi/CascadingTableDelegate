@@ -36,7 +36,7 @@ class DestinationMapCell: UITableViewCell {
 		
 		let displayRatio = CGFloat(109.0 / 355.0)
 		
-		return displayRatio * expectedWidth
+		return (displayRatio * expectedWidth) + 10
 	}
 	
 	func configure(coordinate coordinate: CLLocationCoordinate2D, regionDistance: Double = 1200.0) {

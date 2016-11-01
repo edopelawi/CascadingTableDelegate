@@ -18,13 +18,13 @@
                         <rect key="frame" x="10" y="0.0" width="300" height="103"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRi-hG-l7Z">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="103"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="93"/>
                                 <color key="backgroundColor" red="0.24313725531101227" green="0.29019609093666077" blue="0.34509804844856262" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" red="0.24313725531101227" green="0.29019609093666077" blue="0.34509804844856262" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="VRi-hG-l7Z" secondAttribute="bottom" id="HZU-IK-gcZ"/>
+                            <constraint firstAttribute="bottom" secondItem="VRi-hG-l7Z" secondAttribute="bottom" constant="10" id="HZU-IK-gcZ"/>
                             <constraint firstItem="VRi-hG-l7Z" firstAttribute="leading" secondItem="ab9-U5-oAw" secondAttribute="leading" id="PAP-Ki-duK"/>
                             <constraint firstAttribute="trailing" secondItem="VRi-hG-l7Z" secondAttribute="trailing" id="VXF-qj-YDH"/>
                             <constraint firstItem="VRi-hG-l7Z" firstAttribute="top" secondItem="ab9-U5-oAw" secondAttribute="top" id="rtv-zU-a9G"/>
