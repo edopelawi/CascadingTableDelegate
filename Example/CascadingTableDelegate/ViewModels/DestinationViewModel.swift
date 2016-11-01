@@ -84,6 +84,7 @@ class DestinationViewModel {
 		
 		// TODO: Execute more closures here
 		headerDataChanged?()
+		infoDataChanged?()
 	}
 }
 
