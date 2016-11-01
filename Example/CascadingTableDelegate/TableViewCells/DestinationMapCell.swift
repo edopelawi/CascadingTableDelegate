@@ -39,15 +39,18 @@ class DestinationMapCell: UITableViewCell {
 		return displayRatio * expectedWidth
 	}
 	
-	func configure(coordinate coordinate: CLLocationCoordinate2D) {
-		mapView.setCenterCoordinate(coordinate, animated: true)
+	func configure(coordinate coordinate: CLLocationCoordinate2D, regionDistance: Double = 1200.0) {
+		
+		let region = MKCoordinateRegionMakeWithDistance(coordinate, regionDistance, regionDistance)
+		
+		mapView.setRegion(region, animated: true)		
 	}
 	
 	
 	// MARK: - Private methods
 	
 	private func resetMapView() {
-
+		
 		let zeroCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
 		mapView.setCenterCoordinate(zeroCoordinate, animated: false)
 	}
