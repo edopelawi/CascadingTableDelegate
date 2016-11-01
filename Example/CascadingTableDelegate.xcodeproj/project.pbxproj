@@ -13,6 +13,8 @@
 		8D0632981D704F0900BE5056 /* CascadingTableDelegateStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0632961D704D3600BE5056 /* CascadingTableDelegateStub.swift */; };
 		8D06329A1D70529500BE5056 /* CascadingTableDelegateBareStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0632991D70529500BE5056 /* CascadingTableDelegateBareStub.swift */; };
 		8D1309681DC8596100FEF9C3 /* DestinationInfoSectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1309671DC8596100FEF9C3 /* DestinationInfoSectionDelegate.swift */; };
+		8D13096B1DC8601700FEF9C3 /* DestinationInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1309691DC8601700FEF9C3 /* DestinationInfoCell.swift */; };
+		8D13096C1DC8601700FEF9C3 /* DestinationInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D13096A1DC8601700FEF9C3 /* DestinationInfoCell.xib */; };
 		8D1BCAA91DC33ED900826B1D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1BCAA71DC33ED900826B1D /* WelcomeViewController.swift */; };
 		8D1BCAAA1DC33ED900826B1D /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1BCAA81DC33ED900826B1D /* WelcomeViewController.xib */; };
 		8D1F13571DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F13561DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift */; };
@@ -79,6 +81,8 @@
 		8D0632961D704D3600BE5056 /* CascadingTableDelegateStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateStub.swift; sourceTree = "<group>"; };
 		8D0632991D70529500BE5056 /* CascadingTableDelegateBareStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateBareStub.swift; sourceTree = "<group>"; };
 		8D1309671DC8596100FEF9C3 /* DestinationInfoSectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationInfoSectionDelegate.swift; sourceTree = "<group>"; };
+		8D1309691DC8601700FEF9C3 /* DestinationInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationInfoCell.swift; sourceTree = "<group>"; };
+		8D13096A1DC8601700FEF9C3 /* DestinationInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationInfoCell.xib; sourceTree = "<group>"; };
 		8D1BCAA71DC33ED900826B1D /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		8D1BCAA81DC33ED900826B1D /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		8D1F13561DB5D63900571053 /* PropagatingTableDelegateSelectorResponseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegateSelectorResponseSpec.swift; sourceTree = "<group>"; };
@@ -267,6 +271,8 @@
 				8D4D12D81DC7194B00B273F9 /* DestinationDescriptionCell.xib */,
 				8D50BE751DC8535F00B0C427 /* DestinationMapCell.swift */,
 				8D50BE761DC8535F00B0C427 /* DestinationMapCell.xib */,
+				8D1309691DC8601700FEF9C3 /* DestinationInfoCell.swift */,
+				8D13096A1DC8601700FEF9C3 /* DestinationInfoCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -438,6 +444,7 @@
 				8D4D12DA1DC7194B00B273F9 /* DestinationDescriptionCell.xib in Resources */,
 				8D4D12D01DC70AB900B273F9 /* DestinationNameCell.xib in Resources */,
 				8D50BE781DC8535F00B0C427 /* DestinationMapCell.xib in Resources */,
+				8D13096C1DC8601700FEF9C3 /* DestinationInfoCell.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				8D4D12CA1DC708CC00B273F9 /* DestinationTopPhotoCell.xib in Resources */,
 				8D1BCAAA1DC33ED900826B1D /* WelcomeViewController.xib in Resources */,
@@ -554,6 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				8D13096B1DC8601700FEF9C3 /* DestinationInfoCell.swift in Sources */,
 				8D4D12C11DC7033400B273F9 /* DestinationViewController.swift in Sources */,
 				8D4D12DD1DC7267700B273F9 /* DestinationHeaderSectionDelegate.swift in Sources */,
 				8D4D12C51DC706B200B273F9 /* UIColor+CSTAdditions.swift in Sources */,
