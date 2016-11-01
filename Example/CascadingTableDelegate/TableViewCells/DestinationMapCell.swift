@@ -23,9 +23,28 @@ class DestinationMapCell: UITableViewCell {
 		resetMapView()
 	}
 	
+	// MARK: - Public methods
+	
+	/// Preferred height to show this class' instance.
+	static func preferredHeight() -> CGFloat {
+		
+		let mainScreen = UIScreen.mainScreen()
+		let displayWidth = mainScreen.bounds.width
+		
+		let horizontalPadding = CGFloat(10)
+		let expectedWidth = displayWidth - (horizontalPadding * 2.0)
+		
+		let displayRatio = CGFloat(109.0 / 355.0)
+		
+		return displayRatio * expectedWidth
+	}
+	
 	func configure(coordinate coordinate: CLLocationCoordinate2D) {
 		mapView.setCenterCoordinate(coordinate, animated: true)
 	}
+	
+	
+	// MARK: - Private methods
 	
 	private func resetMapView() {
 
