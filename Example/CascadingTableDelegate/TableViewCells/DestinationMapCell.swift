@@ -43,7 +43,7 @@ class DestinationMapCell: UITableViewCell {
 		
 		let region = MKCoordinateRegionMakeWithDistance(coordinate, regionDistance, regionDistance)
 		
-		mapView.setRegion(region, animated: true)		
+		mapView.setRegion(region, animated: false)
 	}
 	
 	
