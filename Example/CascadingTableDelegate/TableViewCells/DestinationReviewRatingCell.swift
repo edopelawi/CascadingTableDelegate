@@ -22,6 +22,10 @@ class DestinationReviewRatingCell: UITableViewCell {
 		configure(rating: 0)
 	}
 		
+	static func preferredHeight() -> CGFloat {
+		return CGFloat(39)
+	}
+	
 	/// Configures this instance with passed `rating`. Valid values are between 0 - 5. Behaviour for invalid values is undefined.
 	func configure(rating rating: Int) {
 		
