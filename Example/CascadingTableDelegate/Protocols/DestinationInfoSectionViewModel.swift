@@ -14,6 +14,12 @@ struct DestinationInfo {
 	let text: String
 }
 
+protocol DestinationInfoSectionViewModelObserver: class {
+	
+	/// Executed when any property info of the listened `DestinationInfoSectionViewModel` is updated.
+	func infoSectionDataChanged()
+}
+
 protocol DestinationInfoSectionViewModel: class {
 	
 	/// Stores location coordinate.
@@ -22,6 +28,32 @@ protocol DestinationInfoSectionViewModel: class {
 	/// Stores array of `DestinationInfo`.
 	var locationInfo: [DestinationInfo] { get }
 	
-	/// Executed when any property info of this instance is updated.
-	var infoDataChanged: (Void -> Void)? { get set }
+	/// `DestinationInfoSectionViewModelObserver`s of this instance.
+	var infoSectionObservers: [DestinationInfoSectionViewModelObserver] { get set }
+}
+
+extension DestinationInfoSectionViewModel {
+	
+	func add(observer observer: DestinationInfoSectionViewModelObserver) {
+		self.infoSectionObservers.append(observer)
+	}
+	
+	func remove(observer observer: DestinationInfoSectionViewModelObserver) {
+		
+		let observerIndex = self.infoSectionObservers.indexOf { (currentObserver) -> Bool in
+			return unsafeAddressOf(observer) == unsafeAddressOf(currentObserver)
+		}
+		
+		if let index = observerIndex {
+			self.infoSectionObservers.removeAtIndex(index)
+		}
+	}
+	
+	
+	/// Notify all
+	func notifyInfoSectionObservers() {
+		self.infoSectionObservers.forEach { observer in
+			observer.infoSectionDataChanged()
+		}
+	}
 }
