@@ -11,6 +11,7 @@ import UIKit
 class ReviewSectionFooterView: UIView {
 
 	@IBOutlet private weak var showMoreButton: UIButton?
+	@IBOutlet private weak var activityIndicator: UIActivityIndicatorView?
 	
 	/// This instance's button text.
 	var buttonText: String? {
@@ -18,7 +19,7 @@ class ReviewSectionFooterView: UIView {
 			return showMoreButton?.titleLabel?.text
 		}
 		set {
-			showMoreButton?.titleLabel?.text = buttonText
+			showMoreButton?.setTitle(newValue, forState: .Normal)
 		}
 	}
 	
@@ -28,6 +29,7 @@ class ReviewSectionFooterView: UIView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		showMoreButton?.setRoundedCorner()
+		activityIndicator?.hidden = true
 	}
 	
 	/// Factory method of this class.
@@ -42,6 +44,32 @@ class ReviewSectionFooterView: UIView {
 	/// Prefered height to display this instance.
 	static func preferredHeight() -> CGFloat {
 		return CGFloat(46)
+	}
+	
+	/// Shows this instance's activity indicator and hides its button text.
+	func startActivityIndicator() {
+
+		if let indicator = activityIndicator where !indicator.hidden {
+			return
+		}
+		
+		activityIndicator?.hidden = false
+		activityIndicator?.startAnimating()
+		
+		showMoreButton?.titleLabel?.alpha = 0.0
+	}
+	
+	/// Hides this instance's activity indicator and returns its button text.
+	func stopActivityIndicator() {
+		
+		if let indicator = activityIndicator where indicator.hidden {
+			return
+		}
+		
+		activityIndicator?.hidden = true
+		activityIndicator?.stopAnimating()
+		
+		showMoreButton?.titleLabel?.alpha = 1.0
 	}
 		
 	@IBAction private func showMoreButtonTapped(sender: AnyObject) {

@@ -25,11 +25,16 @@
                                 <action selector="showMoreButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="2FU-0i-xpR"/>
                             </connections>
                         </button>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qpL-DW-v4O">
+                            <rect key="frame" x="281" y="90" width="20" height="20"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" red="0.24313725531101227" green="0.29019609093666077" blue="0.34509804844856262" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="GyR-kH-plJ" firstAttribute="centerY" secondItem="5dG-Um-yar" secondAttribute="centerY" id="0kr-cr-zeG"/>
+                        <constraint firstItem="qpL-DW-v4O" firstAttribute="centerY" secondItem="GyR-kH-plJ" secondAttribute="centerY" id="3Hc-ab-fpa"/>
                         <constraint firstItem="GyR-kH-plJ" firstAttribute="centerX" secondItem="5dG-Um-yar" secondAttribute="centerX" id="BAy-uY-Ve1"/>
+                        <constraint firstItem="qpL-DW-v4O" firstAttribute="centerX" secondItem="GyR-kH-plJ" secondAttribute="centerX" id="GLt-KC-EGL"/>
                     </constraints>
                 </view>
             </subviews>
@@ -42,6 +47,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="activityIndicator" destination="qpL-DW-v4O" id="s8B-v4-QKS"/>
                 <outlet property="showMoreButton" destination="GyR-kH-plJ" id="0e3-0C-dUC"/>
             </connections>
             <point key="canvasLocation" x="192" y="553.5"/>
