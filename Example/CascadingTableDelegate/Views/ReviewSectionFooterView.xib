@@ -22,8 +22,9 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GyR-kH-plJ">
-                            <rect key="frame" x="222" y="84" width="137" height="32"/>
+                            <rect key="frame" x="231" y="86.5" width="119" height="27"/>
                             <color key="backgroundColor" red="0.17254902422428131" green="0.88235294818878174" blue="0.88627451658248901" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="contentEdgeInsets" minX="24" minY="5" maxX="24" maxY="5"/>
                             <state key="normal" title="show more">
                                 <color key="titleColor" red="0.24313725531101227" green="0.29019609093666077" blue="0.34509804844856262" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
