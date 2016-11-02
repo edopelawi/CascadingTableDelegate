@@ -16,19 +16,23 @@ class DestinationInfoListSectionDelegate: CascadingSectionTableDelegate {
 	convenience init(viewModel: DestinationInfoSectionViewModel) {
 		
 		self.init(index: 0, childDelegates: [])
+		
+		viewModel.add(observer: self)
 		self.viewModel = viewModel
+		
 		reloadOnChildDelegatesChanged = true
-		configureViewModelObserver()
 	}
 	
-	private func configureViewModelObserver() {
-		// TODO: Update this after viewModels' observing logic is updated to Observer Pattern.
-		guard let viewModel = viewModel else {
-			return
-		}
+	deinit {
+		viewModel?.remove(observer: self)
+	}
+	
+	override func prepare(tableView tableView: UITableView) {
+		super.prepare(tableView: tableView)
 		
-		childDelegates = viewModel.locationInfo
-		.map({ DestinationInfoListRowDelegate(info: $0) })
+		let identifier = DestinationInfoListRowDelegate.cellIdentifier
+		let nib = UINib(nibName: identifier, bundle: nil)
+		tableView.registerNib(nib, forCellReuseIdentifier: identifier)
 	}
 	
 	override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -37,5 +41,18 @@ class DestinationInfoListSectionDelegate: CascadingSectionTableDelegate {
 	
 	override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return CGFloat.min
+	}
+}
+
+extension DestinationInfoListSectionDelegate: DestinationInfoSectionViewModelObserver {
+
+	
+	func infoSectionDataChanged() {
+		
+		guard let viewModel = viewModel else {
+			return
+		}
+		
+		childDelegates = viewModel.locationInfo.map({ DestinationInfoListRowDelegate(info: $0) })
 	}
 }
