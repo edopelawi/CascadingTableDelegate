@@ -17,6 +17,7 @@ class DestinationViewModel {
 	var headerDataChanged: (Void -> Void)?
 	var infoDataChanged: (Void -> Void)?
 	var reviewRatingDataUpdated: (Void -> Void)?
+	var reviewUserDataChanged: (Void -> Void)?
 	
 	// MARK: - Private properties
 	
@@ -30,6 +31,7 @@ class DestinationViewModel {
 	private var _locationInfo = [DestinationInfo]()
 	
 	private var _averageRating = 0
+	private var _rowViewModels = [DestinationReviewUserRowViewModel]()
 	
 	// MARK: - Public methods
 	
@@ -86,14 +88,22 @@ class DestinationViewModel {
 	
 	private func updateReviewSectionProperties() {
 		_averageRating = 4
+		
+		let userReview = DestinationReviewUserRowViewModel(
+			userName: "Alice",
+			userReview: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed placerat tincidunt aliquet. Quisque dictum nisi felis, vel aliquet metus congue ac",
+			rating: 4
+		)
+		
+		_rowViewModels = [DestinationReviewUserRowViewModel](count: 5, repeatedValue: userReview)
 	}
 	
 	private func executeUpdateClosures() {
-		
-		// TODO: Execute more closures here
+				
 		headerDataChanged?()
 		infoDataChanged?()
 		reviewRatingDataUpdated?()
+		reviewUserDataChanged?()
 	}
 }
 
@@ -135,4 +145,12 @@ extension DestinationViewModel: DestinationReviewRatingSectionViewModel {
 		return _averageRating
 	}
 	
+}
+
+extension DestinationViewModel: DestinationReviewUserSectionViewModel {
+	
+	var rowViewModels: [DestinationReviewUserRowViewModel] {
+
+		return _rowViewModels
+	}
 }
