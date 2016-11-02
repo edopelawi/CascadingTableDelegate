@@ -21,7 +21,9 @@ class DestinationInfoListSectionDelegate: CascadingSectionTableDelegate {
 		self.init(index: 0, childDelegates: [])
 		
 		viewModel.add(observer: self)
-		self.viewModel = viewModel		
+		self.viewModel = viewModel
+		
+		self.reloadModeOnChildDelegatesChanged = .Section(animation: .Automatic)
 	}
 	
 	deinit {
@@ -59,8 +61,5 @@ extension DestinationInfoListSectionDelegate: DestinationInfoSectionViewModelObs
 		}
 		
 		childDelegates = viewModel.locationInfo.map({ DestinationInfoListRowDelegate(info: $0) })
-		
-		let indexes = NSIndexSet(index: index)
-		currentTableView?.reloadSections(indexes, withRowAnimation: .Automatic)
 	}
 }

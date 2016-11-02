@@ -36,7 +36,9 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 	convenience init(viewModel: DestinationReviewUserSectionViewModel) {
 		
 		self.init()
+		
 		self.viewModel = viewModel
+		self.reloadModeOnChildDelegatesChanged = .Section(animation: .Automatic)
 		
 		configureViewModelObserver()
 		updateChildDelegates()
@@ -81,11 +83,6 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		}
 		
 		childDelegates = childViewModels.map({ DestinationReviewUserRowDelegate(viewModel: $0) })
-				
-		// TODO: Perhaps we could replace the reloadOnChildDelegatesChanged to some enum that allows reloadSections.
-		
-		let indexes = NSIndexSet(index: index)
-		currentTableView?.reloadSections(indexes, withRowAnimation: .Automatic)
 	}
 	
 	private func configureFooterViewObserver() {
