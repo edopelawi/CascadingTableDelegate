@@ -41,6 +41,8 @@
 		8D4FD7551DC99CE700F42211 /* DestinationReviewUserRowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FD7541DC99CE700F42211 /* DestinationReviewUserRowDelegate.swift */; };
 		8D4FD7571DC9A0A200F42211 /* DestinationReviewUserSectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FD7561DC9A0A200F42211 /* DestinationReviewUserSectionDelegate.swift */; };
 		8D4FD7591DC9A71600F42211 /* UITableView+RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FD7581DC9A71600F42211 /* UITableView+RefreshControl.swift */; };
+		8D4FD75B1DC9A9BA00F42211 /* ReviewSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FD75A1DC9A9BA00F42211 /* ReviewSectionFooterView.swift */; };
+		8D4FD75D1DC9A9C400F42211 /* ReviewSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4FD75C1DC9A9C400F42211 /* ReviewSectionFooterView.xib */; };
 		8D50BE771DC8535F00B0C427 /* DestinationMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D50BE751DC8535F00B0C427 /* DestinationMapCell.swift */; };
 		8D50BE781DC8535F00B0C427 /* DestinationMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D50BE761DC8535F00B0C427 /* DestinationMapCell.xib */; };
 		8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */; };
@@ -117,6 +119,8 @@
 		8D4FD7541DC99CE700F42211 /* DestinationReviewUserRowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationReviewUserRowDelegate.swift; sourceTree = "<group>"; };
 		8D4FD7561DC9A0A200F42211 /* DestinationReviewUserSectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationReviewUserSectionDelegate.swift; sourceTree = "<group>"; };
 		8D4FD7581DC9A71600F42211 /* UITableView+RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+RefreshControl.swift"; sourceTree = "<group>"; };
+		8D4FD75A1DC9A9BA00F42211 /* ReviewSectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewSectionFooterView.swift; sourceTree = "<group>"; };
+		8D4FD75C1DC9A9C400F42211 /* ReviewSectionFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewSectionFooterView.xib; sourceTree = "<group>"; };
 		8D50BE751DC8535F00B0C427 /* DestinationMapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationMapCell.swift; sourceTree = "<group>"; };
 		8D50BE761DC8535F00B0C427 /* DestinationMapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationMapCell.xib; sourceTree = "<group>"; };
 		8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateCompleteStub.swift; sourceTree = "<group>"; };
@@ -323,6 +327,8 @@
 			children = (
 				8D4D12E21DC74CA700B273F9 /* SectionHeaderView.swift */,
 				8D4D12E41DC74CB700B273F9 /* SectionHeaderView.xib */,
+				8D4FD75A1DC9A9BA00F42211 /* ReviewSectionFooterView.swift */,
+				8D4FD75C1DC9A9C400F42211 /* ReviewSectionFooterView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -474,6 +480,7 @@
 			files = (
 				8DDD582B1DC8C8DE00328981 /* DestinationReviewRatingCell.xib in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				8D4FD75D1DC9A9C400F42211 /* ReviewSectionFooterView.xib in Resources */,
 				8D4D12DA1DC7194B00B273F9 /* DestinationDescriptionCell.xib in Resources */,
 				8D4D12D01DC70AB900B273F9 /* DestinationNameCell.xib in Resources */,
 				8D50BE781DC8535F00B0C427 /* DestinationMapCell.xib in Resources */,
@@ -603,6 +610,7 @@
 				8D4FD7591DC9A71600F42211 /* UITableView+RefreshControl.swift in Sources */,
 				8D4D12C51DC706B200B273F9 /* UIColor+CSTAdditions.swift in Sources */,
 				8D4D12CF1DC70AB900B273F9 /* DestinationNameCell.swift in Sources */,
+				8D4FD75B1DC9A9BA00F42211 /* ReviewSectionFooterView.swift in Sources */,
 				8D4D12C91DC708CC00B273F9 /* DestinationTopPhotoCell.swift in Sources */,
 				8D4D12D91DC7194B00B273F9 /* DestinationDescriptionCell.swift in Sources */,
 				8D50BE771DC8535F00B0C427 /* DestinationMapCell.swift in Sources */,
