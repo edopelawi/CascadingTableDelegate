@@ -8,24 +8,6 @@
 
 import Foundation
 import CascadingTableDelegate
-import CoreLocation
-
-struct DestinationInfo {
-	let type: String
-	let text: String
-}
-
-protocol DestinationInfoSectionViewModel: class {
-	
-	/// Stores location coordinate.
-	var locationCoordinate: CLLocationCoordinate2D? { get }
-	
-	/// Stores array of `DestinationInfo`.
-	var locationInfo: [DestinationInfo] { get }
-	
-	/// Executed when any property info of this instance is updated.
-	var infoDataChanged: (Void -> Void)? { get set }
-}
 
 class DestinationInfoSectionDelegate: NSObject {
 	
