@@ -19,6 +19,10 @@ class DestinationViewController: UIViewController {
 	
 	private var rootDelegate: CascadingRootTableDelegate?
 	
+	convenience init() {
+		self.init(nibName: "DestinationViewController", bundle: nil)
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		

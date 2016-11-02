@@ -10,6 +10,10 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
+	convenience init() {
+		self.init(nibName: "WelcomeViewController", bundle: nil)
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		title = ""
