@@ -12,6 +12,7 @@ import CascadingTableDelegate
 class DestinationViewController: UIViewController {
 
 	@IBOutlet weak private var tableView: UITableView!
+	@IBOutlet private weak var footerButton: UIButton!
 	
 	private let refreshControl = UIRefreshControl()
 	private let viewModel = DestinationViewModel()
@@ -26,6 +27,8 @@ class DestinationViewController: UIViewController {
 		configureRefreshControl()
 		configureNavBarStyle()
 		
+		footerButton.setRoundedCorner()
+		
 		createRootDelegate()
     }
 	
@@ -37,6 +40,12 @@ class DestinationViewController: UIViewController {
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
 		return .LightContent
+	}
+	
+	
+	@IBAction func scrollToTop(sender: AnyObject) {		
+		let topIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+		tableView.scrollToRowAtIndexPath(topIndexPath, atScrollPosition: .Middle, animated: true)
 	}
 	
 	// MARK: - Private methods
@@ -67,15 +76,13 @@ class DestinationViewController: UIViewController {
 		
 		let childDelegates: [CascadingTableDelegate] = [
 			DestinationHeaderSectionDelegate(viewModel: viewModel),
-			DestinationInfoSectionDelegate(viewModel: viewModel),
+			DestinationInfoMapSectionDelegate(viewModel: viewModel),
+			DestinationInfoListSectionDelegate(viewModel: viewModel),
 			DestinationReviewRatingSectionDelegate(viewModel: viewModel),
 			DestinationReviewUserSectionDelegate(viewModel: viewModel)
 		]
-				
-		// TODO: Perhaps we could add a non-indexed initializer later... the index seems irrelevant at this phase.
 		
 		rootDelegate = CascadingRootTableDelegate(
-			index: 0,
 			childDelegates: childDelegates,
 			tableView: tableView
 		)
@@ -85,17 +92,35 @@ class DestinationViewController: UIViewController {
 		
 		viewModel.refreshData { [weak self] in
 			self?.updateTitle()
-			self?.refreshControl.endRefreshing()
+			self?.stopRefreshControl()
 		}
 		
 		if refreshControl.refreshing {
 			return
 		}
 		
+		startRefreshControl()
+	}
+	
+	private func startRefreshControl() {
+		
 		tableView.showRefreshControl()
 		
 		refreshControl.beginRefreshing()
 		refreshControl.hidden = false
+	}
+	
+	private func stopRefreshControl() {
+		
+		let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC)))
+		let dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+		
+		dispatch_after(delayTime, dispatchQueue) {
+			
+			dispatch_async(dispatch_get_main_queue(), {
+				self.refreshControl.endRefreshing()
+			})
+		}
 	}
 	
 }

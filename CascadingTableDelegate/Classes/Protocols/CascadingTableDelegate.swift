@@ -59,7 +59,7 @@ extension CascadingTableDelegate {
 	/**
 	Convenience initializer for this protocol, that will assign `index`es of the passed `childDelegates`, set their `parentDelegate` to this instance, and call this instance and its child's `prepare(tableView:)` method.
 	
-	- parameter index:          `index` value for this instance. May be changed later.
+	- parameter index:          `index` value for this instance. May be changed later. When omitted, defaults to 0.
 	- parameter childDelegates: Array of child `CascadingTableDelegate`s.
 	- parameter tableView:      `UITableView` optional that will use this instance as delegate and data source later. If passed with valid instance, it will be passed on this instance and its child's `prepare(tableView:)` call.
 	
@@ -71,7 +71,7 @@ extension CascadingTableDelegate {
 	
 	- returns: This class' instance.
 	*/
-	public init(index:Int, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
+	public init(index: Int = 0, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
 		
 		self.init(index: index, childDelegates: childDelegates)
 		

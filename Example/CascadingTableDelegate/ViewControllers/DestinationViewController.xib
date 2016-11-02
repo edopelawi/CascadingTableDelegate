@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DestinationViewController" customModule="CascadingTableDelegate_Example" customModuleProvider="target">
             <connections>
+                <outlet property="footerButton" destination="YTK-Jn-A4G" id="Ncg-zb-X2s"/>
                 <outlet property="tableView" destination="zUW-bE-uw6" id="GB6-bM-a5N"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -17,17 +18,57 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="zUW-bE-uw6">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="547"/>
                     <color key="backgroundColor" red="0.18039216101169586" green="0.21568627655506134" blue="0.25098040699958801" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIq-my-6Ct" userLabel="Static Footer View">
+                    <rect key="frame" x="0.0" y="547" width="600" height="53"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTK-Jn-A4G" userLabel="Footer Button">
+                            <rect key="frame" x="15" y="10" width="570" height="33"/>
+                            <color key="backgroundColor" red="0.17254902420000001" green="0.88235294819999999" blue="0.88627451660000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <state key="normal" title="To the top!">
+                                <color key="titleColor" red="0.180392161" green="0.2156862766" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="scrollToTop:" destination="-1" eventType="touchUpInside" id="M4R-HA-Ac6"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.180392161" green="0.2156862766" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="YTK-Jn-A4G" secondAttribute="trailing" constant="15" id="20N-Et-Jwf"/>
+                        <constraint firstAttribute="height" constant="128" id="FDb-1X-OSd"/>
+                        <constraint firstItem="YTK-Jn-A4G" firstAttribute="leading" secondItem="uIq-my-6Ct" secondAttribute="leading" constant="15" id="IBS-fF-7s6"/>
+                        <constraint firstAttribute="height" constant="100" id="QMW-Su-qZU"/>
+                        <constraint firstItem="YTK-Jn-A4G" firstAttribute="top" secondItem="uIq-my-6Ct" secondAttribute="top" constant="10" id="bpH-U6-iE2"/>
+                        <constraint firstAttribute="bottom" secondItem="YTK-Jn-A4G" secondAttribute="bottom" constant="10" id="i5A-Pe-MQE"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="FDb-1X-OSd"/>
+                            <exclude reference="QMW-Su-qZU"/>
+                        </mask>
+                    </variation>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.18039216101169586" green="0.21568627655506134" blue="0.25098040699958801" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="zUW-bE-uw6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0Da-fF-klh"/>
+                <constraint firstItem="uIq-my-6Ct" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ew7-Hn-j78"/>
+                <constraint firstItem="uIq-my-6Ct" firstAttribute="top" secondItem="zUW-bE-uw6" secondAttribute="bottom" id="Ig8-V3-xV2"/>
+                <constraint firstAttribute="bottom" secondItem="uIq-my-6Ct" secondAttribute="bottom" id="Rml-X3-izV"/>
                 <constraint firstItem="zUW-bE-uw6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Y7v-ua-YMU"/>
+                <constraint firstAttribute="trailing" secondItem="uIq-my-6Ct" secondAttribute="trailing" id="aFu-uB-guH"/>
                 <constraint firstAttribute="trailing" secondItem="zUW-bE-uw6" secondAttribute="trailing" id="e4S-Jy-RKP"/>
                 <constraint firstAttribute="bottom" secondItem="zUW-bE-uw6" secondAttribute="bottom" id="fN5-bX-UkS"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="fN5-bX-UkS"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

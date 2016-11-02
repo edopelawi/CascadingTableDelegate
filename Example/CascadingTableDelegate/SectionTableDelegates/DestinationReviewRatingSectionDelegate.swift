@@ -49,7 +49,14 @@ class DestinationReviewRatingSectionDelegate: NSObject {
 	private func configureViewModelObserver() {
 		
 		viewModel?.reviewRatingDataUpdated = { [weak self] in
-			self?.currentTableView?.reloadData()
+			
+			guard let index = self?.index,
+				let tableView = self?.currentTableView else {
+				return
+			}
+			
+			let indexes = NSIndexSet(index: index)
+			tableView.reloadSections(indexes, withRowAnimation: .Automatic)			
 		}
 	}
 }

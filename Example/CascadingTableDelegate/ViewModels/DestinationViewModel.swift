@@ -15,9 +15,10 @@ class DestinationViewModel {
 	
 	var destinationTitle: String?
 	var headerDataChanged: (Void -> Void)?
-	var infoDataChanged: (Void -> Void)?
 	var reviewRatingDataUpdated: (Void -> Void)?
 	var reviewUserDataChanged: (Void -> Void)?
+	
+	var infoSectionObservers = [DestinationInfoSectionViewModelObserver]()
 	
 	// MARK: - Private properties
 	
@@ -103,9 +104,10 @@ class DestinationViewModel {
 	private func executeUpdateClosures() {
 				
 		headerDataChanged?()
-		infoDataChanged?()
 		reviewRatingDataUpdated?()
 		reviewUserDataChanged?()
+		
+		notifyInfoSectionObservers()
 	}
 }
 

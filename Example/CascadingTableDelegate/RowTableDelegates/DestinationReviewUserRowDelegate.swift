@@ -29,11 +29,7 @@ class DestinationReviewUserRowDelegate: CascadingBareTableDelegate {
 	
 }
 
-extension DestinationReviewUserRowDelegate {
-	
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 0
-	}
+extension DestinationReviewUserRowDelegate {		
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		

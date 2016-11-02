@@ -46,9 +46,7 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		
 		footerView = ReviewSectionFooterView.view()
 		
-		super.init(index: index, childDelegates: childDelegates)
-		
-		reloadOnChildDelegatesChanged = true
+		super.init(index: index, childDelegates: childDelegates)				
 		
 		configureFooterViewObserver()
 	}
@@ -83,6 +81,11 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		}
 		
 		childDelegates = childViewModels.map({ DestinationReviewUserRowDelegate(viewModel: $0) })
+				
+		// TODO: Perhaps we could replace the reloadOnChildDelegatesChanged to some enum that allows reloadSections.
+		
+		let indexes = NSIndexSet(index: index)
+		currentTableView?.reloadSections(indexes, withRowAnimation: .Automatic)
 	}
 	
 	private func configureFooterViewObserver() {
