@@ -14,6 +14,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dG-Um-yar" userLabel="Wrapper View">
                     <rect key="frame" x="10" y="0.0" width="580" height="199"/>
                     <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oPD-n5-b2Y" userLabel="Custom Top Border View">
+                            <rect key="frame" x="0.0" y="0.0" width="580" height="1"/>
+                            <color key="backgroundColor" red="0.30980393290519714" green="0.37254902720451355" blue="0.43529412150382996" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="ugG-ih-fe8"/>
+                            </constraints>
+                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GyR-kH-plJ">
                             <rect key="frame" x="222" y="84" width="137" height="32"/>
                             <color key="backgroundColor" red="0.17254902422428131" green="0.88235294818878174" blue="0.88627451658248901" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -34,7 +41,10 @@
                         <constraint firstItem="GyR-kH-plJ" firstAttribute="centerY" secondItem="5dG-Um-yar" secondAttribute="centerY" id="0kr-cr-zeG"/>
                         <constraint firstItem="qpL-DW-v4O" firstAttribute="centerY" secondItem="GyR-kH-plJ" secondAttribute="centerY" id="3Hc-ab-fpa"/>
                         <constraint firstItem="GyR-kH-plJ" firstAttribute="centerX" secondItem="5dG-Um-yar" secondAttribute="centerX" id="BAy-uY-Ve1"/>
+                        <constraint firstAttribute="trailing" secondItem="oPD-n5-b2Y" secondAttribute="trailing" id="BX3-y4-mB3"/>
+                        <constraint firstItem="oPD-n5-b2Y" firstAttribute="leading" secondItem="5dG-Um-yar" secondAttribute="leading" id="D4J-NX-HUz"/>
                         <constraint firstItem="qpL-DW-v4O" firstAttribute="centerX" secondItem="GyR-kH-plJ" secondAttribute="centerX" id="GLt-KC-EGL"/>
+                        <constraint firstItem="oPD-n5-b2Y" firstAttribute="top" secondItem="5dG-Um-yar" secondAttribute="top" id="QfW-u1-ujy"/>
                     </constraints>
                 </view>
             </subviews>
