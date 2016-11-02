@@ -13,6 +13,9 @@ class DestinationInfoListSectionDelegate: CascadingSectionTableDelegate {
 	
 	private var viewModel: DestinationInfoSectionViewModel?
 	
+	private let headerView = EmptyContentView.view()
+	private let headerViewHeight = CGFloat(10)
+		
 	convenience init(viewModel: DestinationInfoSectionViewModel) {
 		
 		self.init(index: 0, childDelegates: [])
@@ -35,8 +38,12 @@ class DestinationInfoListSectionDelegate: CascadingSectionTableDelegate {
 		tableView.registerNib(nib, forCellReuseIdentifier: identifier)
 	}
 	
+	override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		return childDelegates.isEmpty ? nil : headerView
+	}
+	
 	override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return CGFloat.min
+		return childDelegates.isEmpty ? CGFloat.min : headerViewHeight
 	}
 	
 	override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
