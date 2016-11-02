@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DestinationMapCell" rowHeight="104" id="KGk-i7-Jjw" customClass="DestinationMapCell" customModule="CascadingTableDelegate_Example" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="103.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ab9-U5-oAw" userLabel="Wrapper View">
+                        <rect key="frame" x="10" y="0.0" width="300" height="103"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRi-hG-l7Z">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="103"/>
+                                <color key="backgroundColor" red="0.24313725531101227" green="0.29019609093666077" blue="0.34509804844856262" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.24313725531101227" green="0.29019609093666077" blue="0.34509804844856262" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="VRi-hG-l7Z" secondAttribute="bottom" id="HZU-IK-gcZ"/>
+                            <constraint firstItem="VRi-hG-l7Z" firstAttribute="leading" secondItem="ab9-U5-oAw" secondAttribute="leading" id="PAP-Ki-duK"/>
+                            <constraint firstAttribute="trailing" secondItem="VRi-hG-l7Z" secondAttribute="trailing" id="VXF-qj-YDH"/>
+                            <constraint firstItem="VRi-hG-l7Z" firstAttribute="top" secondItem="ab9-U5-oAw" secondAttribute="top" id="rtv-zU-a9G"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.18039216101169586" green="0.21568627655506134" blue="0.25098040699958801" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="ab9-U5-oAw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="8Ir-0c-Iin"/>
+                    <constraint firstAttribute="trailing" secondItem="ab9-U5-oAw" secondAttribute="trailing" constant="10" id="OMa-Jn-ZJu"/>
+                    <constraint firstItem="ab9-U5-oAw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="QtN-sW-Mu5"/>
+                    <constraint firstAttribute="bottom" secondItem="ab9-U5-oAw" secondAttribute="bottom" id="sP0-UY-kaW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.18039216101169586" green="0.21568627655506134" blue="0.25098040699958801" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="mapView" destination="VRi-hG-l7Z" id="Bev-kF-MTW"/>
+            </connections>
+            <point key="canvasLocation" x="186" y="301"/>
+        </tableViewCell>
+    </objects>
+</document>

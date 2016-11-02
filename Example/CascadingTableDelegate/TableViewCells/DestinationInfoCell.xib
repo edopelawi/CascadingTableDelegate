@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DestinationInfoCell" rowHeight="116" id="KGk-i7-Jjw" customClass="DestinationInfoCell" customModule="CascadingTableDelegate_Example" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="420" height="116"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="420" height="115.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgY-Vk-4iI" userLabel="Wrapper View">
+                        <rect key="frame" x="10" y="0.0" width="400" height="115.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info Type" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gm9-5Y-RMk" userLabel="Info Type Label">
+                                <rect key="frame" x="10" y="0.0" width="380" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info text, whatever you want this to be" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Cc-AR-7l5" userLabel="Info Text Label">
+                                <rect key="frame" x="10" y="27" width="380" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.24313725531101227" green="0.29019609093666077" blue="0.34509804844856262" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="0Cc-AR-7l5" firstAttribute="trailing" secondItem="Gm9-5Y-RMk" secondAttribute="trailing" id="7ck-6J-UDD"/>
+                            <constraint firstAttribute="trailing" secondItem="Gm9-5Y-RMk" secondAttribute="trailing" constant="10" id="CMx-kK-8M4"/>
+                            <constraint firstItem="0Cc-AR-7l5" firstAttribute="top" secondItem="Gm9-5Y-RMk" secondAttribute="bottom" constant="10" id="CeM-kw-Enl"/>
+                            <constraint firstItem="0Cc-AR-7l5" firstAttribute="leading" secondItem="Gm9-5Y-RMk" secondAttribute="leading" id="aqs-Xp-Be9"/>
+                            <constraint firstItem="Gm9-5Y-RMk" firstAttribute="top" secondItem="QgY-Vk-4iI" secondAttribute="top" id="ldo-On-aBR"/>
+                            <constraint firstItem="Gm9-5Y-RMk" firstAttribute="leading" secondItem="QgY-Vk-4iI" secondAttribute="leading" constant="10" id="zzm-9y-M1Y"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="QgY-Vk-4iI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="crc-Y4-oUk"/>
+                    <constraint firstAttribute="bottom" secondItem="QgY-Vk-4iI" secondAttribute="bottom" id="ddD-YW-2cY"/>
+                    <constraint firstAttribute="trailing" secondItem="QgY-Vk-4iI" secondAttribute="trailing" constant="10" id="e3I-PQ-qL6"/>
+                    <constraint firstItem="QgY-Vk-4iI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gey-M1-G1y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.18039216101169586" green="0.21568627655506134" blue="0.25098040699958801" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="infoTextLabel" destination="0Cc-AR-7l5" id="MgO-iu-KVS"/>
+                <outlet property="infoTypeLabel" destination="Gm9-5Y-RMk" id="DMD-hs-m23"/>
+            </connections>
+            <point key="canvasLocation" x="286" y="350"/>
+        </tableViewCell>
+    </objects>
+</document>

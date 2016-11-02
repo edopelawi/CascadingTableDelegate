@@ -30,6 +30,19 @@ since it's unclear how to propagate those methods to its childs. Should you need
 */
 public class CascadingSectionTableDelegate: PropagatingTableDelegate {
 	
+	/// Reload mode that used when this instance's `childDelegates` are changed.
+	public enum ReloadMode {
+		
+		/// Does not reload.
+		case None
+		
+		/// Calls `currentTableView`'s `reloadData` method.
+		case Whole
+	
+		/// Calls `currentTableView`s `reloadSections(_:withRowAnimation:)` using this instance's `index` and corresponding `animation`.
+		case Section(animation: UITableViewRowAnimation)
+	}
+	
 	// MARK: - Public properties
 	
 	/// This value will always be set as `.Row`, no matter what new value is assigned.
@@ -45,19 +58,21 @@ public class CascadingSectionTableDelegate: PropagatingTableDelegate {
 	
 	override public var childDelegates: [CascadingTableDelegate] {
 		didSet {
-			
-			if reloadOnChildDelegatesChanged {
-				tableView?.reloadData()
-			}
+			reloadCurrentTableView()
 		}
 	}
 	
-	/// Marks whether this instance should reload its corresponding `tableView` if its `childDelegates` changed.
-	public var reloadOnChildDelegatesChanged = false
+	/// Marks whether this instance should reload its `currentTableView` if its `childDelegates` changed. Defaults to `None`.
+	public var reloadModeOnChildDelegatesChanged: ReloadMode = .None
+	
+	/// Current `UITableView` that weakly held by this instance.
+	public var currentTableView: UITableView? {
+		return tableView
+	}
 	
 	// MARK: - Private properties
 	
-	weak var tableView: UITableView?
+	private weak var tableView: UITableView?
 	
 	// MARK: - Initializers
 	
@@ -77,7 +92,6 @@ public class CascadingSectionTableDelegate: PropagatingTableDelegate {
 	
 	// MARK: - Public methods
 	
-	
 	/**
 	Propagates the `prepare(tableView :)` call to its `childDelegates`, then holds weak reference to passed `tableView` whenever it needs to call its `reloadData()`.
 	
@@ -88,5 +102,24 @@ public class CascadingSectionTableDelegate: PropagatingTableDelegate {
 		super.prepare(tableView: tableView)
 		
 		self.tableView = tableView
+	}
+	
+	// MARK: - Private methods
+	
+	private func reloadCurrentTableView() {
+		
+		switch reloadModeOnChildDelegatesChanged {
+			
+		case .Whole:
+			currentTableView?.reloadData()
+			
+		case .Section(let animation):
+			let indexes = NSIndexSet(index: self.index)
+			currentTableView?.reloadSections(indexes, withRowAnimation: animation)
+			
+		case .None:
+			break
+			
+		}
 	}
 }

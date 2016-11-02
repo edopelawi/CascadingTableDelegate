@@ -1,5 +1,5 @@
 PODS:
-  - CascadingTableDelegate (1.0.0)
+  - CascadingTableDelegate (1.1.0)
   - Nimble (4.0.0)
   - Quick (0.9.0)
 
@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CascadingTableDelegate: 906d786a95a7ae3a6a06644c8604104f35c78297
+  CascadingTableDelegate: ad4aa8c19204bbb1d586291d4b8c533ff21ad7db
   Nimble: 72bcc3e2f02242e6bfaaf8d9412ca7bfe3d8b417
   Quick: 332eb1da73125a2106dd637424c803f2ae97e4a9
 

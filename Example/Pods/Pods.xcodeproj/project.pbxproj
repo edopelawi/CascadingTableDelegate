@@ -68,6 +68,7 @@
 		84CA4817F662261DC7D894F6ADF0F9BF /* QCKDSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9849CC70EE76C7FD6FB071AE7BD16597 /* QCKDSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8900D5810E0B8B61EB79A6AED20F23A7 /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DB561D01DB3D3E512756D77C1490B /* Equal.swift */; };
 		8B8713AF4A13EA2630389000A9FEC1F5 /* QuickTestSuite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB1335CE596E082318F53614A268B3 /* QuickTestSuite.swift */; };
+		8D4FD7621DC9F61700F42211 /* CascadingBareTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FD7611DC9F61700F42211 /* CascadingBareTableDelegate.swift */; };
 		8DAC10E57501F4EAC3D53B6D8035E10F /* ExampleMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605D714F77EB699C5D062588E9FEEC9C /* ExampleMetadata.swift */; };
 		8E70A39BD76B21F34B9D70C9496F44E8 /* BeNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ABF2D758D86698977C4B7049DFD5E5 /* BeNil.swift */; };
 		8EB5CB562A6FAF17D11C0A6709BD8162 /* Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6CD83F01DCBB68813434BDF65AD321 /* Functional.swift */; };
@@ -210,6 +211,7 @@
 		88B39C18E753642428C924D3F40FCFD7 /* BeLogical.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeLogical.swift; path = Sources/Nimble/Matchers/BeLogical.swift; sourceTree = "<group>"; };
 		8A5CCB08C927B6029144EA30171B111E /* Closures.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Closures.swift; path = Sources/Quick/Hooks/Closures.swift; sourceTree = "<group>"; };
 		8B04632D6632788332B697D018C5DD60 /* QuickSelectedTestSuiteBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickSelectedTestSuiteBuilder.swift; path = Sources/Quick/QuickSelectedTestSuiteBuilder.swift; sourceTree = "<group>"; };
+		8D4FD7611DC9F61700F42211 /* CascadingBareTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingBareTableDelegate.swift; sourceTree = "<group>"; };
 		8E1C71DF476A51AC4BA8493E58D6C373 /* PropagatingTableDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PropagatingTableDelegate.swift; sourceTree = "<group>"; };
 		8F158BB020436A2DE5CAF6FA6F0E3025 /* Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = Sources/Quick/Configuration/Configuration.swift; sourceTree = "<group>"; };
 		8F6376337E587A7FD2825770DA3A23D6 /* QuickSpec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickSpec.h; path = Sources/Quick/QuickSpec.h; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 		2E778E1EC29C5654FBD41EF0746C8E66 /* CascadingTableDelegates */ = {
 			isa = PBXGroup;
 			children = (
+				8D4FD7611DC9F61700F42211 /* CascadingBareTableDelegate.swift */,
 				243510D20BFE939CBD03BC7A8F3D98A9 /* CascadingRootTableDelegate.swift */,
 				B6DA1F8DC3181A91738B3B10331121D5 /* CascadingSectionTableDelegate.swift */,
 				8E1C71DF476A51AC4BA8493E58D6C373 /* PropagatingTableDelegate.swift */,
@@ -863,6 +866,7 @@
 				C5DE9EB5F36D6F6DC4083B18366B6D19 /* CascadingSectionTableDelegate.swift in Sources */,
 				BA81315C1483F94138F704AB11D5FD3F /* CascadingTableDelegate-dummy.m in Sources */,
 				78483C0A4D6DC829AC258B808E3A8E6F /* CascadingTableDelegate.swift in Sources */,
+				8D4FD7621DC9F61700F42211 /* CascadingBareTableDelegate.swift in Sources */,
 				B72B73C78587D8007414FCE0DE5E8394 /* PropagatingTableDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

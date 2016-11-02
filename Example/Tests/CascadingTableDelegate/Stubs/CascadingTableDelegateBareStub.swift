@@ -3,7 +3,7 @@
 //  CascadingTableDelegate
 //
 //  Created by Ricardo Pramana Suranta on 8/26/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
+//  Copyright © 2016 Ricardo Pramana Suranta. All rights reserved.
 //
 
 @testable import CascadingTableDelegate
@@ -99,4 +99,3 @@ extension CascadingTableDelegateBareStub: UITableViewDataSource {
 		return returnedTableCell
 	}
 }
-
