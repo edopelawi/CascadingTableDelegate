@@ -52,12 +52,17 @@ public class CascadingRootTableDelegate: PropagatingTableDelegate {
         }
     }
     
-    /// Marks whether this instance should reload its corresponding `tableView` if its `childDelegates` changed.
+    /// Marks whether this instance should reload its `currentTableView` if its `childDelegates` changed. Defaults to `false`.
     public var reloadOnChildDelegatesChanged = false
-    
+	
+	/// Current `UITableView` that weakly held by this instance.
+	public var currentTableView: UITableView? {
+		return tableView
+	}
+	
     // MARK: - Private properties
     
-    weak var tableView: UITableView?
+    private weak var tableView: UITableView?
     
     // MARK: - Initializers
     
