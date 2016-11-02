@@ -106,6 +106,8 @@ class DestinationViewModel {
 		headerDataChanged?()
 		reviewRatingDataUpdated?()
 		reviewUserDataChanged?()
+		
+		notifyInfoSectionObservers()
 	}
 }
 
