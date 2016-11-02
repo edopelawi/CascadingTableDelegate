@@ -71,4 +71,18 @@ extension DestinationReviewUserRowDelegate: UITableViewDelegate {
 		
 		return DestinationReviewUserCell.preferredHeight(userReview: "")
 	}
+	
+	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+		guard let cell = cell as? DestinationReviewUserCell,
+			let viewModel = viewModel else {
+			return
+		}
+		
+		cell.configure(
+			userName: viewModel.userName,
+			userReview: viewModel.userReview,
+			rating: viewModel.rating
+		)
+	}
 }
