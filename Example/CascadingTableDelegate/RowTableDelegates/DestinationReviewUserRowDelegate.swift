@@ -15,16 +15,10 @@ struct DestinationReviewUserRowViewModel {
 	let rating: Int
 }
 
-// TODO: This class implementation could be simplified by using CascadingBaseTableDelegate later.
-
-class DestinationReviewUserRowDelegate: NSObject {
+class DestinationReviewUserRowDelegate: CascadingBareTableDelegate {
 	
 	/// Cell identifier that will be used by this instance. Kindly register this on section-level delegate that will use this class' instance.
 	static let cellIdentifier = DestinationReviewUserCell.nibIdentifier()
-
-	var index: Int
-	var childDelegates: [CascadingTableDelegate]
-	weak var parentDelegate: CascadingTableDelegate?
 	
 	private var viewModel: DestinationReviewUserRowViewModel?
 	
@@ -33,33 +27,19 @@ class DestinationReviewUserRowDelegate: NSObject {
 		self.viewModel = viewModel
 	}
 	
-	required init(index: Int, childDelegates: [CascadingTableDelegate]) {
-		self.index = index
-		self.childDelegates = childDelegates
-	}
 }
 
-extension DestinationReviewUserRowDelegate: CascadingTableDelegate {
-
-	func prepare(tableView tableView: UITableView) {
-		
-	}
-}
-
-extension DestinationReviewUserRowDelegate: UITableViewDataSource {
+extension DestinationReviewUserRowDelegate {
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 0
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
 		let identifier = DestinationReviewUserRowDelegate.cellIdentifier
 		return tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
 	}
-}
-
-extension DestinationReviewUserRowDelegate: UITableViewDelegate {
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
