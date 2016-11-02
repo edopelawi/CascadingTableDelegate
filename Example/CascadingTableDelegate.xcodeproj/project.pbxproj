@@ -38,6 +38,7 @@
 		8D4D12E51DC74CB700B273F9 /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D12E41DC74CB700B273F9 /* SectionHeaderView.xib */; };
 		8D4FD7511DC97E1800F42211 /* DestinationReviewUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FD74F1DC97E1800F42211 /* DestinationReviewUserCell.swift */; };
 		8D4FD7521DC97E1800F42211 /* DestinationReviewUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4FD7501DC97E1800F42211 /* DestinationReviewUserCell.xib */; };
+		8D4FD7551DC99CE700F42211 /* DestinationReviewUserRowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FD7541DC99CE700F42211 /* DestinationReviewUserRowDelegate.swift */; };
 		8D50BE771DC8535F00B0C427 /* DestinationMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D50BE751DC8535F00B0C427 /* DestinationMapCell.swift */; };
 		8D50BE781DC8535F00B0C427 /* DestinationMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D50BE761DC8535F00B0C427 /* DestinationMapCell.xib */; };
 		8D754B901D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */; };
@@ -111,6 +112,7 @@
 		8D4D12E41DC74CB700B273F9 /* SectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
 		8D4FD74F1DC97E1800F42211 /* DestinationReviewUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationReviewUserCell.swift; sourceTree = "<group>"; };
 		8D4FD7501DC97E1800F42211 /* DestinationReviewUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationReviewUserCell.xib; sourceTree = "<group>"; };
+		8D4FD7541DC99CE700F42211 /* DestinationReviewUserRowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationReviewUserRowDelegate.swift; sourceTree = "<group>"; };
 		8D50BE751DC8535F00B0C427 /* DestinationMapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationMapCell.swift; sourceTree = "<group>"; };
 		8D50BE761DC8535F00B0C427 /* DestinationMapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DestinationMapCell.xib; sourceTree = "<group>"; };
 		8D754B8F1D6B103400A1DE01 /* CascadingTableDelegateCompleteStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadingTableDelegateCompleteStub.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				8D1BCAA61DC33EBA00826B1D /* ViewControllers */,
 				8D4D12C61DC7088600B273F9 /* TableViewCells */,
 				8D4D12DB1DC7261A00B273F9 /* SectionTableDelegates */,
+				8D4FD7531DC99C9400F42211 /* RowTableDelegates */,
 				8D4D12C31DC7068800B273F9 /* Extensions */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -316,6 +319,14 @@
 				8D4D12E41DC74CB700B273F9 /* SectionHeaderView.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8D4FD7531DC99C9400F42211 /* RowTableDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				8D4FD7541DC99CE700F42211 /* DestinationReviewUserRowDelegate.swift */,
+			);
+			path = RowTableDelegates;
 			sourceTree = "<group>";
 		};
 		8D754B8A1D6B0F1E00A1DE01 /* CascadingTableDelegate */ = {
@@ -580,6 +591,7 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				8D4FD7511DC97E1800F42211 /* DestinationReviewUserCell.swift in Sources */,
 				8D13096B1DC8601700FEF9C3 /* DestinationInfoCell.swift in Sources */,
+				8D4FD7551DC99CE700F42211 /* DestinationReviewUserRowDelegate.swift in Sources */,
 				8D4D12C11DC7033400B273F9 /* DestinationViewController.swift in Sources */,
 				8D4D12DD1DC7267700B273F9 /* DestinationHeaderSectionDelegate.swift in Sources */,
 				8D4D12C51DC706B200B273F9 /* UIColor+CSTAdditions.swift in Sources */,
