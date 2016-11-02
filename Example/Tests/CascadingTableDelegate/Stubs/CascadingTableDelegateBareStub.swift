@@ -99,4 +99,3 @@ extension CascadingTableDelegateBareStub: UITableViewDataSource {
 		return returnedTableCell
 	}
 }
-
