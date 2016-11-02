@@ -11,11 +11,11 @@
             <rect key="frame" x="0.0" y="0.0" width="510" height="157"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="510" height="156.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="510" height="157"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKe-wL-79Y" userLabel="Wrapper View">
-                        <rect key="frame" x="10" y="0.0" width="490" height="156.5"/>
+                        <rect key="frame" x="10" y="0.0" width="490" height="157"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3on-PN-Gki">
                                 <rect key="frame" x="10" y="10" width="380" height="17"/>
@@ -23,7 +23,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your user review here." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYN-G9-5mE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your user review here." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYN-G9-5mE">
                                 <rect key="frame" x="10" y="37" width="470" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,7 +72,7 @@
                                     <constraint firstItem="1Q1-3j-0on" firstAttribute="leading" secondItem="9iS-2t-cyg" secondAttribute="trailing" id="uun-aR-K2U"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVD-2B-VpS" userLabel="Bottom Border View">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OVD-2B-VpS" userLabel="Bottom Border View">
                                 <rect key="frame" x="0.0" y="155" width="490" height="1"/>
                                 <color key="backgroundColor" red="0.30980393290519714" green="0.37254902720451355" blue="0.43529412150382996" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
