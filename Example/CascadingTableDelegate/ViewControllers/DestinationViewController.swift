@@ -63,14 +63,13 @@ class DestinationViewController: UIViewController {
 		navigationBar?.barStyle = .Black
 	}
 
-	private func createRootDelegate() {
-		
-		// TODO: Fill up the `childDelegates` later.
+	private func createRootDelegate() {				
 		
 		let childDelegates: [CascadingTableDelegate] = [
 			DestinationHeaderSectionDelegate(viewModel: viewModel),
 			DestinationInfoSectionDelegate(viewModel: viewModel),
-			DestinationReviewRatingSectionDelegate(viewModel: viewModel)
+			DestinationReviewRatingSectionDelegate(viewModel: viewModel),
+			DestinationReviewUserSectionDelegate(viewModel: viewModel)
 		]
 				
 		// TODO: Perhaps we could add a non-indexed initializer later... the index seems irrelevant at this phase.
