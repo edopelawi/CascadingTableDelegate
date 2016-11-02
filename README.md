@@ -84,6 +84,12 @@ Worry not, we already done the heavy lifting by creating **two ready-to-use clas
 	
 Both classes also accepts your custom implementations of `CascadingTableDelegate` (which is only `UITableViewDataSource` and `UITableViewDelegate` with few new properties and methods, really) as their `childDelegates`. Plus, you could subclass any of them and call `super` on the overriden methods to let them do the propagation - [Chain-of-responsibility](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern)-esque style.
 
+Here's a snipped how the long page above is divided into section delegates in the sample code:
+
+![Section Delegates](ReadmeImages/section-delegates.jpg)
+
+All the section delegate classes then added as child to a single `CascadingRootTableDelegate`.
+
 ## Pros and Cons
 
 ### Pros
@@ -139,8 +145,6 @@ Somehow, Xcode won't add `weak` modifier when you're implementing your own `Casc
 
 ## TODOs
 
-- Add sample page in the example with rich and long content.
-- Use the sample page in README.md.
 - Update to Swift 3 and check for new delegate / datasource methods in iOS 10.
 
 ## Example
