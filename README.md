@@ -17,7 +17,7 @@ In common iOS development, `UITableView` has became the bread and butter for bui
 
 ![Sample Page](ReadmeImages/sample-page-screenshot.jpg)
 
-(Credits to [Wieky](https://id.linkedin.com/in/wiekyazza) for helping me creating this page for the sample!)
+(Credits to [Wieky](https://id.linkedin.com/in/wiekyazza) for helping me creating this page for the sample! 😁)
 
 Still, using `UITableView` has its own problems.
 
@@ -82,13 +82,19 @@ Worry not, we already done the heavy lifting by creating **two ready-to-use clas
 	-  Just like `CascadingRootTableDelegate`, it also propagates **almost** all of delegate and dataSource calls to its `childDelegates`, but based by the `row` of passed `NSIndexPath`.
 	-  Returns number of its `childDelegates` for `tableView(_:numberOfRowsInSection:)` call.
 	
-Both classes also accepts your custom implementations of `CascadingTableDelegate` (which is only `UITableViewDataSource` and `UITableViewDelegate` with few new properties and methods, really) as their `childDelegates`. Plus, you could subclass any of them and call `super` on the overriden methods to let them do the propagation - [Chain-of-responsibility](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern)-esque style.
+Here's a diagram to potray how a `tableView(_:cellForRowAtIndexPath:)` call works to those classes:
 
-Here's a snipped how the long page above is divided into section delegates in the sample code:
+
+![Example Logic Diagram](ReadmeImages/example-logic-diagram.jpg)
+
+
+Both classes also accepts your custom implementations of `CascadingTableDelegate` (which is only `UITableViewDataSource` and `UITableViewDelegate` with few new properties and methods, really) as their `childDelegates`. Plus, you could subclass any of them and call `super` on the overriden methods to let them do the propagation - [Chain-of-responsibility](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern)-esque style 😉
+
+Here's a snippet how the long page above is divided into section delegates in the sample code:
 
 ![Section Delegates](ReadmeImages/section-delegates.jpg)
 
-All the section delegate classes then added as child to a single `CascadingRootTableDelegate`.
+All the section delegate classes then added as child to a single `CascadingRootTableDelegate`. For the details, just clone this repo and run the sample project! 😁
 
 ## Pros and Cons
 
@@ -142,6 +148,8 @@ For details of all method return values, please refer to the [Default Return Val
 #### 3. `weak` declaration for `parentDelegate`
 
 Somehow, Xcode won't add `weak` modifier when you're implementing your own `CascadingTableDelegate` and autocompleting the `parentDelegate` property. Kindly add the `weak` modifier manually to prevent retain cycles 😁
+
+Still, if you still think typing it manually is a tedious job, just subclass the `CascadingBareTableDelegate` out. It's a bare implementation of the `CascadingTableDelegate`, without the propagating logic 🙂
 
 ## TODOs
 
