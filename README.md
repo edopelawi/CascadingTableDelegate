@@ -17,7 +17,7 @@ In common iOS development, `UITableView` has became the bread and butter for bui
 
 ![Sample Page](ReadmeImages/sample-page-screenshot.jpg)
 
-(Credits to [Wieky](https://id.linkedin.com/in/wiekyazza) for helping me creating this page for the sample! 😁)
+(Kudos to [Wieky](https://id.linkedin.com/in/wiekyazza) for helping me creating this sample page's design! 😁)
 
 Still, using `UITableView` has its own problems.
 
