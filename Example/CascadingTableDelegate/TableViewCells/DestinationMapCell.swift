@@ -13,6 +13,9 @@ class DestinationMapCell: UITableViewCell {
 
 	@IBOutlet private weak var mapView: MKMapView!
 	
+	private var latestCoordinate: CLLocationCoordinate2D?
+	private var latestRegionDistance: Double?
+	
     override func awakeFromNib() {
         super.awakeFromNib()
         resetMapView()
@@ -41,9 +44,21 @@ class DestinationMapCell: UITableViewCell {
 	
 	func configure(coordinate coordinate: CLLocationCoordinate2D, regionDistance: Double = 1200.0) {
 		
-		let region = MKCoordinateRegionMakeWithDistance(coordinate, regionDistance, regionDistance)
+		let identicalCoordinate = (latestCoordinate?.latitude == coordinate.latitude) &&
+		(latestCoordinate?.longitude == coordinate.longitude)
 		
-		mapView.setRegion(region, animated: false)
+		let identicalDistance = (latestRegionDistance == regionDistance)
+		
+		if identicalDistance && identicalCoordinate {
+			return
+		}
+		
+		let newRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionDistance, regionDistance)
+		
+		mapView.setRegion(newRegion, animated: false)
+		
+		latestCoordinate = coordinate
+		latestRegionDistance = regionDistance
 	}
 	
 	
