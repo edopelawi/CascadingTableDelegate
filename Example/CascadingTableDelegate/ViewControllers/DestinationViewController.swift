@@ -12,6 +12,7 @@ import CascadingTableDelegate
 class DestinationViewController: UIViewController {
 
 	@IBOutlet weak private var tableView: UITableView!
+	@IBOutlet private weak var footerButton: UIButton!
 	
 	private let refreshControl = UIRefreshControl()
 	private let viewModel = DestinationViewModel()
@@ -26,6 +27,8 @@ class DestinationViewController: UIViewController {
 		configureRefreshControl()
 		configureNavBarStyle()
 		
+		footerButton.setRoundedCorner()
+		
 		createRootDelegate()
     }
 	
@@ -37,6 +40,12 @@ class DestinationViewController: UIViewController {
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
 		return .LightContent
+	}
+	
+	
+	@IBAction func scrollToTop(sender: AnyObject) {		
+		let topIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+		tableView.scrollToRowAtIndexPath(topIndexPath, atScrollPosition: .Middle, animated: true)
 	}
 	
 	// MARK: - Private methods
