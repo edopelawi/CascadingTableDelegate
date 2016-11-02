@@ -32,11 +32,12 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 	}
 	
 	private var footerView: ReviewSectionFooterView
-	private weak var currentTableView: UITableView?
 	
 	convenience init(viewModel: DestinationReviewUserSectionViewModel) {
+		
 		self.init()
 		self.viewModel = viewModel
+		
 		configureViewModelObserver()
 		updateChildDelegates()
 	}
@@ -54,7 +55,6 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 	
 	override func prepare(tableView tableView: UITableView) {
 		super.prepare(tableView: tableView)
-		currentTableView = tableView
 		registerNib(tableView: tableView)
 	}
 	
@@ -94,8 +94,10 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 	
 	private func retrieveMoreViewModels() {
 		
+		footerView.startActivityIndicator()
+		
 		viewModel?.retrieveMoreRowViewModels({ [weak self] _ in
-			self?.currentTableView?.reloadData()
+			self?.footerView.stopActivityIndicator()
 		})
 	}
 	
