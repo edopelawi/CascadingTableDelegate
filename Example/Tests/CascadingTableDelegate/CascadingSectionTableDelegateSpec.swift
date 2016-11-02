@@ -87,7 +87,7 @@ class CascadingSectionTableDelegateSpec: QuickSpec {
 			expect(lastDelegateIndex).to(equal(expectedIndex))
 		}
 		
-		describe("reloadOnChildDelegateChanged") {
+		describe("reloadModeOnChildDelegatesChanged value on changed childDelegates") {
 			
 			var testableTableView: TestableTableView!
 			
@@ -101,21 +101,37 @@ class CascadingSectionTableDelegateSpec: QuickSpec {
 				testableTableView.resetRecordedParameters()
 			})
 			
-			it("should not call its tableView's `reloadData()` for `false` value when its child is changed", closure: {
+			it("should not call its tableView's `reloadData()` or `reloadSections(_:withRowAnimation)` for `None`", closure: {
 				
-				sectionTableDelegate.reloadOnChildDelegatesChanged = false
+				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .None
 				sectionTableDelegate.childDelegates = []
 				
 				expect(testableTableView.reloadDataCalled).to(beFalse())
+				expect(testableTableView.reloadSectionsCalled).to(beFalse())
 			})
 			
-			it("should call its tableView's `reloadData()` for `true` value when its child is changed", closure: {
+			it("should only call its tableView's `reloadData()` for `Whole` ", closure: {
 				
-				sectionTableDelegate.reloadOnChildDelegatesChanged = true
+				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .Whole
 				sectionTableDelegate.childDelegates = []
 				
 				expect(testableTableView.reloadDataCalled).to(beTrue())
+				expect(testableTableView.reloadSectionsCalled).to(beFalse())
+			})
+			
+			it("should only call its tableView's `reloadSections(_:withRowAnimation)` using its index for `Section(animation:)` ", closure: {
 				
+				let expectedAnimation = UITableViewRowAnimation.Automatic
+				let expectedIndex = NSIndexSet(index: sectionTableDelegate.index)
+				
+				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .Section(animation: expectedAnimation)
+				sectionTableDelegate.childDelegates = []
+				
+				expect(testableTableView.reloadDataCalled).to(beFalse())
+				
+				expect(testableTableView.reloadSectionsCalled).to(beTrue())
+				expect(testableTableView.passedReloadSectionsIndexSet).to(equal(expectedIndex))
+				expect(testableTableView.passedReloadSectionsAnimation).to(equal(expectedAnimation))
 			})
 		}
 	}
