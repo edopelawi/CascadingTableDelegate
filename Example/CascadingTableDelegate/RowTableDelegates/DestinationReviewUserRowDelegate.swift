@@ -84,5 +84,9 @@ extension DestinationReviewUserRowDelegate: UITableViewDelegate {
 			userReview: viewModel.userReview,
 			rating: viewModel.rating
 		)
+		
+		let lastRow = (index + 1) == parentDelegate?.childDelegates.count
+		
+		cell.hideBottomBorder = lastRow
 	}
 }
