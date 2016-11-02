@@ -71,7 +71,7 @@ class DestinationViewController: UIViewController {
 			DestinationInfoListSectionDelegate(viewModel: viewModel),
 			DestinationReviewRatingSectionDelegate(viewModel: viewModel),
 			DestinationReviewUserSectionDelegate(viewModel: viewModel)
-		]						
+		]
 		
 		rootDelegate = CascadingRootTableDelegate(
 			childDelegates: childDelegates,
@@ -83,17 +83,35 @@ class DestinationViewController: UIViewController {
 		
 		viewModel.refreshData { [weak self] in
 			self?.updateTitle()
-			self?.refreshControl.endRefreshing()
+			self?.stopRefreshControl()
 		}
 		
 		if refreshControl.refreshing {
 			return
 		}
 		
+		startRefreshControl()
+	}
+	
+	private func startRefreshControl() {
+		
 		tableView.showRefreshControl()
 		
 		refreshControl.beginRefreshing()
 		refreshControl.hidden = false
+	}
+	
+	private func stopRefreshControl() {
+		
+		let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC)))
+		let dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+		
+		dispatch_after(delayTime, dispatchQueue) {
+			
+			dispatch_async(dispatch_get_main_queue(), {
+				self.refreshControl.endRefreshing()
+			})
+		}
 	}
 	
 }
