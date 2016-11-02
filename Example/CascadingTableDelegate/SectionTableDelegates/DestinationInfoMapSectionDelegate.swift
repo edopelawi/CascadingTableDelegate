@@ -1,5 +1,5 @@
 //
-//  DestinationInfoSectionDelegate.swift
+//  DestinationInfoMapSectionDelegate.swift
 //  CascadingTableDelegate
 //
 //  Created by Ricardo Pramana Suranta on 11/1/16.
@@ -9,7 +9,7 @@
 import Foundation
 import CascadingTableDelegate
 
-class DestinationInfoSectionDelegate: CascadingBareTableDelegate {
+class DestinationInfoMapSectionDelegate: CascadingBareTableDelegate {
 	
 	private weak var currentTableView: UITableView?
 	
@@ -45,14 +45,14 @@ class DestinationInfoSectionDelegate: CascadingBareTableDelegate {
 	}
 }
 
-extension DestinationInfoSectionDelegate: DestinationInfoSectionViewModelObserver {
+extension DestinationInfoMapSectionDelegate: DestinationInfoSectionViewModelObserver {
 	
 	func infoSectionDataChanged() {
 		currentTableView?.reloadData()
 	}
 }
 
-extension DestinationInfoSectionDelegate {
+extension DestinationInfoMapSectionDelegate {
 
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
