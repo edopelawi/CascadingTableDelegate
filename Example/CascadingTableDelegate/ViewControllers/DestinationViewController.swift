@@ -68,6 +68,7 @@ class DestinationViewController: UIViewController {
 		let childDelegates: [CascadingTableDelegate] = [
 			DestinationHeaderSectionDelegate(viewModel: viewModel),
 			DestinationInfoMapSectionDelegate(viewModel: viewModel),
+			DestinationInfoListSectionDelegate(viewModel: viewModel),
 			DestinationReviewRatingSectionDelegate(viewModel: viewModel),
 			DestinationReviewUserSectionDelegate(viewModel: viewModel)
 		]
