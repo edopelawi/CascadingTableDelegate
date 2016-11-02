@@ -48,7 +48,8 @@ class DestinationInfoMapSectionDelegate: CascadingBareTableDelegate {
 extension DestinationInfoMapSectionDelegate: DestinationInfoSectionViewModelObserver {
 	
 	func infoSectionDataChanged() {
-		currentTableView?.reloadData()
+		let indexes = NSIndexSet(index: index)
+		currentTableView?.reloadSections(indexes, withRowAnimation: .Automatic)
 	}
 }
 
