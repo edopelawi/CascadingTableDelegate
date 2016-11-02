@@ -16,18 +16,6 @@ class DestinationMapCell: UITableViewCell {
 	private var latestCoordinate: CLLocationCoordinate2D?
 	private var latestRegionDistance: Double?
 	
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        resetMapView()
-    }
-
-	override func prepareForReuse() {
-		super.prepareForReuse()
-		resetMapView()
-	}
-	
-	// MARK: - Public methods
-	
 	/// Preferred height to show this class' instance.
 	static func preferredHeight() -> CGFloat {
 		
@@ -39,7 +27,7 @@ class DestinationMapCell: UITableViewCell {
 		
 		let displayRatio = CGFloat(109.0 / 355.0)
 		
-		return (displayRatio * expectedWidth) + 10
+		return displayRatio * expectedWidth
 	}
 	
 	func configure(coordinate coordinate: CLLocationCoordinate2D, regionDistance: Double = 1200.0) {
@@ -61,12 +49,4 @@ class DestinationMapCell: UITableViewCell {
 		latestRegionDistance = regionDistance
 	}
 	
-	
-	// MARK: - Private methods
-	
-	private func resetMapView() {
-		
-		let zeroCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-		mapView.setCenterCoordinate(zeroCoordinate, animated: false)
-	}
 }
