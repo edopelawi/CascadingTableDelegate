@@ -25,14 +25,16 @@ class ReviewSectionFooterView: UIView {
 	/// Executed when this instance's button tapped.
 	var onButtonTapped: (Void -> Void)?
 	
-	// MARK: - Public methods
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		showMoreButton.setRoundedCorner()
+	}
 	
 	/// Prefered height to display this instance.
 	static func preferredHeight() -> CGFloat {
 		return CGFloat(46)
 	}
-	
-	// MARK: - Private methods
+		
 	@IBAction private func showMoreButtonTapped(sender: AnyObject) {
 		onButtonTapped?()
 	}
