@@ -3,7 +3,7 @@
 //  CascadingTableDelegate
 //
 //  Created by Ricardo Pramana Suranta on 8/22/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
+//  Copyright © 2016 Ricardo Pramana Suranta. All rights reserved.
 //
 
 @testable import CascadingTableDelegate
