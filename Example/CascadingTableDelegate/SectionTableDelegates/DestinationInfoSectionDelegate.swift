@@ -17,7 +17,8 @@ class DestinationInfoSectionDelegate: NSObject {
 	
 	var viewModel: DestinationInfoSectionViewModel? {
 		didSet {
-			configureViewModelObserver()
+			oldValue?.remove(observer: self)
+			viewModel?.add(observer: self)
 		}
 	}
 	
@@ -26,7 +27,6 @@ class DestinationInfoSectionDelegate: NSObject {
 	convenience init(viewModel: DestinationInfoSectionViewModel? = nil) {
 		self.init(index: 0, childDelegates: [])
 		self.viewModel = viewModel
-		configureViewModelObserver()
 	}
 	
 	required init(index: Int, childDelegates: [CascadingTableDelegate]) {
@@ -34,15 +34,11 @@ class DestinationInfoSectionDelegate: NSObject {
 		self.childDelegates = childDelegates
 	}
 	
-	// MARK: - Private methods
-	
-	private func configureViewModelObserver() {
-		
-		viewModel?.infoDataChanged = { [weak self] in
-			self?.currentTableView?.reloadData()
-		}
+	deinit {
+		viewModel?.remove(observer: self)
 	}
 	
+	// MARK: - Private methods
 	
 	private func identifierForRow(row: Int) -> String? {
 		
@@ -55,6 +51,13 @@ class DestinationInfoSectionDelegate: NSObject {
 		}
 		
 		return nil
+	}
+}
+
+extension DestinationInfoSectionDelegate: DestinationInfoSectionViewModelObserver {
+	
+	func infoSectionDataChanged() {
+		currentTableView?.reloadData()
 	}
 }
 
