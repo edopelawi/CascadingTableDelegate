@@ -10,6 +10,11 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		title = ""
+	}
+	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
