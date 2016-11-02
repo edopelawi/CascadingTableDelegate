@@ -16,6 +16,8 @@ class DestinationViewModel {
 	var destinationTitle: String?
 	var headerDataChanged: (Void -> Void)?
 	var infoDataChanged: (Void -> Void)?
+	var reviewRatingDataUpdated: (Void -> Void)?
+	var reviewUserDataChanged: (Void -> Void)?
 	
 	// MARK: - Private properties
 	
@@ -27,6 +29,10 @@ class DestinationViewModel {
 	
 	private var _locationCoordinate: CLLocationCoordinate2D?
 	private var _locationInfo = [DestinationInfo]()
+	
+	private var _averageRating = 0
+	private var _rowViewModels = [DestinationReviewUserRowViewModel]()
+	private var _remainingRowViewModels = 0
 	
 	// MARK: - Public methods
 	
@@ -42,6 +48,7 @@ class DestinationViewModel {
 			
 			self.updateHeaderSectionProperties()
 			self.updateInfoSectionProperties()
+			self.updateReviewSectionProperties()
 			
 			dispatch_async(dispatch_get_main_queue(), {
 				self.executeUpdateClosures()
@@ -80,11 +87,25 @@ class DestinationViewModel {
 		})
 	}
 	
-	private func executeUpdateClosures() {
+	private func updateReviewSectionProperties() {
+		_averageRating = 4
 		
-		// TODO: Execute more closures here
+		let userReview = DestinationReviewUserRowViewModel(
+			userName: "Alice",
+			userReview: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed placerat tincidunt aliquet. Quisque dictum nisi felis, vel aliquet metus congue ac.",
+			rating: 4
+		)
+		
+		_rowViewModels = [DestinationReviewUserRowViewModel](count: 3, repeatedValue: userReview)
+		_remainingRowViewModels = 2
+	}
+	
+	private func executeUpdateClosures() {
+				
 		headerDataChanged?()
 		infoDataChanged?()
+		reviewRatingDataUpdated?()
+		reviewUserDataChanged?()
 	}
 }
 
@@ -118,4 +139,56 @@ extension DestinationViewModel: DestinationInfoSectionViewModel {
 		return _locationInfo
 	}
 	
+}
+
+extension DestinationViewModel: DestinationReviewRatingSectionViewModel {
+	
+	var averageRating: Int {
+		return _averageRating
+	}
+	
+}
+
+extension DestinationViewModel: DestinationReviewUserSectionViewModel {
+	
+	var rowViewModels: [DestinationReviewUserRowViewModel] {
+
+		return _rowViewModels
+	}
+	
+	var remainingRowViewModels: Int {
+		return _remainingRowViewModels
+	}
+	
+	func retrieveMoreRowViewModels(onCompleted: (Void -> Void)?) {
+		
+		let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+		let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+		
+		
+		dispatch_after(delayTime, queue) {
+			
+			self.generateMoreRowViewModels()
+			
+			dispatch_async(dispatch_get_main_queue(), {
+				self.reviewUserDataChanged?()
+				onCompleted?()
+			})
+		}
+		
+	}
+	
+	private func generateMoreRowViewModels() {
+		
+		let userReview = DestinationReviewUserRowViewModel(
+			userName: "Bob",
+			userReview: "Quisque dictum nisi felis, vel aliquet metus congue ac. Curabitur dui arcu, sagittis vel urna non, faucibus pellentesque sem.",
+			rating: 4
+		)
+		
+		let newReviews = [DestinationReviewUserRowViewModel](count: 2, repeatedValue: userReview)
+		
+		_rowViewModels.appendContentsOf(newReviews)
+		_remainingRowViewModels = 0
+	}
 }
