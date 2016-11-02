@@ -42,7 +42,6 @@ class DestinationViewController: UIViewController {
 		return .LightContent
 	}
 	
-	
 	@IBAction func scrollToTop(sender: AnyObject) {		
 		let topIndexPath = NSIndexPath(forRow: 0, inSection: 0)
 		tableView.scrollToRowAtIndexPath(topIndexPath, atScrollPosition: .Middle, animated: true)
