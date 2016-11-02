@@ -2,30 +2,35 @@
 
 [![CI Status](http://img.shields.io/travis/edopelawi/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/edopelawi/CascadingTableDelegate) 
 [![Swift 2.2](https://img.shields.io/badge/Swift-2.2-yellow.svg)](https://swift.org)
-
-[![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
-[![License](https://img.shields.io/cocoapods/l/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 [![Platform](https://img.shields.io/cocoapods/p/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 
+[![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![License](https://img.shields.io/cocoapods/l/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 
 **A no-nonsense way to write cleaner `UITableViewDelegate` and `UITableViewDataSource`.**
 
 
 ## Why is this library made?
 
-In common iOS development, `UITableView` has became the bread and butter for building a rich, large pages. Still, using `UITableView` has its own problems.
+In common iOS development, `UITableView` has became the bread and butter for building a rich, large pages. This page, for example:
+
+![Sample Page](ReadmeImages/sample-page-screenshot.jpg)
+
+(Credits to [Wieky](https://id.linkedin.com/in/wiekyazza) for helping me creating this page for the sample!)
+
+Still, using `UITableView` has its own problems.
 
 As you know, to display the contents, `UITableView` uses `UITableViewDelegate` and `UITableViewDataSource`- compliant objects. This often became the cause of my headache since `UITableView` **only allows one object** to become the `delegate` and `dataSource`. These limitations might led to an unnecessarily huge source code file - a know-it-all [Megamoth method](https://blog.codinghorror.com/new-programming-jargon/). Some common victims of this problems are `tableView(_:cellForRowAtIndexPath:)`, `tableView(_:heightForRowAtIndexPath)`, and `tableView(_:didSelectRowAtIndexPath:)`. 
 
-Because of this, there are times when I had these thought:
-> Hey, it might be nice if we could split the `delegate` and `dataSource` method calls into each section or row.
+Because of this, there are times when I thought it be nice if **we could split** the `delegate` and `dataSource` method calls **into each section or row.**
 
 # Meet CascadingTableDelegate.
 
 `CascadingTableDelegate` is an approach to break down `UITableViewDelegate` and `UITableViewDataSource` into tree structure, inspired by the [Composite pattern](https://en.wikipedia.org/wiki/Composite_pattern). Here's the simplified structure of the protocol (with less documentation):
 
-```
+```swift
+
 public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
 	
 	/// Index of this instance in its parent's `childDelegates`. Will be set by the parent.
