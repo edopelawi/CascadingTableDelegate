@@ -71,12 +71,9 @@ class DestinationViewController: UIViewController {
 			DestinationInfoListSectionDelegate(viewModel: viewModel),
 			DestinationReviewRatingSectionDelegate(viewModel: viewModel),
 			DestinationReviewUserSectionDelegate(viewModel: viewModel)
-		]
-				
-		// TODO: Perhaps we could add a non-indexed initializer later... the index seems irrelevant at this phase.
+		]						
 		
 		rootDelegate = CascadingRootTableDelegate(
-			index: 0,
 			childDelegates: childDelegates,
 			tableView: tableView
 		)
