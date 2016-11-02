@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="510" height="157"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="510" height="157"/>
+                <rect key="frame" x="0.0" y="0.0" width="510" height="156.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKe-wL-79Y" userLabel="Wrapper View">
@@ -111,6 +111,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottomBorderView" destination="OVD-2B-VpS" id="UjN-G5-Z6p"/>
                 <outlet property="userNameLabel" destination="3on-PN-Gki" id="czk-YC-OJ3"/>
                 <outlet property="userReviewLabel" destination="nYN-G9-5mE" id="P2E-cf-aK5"/>
                 <outletCollection property="starImageViews" destination="Gf1-tl-tic" collectionClass="NSMutableArray" id="33H-vv-Fzu"/>

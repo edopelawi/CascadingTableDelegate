@@ -10,8 +10,20 @@ import UIKit
 
 class DestinationReviewUserCell: UITableViewCell {
 
+	/// Marks and sets whether this instance's bottom border view is hidden or not.
+	var hideBottomBorder: Bool {
+		get {
+			return bottomBorderView?.hidden ?? true
+		}
+		set {
+			bottomBorderView?.hidden = newValue
+		}
+	}
+	
 	@IBOutlet private weak var userNameLabel: UILabel!
 	@IBOutlet private weak var userReviewLabel: UILabel!
+	
+	@IBOutlet private weak var bottomBorderView: UIView?
 	
 	@IBOutlet private var starImageViews: [UIImageView]?
 	
