@@ -13,17 +13,14 @@ class DestinationInfoMapSectionDelegate: CascadingBareTableDelegate {
 	
 	private weak var currentTableView: UITableView?
 	
-	private var viewModel: DestinationInfoSectionViewModel? {
-		didSet {
-			oldValue?.remove(observer: self)
-			viewModel?.add(observer: self)
-		}
-	}
+	private var viewModel: DestinationInfoSectionViewModel?
 	
 	private var headerView = SectionHeaderView.view(headerText: "INFORMATION")
 	
 	convenience init(viewModel: DestinationInfoSectionViewModel? = nil) {
 		self.init(index: 0, childDelegates: [])
+		
+		viewModel?.add(observer: self)
 		self.viewModel = viewModel
 	}
 	
