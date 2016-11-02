@@ -31,4 +31,12 @@ class DestinationInfoListRowDelegate: CascadingBareTableDelegate {
 		return DestinationInfoCell.preferredHeight(infoType: info?.type, infoText: info?.text)
 	}		
 	
+	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+		guard let cell = cell as? DestinationInfoCell else {
+			return
+		}
+		
+		cell.configure(infoType: info?.type, infoText: info?.text)
+	}
 }
