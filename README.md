@@ -1,7 +1,7 @@
 # CascadingTableDelegate
 
 [![CI Status](http://img.shields.io/travis/edopelawi/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/edopelawi/CascadingTableDelegate) 
-[![Swift 2.2](https://img.shields.io/badge/Swift-2.2-yellow.svg)](https://swift.org)
+[![Swift 3](https://img.shields.io/badge/Swift-3.0-brightgreen.svg)](https://swift.org)
 [![Platform](https://img.shields.io/cocoapods/p/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 
 [![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
@@ -151,17 +151,13 @@ Somehow, Xcode won't add `weak` modifier when you're implementing your own `Casc
 
 Still, if you still think typing it manually is a tedious job, just subclass the `CascadingBareTableDelegate` out. It's a bare implementation of the `CascadingTableDelegate`, without the propagating logic 🙂
 
-## TODOs
-
-- Update to Swift 3 and check for new delegate / datasource methods in iOS 10.
-
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
 
-Xcode 7.x, Swift 2.2.
+This version supports Swift 3, which available in Xcode 8. For Swift 2.2 / Xcode 7.x support, kindly check the 1.x versions 🙂
 
 ## Installation
 
