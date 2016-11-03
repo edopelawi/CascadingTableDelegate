@@ -150,7 +150,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 	
 	func sectionIndexTitles(for tableView: UITableView) -> [String]? {
 		
-		let selector = #selector(UITableViewDataSource.sectionIndexTitles(`for`:))
+		let selector = #selector(UITableViewDataSource.sectionIndexTitles(for:))
 		
 		_latestCalledDelegateMethod = [ selector: tableView ]
 		
@@ -493,7 +493,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 	@available(iOS 9.0, *)
 	func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
 		
-		let selector = #selector(UITableViewDelegate.indexPathForPreferredFocusedView(`in`:))
+		let selector = #selector(UITableViewDelegate.indexPathForPreferredFocusedView(in:))
 		
 		_latestCalledDelegateMethod = [ selector: tableView ]
 		
