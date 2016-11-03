@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "838FF0FED1C271BB0EDD709DD6AB1837"
+               BlueprintIdentifier = "1ED195FD24377788288ED1C64628DAF0"
                BuildableName = "CascadingTableDelegate.framework"
                BlueprintName = "CascadingTableDelegate"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "838FF0FED1C271BB0EDD709DD6AB1837"
+            BlueprintIdentifier = "1ED195FD24377788288ED1C64628DAF0"
             BuildableName = "CascadingTableDelegate.framework"
             BlueprintName = "CascadingTableDelegate"
             ReferencedContainer = "container:Pods.xcodeproj">
