@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary          = 'A no-nonsense way to write cleaner `UITableViewDelegate` and `UITableViewDataSource`.'
 
   s.description      = <<-DESC
-CascadingTableDelegate allows you to propagate `UITableViewDelegate` and `UITableViewDataSource` method calls to several objects, based by the `NSIndexPath` of the method's parameter.
+CascadingTableDelegate allows you to propagate `UITableViewDelegate` and `UITableViewDataSource` method calls to several objects, based by the `IndexPath` of the method's parameter.
                        DESC
 
   s.homepage         = 'https://github.com/edopelawi/CascadingTableDelegate'
