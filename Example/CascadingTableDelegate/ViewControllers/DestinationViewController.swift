@@ -116,8 +116,8 @@ class DestinationViewController: UIViewController {
 	
 	fileprivate func stopRefreshControl() {
 		
-		let delayTime = DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-		let dispatchQueue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
+		let delayTime = DispatchTime.now() + 1.5
+		let dispatchQueue = DispatchQueue.global(qos: .userInitiated)
 		
 		dispatchQueue.asyncAfter(deadline: delayTime) {
 			

@@ -40,8 +40,8 @@ class DestinationViewModel {
 	/// Refreshes data that held by this instance, and invokes passed `completionHandler` when done.
 	func refreshData(_ completionHandler: ((Void) -> Void)?) {
 		
-		let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-		let dispatchQueue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
+		let delayTime = DispatchTime.now() + 2.0
+		let dispatchQueue = DispatchQueue.global(qos: .userInitiated)
 		
 		dispatchQueue.asyncAfter(deadline: delayTime) {
 			
@@ -164,9 +164,8 @@ extension DestinationViewModel: DestinationReviewUserSectionViewModel {
 	
 	func retrieveMoreRowViewModels(_ onCompleted: ((Void) -> Void)?) {
 		
-		let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-		let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
-		
+		let delayTime = DispatchTime.now() + 2.0
+		let queue = DispatchQueue.global(qos: .userInitiated)
 		
 		queue.asyncAfter(deadline: delayTime) {
 			
