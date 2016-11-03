@@ -911,8 +911,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
-					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
-						fail("tableView(_:willBeginEditingRowAt:) not called correctly")
+					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath?) else {
+						fail("tableView(_:didEndEditingRowAt:) not called correctly")
 						return
 					}
 					
@@ -956,7 +956,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
-					guard let calledParameters = latestMethods[expectedMethod] as?  (tableView: UITableView, indexPath: IndexPath) else {
+					guard let calledParameters = latestMethods[expectedMethod] as?  (tableView: UITableView, indexPath: IndexPath?) else {
 						fail("tableView(_:didEndEditingRowAt:) not called correctly")
 						return
 					}
