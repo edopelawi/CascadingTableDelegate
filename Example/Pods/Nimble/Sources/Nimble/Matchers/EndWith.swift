@@ -3,14 +3,12 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence's last element
 /// is equal to the expected value.
-public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> NonNilMatcherFunc<S>
-    where S.Iterator.Element == T
-{
+public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(endingElement: T) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 
         if let actualValue = try actualExpression.evaluate() {
-            var actualGenerator = actualValue.makeIterator()
+            var actualGenerator = actualValue.generate()
             var lastItem: T?
             var item: T?
             repeat {
@@ -26,20 +24,11 @@ public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> NonNilMatc
 
 /// A Nimble matcher that succeeds when the actual collection's last element
 /// is equal to the expected object.
-public func endWith(_ endingElement: Any) -> NonNilMatcherFunc<NMBOrderedCollection> {
+public func endWith(endingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCollection> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
-        guard let collection = try actualExpression.evaluate() else { return false }
-        guard collection.count > 0 else { return false }
-        #if os(Linux)
-            guard let collectionValue = collection.object(at: collection.count - 1) as? NSObject else {
-                return false
-            }
-        #else
-            let collectionValue = collection.object(at: collection.count - 1) as AnyObject
-        #endif
-
-        return collectionValue.isEqual(endingElement)
+        let collection = try actualExpression.evaluate()
+        return collection != nil && collection!.indexOfObject(endingElement) == collection!.count - 1
     }
 }
 
@@ -47,11 +36,12 @@ public func endWith(_ endingElement: Any) -> NonNilMatcherFunc<NMBOrderedCollect
 /// A Nimble matcher that succeeds when the actual string contains the expected substring
 /// where the expected substring's location is the actual string's length minus the
 /// expected substring's length.
-public func endWith(_ endingSubstring: String) -> NonNilMatcherFunc<String> {
+public func endWith(endingSubstring: String) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         if let collection = try actualExpression.evaluate() {
-            return collection.hasSuffix(endingSubstring)
+            let range = collection.rangeOfString(endingSubstring)
+            return range != nil && range!.endIndex == collection.endIndex
         }
         return false
     }
@@ -59,7 +49,7 @@ public func endWith(_ endingSubstring: String) -> NonNilMatcherFunc<String> {
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func endWithMatcher(_ expected: Any) -> NMBObjCMatcher {
+    public class func endWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let actual = try! actualExpression.evaluate()
             if let _ = actual as? String {

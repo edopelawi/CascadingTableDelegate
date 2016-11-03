@@ -1,26 +1,24 @@
 import Foundation
 
-/// If you are running on a slower machine, it could be useful to increase the default timeout value
-/// or slow down poll interval. Default timeout interval is 1, and poll interval is 0.01.
+#if _runtime(_ObjC)
+
 public struct AsyncDefaults {
-    public static var Timeout: TimeInterval = 1
-    public static var PollInterval: TimeInterval = 0.01
+    public static var Timeout: NSTimeInterval = 1
+    public static var PollInterval: NSTimeInterval = 0.01
 }
 
-internal struct AsyncMatcherWrapper<T, U>: Matcher
-    where U: Matcher, U.ValueType == T
-{
+internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
     let fullMatcher: U
-    let timeoutInterval: TimeInterval
-    let pollInterval: TimeInterval
+    let timeoutInterval: NSTimeInterval
+    let pollInterval: NSTimeInterval
 
-    init(fullMatcher: U, timeoutInterval: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval) {
+    init(fullMatcher: U, timeoutInterval: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval) {
       self.fullMatcher = fullMatcher
       self.timeoutInterval = timeoutInterval
       self.pollInterval = pollInterval
     }
 
-    func matches(_ actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
+    func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
         let fnName = "expect(...).toEventually(...)"
         let result = pollBlock(
@@ -32,23 +30,23 @@ internal struct AsyncMatcherWrapper<T, U>: Matcher
                 try self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-        case let .completed(isSuccessful): return isSuccessful
-        case .timedOut: return false
-        case let .errorThrown(error):
+        case let .Completed(isSuccessful): return isSuccessful
+        case .TimedOut: return false
+        case let .ErrorThrown(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
-        case let .raisedException(exception):
+        case let .RaisedException(exception):
             failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
             return false
-        case .blockedRunLoop:
+        case .BlockedRunLoop:
             failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
             return false
-        case .incomplete:
-            internalError("Reached .incomplete state for toEventually(...).")
+        case .Incomplete:
+            internalError("Reached .Incomplete state for toEventually(...).")
         }
     }
 
-    func doesNotMatch(_ actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
+    func doesNotMatch(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
         let uncachedExpression = actualExpression.withoutCaching()
         let result = pollBlock(
             pollInterval: pollInterval,
@@ -59,19 +57,19 @@ internal struct AsyncMatcherWrapper<T, U>: Matcher
                 try self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-        case let .completed(isSuccessful): return isSuccessful
-        case .timedOut: return false
-        case let .errorThrown(error):
+        case let .Completed(isSuccessful): return isSuccessful
+        case .TimedOut: return false
+        case let .ErrorThrown(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
-        case let .raisedException(exception):
+        case let .RaisedException(exception):
             failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
             return false
-        case .blockedRunLoop:
+        case .BlockedRunLoop:
             failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
             return false
-        case .incomplete:
-            internalError("Reached .incomplete state for toEventuallyNot(...).")
+        case .Incomplete:
+            internalError("Reached .Incomplete state for toEventuallyNot(...).")
         }
     }
 }
@@ -86,9 +84,7 @@ extension Expectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-    public func toEventually<U>(_ matcher: U, timeout: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval, description: String? = nil)
-        where U: Matcher, U.ValueType == T
-    {
+    public func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
         if expression.isClosure {
             let (pass, msg) = expressionMatches(
                 expression,
@@ -111,9 +107,7 @@ extension Expectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-    public func toEventuallyNot<U>(_ matcher: U, timeout: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval, description: String? = nil)
-        where U: Matcher, U.ValueType == T
-    {
+    public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
         if expression.isClosure {
             let (pass, msg) = expressionDoesNotMatch(
                 expression,
@@ -138,9 +132,9 @@ extension Expectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-    public func toNotEventually<U>(_ matcher: U, timeout: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval, description: String? = nil)
-        where U: Matcher, U.ValueType == T
-    {
+    public func toNotEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
         return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 }
+
+#endif

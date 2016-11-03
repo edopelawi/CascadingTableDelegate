@@ -2,15 +2,11 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the variable list of matchers. 
-public func satisfyAnyOf<T,U>(_ matchers: U...) -> NonNilMatcherFunc<T>
-    where U: Matcher, U.ValueType == T
-{
+public func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(matchers: U...) -> NonNilMatcherFunc<T> {
     return satisfyAnyOf(matchers)
 }
 
-internal func satisfyAnyOf<T,U>(_ matchers: [U]) -> NonNilMatcherFunc<T>
-    where U: Matcher, U.ValueType == T
-{
+internal func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(matchers: [U]) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc<T> { actualExpression, failureMessage in
         let postfixMessages = NSMutableArray()
         var matches = false
@@ -18,10 +14,10 @@ internal func satisfyAnyOf<T,U>(_ matchers: [U]) -> NonNilMatcherFunc<T>
             if try matcher.matches(actualExpression, failureMessage: failureMessage) {
                 matches = true
             }
-            postfixMessages.add(NSString(string: "{\(failureMessage.postfixMessage)}"))
+            postfixMessages.addObject(NSString(string: "{\(failureMessage.postfixMessage)}"))
         }
 
-        failureMessage.postfixMessage = "match one of: " + postfixMessages.componentsJoined(by: ", or ")
+        failureMessage.postfixMessage = "match one of: " + postfixMessages.componentsJoinedByString(", or ")
         if let actualValue = try actualExpression.evaluate() {
             failureMessage.actualValue = "\(actualValue)"
         }
@@ -40,7 +36,7 @@ public func ||<T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> NonNilMatcherF
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func satisfyAnyOfMatcher(_ matchers: [NMBObjCMatcher]) -> NMBObjCMatcher {
+    public class func satisfyAnyOfMatcher(matchers: [NMBObjCMatcher]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             if matchers.isEmpty {
                 failureMessage.stringValue = "satisfyAnyOf must be called with at least one matcher"
