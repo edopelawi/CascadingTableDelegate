@@ -323,7 +323,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: IndexPath, sender: AnyObject?) else {
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: IndexPath, sender: Any?) else {
                             fail("tableView(_:canPerformAction:forRowAt:withSender:) is not called correctly")
                             return
                         }
@@ -440,7 +440,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: IndexPath, sender: AnyObject?) else {
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: IndexPath, sender: Any?) else {
                             fail("tableView(_:canPerformAction:forRowAt:withSender:) is not called correctly")
                             return
                         }
@@ -523,7 +523,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: IndexPath, sender: AnyObject?) else {
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: IndexPath, sender: Any?) else {
                         
                         fail("tableView(_:performAction:forRowAt:withSender:) not called correctly")
                         return
