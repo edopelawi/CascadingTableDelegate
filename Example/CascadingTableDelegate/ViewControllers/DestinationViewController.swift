@@ -109,6 +109,7 @@ class DestinationViewController: UIViewController {
 		
 		tableView.showRefreshControl()
 		
+		refreshControl.layoutIfNeeded()
 		refreshControl.beginRefreshing()
 		refreshControl.isHidden = false
 	}
