@@ -1,22 +1,22 @@
 PODS:
-  - CascadingTableDelegate (1.1.0)
-  - Nimble (4.0.0)
-  - Quick (0.9.0)
+  - CascadingTableDelegate (1.2.0)
+  - Nimble (5.1.1)
+  - Quick (0.10.0)
 
 DEPENDENCIES:
   - CascadingTableDelegate (from `../`)
-  - Nimble (= 4.0.0)
-  - Quick (= 0.9.0)
+  - Nimble (= 5.1.1)
+  - Quick (= 0.10.0)
 
 EXTERNAL SOURCES:
   CascadingTableDelegate:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CascadingTableDelegate: ad4aa8c19204bbb1d586291d4b8c533ff21ad7db
-  Nimble: 72bcc3e2f02242e6bfaaf8d9412ca7bfe3d8b417
-  Quick: 332eb1da73125a2106dd637424c803f2ae97e4a9
+  CascadingTableDelegate: 3a7c1c6848bd88f4d986a08294dba7115b35af51
+  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
+  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
 
-PODFILE CHECKSUM: dde3feb6605fad86231f5b1f05c6a41e198a90e2
+PODFILE CHECKSUM: 0a084b168a33367fe4e72c8e199ff581a800034b
 
 COCOAPODS: 1.0.1

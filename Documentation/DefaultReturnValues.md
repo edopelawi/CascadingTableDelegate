@@ -9,20 +9,20 @@ Below are the list of default return values of `UITableViewDelegate` and `UITabl
 - `tableView(_:numberOfRowsInSection:)`
 	- `.Row`: Number of `childDelegates`.
 	- `.Section`: 0.
-- `tableView(_:cellForRowAtIndexPath)`
+- `tableView(_:cellForRowAt:)`
 	- New `UITableViewCell` instance.
-- `numberOfSectionsInTableView(_:)`
+- `numberOfSections(in:)`
 	- `.Row`: 0.
 	- `.Section`: Number of `childDelegates`.
 - `tableView(_:titleForHeaderInSection:)`
 	- 	`nil`.
--  `tableView(_:canEditRowAtIndexPath)`
+-  `tableView(_:canEditRowAt:)`
 	-  `false`.
 -  `tableView(_:titleForFooterInSection:)`
 	-  `nil`.
--  `tableView(_:canEditRowAtIndexPath:)`
+-  `tableView(_:canEditRowAt:)`
 	-  `false`.
--  `tableView(_:canMoveRowAtIndexPath:)`
+-  `tableView(_:canMoveRowAt:)`
 	-  `false`.
 
 
@@ -30,14 +30,14 @@ Below are the list of default return values of `UITableViewDelegate` and `UITabl
 
 ### Height support
 
-- `tableView(_:heightForRowAtIndexPath:)`
+- `tableView(_:heightForRowAt:)`
 	- `UITableViewAutomaticDimension`.
 - `tableView(_:heightForHeaderInSection:)`
 	- `CGFloat(0)`.
 - `tableView(_:heightForFooterInSection:)`
 	- `CGFloat(0)`
-- `tableView(_:estimatedHeightForRowAtIndexPath)`
-	- Corresponding child's `tableView(_:heightForRowAtIndexPath:)` result if available, and
+- `tableView(_:estimatedHeightForRowAt:)`
+	- Corresponding child's `tableView(_:heightForRowAt:)` result if available, and
 	- `UITableViewAutomaticDimension` if not.
 - `tableView(_:estimatedHeightForHeaderInSection:)`
 	- Corresponding child's `tableView(_:heightForHeaderInSection:)` result if available, and
@@ -55,38 +55,38 @@ Below are the list of default return values of `UITableViewDelegate` and `UITabl
 
 ### Editing
 
-- `tableView(_:editingStyleForRowAtIndexPath:)`
+- `tableView(_:editingStyleForRowAt:)`
 	- `UITableViewCellEditingStyle.None`.
-- `tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:)`
+- `tableView(_:titleForDeleteConfirmationButtonForRowAt:)`
 	- `nil`.
-- `tableView(_:editActionsForRowAtIndexPath:)`
+- `tableView(_:editActionsForRowAt:)`
 	- `nil`.
-- `tableView(_:shouldIndentWhileEditingRowAtIndexPath:)`
+- `tableView(_:shouldIndentWhileEditingRowAt:)`
 	- `false`.
 
 ### Selection
 
-- `tableView(_:shouldHighlightRowAtIndexPath:)`
+- `tableView(_:shouldHighlightRowAt:)`
 	- `true`.
-- `tableView(_:willSelectRowAtIndexPath:)`
+- `tableView(_:willSelectRowAt:)`
 	- `NSIndexPath` parameter that passed on the method call.
-- `tableView(_:willDeselectRowAtIndexPath:)`
+- `tableView(_:willDeselectRowAt:)`
 	- `NSIndexPath` parameter that passed on the method call.
 
 ### Copy and Paste
 
-- `tableView(_:shouldShowMenuForRowAtIndexPath)`
+- `tableView(_:shouldShowMenuForRowAt:)`
 	- 	`false`.
-- `tableView(_:canPerformAction:forRowAtIndexPath:withSender:)`
+- `tableView(_:canPerformAction:forRowAt:withSender:)`
 	- `false`.
 
 ### Focus
 
-- `tableView(_:canFocusRowAtIndexPath:)`
+- `tableView(_:canFocusRowAt:)`
 	- `false`.
 
 ### Reorder
 
-- `tableView(_:indentationLevelForRowAtIndexPath:)`
-	- 0.	
+- `tableView(_:indentationLevelForRowAt:)`
+	- 0.
 

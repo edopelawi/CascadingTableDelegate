@@ -13,19 +13,19 @@ class DestinationReviewUserCell: UITableViewCell {
 	/// Marks and sets whether this instance's bottom border view is hidden or not.
 	var hideBottomBorder: Bool {
 		get {
-			return bottomBorderView?.hidden ?? true
+			return bottomBorderView?.isHidden ?? true
 		}
 		set {
-			bottomBorderView?.hidden = newValue
+			bottomBorderView?.isHidden = newValue
 		}
 	}
 	
-	@IBOutlet private weak var userNameLabel: UILabel!
-	@IBOutlet private weak var userReviewLabel: UILabel!
+	@IBOutlet fileprivate weak var userNameLabel: UILabel!
+	@IBOutlet fileprivate weak var userReviewLabel: UILabel!
 	
-	@IBOutlet private weak var bottomBorderView: UIView?
+	@IBOutlet fileprivate weak var bottomBorderView: UIView?
 	
-	@IBOutlet private var starImageViews: [UIImageView]?
+	@IBOutlet fileprivate var starImageViews: [UIImageView]?
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,15 +35,15 @@ class DestinationReviewUserCell: UITableViewCell {
 	
 	// MARK: - Public methods
 	
-	static func preferredHeight(userReview userReview: String) -> CGFloat {
+	static func preferredHeight(userReview: String) -> CGFloat {
 		
-		let mainScreen = UIScreen.mainScreen()
+		let mainScreen = UIScreen.main
 		let screenWidth = mainScreen.bounds.width
 		
 		let horizontalPadding = CGFloat(40)
 		let reviewTextWidth = screenWidth - horizontalPadding
 		
-		let reviewFont = UIFont.systemFontOfSize(14.0)
+		let reviewFont = UIFont.systemFont(ofSize: 14.0)
 		let reviewTextHeight = userReview.displayHeight(width: reviewTextWidth, font: reviewFont)
 		
 		let topHeight = CGFloat(39)
@@ -53,7 +53,7 @@ class DestinationReviewUserCell: UITableViewCell {
 		return topHeight + reviewTextHeight + verticalPadding
 	}
 	
-	func configure(userName userName: String, userReview: String, rating: Int) {
+	func configure(userName: String, userReview: String, rating: Int) {
 		userNameLabel.text = userName
 		userReviewLabel.text = userReview
 		configure(rating: rating)
@@ -61,18 +61,18 @@ class DestinationReviewUserCell: UITableViewCell {
 	
 	// MARK: - Private methods
 	
-	private func resetLabels() {
+	fileprivate func resetLabels() {
 		userNameLabel.text = nil
 		userReviewLabel.text = nil
 	}
 	
-	private func configure(rating rating: Int) {
+	fileprivate func configure(rating: Int) {
 		
 		guard let starImageViews = starImageViews else {
 			return
 		}
 		
-		starImageViews.enumerate()
+		starImageViews.enumerated()
 			.forEach { index, imageView in
 				
 				let insideRating = index < rating

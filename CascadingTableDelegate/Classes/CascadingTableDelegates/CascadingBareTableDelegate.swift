@@ -18,13 +18,13 @@ Feel free to override any of this class' method however you see fit.
 	- `init(index:childDelegates)`. Will set the passed `index` and `childDelegates` to its corresponding property.
 	- `prepare(tableView:)`. Will call its `childDelegates`' `prepare(tableView:)` using the passed `tableView`.
 	- `tableView(_:numberOfRowsInSection:)`. Returns `0` by default.
-	- `tableView(_:cellForRowAtIndexPath:)`. Returns a new `UITableViewCell` instance for each call.
+	- `tableView(_:cellForRowAt:)`. Returns a new `UITableViewCell` instance for each call.
 */
-public class CascadingBareTableDelegate: NSObject {
+open class CascadingBareTableDelegate: NSObject {
 
-	public var index: Int
-	public var childDelegates: [CascadingTableDelegate]
-	public weak var parentDelegate: CascadingTableDelegate?
+	open var index: Int
+	open var childDelegates: [CascadingTableDelegate]
+	open weak var parentDelegate: CascadingTableDelegate?
 	
 	required public init(index: Int, childDelegates: [CascadingTableDelegate]) {
 		self.index = index
@@ -34,7 +34,7 @@ public class CascadingBareTableDelegate: NSObject {
 
 extension CascadingBareTableDelegate: CascadingTableDelegate {
 
-	public func prepare(tableView tableView: UITableView) {
+	open func prepare(tableView: UITableView) {
 		
 		childDelegates.forEach { child in
 			child.prepare(tableView: tableView)
@@ -44,11 +44,11 @@ extension CascadingBareTableDelegate: CascadingTableDelegate {
 
 extension CascadingBareTableDelegate: UITableViewDataSource {
 	
-	public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 0
 	}
 	
-	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		return UITableViewCell()
 	}
 }

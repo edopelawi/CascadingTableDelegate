@@ -10,7 +10,7 @@ import UIKit
 
 class DestinationReviewRatingCell: UITableViewCell {
 
-	@IBOutlet private var starImageViews: [UIImageView]?
+	@IBOutlet fileprivate var starImageViews: [UIImageView]?
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,13 +27,13 @@ class DestinationReviewRatingCell: UITableViewCell {
 	}
 	
 	/// Configures this instance with passed `rating`. Valid values are between 0 - 5. Behaviour for invalid values is undefined.
-	func configure(rating rating: Int) {
+	func configure(rating: Int) {
 		
 		guard let starImageViews = starImageViews else {
 			return
 		}
 		
-		starImageViews.enumerate()
+		starImageViews.enumerated()
 		.forEach { index, imageView in
 			
 			let insideRating = index < rating

@@ -15,7 +15,7 @@ public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelega
 	
 	- warning: On implementation, this value should be corresponding to its `index` number in its parent's `childDelegates`.
 	
-	- note: The passed `NSIndexPath` to this instance's `UITableViewDataSource` and `UITableViewDelegate` method will be affected by this value, e.g. `index` value as `section`, or index as `row`.
+	- note: The passed `IndexPath` to this instance's `UITableViewDataSource` and `UITableViewDelegate` method will be affected by this value, e.g. `index` value as `section`, or index as `row`.
 	*/
 	var index: Int { get set }
 	
@@ -51,7 +51,7 @@ public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelega
 	
 	- parameter tableView: `UITableView` instance.
 	*/
-	func prepare(tableView tableView: UITableView)
+	func prepare(tableView: UITableView)
 }
 
 extension CascadingTableDelegate {
@@ -90,7 +90,7 @@ extension CascadingTableDelegate {
 	*/
 	public func validateChildDelegates() {
 		
-		childDelegates.enumerate()
+		childDelegates.enumerated()
 		.forEach { (arrayIndex, child) in
 			
 			child.index = arrayIndex

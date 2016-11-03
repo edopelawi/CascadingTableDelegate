@@ -38,7 +38,7 @@ class PropagatingTableDelegateBaseSpec: QuickSpec {
 		
 		it("prepare(tableView:) should call all its childDelegates' method with the same parameter") {
 			
-			let expectedTableView = UITableView(frame: CGRectZero)
+			let expectedTableView = UITableView()
 			propagatingTableDelegate.prepare(tableView: expectedTableView)
 			
 			for childDelegate in childDelegates {
@@ -49,7 +49,7 @@ class PropagatingTableDelegateBaseSpec: QuickSpec {
 		
 		it("should sort out its child delegate's indexes") { 
 			
-			for (expectedIndex, childDelegate) in childDelegates.enumerate() {
+			for (expectedIndex, childDelegate) in childDelegates.enumerated() {
 		
 				expect(childDelegate.index).to(equal(expectedIndex))
 			}

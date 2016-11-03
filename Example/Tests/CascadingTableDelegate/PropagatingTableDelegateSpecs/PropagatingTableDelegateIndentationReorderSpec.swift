@@ -32,7 +32,7 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
             )
         }
         
-        describe("tableView(_:indentationLevelForRowAtIndexPath:)", {
+        describe("tableView(_:indentationLevelForRowAt:)", {
             
             var tableView: UITableView!
             
@@ -40,10 +40,10 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", {
+            context("on .row propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 context("with invalid indexPath row value", {
@@ -51,8 +51,9 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                     var result: Int!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAtIndexPath: indexPath)
+						
+                        let indexPath = IndexPath(row: 999, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAt: indexPath)
                     })
                     
                     it("shoul return zero ", closure: {
@@ -71,8 +72,8 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                     var result: Int!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAt: indexPath)
                     })
                     
                     it("should return zero", closure: {
@@ -91,15 +92,15 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                     var expectedResult: Int!
                     var result: Int!
                     
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     beforeEach({
                         
                         expectedResult = 5
                         childDelegates[completeChildDelegateIndex].returnedInt = expectedResult
                         
-                        indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAt: indexPath)
                     })
                     
                     
@@ -109,12 +110,12 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                     
                     it("should call the child's method using passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:indentationLevelForRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:indentationLevelForRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:indentationLevelForRowAtIndexPath:) not called properly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:indentationLevelForRowAt:) not called properly")
                             return
                         }
                         
@@ -125,10 +126,10 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", {
+            context("on .section propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 context("with invalid indexPath section value", {
@@ -136,8 +137,8 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                     var result: Int!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 0, section: 999)
+                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAt: indexPath)
                     })
                     
                     it("shoul return zero ", closure: {
@@ -156,8 +157,8 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                     var result: Int!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAt: indexPath)
                     })
                     
                     it("should return zero", closure: {
@@ -176,15 +177,15 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                     var expectedResult: Int!
                     var result: Int!
                     
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     beforeEach({
                         
                         expectedResult = 5
                         childDelegates[completeChildDelegateIndex].returnedInt = expectedResult
                         
-                        indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, indentationLevelForRowAt: indexPath)
                     })
                     
                     
@@ -194,12 +195,12 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
                     
                     it("should call the child's method using passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:indentationLevelForRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:indentationLevelForRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:indentationLevelForRowAtIndexPath:) not called properly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:indentationLevelForRowAt:) not called properly")
                             return
                         }
                         
@@ -213,7 +214,7 @@ class PropagatingTableDelegateIndentationReorderSpec: QuickSpec {
         })
         
         
-//		pending("tableView(_:targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)", {})
+//		pending("tableView(_:targetIndexPathForMoveFromRowAt: toProposedIndexPath:)", {})
 
 	}
 }

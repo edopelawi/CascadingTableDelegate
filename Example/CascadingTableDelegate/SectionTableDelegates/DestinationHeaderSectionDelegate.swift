@@ -19,21 +19,21 @@ protocol DestinationHeaderSectionViewModel: class {
 	var description: String? { get }
 	
 	/// Executed when any of this instance's header-related property updated.
-	var headerDataChanged: (Void -> Void)? { get set }
+	var headerDataChanged: ((Void) -> Void)? { get set }
 }
 
 class DestinationHeaderSectionDelegate: NSObject {
 
 	enum Row: Int {
-		case TopPhoto = 0, Name, Description
+		case topPhoto = 0, name, description
 		
-		static let allValues: [Row] = [ .TopPhoto, .Name, .Description ]
+		static let allValues: [Row] = [ .topPhoto, .name, .description ]
 		
 		var cellIdentifier: String {
 			switch self {
-			case .TopPhoto: return DestinationTopPhotoCell.nibIdentifier()
-			case .Name: return DestinationNameCell.nibIdentifier()
-			case .Description: return DestinationDescriptionCell.nibIdentifier()
+			case .topPhoto: return DestinationTopPhotoCell.nibIdentifier()
+			case .name: return DestinationNameCell.nibIdentifier()
+			case .description: return DestinationDescriptionCell.nibIdentifier()
 			}
 		}
 	}
@@ -49,7 +49,7 @@ class DestinationHeaderSectionDelegate: NSObject {
 		}
 	}
 	
-	private weak var currentTableView: UITableView?
+	fileprivate weak var currentTableView: UITableView?
 	
 	convenience init(viewModel: DestinationHeaderSectionViewModel? = nil) {
 		self.init(index: 0, childDelegates: [])
@@ -64,7 +64,7 @@ class DestinationHeaderSectionDelegate: NSObject {
 	
 	// MARK: - Private methods
 	
-	private func configureViewModelObserver() {
+	fileprivate func configureViewModelObserver() {
 
 		viewModel?.headerDataChanged = { [weak self] in
 			
@@ -73,88 +73,88 @@ class DestinationHeaderSectionDelegate: NSObject {
 				return
 			}
 			
-			let indexes = NSIndexSet(index: index)
-			tableView.reloadSections(indexes, withRowAnimation: .Automatic)
+			let indexes = IndexSet(integer: index)
+			tableView.reloadSections(indexes, with: .automatic)
 		}
 	}
 }
 
 extension DestinationHeaderSectionDelegate: CascadingTableDelegate {
 
-	func prepare(tableView tableView: UITableView) {
+	func prepare(tableView: UITableView) {
 		
 		currentTableView = tableView
 		registerNibs(tableView: tableView)
 	}
 	
-	private func registerNibs(tableView tableView: UITableView) {
+	fileprivate func registerNibs(tableView: UITableView) {
 	
 		Row.allValues.map({ $0.cellIdentifier })
 			.forEach { identifier in
 				
 				let nib = UINib(nibName: identifier, bundle: nil)
-				tableView.registerNib(nib, forCellReuseIdentifier: identifier)
+				tableView.register(nib, forCellReuseIdentifier: identifier)
 		}
 	}
 }
 
 extension DestinationHeaderSectionDelegate: UITableViewDataSource {
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return Row.allValues.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		
-		guard let row = Row(rawValue: indexPath.row) else {
+		guard let row = Row(rawValue: (indexPath as IndexPath).row) else {
 			return UITableViewCell()
 		}
 		
-		return tableView.dequeueReusableCellWithIdentifier(row.cellIdentifier, forIndexPath: indexPath)
+		return tableView.dequeueReusableCell(withIdentifier: row.cellIdentifier, for: indexPath)
 	}
 }
 
 extension DestinationHeaderSectionDelegate: UITableViewDelegate {
 
 	
-	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return CGFloat.min
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return CGFloat.leastNormalMagnitude
 	}
 	
-	func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return CGFloat.min
+	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return CGFloat.leastNormalMagnitude
 	}
 
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		
-		guard let row = Row(rawValue: indexPath.row) else {
+		guard let row = Row(rawValue: (indexPath as IndexPath).row) else {
 			return CGFloat(0)
 		}
 		
 		switch row {
 
-		case .TopPhoto: return DestinationTopPhotoCell.preferredHeight()
-		case .Name: return DestinationNameCell.preferredHeight()
-		case .Description: return DestinationDescriptionCell.preferredHeight(displayText: viewModel?.description)
+		case .topPhoto: return DestinationTopPhotoCell.preferredHeight()
+		case .name: return DestinationNameCell.preferredHeight()
+		case .description: return DestinationDescriptionCell.preferredHeight(displayText: viewModel?.description)
 		}
 	}
 	
-	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		
-		guard let row = Row(rawValue: indexPath.row) else {
+		guard let row = Row(rawValue: (indexPath as IndexPath).row) else {
 			return
 		}
 		
-		if let cell = cell as? DestinationTopPhotoCell where row == .TopPhoto {
+		if let cell = cell as? DestinationTopPhotoCell , row == .topPhoto {
 			cell.configure(image: viewModel?.topPhoto)
 		}
 		
-		if let cell = cell as? DestinationNameCell where row == .Name {
+		if let cell = cell as? DestinationNameCell , row == .name {
 			cell.configure(destinationName: viewModel?.destinationName, locationText: viewModel?.locationName)
 		}
 		
-		if let cell = cell as? DestinationDescriptionCell where row == .Description {
+		if let cell = cell as? DestinationDescriptionCell , row == .description {
 			cell.configure(description: viewModel?.description)
 		}
 		

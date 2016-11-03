@@ -33,7 +33,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             )
         }
         
-		describe("tableView(_:accessoryButtonTappedForRowWithIndexPath:)", {
+		describe("tableView(_:accessoryButtonTappedForRowWith:)", {
             
             var tableView: UITableView!
             
@@ -41,16 +41,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", { 
+            context("on .row propagation mode", { 
                 
                 beforeEach({ 
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 it("should not call any of its child's method on invalid indexPath row value", closure: { 
                     
-                    let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 999, section: 0)
+                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -59,8 +59,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method where corresponding child doesn't implement it", closure: { 
                     
-                    let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+                    let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -70,14 +70,14 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 it("should call it's corresponding child method with passed parameters if the child implements it", closure: { 
                     
                     
-                    let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+                    let indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWithIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWith:))
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_:accessoryButtonTappedForRowAtIndexPath:) is not called correctly.")
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                        fail("tableView(_:accessoryButtonTappedForRowAt:) is not called correctly.")
                         return
                     }
                     
@@ -86,16 +86,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", {
+            context("on .section propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 it("should not call any of its child's method on invalid indexPath section value", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: 999)
+                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -104,8 +104,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method where corresponding child doesn't implement it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -115,14 +115,14 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 it("should call it's corresponding child method with passed parameters if the child implements it", closure: {
                     
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWithIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWith:))
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_:accessoryButtonTappedForRowAtIndexPath:) is not called correctly.")
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                        fail("tableView(_:accessoryButtonTappedForRowAt:) is not called correctly.")
                         return
                     }
                     
@@ -132,7 +132,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 		
-		describe("tableView(_:shouldHighlightRowAtIndexPath:)", {
+		describe("tableView(_:shouldHighlightRowAt:)", {
             
             var tableView: UITableView!
             
@@ -140,10 +140,10 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", { 
+            context("on .row propagation mode", { 
                 
                 beforeEach({ 
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 context("with invalid indexPath row value", { 
@@ -151,8 +151,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({ 
-                        let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 999, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAt: indexPath)
                     })
                     
                     it("shoul return true ", closure: {
@@ -171,8 +171,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({ 
-                        let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAt: indexPath)
                     })
                     
                     it("should return true", closure: {
@@ -191,15 +191,15 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     var expectedResult: Bool!
                     var result: Bool!
                     
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     beforeEach({
                         
                         expectedResult = true
                         childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
                         
-                        indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAt: indexPath)
                     })
                     
                     
@@ -209,12 +209,12 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     it("should call the child's method using passed parameter", closure: { 
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:shouldHighlightRowAtIndexPath:) not called properly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:shouldHighlightRowAt:) not called properly")
                             return
                         }
                         
@@ -225,10 +225,10 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", {
+            context("on .section propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 context("with invalid indexPath section value", {
@@ -236,8 +236,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 0, section: 999)
+                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAt: indexPath)
                     })
                     
                     it("shoul return true ", closure: {
@@ -256,8 +256,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAt: indexPath)
                     })
                     
                     it("should return true", closure: {
@@ -276,15 +276,15 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     var expectedResult: Bool!
                     var result: Bool!
                     
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     beforeEach({
                         
                         expectedResult = true
                         childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
                         
-                        indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, shouldHighlightRowAt: indexPath)
                     })
                     
                     
@@ -294,12 +294,12 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     it("should call the child's method using passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:shouldHighlightRowAtIndexPath:) not called properly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:shouldHighlightRowAt:) not called properly")
                             return
                         }
                         
@@ -311,7 +311,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 
-		describe("tableView(_:didHighlightRowAtIndexPath:)", {
+		describe("tableView(_:didHighlightRowAt:)", {
         
             var tableView: UITableView!
             
@@ -319,16 +319,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", {
+            context("on .row propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 it("should not call any of its child's method on invalid indexPath row value", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didHighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 999, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didHighlightRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -337,8 +337,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method where corresponding child doesn't implement it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didHighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didHighlightRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -348,14 +348,14 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 it("should call it's corresponding child method with passed parameters if the child implements it", closure: {
                     
                     
-                    let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didHighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didHighlightRowAt: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didHighlightRowAtIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didHighlightRowAt:))
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_:didHighlightRowAtIndexPath:) is not called correctly.")
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                        fail("tableView(_:didHighlightRowAt:) is not called correctly.")
                         return
                     }
                     
@@ -364,16 +364,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", {
+            context("on .section propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 it("should not call any of its child's method on invalid indexPath section value", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                    propagatingTableDelegate.tableView(tableView, didHighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: 999)
+                    propagatingTableDelegate.tableView(tableView, didHighlightRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -382,8 +382,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method where corresponding child doesn't implement it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, didHighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, didHighlightRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -393,14 +393,14 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 it("should call it's corresponding child method with passed parameters if the child implements it", closure: {
                     
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, didHighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, didHighlightRowAt: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didHighlightRowAtIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didHighlightRowAt:))
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_:didHighlightRowAtIndexPath:) is not called correctly.")
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                        fail("tableView(_:didHighlightRowAt:) is not called correctly.")
                         return
                     }
                     
@@ -410,7 +410,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 		
-		describe("tableView(_:didUnhighlightRowAtIndexPath:)", {
+		describe("tableView(_:didUnhighlightRowAt:)", {
             
             var tableView: UITableView!
             
@@ -418,16 +418,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", {
+            context("on .row propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 it("should not call any of its child's method on invalid indexPath row value", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 999, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -436,8 +436,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method where corresponding child doesn't implement it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -447,14 +447,14 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 it("should call it's corresponding child method with passed parameters if the child implements it", closure: {
                     
                     
-                    let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAt: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAtIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:))
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_:didHighlightRowAtIndexPath:) is not called correctly.")
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                        fail("tableView(_:didHighlightRowAt:) is not called correctly.")
                         return
                     }
                     
@@ -463,16 +463,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", {
+            context("on .section propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 it("should not call any of its child's method on invalid indexPath section value", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: 999)
+                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -481,8 +481,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method where corresponding child doesn't implement it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -492,14 +492,14 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 it("should call it's corresponding child method with passed parameters if the child implements it", closure: {
                     
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, didUnhighlightRowAt: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAtIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:))
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                        fail("tableView(_:didUnhighlightRowAtIndexPath:) is not called correctly.")
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                        fail("tableView(_:didUnhighlightRowAt:) is not called correctly.")
                         return
                     }
                     
@@ -509,7 +509,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 		
-        describe("tableView(_:willSelectRowAtIndexPath:)", {
+        describe("tableView(_:willSelectRowAt:)", {
             
             var tableView: UITableView!
             
@@ -517,20 +517,20 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", closure: { 
+            context("on .row propagation mode", closure: { 
                 
                 beforeEach({ 
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 context("with invalid indexPath row value", closure: {
 					
-					var indexPath: NSIndexPath!
-                    var result: NSIndexPath?
+					var indexPath: IndexPath!
+                    var result: IndexPath?
 					
                     beforeEach({
-                        indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 999, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAt: indexPath)
                     })
                     
                     it("should return the passed indexPath", closure: {
@@ -547,12 +547,12 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 context("where corresponding child doesn't implements the method", closure: { 
 					
-					var indexPath: NSIndexPath!
-                    var result: NSIndexPath?
+					var indexPath: IndexPath!
+                    var result: IndexPath?
                     
                     beforeEach({ 
-                        indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAt: indexPath)
                         
                     })
                     
@@ -570,18 +570,18 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 context("where corresponding child implements the method", closure: { 
                     
-                    var expectedResult: NSIndexPath?
-                    var indexPath: NSIndexPath!
+                    var expectedResult: IndexPath?
+                    var indexPath: IndexPath!
                     
-                    var result: NSIndexPath?
+                    var result: IndexPath?
                     
                     beforeEach({ 
-                        indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+                        indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
                         
                         expectedResult = indexPath
                         childDelegates[completeChildDelegateIndex].returnedIndexPathOptional = expectedResult
                         
-                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
+                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAt: indexPath)
                     })
                     
                     it("should return child's method result", closure: { 
@@ -590,12 +590,12 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     it("should call child's method with passed parameter", closure: { 
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:willSelectRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:willSelectRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:willSelectRowAtIndexPath:) not called correctly.")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:willSelectRowAt:) not called correctly.")
                             return
                         }
                         
@@ -606,20 +606,20 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", closure: {
+            context("on .section propagation mode", closure: {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 context("with invalid indexPath section value", closure: {
 					
-					var indexPath: NSIndexPath!
-                    var result: NSIndexPath?
+					var indexPath: IndexPath!
+                    var result: IndexPath?
 					
                     beforeEach({
-                        indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 0, section: 999)
+                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAt: indexPath)
                     })
                     
                     it("should return the passed indexPath", closure: {
@@ -636,13 +636,13 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 context("where corresponding child doesn't implements the method", closure: {
 					
-					var indexPath: NSIndexPath!
-                    var result: NSIndexPath?
+					var indexPath: IndexPath!
+                    var result: IndexPath?
 					
                     beforeEach({
 						
-                        indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAt: indexPath)
                     })
                     
                     it("should return the passed indexPath", closure: {
@@ -659,18 +659,18 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 context("where corresponding child implements the method", closure: {
                     
-                    var expectedResult: NSIndexPath?
-                    var indexPath: NSIndexPath!
+                    var expectedResult: IndexPath?
+                    var indexPath: IndexPath!
                     
-                    var result: NSIndexPath?
+                    var result: IndexPath?
                     
                     beforeEach({
-                        indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+                        indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
                         
                         expectedResult = indexPath
                         childDelegates[completeChildDelegateIndex].returnedIndexPathOptional = expectedResult
                         
-                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAtIndexPath: indexPath)
+                        result = propagatingTableDelegate.tableView(tableView, willSelectRowAt: indexPath)
                     })
                     
                     it("should return child's method result", closure: {
@@ -679,12 +679,12 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     it("should call child's method with passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:willSelectRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:willSelectRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:willSelectRowAtIndexPath:) not called correctly.")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:willSelectRowAt:) not called correctly.")
                             return
                         }
                         
@@ -696,7 +696,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 
-		describe("tableView(_:willDeselectRowAtIndexPath:)", {
+		describe("tableView(_:willDeselectRowAt:)", {
         
             var tableView: UITableView!
             
@@ -704,20 +704,20 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", closure: {
+            context("on .row propagation mode", closure: {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 context("with invalid indexPath row value", closure: {
                     
-                    var result: NSIndexPath?
-					var indexPath: NSIndexPath!
+                    var result: IndexPath?
+					var indexPath: IndexPath!
 					
                     beforeEach({
-                        indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 999, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAt: indexPath)
                     })
                     
                     it("should return the passed indexPath", closure: {
@@ -734,12 +734,12 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 context("where corresponding child doesn't implements the method", closure: {
                     
-                    var result: NSIndexPath?
-					var indexPath: NSIndexPath!
+                    var result: IndexPath?
+					var indexPath: IndexPath!
 					
                     beforeEach({
-                        indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAt: indexPath)
                         
                     })
                     
@@ -757,18 +757,18 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 context("where corresponding child implements the method", closure: {
                     
-                    var expectedResult: NSIndexPath?
-                    var indexPath: NSIndexPath!
+                    var expectedResult: IndexPath?
+                    var indexPath: IndexPath!
                     
-                    var result: NSIndexPath?
+                    var result: IndexPath?
                     
                     beforeEach({
-                        indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+                        indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
                         
                         expectedResult = indexPath
                         childDelegates[completeChildDelegateIndex].returnedIndexPathOptional = expectedResult
                         
-                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
+                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAt: indexPath)
                     })
                     
                     it("should return child's method result", closure: {
@@ -777,12 +777,12 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     it("should call child's method with passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:willDeselectRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:willDeselectRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:willDeselectRowAtIndexPath:) not called correctly.")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:willDeselectRowAt:) not called correctly.")
                             return
                         }
                         
@@ -793,23 +793,23 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", closure: {
+            context("on .section propagation mode", closure: {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 context("with invalid indexPath section value", closure: {
                     
-                    var result: NSIndexPath?
-					var indexPath: NSIndexPath!
+                    var result: IndexPath?
+					var indexPath: IndexPath!
 					
                     beforeEach({
-                        indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 0, section: 999)
+                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAt: indexPath)
                     })
                     
-                    it("should return the passed NSIndexPath", closure: {
+                    it("should return the passed IndexPath", closure: {
                         expect(result).to(equal(indexPath))
                     })
                     
@@ -823,12 +823,12 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 context("where corresponding child doesn't implements the method", closure: {
                     
-                    var result: NSIndexPath?
-					var indexPath: NSIndexPath!
+                    var result: IndexPath?
+					var indexPath: IndexPath!
 					
                     beforeEach({
-                        indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAt: indexPath)
                         
                     })
                     
@@ -846,18 +846,18 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 context("where corresponding child implements the method", closure: {
                     
-                    var expectedResult: NSIndexPath?
-                    var indexPath: NSIndexPath!
+                    var expectedResult: IndexPath?
+                    var indexPath: IndexPath!
                     
-                    var result: NSIndexPath?
+                    var result: IndexPath?
                     
                     beforeEach({
-                        indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+                        indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
                         
                         expectedResult = indexPath
                         childDelegates[completeChildDelegateIndex].returnedIndexPathOptional = expectedResult
                         
-                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAtIndexPath: indexPath)
+                        result = propagatingTableDelegate.tableView(tableView, willDeselectRowAt: indexPath)
                     })
                     
                     it("should return child's method result", closure: {
@@ -866,12 +866,12 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                     
                     it("should call child's method with passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:willDeselectRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:willDeselectRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:willDeselectRowAtIndexPath:) not called correctly.")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:willDeselectRowAt:) not called correctly.")
                             return
                         }
                         
@@ -883,7 +883,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 		
-        describe("tableView(_:didSelectRowAtIndexPath:)", {
+        describe("tableView(_:didSelectRowAt:)", {
             
             var tableView: UITableView!
             
@@ -891,16 +891,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", closure: { 
+            context("on .row propagation mode", closure: { 
                 
                 beforeEach({ 
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 it("should not call any of its child's method for invalid indexPath row value", closure: { 
                     
-                    let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 999, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didSelectRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -909,8 +909,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method when corresponding child doesn't implement it", closure: { 
                     
-                    let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didSelectRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -919,16 +919,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should call child's method with passed parameter when corresponding child implements it", closure: { 
                     
-                    let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didSelectRowAt: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didSelectRowAtIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didSelectRowAt:))
                     
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 
-                        fail("tableView(_:didSelectRowAtIndexPath:) not called correctly")
+                        fail("tableView(_:didSelectRowAt:) not called correctly")
                         return
                     }
                     
@@ -937,16 +937,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", closure: {
+            context("on .section propagation mode", closure: {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 it("should not call any of its child's method for invalid indexPath section value", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                    propagatingTableDelegate.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: 999)
+                    propagatingTableDelegate.tableView(tableView, didSelectRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -955,8 +955,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method when corresponding child doesn't implement it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, didSelectRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -965,16 +965,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should call child's method with passed parameter when corresponding child implements it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, didSelectRowAt: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didSelectRowAtIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didSelectRowAt:))
                     
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
                         
-                        fail("tableView(_:didSelectRowAtIndexPath:) not called correctly")
+                        fail("tableView(_:didSelectRowAt:) not called correctly")
                         return
                     }
                     
@@ -984,7 +984,7 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
             })
         })
 
-		describe("tableView(_:didDeselectRowAtIndexPath:)", {
+		describe("tableView(_:didDeselectRowAt:)", {
         
             
             var tableView: UITableView!
@@ -993,16 +993,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", closure: {
+            context("on .row propagation mode", closure: {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 it("should not call any of its child's method for invalid indexPath row value", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didDeselectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 999, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didDeselectRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -1011,8 +1011,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method when corresponding child doesn't implement it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didDeselectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didDeselectRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -1021,16 +1021,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should call child's method with passed parameter when corresponding child implements it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-                    propagatingTableDelegate.tableView(tableView, didDeselectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+                    propagatingTableDelegate.tableView(tableView, didDeselectRowAt: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didDeselectRowAtIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didDeselectRowAt:))
                     
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
                         
-                        fail("tableView(_:didDeselectRowAtIndexPath:) not called correctly")
+                        fail("tableView(_:didDeselectRowAt:) not called correctly")
                         return
                     }
                     
@@ -1039,16 +1039,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", closure: {
+            context("on .section propagation mode", closure: {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 it("should not call any of its child's method for invalid indexPath section value", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                    propagatingTableDelegate.tableView(tableView, didDeselectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: 999)
+                    propagatingTableDelegate.tableView(tableView, didDeselectRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -1057,8 +1057,8 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should not call any of its child's method when corresponding child doesn't implement it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, didDeselectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, didDeselectRowAt: indexPath)
                     
                     for delegate in childDelegates {
                         expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -1067,16 +1067,16 @@ class PropagatingTableDelegateSelectionSpec: QuickSpec {
                 
                 it("should call child's method with passed parameter when corresponding child implements it", closure: {
                     
-                    let indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-                    propagatingTableDelegate.tableView(tableView, didDeselectRowAtIndexPath: indexPath)
+                    let indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+                    propagatingTableDelegate.tableView(tableView, didDeselectRowAt: indexPath)
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didDeselectRowAtIndexPath:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:didDeselectRowAt:))
                     
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
                         
-                        fail("tableView(_:didDeselectRowAtIndexPath:) not called correctly")
+                        fail("tableView(_:didDeselectRowAt:) not called correctly")
                         return
                     }
                     

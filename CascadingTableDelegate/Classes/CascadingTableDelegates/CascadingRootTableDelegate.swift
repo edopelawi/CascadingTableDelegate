@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-A `CascadingTableDelegate`-compliant class that will propagate any `UITableViewDelegate` or `UITableViewDataSource` method it received to its class, based on received `NSIndexPath`'s `section` value.
+A `CascadingTableDelegate`-compliant class that will propagate any `UITableViewDelegate` or `UITableViewDataSource` method it received to its class, based on received `IndexPath`'s `section` value.
 
 In a way, this instance's child `CascadingTableDelegate`s acts as section-based `UITableViewDelegate`s and `UITableViewDataSource`s.
 
@@ -18,32 +18,32 @@ In a way, this instance's child `CascadingTableDelegate`s acts as section-based 
 It is advised for the `childDelegates` to implement the `estimatedHeightFor...` methods, too. Should they not implement it, this class' instance will fall back to the normal `heightFor...` methods to prevent incorrect layouts.
 
 - warning: Currently, this class doesn't implement:
-	- `sectionIndexTitlesForTableView(_:)`
-	- `tableView(_:sectionForSectionIndexTitle:atIndex:)`
-	- `tableView(_:moveRowAtIndexPath:toIndexPath:)`
-	- `tableView(_:shouldUpdateFocusInContext:)`
-	- `tableView(_:didUpdateFocusInContext: withAnimationCoordinator:)`
-	- `indexPathForPreferredFocusedViewInTableView(_:)`
-	- `tableView(_:targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
+	- `sectionIndexTitles(for:)`
+	- `tableView(_:sectionForSectionIndexTitle:at:)`
+	- `tableView(_:moveRowAt:to:)`
+	- `tableView(_:shouldUpdateFocusIn:)`
+	- `tableView(_:didUpdateFocusInContext:with:)`
+	- `indexPathForPreferredFocusedView(in:)`
+	- `tableView(_:targetIndexPathForMoveFromRowAt: toProposedIndexPath:)`
 
 since it's unclear how to propagate those methods to its childs. Should you need to implement those, kindly subclass this class.
 */
-public class CascadingRootTableDelegate: PropagatingTableDelegate {
+open class CascadingRootTableDelegate: PropagatingTableDelegate {
     
     // MARK: - Public properties
     
-    /// This value will always be set as `.Section`, no matter what new value is assigned.
-    override public var propagationMode: PropagatingTableDelegate.PropagationMode {
+    /// This value will always be set as `.section`, no matter what new value is assigned.
+    override open var propagationMode: PropagatingTableDelegate.PropagationMode {
 
         didSet {
             
-            if propagationMode != .Section {
-                propagationMode = .Section
+            if propagationMode != .section {
+                propagationMode = .section
             }
         }
     }
     
-    override public var childDelegates: [CascadingTableDelegate] {
+    override open var childDelegates: [CascadingTableDelegate] {
         didSet {
             
             if reloadOnChildDelegatesChanged {
@@ -53,27 +53,27 @@ public class CascadingRootTableDelegate: PropagatingTableDelegate {
     }
     
     /// Marks whether this instance should reload its `currentTableView` if its `childDelegates` changed. Defaults to `false`.
-    public var reloadOnChildDelegatesChanged = false
+    open var reloadOnChildDelegatesChanged = false
 	
 	/// Current `UITableView` that weakly held by this instance.
-	public var currentTableView: UITableView? {
+	open var currentTableView: UITableView? {
 		return tableView
 	}
 	
     // MARK: - Private properties
     
-    private weak var tableView: UITableView?
+    fileprivate weak var tableView: UITableView?
     
     // MARK: - Initializers
     
     required public init(index: Int, childDelegates: [CascadingTableDelegate]) {
         
         super.init(index: index, childDelegates: childDelegates)
-        self.propagationMode = .Section
+        self.propagationMode = .section
     }
     
     /**
-        Overidden convenience initialzer from `PropagatingTableDelegate`. Any given `propagationMode` will changed to `.Section`.
+        Overidden convenience initialzer from `PropagatingTableDelegate`. Any given `propagationMode` will changed to `.section`.
      */
     convenience init(index: Int, childDelegates: [CascadingTableDelegate], propagationMode: PropagatingTableDelegate.PropagationMode) {
         
@@ -88,7 +88,7 @@ public class CascadingRootTableDelegate: PropagatingTableDelegate {
 	
 	- parameter tableView: `UITableView` instance.
 	*/
-    override public func prepare(tableView tableView: UITableView) {
+    override open func prepare(tableView: UITableView) {
         
         super.prepare(tableView: tableView)
         

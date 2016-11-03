@@ -30,7 +30,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 			propagatingTableDelegate = PropagatingTableDelegate(index: 0, childDelegates: childDelegates.map({ $0 as CascadingTableDelegate}))
 		}
 		
-		describe("tableView(_:heightForRowAtIndexPath:)", {
+		describe("tableView(_:heightForRowAt:)", {
 
 			var tableView: UITableView!
 			
@@ -38,10 +38,10 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", { 
+			context("on .row propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("on invalid indexPath row value", {
@@ -50,11 +50,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: 999, inSection: 0)
+						let indexPath = IndexPath(row: 999, section: 0)
 						
 						result = propagatingTableDelegate.tableView(
 							tableView,
-							heightForRowAtIndexPath: indexPath
+							heightForRowAt: indexPath
 						)
 					})
 					
@@ -74,11 +74,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					var result: CGFloat!
 					
 					beforeEach({ 
-						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+						let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
 						
 						result = propagatingTableDelegate.tableView(
 							tableView,
-							heightForRowAtIndexPath: indexPath
+							heightForRowAt: indexPath
 						)
 					})
 					
@@ -98,7 +98,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					var expectedResult: CGFloat!
 					
 					var result: CGFloat!
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						
@@ -106,11 +106,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						
 						childDelegates[completeChildDelegateIndex].returnedFloat = expectedResult
 						
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
 						result = propagatingTableDelegate.tableView(
 							tableView,
-							heightForRowAtIndexPath: indexPath
+							heightForRowAt: indexPath
 						)
 					})
 					
@@ -120,11 +120,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					
 					it("should call the child's corresponding method using the passed parameters", closure: { 
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAt:))
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-							fail("tableView(_:heightForRowAtIndexPath:) is not called correctly")
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+							fail("tableView(_:heightForRowAt:) is not called correctly")
 							return
 						}
 						
@@ -135,10 +135,10 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("on invalid indexPath section value", {
@@ -147,11 +147,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: 0, inSection: 999)
+						let indexPath = IndexPath(row: 0, section: 999)
 						
 						result = propagatingTableDelegate.tableView(
 							tableView,
-							heightForRowAtIndexPath: indexPath
+							heightForRowAt: indexPath
 						)
 					})
 					
@@ -171,11 +171,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					var result: CGFloat!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+						let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
 						
 						result = propagatingTableDelegate.tableView(
 							tableView,
-							heightForRowAtIndexPath: indexPath
+							heightForRowAt: indexPath
 						)
 					})
 					
@@ -195,7 +195,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					var expectedResult: CGFloat!
 					
 					var result: CGFloat!
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						
@@ -203,11 +203,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						
 						childDelegates[completeChildDelegateIndex].returnedFloat = expectedResult
 						
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
 						result = propagatingTableDelegate.tableView(
 							tableView,
-							heightForRowAtIndexPath: indexPath
+							heightForRowAt: indexPath
 						)
 					})
 					
@@ -217,11 +217,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					
 					it("should call the child's corresponding method using the passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAt:))
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-							fail("tableView(_:heightForRowAtIndexPath:) is not called correctly")
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+							fail("tableView(_:heightForRowAt:) is not called correctly")
 							return
 						}
 						
@@ -241,17 +241,17 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", { 
+			context("on .row propagation mode", { 
 				
 				var result: CGFloat!
 				
 				beforeEach({ 
 					
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					result = propagatingTableDelegate.tableView(tableView, heightForHeaderInSection: 0)
 				})
 				
-				it("should not call any of its child methods on .Row propagation mode", closure: {
+				it("should not call any of its child methods on .row propagation mode", closure: {
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
 					}
@@ -262,10 +262,10 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", { 
+			context("on .section propagation mode", { 
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid section value", {
@@ -355,17 +355,17 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				var result: CGFloat!
 				
 				beforeEach({
 					
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					result = propagatingTableDelegate.tableView(tableView, heightForFooterInSection: 0)
 				})
 				
-				it("should not call any of its child methods on .Row propagation mode", closure: {
+				it("should not call any of its child methods on .row propagation mode", closure: {
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
 					}
@@ -376,10 +376,10 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid section value", {
@@ -460,7 +460,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_:estimatedHeightForRowAtIndexPath:)", {
+		describe("tableView(_:estimatedHeightForRowAt:)", {
 			
 			var tableView: UITableView!
 			
@@ -468,10 +468,10 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", { 
+			context("on .row propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("where indexPath's row value is invalid", { 
@@ -480,9 +480,9 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					
 					beforeEach({ 
 						
-						let indexPath = NSIndexPath(forRow: 99, inSection: 0)
+						let indexPath = IndexPath(row: 99, section: 0)
 						
-						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAt: indexPath)
 					})
 					
 					it("should return UITableViewAutomaticDimension as result", closure: {
@@ -501,8 +501,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					var result: CGFloat!
 					
 					beforeEach({ 
-						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAt: indexPath)
 					})
 					
 					it("should return UITableViewAutomaticDimension as result", closure: {
@@ -516,29 +516,29 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					})
 				})
 				
-				context("where the corresponding child only implements tableView(_:heightForRowAtIndexPath:)", {
+				context("where the corresponding child only implements tableView(_:heightForRowAt:)", {
 					
 					var expectedResult: CGFloat!
 					var result: CGFloat!
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						expectedResult = CGFloat(55)
 						childDelegates[partialChildDelegateIndex].returnedFloat = expectedResult
 						
-						indexPath = NSIndexPath(forRow: partialChildDelegateIndex, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+						indexPath = IndexPath(row: partialChildDelegateIndex, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAt: indexPath)
 					})
 					
-					it("should call child's tableView(_:heightForRowAtIndexPath:) and using passed parameters", closure: {
+					it("should call child's tableView(_:heightForRowAt:) and using passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAt:))
 						
 						let latestMethods = childDelegates[partialChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 
-							fail("tableView(_:estimatedHeightForRowAtIndexPath:) doesn't fall back to tableView(_:heightForRowAtIndexPath:)")
+							fail("tableView(_:estimatedHeightForRowAt:) doesn't fall back to tableView(_:heightForRowAt:)")
 							return
 						}
 						
@@ -546,7 +546,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						expect(calledParameters.indexPath).to(equal(indexPath))
 					})
 					
-					it("should return result of child's tableView(_:heightForRowAtIndexPath:)", closure: { 
+					it("should return result of child's tableView(_:heightForRowAt:)", closure: { 
 						expect(result).to(equal(expectedResult))
 					})
 				})
@@ -556,7 +556,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					var expectedResult: CGFloat!
 					
 					var result: CGFloat!
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({ 
 					
@@ -564,9 +564,9 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						
 						childDelegates[completeChildDelegateIndex].returnedFloat = expectedResult
 						
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
-						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAt: indexPath)
 					})
 					
 					it("should return the corresponding child's method result", closure: { 
@@ -575,11 +575,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					
 					it("should call corresponding child's method using passed parameters", closure: { 
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 							fail("tableView(_:estimatedHeightForRowAtIndexPath) not called properly.")
 							return
 						}
@@ -590,10 +590,10 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("where indexPath's section value is invalid", {
@@ -602,9 +602,9 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: 0, inSection: 99)
+						let indexPath = IndexPath(row: 0, section: 99)
 						
-						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAt: indexPath)
 					})
 					
 					it("should return UITableViewAutomaticDimension as result", closure: {
@@ -623,8 +623,8 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					var result: CGFloat!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAt: indexPath)
 					})
 					
 					it("should return UITableViewAutomaticDimension as result", closure: {
@@ -638,29 +638,29 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					})
 				})
 				
-				context("where the corresponding child only implements tableView(_:heightForRowAtIndexPath:)", {
+				context("where the corresponding child only implements tableView(_:heightForRowAt:)", {
 					
 					var expectedResult: CGFloat!
 					var result: CGFloat!
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						expectedResult = CGFloat(55)
 						childDelegates[partialChildDelegateIndex].returnedFloat = expectedResult
 						
-						indexPath = NSIndexPath(forRow: 0, inSection: partialChildDelegateIndex)
-						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+						indexPath = IndexPath(row: 0, section: partialChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAt: indexPath)
 					})
 					
-					it("should call child's tableView(_:heightForRowAtIndexPath:) and using passed parameters", closure: {
+					it("should call child's tableView(_:heightForRowAt:) and using passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForRowAt:))
 						
 						let latestMethods = childDelegates[partialChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 							
-							fail("tableView(_:estimatedHeightForRowAtIndexPath:) doesn't fall back to tableView(_:heightForRowAtIndexPath:)")
+							fail("tableView(_:estimatedHeightForRowAt:) doesn't fall back to tableView(_:heightForRowAt:)")
 							return
 						}
 						
@@ -668,7 +668,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						expect(calledParameters.indexPath).to(equal(indexPath))
 					})
 					
-					it("should return result of child's tableView(_:heightForRowAtIndexPath:)", closure: {
+					it("should return result of child's tableView(_:heightForRowAt:)", closure: {
 						expect(result).to(equal(expectedResult))
 					})
 				})
@@ -678,7 +678,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					var expectedResult: CGFloat!
 					
 					var result: CGFloat!
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						
@@ -686,9 +686,9 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						
 						childDelegates[completeChildDelegateIndex].returnedFloat = expectedResult
 						
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
-						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForRowAt: indexPath)
 					})
 					
 					it("should return the corresponding child's method result", closure: {
@@ -697,11 +697,11 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 					
 					it("should call corresponding child's method using passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 							fail("tableView(_:estimatedHeightForRowAtIndexPath) not called properly.")
 							return
 						}
@@ -721,12 +721,12 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation method", { 
+			context("on .row propagation method", { 
 				
 				var result: CGFloat!
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					result = propagatingTableDelegate.tableView(tableView, estimatedHeightForHeaderInSection: 0)
 				})
 				
@@ -741,10 +741,10 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation method", {
+			context("on .section propagation method", {
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("where invalid section", {
@@ -798,7 +798,7 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 						result = propagatingTableDelegate.tableView(tableView, estimatedHeightForHeaderInSection: partialChildDelegateIndex)
 					})
 					
-					it("should call child's tableView(_:heightForRowAtIndexPath:) and using passed parameters", closure: {
+					it("should call child's tableView(_:heightForRowAt:) and using passed parameters", closure: {
 						
 						let expectedMethod = #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:))
 						
@@ -865,12 +865,12 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation method", {
+			context("on .row propagation method", {
 				
 				var result: CGFloat!
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					result = propagatingTableDelegate.tableView(tableView, estimatedHeightForFooterInSection: 0)
 				})
 				
@@ -885,10 +885,10 @@ class PropagatingTableDelegateVariableHeightSupportSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation method", {
+			context("on .section propagation method", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("where invalid section", {

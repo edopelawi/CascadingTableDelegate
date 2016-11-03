@@ -11,10 +11,10 @@ import CascadingTableDelegate
 
 class DestinationInfoListSectionDelegate: CascadingSectionTableDelegate {
 	
-	private var viewModel: DestinationInfoSectionViewModel?
+	fileprivate var viewModel: DestinationInfoSectionViewModel?
 	
-	private let headerView = EmptyContentView.view()
-	private let headerViewHeight = CGFloat(10)
+	fileprivate let headerView = EmptyContentView.view()
+	fileprivate let headerViewHeight = CGFloat(10)
 		
 	convenience init(viewModel: DestinationInfoSectionViewModel) {
 		
@@ -23,31 +23,31 @@ class DestinationInfoListSectionDelegate: CascadingSectionTableDelegate {
 		viewModel.add(observer: self)
 		self.viewModel = viewModel
 		
-		self.reloadModeOnChildDelegatesChanged = .Section(animation: .Automatic)
+		self.reloadModeOnChildDelegatesChanged = .section(animation: .automatic)
 	}
 	
 	deinit {
 		viewModel?.remove(observer: self)
 	}
 	
-	override func prepare(tableView tableView: UITableView) {
+	override func prepare(tableView: UITableView) {
 		super.prepare(tableView: tableView)
 		
 		let identifier = DestinationInfoListRowDelegate.cellIdentifier
 		let nib = UINib(nibName: identifier, bundle: nil)
-		tableView.registerNib(nib, forCellReuseIdentifier: identifier)
+		tableView.register(nib, forCellReuseIdentifier: identifier)
 	}
 	
-	override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return childDelegates.isEmpty ? nil : headerView
 	}
 	
-	override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return childDelegates.isEmpty ? CGFloat.min : headerViewHeight
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return childDelegates.isEmpty ? CGFloat.leastNormalMagnitude : headerViewHeight
 	}
 	
-	override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return CGFloat.min
+	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return CGFloat.leastNormalMagnitude
 	}
 }
 

@@ -28,21 +28,21 @@ class CascadingSectionTableDelegateSpec: QuickSpec {
 			sectionTableDelegate = CascadingSectionTableDelegate(
 				index: 0,
 				childDelegates: childDelegates.map({ $0 as CascadingTableDelegate }),
-				propagationMode: .Section
+				propagationMode: .section
 			)
 		}
 		
-		it("should have .Row as its default propagationMode, even if the initializer requests .Section") {
+		it("should have .row as its default propagationMode, even if the initializer requests .section") {
 			
-			let expectedMode = PropagatingTableDelegate.PropagationMode.Row
+			let expectedMode = PropagatingTableDelegate.PropagationMode.row
 			expect(sectionTableDelegate.propagationMode).to(equal(expectedMode))
 		}
 		
-		it("should have .Row as its propagationMode, even it's being set to another value.") {
+		it("should have .row as its propagationMode, even it's being set to another value.") {
 			
-			sectionTableDelegate.propagationMode = .Section
+			sectionTableDelegate.propagationMode = .section
 			
-			let expectedMode = PropagatingTableDelegate.PropagationMode.Row
+			let expectedMode = PropagatingTableDelegate.PropagationMode.row
 			expect(sectionTableDelegate.propagationMode).to(equal(expectedMode))
 		}
 		
@@ -103,7 +103,7 @@ class CascadingSectionTableDelegateSpec: QuickSpec {
 			
 			it("should not call its tableView's `reloadData()` or `reloadSections(_:withRowAnimation)` for `None`", closure: {
 				
-				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .None
+				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .none
 				sectionTableDelegate.childDelegates = []
 				
 				expect(testableTableView.reloadDataCalled).to(beFalse())
@@ -112,7 +112,7 @@ class CascadingSectionTableDelegateSpec: QuickSpec {
 			
 			it("should only call its tableView's `reloadData()` for `Whole` ", closure: {
 				
-				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .Whole
+				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .whole
 				sectionTableDelegate.childDelegates = []
 				
 				expect(testableTableView.reloadDataCalled).to(beTrue())
@@ -121,16 +121,16 @@ class CascadingSectionTableDelegateSpec: QuickSpec {
 			
 			it("should only call its tableView's `reloadSections(_:withRowAnimation)` using its index for `Section(animation:)` ", closure: {
 				
-				let expectedAnimation = UITableViewRowAnimation.Automatic
+				let expectedAnimation = UITableViewRowAnimation.automatic
 				let expectedIndex = NSIndexSet(index: sectionTableDelegate.index)
 				
-				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .Section(animation: expectedAnimation)
+				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .section(animation: expectedAnimation)
 				sectionTableDelegate.childDelegates = []
 				
 				expect(testableTableView.reloadDataCalled).to(beFalse())
 				
 				expect(testableTableView.reloadSectionsCalled).to(beTrue())
-				expect(testableTableView.passedReloadSectionsIndexSet).to(equal(expectedIndex))
+				expect(testableTableView.passedReloadSectionsIndexSet).to(equal(expectedIndex as IndexSet))
 				expect(testableTableView.passedReloadSectionsAnimation).to(equal(expectedAnimation))
 			})
 		}

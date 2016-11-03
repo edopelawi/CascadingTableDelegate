@@ -14,36 +14,36 @@ class DestinationViewModel {
 	// MARK: - Public properties
 	
 	var destinationTitle: String?
-	var headerDataChanged: (Void -> Void)?
-	var reviewRatingDataUpdated: (Void -> Void)?
-	var reviewUserDataChanged: (Void -> Void)?
+	var headerDataChanged: ((Void) -> Void)?
+	var reviewRatingDataUpdated: ((Void) -> Void)?
+	var reviewUserDataChanged: ((Void) -> Void)?
 	
 	var infoSectionObservers = [DestinationInfoSectionViewModelObserver]()
 	
 	// MARK: - Private properties
 	
-	private var _topPhoto: UIImage?
-	private var _description: String?
-	private var _destinationName: String?
-	private var _locationName: String?
+	fileprivate var _topPhoto: UIImage?
+	fileprivate var _description: String?
+	fileprivate var _destinationName: String?
+	fileprivate var _locationName: String?
 	
 	
-	private var _locationCoordinate: CLLocationCoordinate2D?
-	private var _locationInfo = [DestinationInfo]()
+	fileprivate var _locationCoordinate: CLLocationCoordinate2D?
+	fileprivate var _locationInfo = [DestinationInfo]()
 	
-	private var _averageRating = 0
-	private var _rowViewModels = [DestinationReviewUserRowViewModel]()
-	private var _remainingRowViewModels = 0
+	fileprivate var _averageRating = 0
+	fileprivate var _rowViewModels = [DestinationReviewUserRowViewModel]()
+	fileprivate var _remainingRowViewModels = 0
 	
 	// MARK: - Public methods
 	
 	/// Refreshes data that held by this instance, and invokes passed `completionHandler` when done.
-	func refreshData(completionHandler: (Void -> Void)?) {
+	func refreshData(_ completionHandler: ((Void) -> Void)?) {
 		
-		let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-		let dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+		let delayTime = DispatchTime.now() + 2.0
+		let dispatchQueue = DispatchQueue.global(qos: .userInitiated)
 		
-		dispatch_after(delayTime, dispatchQueue) {
+		dispatchQueue.asyncAfter(deadline: delayTime) {
 			
 			self.destinationTitle = "Outdoor Adventures"
 			
@@ -51,7 +51,7 @@ class DestinationViewModel {
 			self.updateInfoSectionProperties()
 			self.updateReviewSectionProperties()
 			
-			dispatch_async(dispatch_get_main_queue(), {
+			DispatchQueue.main.async(execute: {
 				self.executeUpdateClosures()
 				completionHandler?()
 			})
@@ -60,7 +60,7 @@ class DestinationViewModel {
 	
 	// MARK: - Private methods
 	
-	private func updateHeaderSectionProperties() {
+	fileprivate func updateHeaderSectionProperties() {
 		_topPhoto = UIImage(named: "vacation-place")
 		
 		_destinationName = "Under The Stars"
@@ -70,7 +70,7 @@ class DestinationViewModel {
 	}
 	
 	
-	private func updateInfoSectionProperties() {
+	fileprivate func updateInfoSectionProperties() {
 	
 		_locationCoordinate = CLLocationCoordinate2D(
 			latitude: 41.6122648,
@@ -88,7 +88,7 @@ class DestinationViewModel {
 		})
 	}
 	
-	private func updateReviewSectionProperties() {
+	fileprivate func updateReviewSectionProperties() {
 		_averageRating = 4
 		
 		let userReview = DestinationReviewUserRowViewModel(
@@ -97,11 +97,11 @@ class DestinationViewModel {
 			rating: 4
 		)
 		
-		_rowViewModels = [DestinationReviewUserRowViewModel](count: 3, repeatedValue: userReview)
+		_rowViewModels = [DestinationReviewUserRowViewModel](repeating: userReview, count: 3)
 		_remainingRowViewModels = 2
 	}
 	
-	private func executeUpdateClosures() {
+	fileprivate func executeUpdateClosures() {
 				
 		headerDataChanged?()
 		reviewRatingDataUpdated?()
@@ -162,17 +162,16 @@ extension DestinationViewModel: DestinationReviewUserSectionViewModel {
 		return _remainingRowViewModels
 	}
 	
-	func retrieveMoreRowViewModels(onCompleted: (Void -> Void)?) {
+	func retrieveMoreRowViewModels(_ onCompleted: ((Void) -> Void)?) {
 		
-		let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-		let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+		let delayTime = DispatchTime.now() + 2.0
+		let queue = DispatchQueue.global(qos: .userInitiated)
 		
-		
-		dispatch_after(delayTime, queue) {
+		queue.asyncAfter(deadline: delayTime) {
 			
 			self.generateMoreRowViewModels()
 			
-			dispatch_async(dispatch_get_main_queue(), {
+			DispatchQueue.main.async(execute: {
 				self.reviewUserDataChanged?()
 				onCompleted?()
 			})
@@ -180,7 +179,7 @@ extension DestinationViewModel: DestinationReviewUserSectionViewModel {
 		
 	}
 	
-	private func generateMoreRowViewModels() {
+	fileprivate func generateMoreRowViewModels() {
 		
 		let userReview = DestinationReviewUserRowViewModel(
 			userName: "Bob",
@@ -188,9 +187,9 @@ extension DestinationViewModel: DestinationReviewUserSectionViewModel {
 			rating: 4
 		)
 		
-		let newReviews = [DestinationReviewUserRowViewModel](count: 2, repeatedValue: userReview)
+		let newReviews = [DestinationReviewUserRowViewModel](repeating: userReview, count: 2)
 		
-		_rowViewModels.appendContentsOf(newReviews)
+		_rowViewModels.append(contentsOf: newReviews)
 		_remainingRowViewModels = 0
 	}
 }

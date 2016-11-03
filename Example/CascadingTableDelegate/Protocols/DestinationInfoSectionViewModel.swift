@@ -34,18 +34,19 @@ protocol DestinationInfoSectionViewModel: class {
 
 extension DestinationInfoSectionViewModel {
 	
-	func add(observer observer: DestinationInfoSectionViewModelObserver) {
+	func add(observer: DestinationInfoSectionViewModelObserver) {
 		self.infoSectionObservers.append(observer)
 	}
 	
-	func remove(observer observer: DestinationInfoSectionViewModelObserver) {
+	func remove(observer: DestinationInfoSectionViewModelObserver) {
 		
-		let observerIndex = self.infoSectionObservers.indexOf { (currentObserver) -> Bool in
-			return unsafeAddressOf(observer) == unsafeAddressOf(currentObserver)
+		let observerIndex = self.infoSectionObservers.index { (anotherObserver) -> Bool in
+			
+			return observer === anotherObserver
 		}
 		
 		if let index = observerIndex {
-			self.infoSectionObservers.removeAtIndex(index)
+			self.infoSectionObservers.remove(at: index)
 		}
 	}
 	
