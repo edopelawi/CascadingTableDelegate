@@ -1,6 +1,0 @@
-framework module CascadingTableDelegate {
-  umbrella header "CascadingTableDelegate-umbrella.h"
-
-  export *
-  module * { export * }
-}
