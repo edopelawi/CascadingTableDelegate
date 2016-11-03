@@ -3,7 +3,7 @@
 //  CascadingTableDelegate
 //
 //  Created by Ricardo Pramana Suranta on 10/31/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
+//  Copyright © 2016 Ricardo Pramana Suranta. All rights reserved.
 //
 
 import UIKit
@@ -18,6 +18,10 @@ class DestinationViewController: UIViewController {
 	private let viewModel = DestinationViewModel()
 	
 	private var rootDelegate: CascadingRootTableDelegate?
+	
+	convenience init() {
+		self.init(nibName: "DestinationViewController", bundle: nil)
+	}
 	
     override func viewDidLoad() {
         super.viewDidLoad()
