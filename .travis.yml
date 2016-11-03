@@ -8,11 +8,11 @@ cache: cocoapods
 podfile: Example/Podfile
 before_install:
 - gem install cocoapods # Since Travis is not always on latest version
-- pod install --project-directory=Example
+# - pod install --project-directory=Example # This is not mandatory, since the Pods already added to Git
 script:
-- set -o pipefail && xcodebuild \
-  -workspace Example/CascadingTableDelegate.xcworkspace \
-  -scheme CascadingTableDelegate-Example \
-  -destination 'platform=iOS Simulator,name=iPhone 5s' \
+- set -o pipefail && xcodebuild
+  -workspace Example/CascadingTableDelegate.xcworkspace
+  -scheme CascadingTableDelegate-Example
+  -destination 'platform=iOS Simulator,name=iPhone 5s'
   clean test | xcpretty
 - pod lib lint
