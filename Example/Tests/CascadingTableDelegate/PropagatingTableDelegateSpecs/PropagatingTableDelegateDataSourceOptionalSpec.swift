@@ -739,11 +739,11 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 		})
 		
 		
-//		pending("sectionIndexTitlesForTableView(_:)", {})
+//		pending("sectionIndexTitles(for:)", {})
 //		
-//		pending("tableView(_:sectionForSectionIndexTitle:atIndex:)", {})
+//		pending("tableView(_:sectionForSectionIndexTitle:at:)", {})
 //		
-//		pending("tableView(_:moveRowAt:toIndexPath:)", {})
+//		pending("tableView(_:moveRowAt:to:)", {})
 		
 	}
 	

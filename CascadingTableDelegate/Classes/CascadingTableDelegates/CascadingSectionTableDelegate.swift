@@ -18,12 +18,12 @@ In a way, this instance's child `CascadingTableDelegate`s acts as row-based `UIT
 It is advised for the `childDelegates` to implement the `estimatedHeightFor...` methods, too. Should they not implement it, this class' instance will fall back to the normal `heightFor...` methods to prevent incorrect layouts.
 
 - warning: Currently, this class doesn't implement:
-- `sectionIndexTitlesForTableView(_:)`
-- `tableView(_:sectionForSectionIndexTitle:atIndex:)`
-- `tableView(_:moveRowAt:toIndexPath:)`
-- `tableView(_:shouldUpdateFocusInContext:)`
-- `tableView(_:didUpdateFocusInContext: withAnimationCoordinator:)`
-- `indexPathForPreferredFocusedViewInTableView(_:)`
+- `sectionIndexTitles(for:)`
+- `tableView(_:sectionForSectionIndexTitle:at:)`
+- `tableView(_:moveRowAt:to:)`
+- `tableView(_:shouldUpdateFocusIn:)`
+- `tableView(_:didUpdateFocusInContext:with:)`
+- `indexPathForPreferredFocusedView(in:)`
 - `tableView(_:targetIndexPathForMoveFromRowAt: toProposedIndexPath:)`
 
 since it's unclear how to propagate those methods to its childs. Should you need to implement those, kindly subclass this class.
