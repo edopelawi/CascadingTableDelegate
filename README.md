@@ -13,7 +13,7 @@
 
 ## Why is this library made?
 
-In common iOS development, `UITableView` has became the bread and butter for building a rich, large pages. This page, for example:
+In common iOS development, `UITableView` has became the bread and butter for building a rich pages with repetitive elements. This page, for example:
 
 ![Sample Page](ReadmeImages/sample-page-screenshot.jpg)
 
@@ -166,7 +166,7 @@ This version supports Swift 3, which available in Xcode 8. For Swift 2.2 / Xcode
 To install CascadingTableDelegate using [CocoaPods](http://cocoapods.org), simply add the following line to your Podfile:
 
 ```ruby
-pod "CascadingTableDelegate", "~> 1.0"
+pod "CascadingTableDelegate", "~> 2.0"
 ```
 
 ### Carthage
@@ -174,7 +174,7 @@ pod "CascadingTableDelegate", "~> 1.0"
 To install CascadingTableDelegate using [Carthage](https://github.com/Carthage/Carthage), simply add the following line to your Cartfile:
 
 ```
-github "edopelawi/CascadingTableDelegate" ~> 1.0
+github "edopelawi/CascadingTableDelegate" ~> 2.0
 ```
 
 ## Author
