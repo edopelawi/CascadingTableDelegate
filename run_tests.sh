@@ -1,1 +1,5 @@
-xcodebuild test -workspace Example/CascadingTableDelegate.xcworkspace -scheme CascadingTableDelegate-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
+xcodebuild \
+  -workspace Example/CascadingTableDelegate.xcworkspace \
+  -scheme CascadingTableDelegate-Example \
+  -destination 'platform=iOS Simulator,name=iPhone 5s' \
+  clean test | xcpretty

@@ -28,21 +28,21 @@ class CascadingRootTableDelegateSpec: QuickSpec {
             rootTableDelegate = CascadingRootTableDelegate(
                 index: 0,
                 childDelegates: childDelegates.map({ $0 as CascadingTableDelegate }),
-                propagationMode: .Row
+                propagationMode: .row
             )
         }
         
-        it("should have .Section as its default propagationMode, even if the initializer requests .Row") {
+        it("should have .section as its default propagationMode, even if the initializer requests .row") {
             
-            let expectedMode = PropagatingTableDelegate.PropagationMode.Section
+            let expectedMode = PropagatingTableDelegate.PropagationMode.section
             expect(rootTableDelegate.propagationMode).to(equal(expectedMode))
         }
         
-        it("should have .Section as its propagationMode, even it's being set to another value.") { 
+        it("should have .section as its propagationMode, even it's being set to another value.") { 
             
-            rootTableDelegate.propagationMode = .Row
+            rootTableDelegate.propagationMode = .row
             
-            let expectedMode = PropagatingTableDelegate.PropagationMode.Section
+            let expectedMode = PropagatingTableDelegate.PropagationMode.section
             expect(rootTableDelegate.propagationMode).to(equal(expectedMode))
         }
         

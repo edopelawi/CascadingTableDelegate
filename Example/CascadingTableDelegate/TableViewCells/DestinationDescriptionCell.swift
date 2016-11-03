@@ -10,7 +10,7 @@ import UIKit
 
 class DestinationDescriptionCell: UITableViewCell {
 
-	@IBOutlet private weak var descriptionLabel: UILabel!
+	@IBOutlet fileprivate weak var descriptionLabel: UILabel!
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,7 +29,7 @@ class DestinationDescriptionCell: UITableViewCell {
 	
 	- returns: `CGFloat` value.
 	*/
-	static func preferredHeight(displayText displayText: String?) -> CGFloat {
+	static func preferredHeight(displayText: String?) -> CGFloat {
 		
 		let verticalPadding = CGFloat(22)
 		
@@ -38,10 +38,10 @@ class DestinationDescriptionCell: UITableViewCell {
 		}
 		
 		let horizontalPadding = CGFloat(30)
-		let screenWidth = UIScreen.mainScreen().bounds.width
+		let screenWidth = UIScreen.main.bounds.width
 		
 		let textWidth = screenWidth - horizontalPadding
-		let textFont = UIFont.systemFontOfSize(14)
+		let textFont = UIFont.systemFont(ofSize: 14)
 		
 		let textHeight = validText.displayHeight(width: textWidth, font: textFont)
 		
@@ -54,7 +54,7 @@ class DestinationDescriptionCell: UITableViewCell {
 	
 	- parameter description:	`String` optional.
 	*/
-	func configure(description description: String?) {
+	func configure(description: String?) {
 		descriptionLabel.text = description
 	}
 }

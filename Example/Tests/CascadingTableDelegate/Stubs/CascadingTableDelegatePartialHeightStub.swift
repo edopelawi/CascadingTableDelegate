@@ -17,13 +17,13 @@ class CascadingTableDelegatePartialHeightStub: NSObject {
 	var childDelegates: [CascadingTableDelegate]
 	weak var parentDelegate: CascadingTableDelegate?
 	
-	private var _prepareCalled = false
+	fileprivate var _prepareCalled = false
 	
-	private var _passedTableViewOnPrepare: UITableView?
+	fileprivate var _passedTableViewOnPrepare: UITableView?
 	
-	private let _returnedTableCell = UITableViewCell()
+	fileprivate let _returnedTableCell = UITableViewCell()
 	
-	private var _latestCalledDelegateMethod = [Selector: Any]()
+	fileprivate var _latestCalledDelegateMethod = [Selector: Any]()
 	
 	var returnedTableCell: UITableViewCell = UITableViewCell()
 	
@@ -35,15 +35,15 @@ class CascadingTableDelegatePartialHeightStub: NSObject {
 	
 	var returnedBool: Bool = false
 	
-	var returnedFloat: CGFloat = CGFloat.min
+	var returnedFloat: CGFloat = CGFloat.leastNormalMagnitude
 	
 	var returnedViewOptional: UIView? = nil
 	
-	var returnedIndexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+	var returnedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
 	
-	var returnedIndexPathOptional: NSIndexPath? = nil
+	var returnedIndexPathOptional: IndexPath? = nil
 	
-	var returnedCellEditingStyle: UITableViewCellEditingStyle = .None
+	var returnedCellEditingStyle: UITableViewCellEditingStyle = .none
 	
 	var returnedRowActions: [UITableViewRowAction]? = nil
 	
@@ -68,7 +68,7 @@ extension CascadingTableDelegatePartialHeightStub: CascadingTableDelegateStub {
 		return _latestCalledDelegateMethod
 	}
 	
-	func prepare(tableView tableView: UITableView) {
+	func prepare(tableView: UITableView) {
 		_prepareCalled = true
 		_passedTableViewOnPrepare = tableView
 	}
@@ -83,7 +83,7 @@ extension CascadingTableDelegatePartialHeightStub: CascadingTableDelegateStub {
 
 extension CascadingTableDelegatePartialHeightStub: UITableViewDataSource {
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		let selector = #selector(UITableViewDataSource.tableView(_:numberOfRowsInSection:))
 		
@@ -92,9 +92,9 @@ extension CascadingTableDelegatePartialHeightStub: UITableViewDataSource {
 		return returnedInt
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let selector = #selector(UITableViewDataSource.tableView(_:cellForRowAtIndexPath:))
+		let selector = #selector(UITableViewDataSource.self.tableView(_:cellForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
@@ -105,16 +105,16 @@ extension CascadingTableDelegatePartialHeightStub: UITableViewDataSource {
 extension CascadingTableDelegatePartialHeightStub: UITableViewDelegate {
 
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:heightForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedFloat
 	}
 	
-	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:))
 		
@@ -123,7 +123,7 @@ extension CascadingTableDelegatePartialHeightStub: UITableViewDelegate {
 		return returnedFloat
 	}
 	
-	func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:))
 		

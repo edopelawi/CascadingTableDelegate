@@ -44,7 +44,7 @@ class CascadingBareTableDelegateSpec: QuickSpec {
 				return
 			}
 			
-			bareTableDelegate.childDelegates.enumerate()
+			bareTableDelegate.childDelegates.enumerated()
 			.forEach({ index, delegate in
 				expect(delegate).to(beIdenticalTo(childDelegates[index]))
 			})
@@ -72,13 +72,13 @@ class CascadingBareTableDelegateSpec: QuickSpec {
 			expect(numberOfRows).to(equal(0))
 		}
 		
-		it("tableView(_:cellForRowAtIndexPath:) should return new UITableViewCell on every call") { 
+		it("tableView(_:cellForRowAt:) should return new UITableViewCell on every call") { 
 			
 			let tableView = UITableView()
-			let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+			let indexPath = IndexPath(row: 0, section: 0)
 			
-			let firstCell = bareTableDelegate.tableView(tableView, cellForRowAtIndexPath: indexPath)
-			let secondCell = bareTableDelegate.tableView(tableView, cellForRowAtIndexPath: indexPath)
+			let firstCell = bareTableDelegate.tableView(tableView, cellForRowAt: indexPath)
+			let secondCell = bareTableDelegate.tableView(tableView, cellForRowAt: indexPath)
 			
 			expect(firstCell).toNot(beIdenticalTo(secondCell))
 			

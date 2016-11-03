@@ -15,7 +15,7 @@ extension UIView {
 	
 	- parameter radius: `CGFloat` optional.
 	*/
-	func setRoundedCorner(radius radius: CGFloat? = nil) {
+	func setRoundedCorner(radius: CGFloat? = nil) {
 		
 		if let radius = radius {
 			self.layer.cornerRadius = radius

@@ -14,7 +14,7 @@ protocol DestinationReviewRatingSectionViewModel: class {
 	var averageRating: Int { get }
 	
 	/// Executed when this instance's review rating data is updated.
-	var reviewRatingDataUpdated: (Void -> Void)? { get set }
+	var reviewRatingDataUpdated: ((Void) -> Void)? { get set }
 }
 
 class DestinationReviewRatingSectionDelegate: NSObject {
@@ -29,8 +29,8 @@ class DestinationReviewRatingSectionDelegate: NSObject {
 		}
 	}
 	
-	private var headerview: SectionHeaderView
-	private weak var currentTableView: UITableView?
+	fileprivate var headerview: SectionHeaderView
+	fileprivate weak var currentTableView: UITableView?
 	
 	convenience init(viewModel: DestinationReviewRatingSectionViewModel? = nil) {
 		self.init(index: 0, childDelegates: [])
@@ -46,7 +46,7 @@ class DestinationReviewRatingSectionDelegate: NSObject {
 		headerview = SectionHeaderView.view(headerText: "REVIEW")
 	}
 	
-	private func configureViewModelObserver() {
+	fileprivate func configureViewModelObserver() {
 		
 		viewModel?.reviewRatingDataUpdated = { [weak self] in
 			
@@ -55,63 +55,63 @@ class DestinationReviewRatingSectionDelegate: NSObject {
 				return
 			}
 			
-			let indexes = NSIndexSet(index: index)
-			tableView.reloadSections(indexes, withRowAnimation: .Automatic)			
+			let indexes = IndexSet(integer: index)
+			tableView.reloadSections(indexes, with: .automatic)			
 		}
 	}
 }
 
 extension DestinationReviewRatingSectionDelegate: CascadingTableDelegate {
 	
-	func prepare(tableView tableView: UITableView) {
+	func prepare(tableView: UITableView) {
 		
 		currentTableView = tableView
 		registerNib(tableView: tableView)
 	}
 	
-	private func registerNib(tableView tableView: UITableView) {
+	fileprivate func registerNib(tableView: UITableView) {
 		
 		let identifier = DestinationReviewRatingCell.nibIdentifier()
 		let nib = UINib(nibName: identifier, bundle: nil)
 		
-		tableView.registerNib(nib, forCellReuseIdentifier: identifier)
+		tableView.register(nib, forCellReuseIdentifier: identifier)
 	}
 }
 
 extension DestinationReviewRatingSectionDelegate: UITableViewDataSource {
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let identifier = DestinationReviewRatingCell.nibIdentifier()
-		return tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+		return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 	}
 	
 }
 
 extension DestinationReviewRatingSectionDelegate: UITableViewDelegate {
 	
-	func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return headerview
 	}
 	
-	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return SectionHeaderView.preferredHeight()
 	}
 	
-	func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return CGFloat.min
+	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return CGFloat.leastNormalMagnitude
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		
 		return DestinationReviewRatingCell.preferredHeight()
 	}
 	
-	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		
 		guard let cell = cell as? DestinationReviewRatingCell else {
 			return

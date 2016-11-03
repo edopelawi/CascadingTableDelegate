@@ -14,7 +14,7 @@ extension UITableViewCell {
 	/// Returns `String` value of this class' Nib name and cell identifier. Will return empty `String` if failed.
 	static func nibIdentifier() -> String {
 		
-		let className = NSStringFromClass(self).componentsSeparatedByString(".").last
+		let className = NSStringFromClass(self).components(separatedBy: ".").last
 		return className ?? ""
 	}
 }

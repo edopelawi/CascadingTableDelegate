@@ -14,24 +14,24 @@ class DestinationInfoListRowDelegate: CascadingBareTableDelegate {
 	/// Cell identifier that will be used by this class. Kindly register this to the section delegate.
 	static let cellIdentifier = DestinationInfoCell.nibIdentifier()
 
-	private var info: DestinationInfo?
+	fileprivate var info: DestinationInfo?
 	
 	convenience init(info: DestinationInfo) {
 		self.init(index: 0, childDelegates: [])
 		self.info = info
 	}
 	
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let identifier = DestinationInfoListRowDelegate.cellIdentifier
-		return tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+		return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 		return DestinationInfoCell.preferredHeight(infoType: info?.type, infoText: info?.text)
 	}		
 	
-	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
 		
 		guard let cell = cell as? DestinationInfoCell else {
 			return

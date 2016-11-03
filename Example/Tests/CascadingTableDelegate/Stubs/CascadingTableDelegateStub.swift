@@ -37,11 +37,11 @@ protocol CascadingTableDelegateStub: CascadingTableDelegate {
 	/// Holds returned `UIView` optional that returned in any method that returns it.
 	var returnedViewOptional: UIView? { get set }
 	
-	/// Holds returned `NSIndexPath` value that returned in any methods that returns that type.
-	var returnedIndexPath: NSIndexPath { get set }
+	/// Holds returned `IndexPath` value that returned in any methods that returns that type.
+	var returnedIndexPath: IndexPath { get set }
 	
-	/// Holds returned `NSIndexPath` optional that returned in any method that returns that type.
-	var returnedIndexPathOptional: NSIndexPath? { get set }
+	/// Holds returned `IndexPath` optional that returned in any method that returns that type.
+	var returnedIndexPathOptional: IndexPath? { get set }
 	
 	/// Holds returned `UITableViewCellEditingStyle` value that returned in any method that returns that type.
 	var returnedCellEditingStyle: UITableViewCellEditingStyle { get set }

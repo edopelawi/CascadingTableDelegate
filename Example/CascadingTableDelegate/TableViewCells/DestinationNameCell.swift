@@ -10,8 +10,8 @@ import UIKit
 
 class DestinationNameCell: UITableViewCell {
 
-	@IBOutlet private weak var nameLabel: UILabel!
-	@IBOutlet private weak var locationLabel: UILabel!
+	@IBOutlet fileprivate weak var nameLabel: UILabel!
+	@IBOutlet fileprivate weak var locationLabel: UILabel!
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,14 +41,14 @@ class DestinationNameCell: UITableViewCell {
 	- parameter destinationName:	`String` optional.
 	- parameter locationText:	`String` optional.
 	*/
-	func configure(destinationName destinationName: String?, locationText: String?) {
+	func configure(destinationName: String?, locationText: String?) {
 		nameLabel.text = destinationName
 		locationLabel.text = locationText
 	}
 	
 	// MARK: - Private methods
 	
-	private func resetLabels() {
+	fileprivate func resetLabels() {
 		nameLabel.text = nil
 		locationLabel.text = nil
 	}

@@ -19,19 +19,19 @@ class WelcomeViewController: UIViewController {
 		title = ""
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		navigationController?.navigationBarHidden = true
+		navigationController?.isNavigationBarHidden = true
 	}
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return .LightContent
+	override var preferredStatusBarStyle : UIStatusBarStyle {
+		return .lightContent
 	}
 	
 	// MARK: - Private methods
 	
-	@IBAction private func nextButtonTapped(sender: AnyObject) {
+	@IBAction fileprivate func nextButtonTapped(_ sender: AnyObject) {
 		
 		let destinationViewController = DestinationViewController()
 		navigationController?.pushViewController(destinationViewController, animated: true)

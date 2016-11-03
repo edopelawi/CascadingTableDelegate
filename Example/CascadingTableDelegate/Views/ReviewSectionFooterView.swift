@@ -10,8 +10,8 @@ import UIKit
 
 class ReviewSectionFooterView: UIView {
 
-	@IBOutlet private weak var showMoreButton: UIButton?
-	@IBOutlet private weak var activityIndicator: UIActivityIndicatorView?
+	@IBOutlet fileprivate weak var showMoreButton: UIButton?
+	@IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView?
 	
 	/// This instance's button text.
 	var buttonText: String? {
@@ -19,26 +19,31 @@ class ReviewSectionFooterView: UIView {
 			return showMoreButton?.titleLabel?.text
 		}
 		set {
-			showMoreButton?.setTitle(newValue, forState: .Normal)
+			showMoreButton?.setTitle(newValue, for: UIControlState())
 		}
 	}
 	
 	/// Executed when this instance's button tapped.
-	var onButtonTapped: (Void -> Void)?
+	var onButtonTapped: ((Void) -> Void)?
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		showMoreButton?.setRoundedCorner()
-		activityIndicator?.hidden = true
+		activityIndicator?.isHidden = true
 	}
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		showMoreButton?.setRoundedCorner()
+	}
+	
 	
 	/// Factory method of this class.
 	static func view() -> ReviewSectionFooterView {
 		
-		let mainBundle = NSBundle.mainBundle()
+		let mainBundle = Bundle.main
 		let nibs = mainBundle.loadNibNamed("ReviewSectionFooterView", owner: nil, options: nil)
 		
-		return nibs.first as? ReviewSectionFooterView ?? ReviewSectionFooterView()
+		return nibs!.first as? ReviewSectionFooterView ?? ReviewSectionFooterView()
 	}
 	
 	/// Prefered height to display this instance.
@@ -49,11 +54,11 @@ class ReviewSectionFooterView: UIView {
 	/// Shows this instance's activity indicator and hides its button text.
 	func startActivityIndicator() {
 
-		if let indicator = activityIndicator where !indicator.hidden {
+		if let indicator = activityIndicator , !indicator.isHidden {
 			return
 		}
 		
-		activityIndicator?.hidden = false
+		activityIndicator?.isHidden = false
 		activityIndicator?.startAnimating()
 		
 		showMoreButton?.titleLabel?.alpha = 0.0
@@ -62,17 +67,17 @@ class ReviewSectionFooterView: UIView {
 	/// Hides this instance's activity indicator and returns its button text.
 	func stopActivityIndicator() {
 		
-		if let indicator = activityIndicator where indicator.hidden {
+		if let indicator = activityIndicator , indicator.isHidden {
 			return
 		}
 		
-		activityIndicator?.hidden = true
+		activityIndicator?.isHidden = true
 		activityIndicator?.stopAnimating()
 		
 		showMoreButton?.titleLabel?.alpha = 1.0
 	}
 		
-	@IBAction private func showMoreButtonTapped(sender: AnyObject) {
+	@IBAction fileprivate func showMoreButtonTapped(_ sender: AnyObject) {
 		onButtonTapped?()
 	}
 }

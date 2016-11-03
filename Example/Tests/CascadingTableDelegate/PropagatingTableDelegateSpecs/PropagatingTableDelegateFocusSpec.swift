@@ -33,7 +33,7 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
             )
         }
         
-		describe("tableView(_:canFocusRowAtIndexPath:)", {
+		describe("tableView(_:canFocusRowAt:)", {
             
             var tableView: UITableView!
             
@@ -41,10 +41,10 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", {
+            context("on .row propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 context("with invalid indexPath row value", {
@@ -52,8 +52,8 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 999, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAt: indexPath)
                     })
                     
                     it("shoul return false ", closure: {
@@ -72,8 +72,8 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAt: indexPath)
                     })
                     
                     it("should return false", closure: {
@@ -92,15 +92,15 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                     var expectedResult: Bool!
                     var result: Bool!
                     
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     beforeEach({
                         
                         expectedResult = true
                         childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
                         
-                        indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAt: indexPath)
                     })
                     
                     
@@ -110,12 +110,12 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                     
                     it("should call the child's method using passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:canFocusRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:canFocusRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:canFocusRowAtIndexPath:) not called properly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:canFocusRowAt:) not called properly")
                             return
                         }
                         
@@ -126,10 +126,10 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", {
+            context("on .section propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 context("with invalid indexPath section value", {
@@ -137,8 +137,8 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 0, section: 999)
+                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAt: indexPath)
                     })
                     
                     it("shoul return false ", closure: {
@@ -157,8 +157,8 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAt: indexPath)
                     })
                     
                     it("should return false", closure: {
@@ -177,15 +177,15 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                     var expectedResult: Bool!
                     var result: Bool!
                     
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     beforeEach({
                         
                         expectedResult = true
                         childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
                         
-                        indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, canFocusRowAt: indexPath)
                     })
                     
                     
@@ -195,12 +195,12 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
                     
                     it("should call the child's method using passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:canFocusRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:canFocusRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:canFocusRowAtIndexPath:) not called properly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:canFocusRowAt:) not called properly")
                             return
                         }
                         
@@ -212,11 +212,11 @@ class PropagatingTableDelegateFocusSpec: QuickSpec {
             })
         })
         
-//		pending("tableView(_:shouldUpdateFocusInContext:)", {})
+//		pending("tableView(_:shouldUpdateFocusIn:)", {})
 //
-//		pending("tableView(_:didUpdateFocusInContext: withAnimationCoordinator:)", {})
+//		pending("tableView(_:didUpdateFocusInContext:with:)", {})
 //        
-//		pending("indexPathForPreferredFocusedViewInTableView(_:)", {})
+//		pending("indexPathForPreferredFocusedView(in:)", {})
 	}
 	
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class SectionHeaderView: UIView {
 
-	@IBOutlet private weak var headerLabel: UILabel!
+	@IBOutlet fileprivate weak var headerLabel: UILabel!
 	
 	/**
 	Preferred height for displaying this class' instance.
@@ -21,12 +21,12 @@ class SectionHeaderView: UIView {
 		return CGFloat(41)
 	}
 	
-	static func view(headerText headerText: String) -> SectionHeaderView {
+	static func view(headerText: String) -> SectionHeaderView {
 		
-		let mainBundle = NSBundle.mainBundle()
+		let mainBundle = Bundle.main
 		let nibs = mainBundle.loadNibNamed("SectionHeaderView", owner: nil, options: nil)
 		
-		if let headerView = nibs.first as? SectionHeaderView {
+		if let headerView = nibs?.first as? SectionHeaderView {
 			
 			headerView.configure(headerText: headerText)
 			return headerView
@@ -43,7 +43,7 @@ class SectionHeaderView: UIView {
 		headerLabel?.text = nil
 	}
 	
-	func configure(headerText headerText: String) {
+	func configure(headerText: String) {
 		headerLabel?.text = headerText
 	}
 }

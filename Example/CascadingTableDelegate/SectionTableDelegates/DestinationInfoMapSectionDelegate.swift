@@ -11,11 +11,11 @@ import CascadingTableDelegate
 
 class DestinationInfoMapSectionDelegate: CascadingBareTableDelegate {
 	
-	private weak var currentTableView: UITableView?
+	fileprivate weak var currentTableView: UITableView?
 	
-	private var viewModel: DestinationInfoSectionViewModel?
+	fileprivate var viewModel: DestinationInfoSectionViewModel?
 	
-	private var headerView = SectionHeaderView.view(headerText: "INFORMATION")
+	fileprivate var headerView = SectionHeaderView.view(headerText: "INFORMATION")
 	
 	convenience init(viewModel: DestinationInfoSectionViewModel? = nil) {
 		self.init(index: 0, childDelegates: [])
@@ -28,59 +28,59 @@ class DestinationInfoMapSectionDelegate: CascadingBareTableDelegate {
 		viewModel?.remove(observer: self)
 	}
 	
-	override func prepare(tableView tableView: UITableView) {
+	override func prepare(tableView: UITableView) {
 		super.prepare(tableView: tableView)
 		currentTableView = tableView
 		registerNibs(tableView: tableView)
 	}
 	
-	private func registerNibs(tableView tableView: UITableView) {
+	fileprivate func registerNibs(tableView: UITableView) {
 		
 		let identifier = DestinationMapCell.nibIdentifier()
 		let nib = UINib(nibName: identifier, bundle: nil)
-		tableView.registerNib(nib, forCellReuseIdentifier: identifier)
+		tableView.register(nib, forCellReuseIdentifier: identifier)
 	}
 }
 
 extension DestinationInfoMapSectionDelegate: DestinationInfoSectionViewModelObserver {
 	
 	func infoSectionDataChanged() {
-		let indexPath = NSIndexPath(forRow: 0, inSection: index)
-		currentTableView?.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .Automatic)
+		let indexPath = IndexPath(row: 0, section: index)
+		currentTableView?.reloadRows(at: [ indexPath ], with: .automatic)
 	}
 }
 
 extension DestinationInfoMapSectionDelegate {
 
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
 	}
 	
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let identifier = DestinationMapCell.nibIdentifier()
-		return tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+		return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 	}
 	
-	func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return headerView
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 		
 		return DestinationMapCell.preferredHeight()
 	}
 	
 	
-	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return SectionHeaderView.preferredHeight()
 	}
 	
-	func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return CGFloat.min
+	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return CGFloat.leastNormalMagnitude
 	}
 	
-	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
 		
 		if let mapCell = cell as? DestinationMapCell,
 			let locationCoordinate = viewModel?.locationCoordinate {

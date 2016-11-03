@@ -33,7 +33,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 			)
 		}
 				
-		describe("tableView(_:editingStyleForRowAtIndexPath:)", {
+		describe("tableView(_:editingStyleForRowAt:)", {
 			
 			var tableView: UITableView!
 			
@@ -41,10 +41,10 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("with invalid indexPath's row value", {
@@ -52,12 +52,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: UITableViewCellEditingStyle!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 999, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAt: indexPath)
 					})
 					
-					it("should return .None as result", closure: { 
-						expect(result).to(equal(UITableViewCellEditingStyle.None))
+					it("should return .none as result", closure: { 
+						expect(result).to(equal(UITableViewCellEditingStyle.none))
 					})
 					
 					it("should not call any of its child's methods", closure: { 
@@ -74,12 +74,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: UITableViewCellEditingStyle!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAt: indexPath)
 					})
 					
-					it("should return .None as result", closure: {
-						expect(result).to(equal(UITableViewCellEditingStyle.None))
+					it("should return .none as result", closure: {
+						expect(result).to(equal(UITableViewCellEditingStyle.none))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -96,17 +96,17 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var expectedResult: UITableViewCellEditingStyle!
 					var result: UITableViewCellEditingStyle!
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						
-						expectedResult = UITableViewCellEditingStyle.Insert
+						expectedResult = UITableViewCellEditingStyle.insert
 						
 						childDelegates[completeChildDelegateIndex].returnedCellEditingStyle = expectedResult
 						
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
-						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAt: indexPath)
 						
 					})
 					
@@ -116,11 +116,11 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					it("should call the child's method using passed parameters", closure: { 
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:editingStyleForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:editingStyleForRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 							fail("tableView(_:indexPath:) is not called correctly")
 							return
 						}
@@ -131,10 +131,10 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid indexPath's section value", {
@@ -142,12 +142,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: UITableViewCellEditingStyle!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 0, section: 999)
+						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAt: indexPath)
 					})
 					
-					it("should return .None as result", closure: {
-						expect(result).to(equal(UITableViewCellEditingStyle.None))
+					it("should return .none as result", closure: {
+						expect(result).to(equal(UITableViewCellEditingStyle.none))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -164,12 +164,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: UITableViewCellEditingStyle!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAt: indexPath)
 					})
 					
-					it("should return .None as result", closure: {
-						expect(result).to(equal(UITableViewCellEditingStyle.None))
+					it("should return .none as result", closure: {
+						expect(result).to(equal(UITableViewCellEditingStyle.none))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -186,17 +186,17 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var expectedResult: UITableViewCellEditingStyle!
 					var result: UITableViewCellEditingStyle!
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						
-						expectedResult = UITableViewCellEditingStyle.Insert
+						expectedResult = UITableViewCellEditingStyle.insert
 						
 						childDelegates[completeChildDelegateIndex].returnedCellEditingStyle = expectedResult
 						
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
-						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, editingStyleForRowAt: indexPath)
 						
 					})
 					
@@ -206,11 +206,11 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					it("should call the child's method using passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:editingStyleForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:editingStyleForRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 							fail("tableView(_:indexPath:) is not called correctly")
 							return
 						}
@@ -223,7 +223,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 			
 		})
 		
-		describe("tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:)", {
+		describe("tableView(_:titleForDeleteConfirmationButtonForRowAt:)", {
 			
 			var tableView: UITableView!
 			
@@ -231,10 +231,10 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", { 
+			context("on .row propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("with invalid indexPath row value", {
@@ -242,8 +242,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: String?
 					
 					beforeEach({ 
-						let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 999, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
 					})
 					
 					it("should return nil as result", closure: { 
@@ -262,12 +262,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: String?
 					
 					beforeEach({ 
-						let indexPath = NSIndexPath(
-							forRow: bareChildDelegateIndex,
-							inSection: 0
+						let indexPath = IndexPath(
+							row: bareChildDelegateIndex,
+							section: 0
 						)
 						
-						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
 					})
 					
 					it("should return nil as result", closure: {
@@ -285,15 +285,15 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					var expectedResult: String?
 					var result: String?
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({ 
 						expectedResult = "Remove this"
 						childDelegates[completeChildDelegateIndex].returnedStringOptional = expectedResult
 						
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
-						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
 					})
 					
 					it("should return the child's method result", closure: { 
@@ -302,12 +302,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					it("should call the child's method with passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-							fail("tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:) not called correctly")
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+							fail("tableView(_:titleForDeleteConfirmationButtonForRowAt:) not called correctly")
 							return
 						}
 						
@@ -318,10 +318,10 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid indexPath section value", {
@@ -329,8 +329,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: String?
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 0, section: 999)
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
 					})
 					
 					it("should return nil as result", closure: {
@@ -349,12 +349,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: String?
 					
 					beforeEach({
-						let indexPath = NSIndexPath(
-							forRow: 0,
-							inSection: bareChildDelegateIndex
+						let indexPath = IndexPath(
+							row: 0,
+							section: bareChildDelegateIndex
 						)
 						
-						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
 					})
 					
 					it("should return nil as result", closure: {
@@ -372,15 +372,15 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					var expectedResult: String?
 					var result: String?
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						expectedResult = "Remove this"
 						childDelegates[completeChildDelegateIndex].returnedStringOptional = expectedResult
 						
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
-						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
 					})
 					
 					it("should return the child's method result", closure: {
@@ -389,12 +389,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					it("should call the child's method with passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-							fail("tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:) not called correctly")
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+							fail("tableView(_:titleForDeleteConfirmationButtonForRowAt:) not called correctly")
 							return
 						}
 						
@@ -406,7 +406,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_:editActionsForRowAtIndexPath:)", {
+		describe("tableView(_:editActionsForRowAt:)", {
 			
 			var tableView: UITableView!
 			
@@ -414,10 +414,10 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("with invalid indexPath row value", {
@@ -426,9 +426,9 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: 99, inSection: 0)
+						let indexPath = IndexPath(row: 99, section: 0)
 						
-						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAt: indexPath)
 					})
 					
 					it("should return nil as result", closure: {
@@ -448,8 +448,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAt: indexPath)
 					})
 					
 					it("should return nil as result", closure: {
@@ -467,15 +467,15 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					var expectedResult: [UITableViewRowAction]?
 					var result: [UITableViewRowAction]?
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						expectedResult = [ UITableViewRowAction() ]
 						childDelegates[completeChildDelegateIndex].returnedRowActions = expectedResult
 						
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
-						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAt: indexPath)
 					})
 					
 					it("should return the result of corresponding child's method", closure: {
@@ -484,12 +484,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					it("should call the child's method using passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:editActionsForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:editActionsForRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-							fail("tableView(_:editActionsForRowAtIndexPath:) not called correctly.")
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+							fail("tableView(_:editActionsForRowAt:) not called correctly.")
 							return
 						}
 						
@@ -500,10 +500,10 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid indexPath section value", {
@@ -512,9 +512,9 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: 0, inSection: 99)
+						let indexPath = IndexPath(row: 0, section: 99)
 						
-						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAt: indexPath)
 					})
 					
 					it("should return nil as result", closure: {
@@ -534,8 +534,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAt: indexPath)
 					})
 					
 					it("should return nil as result", closure: {
@@ -553,15 +553,15 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					var expectedResult: [UITableViewRowAction]?
 					var result: [UITableViewRowAction]?
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						expectedResult = [ UITableViewRowAction() ]
 						childDelegates[completeChildDelegateIndex].returnedRowActions = expectedResult
 						
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
-						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, editActionsForRowAt: indexPath)
 					})
 					
 					it("should return the result of corresponding child's method", closure: {
@@ -570,12 +570,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					it("should call the child's method using passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:editActionsForRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:editActionsForRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-							fail("tableView(_:editActionsForRowAtIndexPath:) not called correctly.")
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+							fail("tableView(_:editActionsForRowAt:) not called correctly.")
 							return
 						}
 						
@@ -587,17 +587,17 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_:shouldIndentWhileEditingRowAtIndexPath:)", {
+		describe("tableView(_:shouldIndentWhileEditingRowAt:)", {
 			var tableView: UITableView!
 			
 			beforeEach({ 
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", { 
+			context("on .row propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("when indexPath row has invalid value", { 
@@ -605,8 +605,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: Bool!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 99, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 99, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAt: indexPath)
 					})
 					
 					it("should return false as result", closure: { 
@@ -626,8 +626,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: Bool!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAt: indexPath)
 					})
 					
 					it("should return false as result", closure: {
@@ -647,16 +647,16 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var expectedResult: Bool!
 					var result: Bool!
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						
 						expectedResult = true
 						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
 						
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
-						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAt: indexPath)
 					})
 					
 					it("should return child's method result", closure: {
@@ -665,12 +665,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					it("should call its' child method with the passed parameters", closure: { 
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-							fail("tableView(_:shouldIndentWhileEditingRowAtIndexPath:) not called correctly")
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+							fail("tableView(_:shouldIndentWhileEditingRowAt:) not called correctly")
 							return
 						}
 						
@@ -680,10 +680,10 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("when indexPath section has invalid value", {
@@ -691,8 +691,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: Bool!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: 99)
-						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 0, section: 99)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAt: indexPath)
 					})
 					
 					it("should return false as result", closure: {
@@ -712,8 +712,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var result: Bool!
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+						let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAt: indexPath)
 					})
 					
 					it("should return false as result", closure: {
@@ -733,16 +733,16 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					var expectedResult: Bool!
 					var result: Bool!
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						
 						expectedResult = true
 						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
 						
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
-						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, shouldIndentWhileEditingRowAt: indexPath)
 					})
 					
 					it("should return child's method result", closure: {
@@ -751,12 +751,12 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					
 					it("should call its' child method with the passed parameters", closure: {
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:))
 						
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
-						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-							fail("tableView(_:shouldIndentWhileEditingRowAtIndexPath:) not called correctly")
+						guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+							fail("tableView(_:shouldIndentWhileEditingRowAt:) not called correctly")
 							return
 						}
 						
@@ -767,7 +767,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_:willBeginEditingRowAtIndexPath:)", {
+		describe("tableView(_:willBeginEditingRowAt:)", {
 			
 			var tableView: UITableView!
 			
@@ -775,16 +775,16 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", { 
+			context("on .row propagation mode", { 
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				it("should not call any of its child method for invalid indexPath row value", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: 999, section: 0)
+					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAt: indexPath)
 					
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -793,8 +793,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				it("should not call any of its child method when corresponding child doesn't implement it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAt: indexPath)
 					
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -803,14 +803,14 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				it("should call its corresponding child method when the child implements it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAt: indexPath)
 					
-					let expectedMethod = #selector(UITableViewDelegate.tableView(_:willBeginEditingRowAtIndexPath:))
+					let expectedMethod = #selector(UITableViewDelegate.tableView(_:willBeginEditingRowAt:))
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
-					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 						fail("tableView(_:willBeginEditingRowAtIndexPath)")
 						return
 					}
@@ -820,16 +820,16 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", { 
+			context("on .section propagation mode", { 
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				it("should not call any of its child method for invalid indexPath section value", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: 0, section: 999)
+					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAt: indexPath)
 					
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -838,8 +838,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				it("should not call any of its child method when corresponding child doesn't implement it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAt: indexPath)
 					
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -848,15 +848,15 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				it("should call its corresponding child method when the child implements it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+					propagatingTableDelegate.tableView(tableView, willBeginEditingRowAt: indexPath)
 					
-					let expectedMethod = #selector(UITableViewDelegate.tableView(_:willBeginEditingRowAtIndexPath:))
+					let expectedMethod = #selector(UITableViewDelegate.tableView(_:willBeginEditingRowAt:))
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
-					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-						fail("tableView(_:willBeginEditingRowAtIndexPath:) not called correctly")
+					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+						fail("tableView(_:willBeginEditingRowAt:) not called correctly")
 						return
 					}
 					
@@ -868,7 +868,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 		
 		})
 
-		describe("tableView(_:didEndEditingRowAtIndexPath:)", {
+		describe("tableView(_:didEndEditingRowAt:)", {
 			
 			var tableView: UITableView!
 			
@@ -876,16 +876,16 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				it("should not call any of its child method for invalid indexPath row value", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-					propagatingTableDelegate.tableView(tableView, didEndEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: 999, section: 0)
+					propagatingTableDelegate.tableView(tableView, didEndEditingRowAt: indexPath)
 					
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -894,8 +894,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				it("should not call any of its child method when corresponding child doesn't implement it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-					propagatingTableDelegate.tableView(tableView, didEndEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+					propagatingTableDelegate.tableView(tableView, didEndEditingRowAt: indexPath)
 					
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -904,15 +904,15 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				it("should call its corresponding child method when the child implements it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-					propagatingTableDelegate.tableView(tableView, didEndEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+					propagatingTableDelegate.tableView(tableView, didEndEditingRowAt: indexPath)
 					
-					let expectedMethod = #selector(UITableViewDelegate.tableView(_:didEndEditingRowAtIndexPath:))
+					let expectedMethod = #selector(UITableViewDelegate.tableView(_:didEndEditingRowAt:))
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
-					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-						fail("tableView(_:willBeginEditingRowAtIndexPath:) not called correctly")
+					guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath?) else {
+						fail("tableView(_:didEndEditingRowAt:) not called correctly")
 						return
 					}
 					
@@ -921,16 +921,16 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				it("should not call any of its child method for invalid indexPath section value", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-					propagatingTableDelegate.tableView(tableView, didEndEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: 0, section: 999)
+					propagatingTableDelegate.tableView(tableView, didEndEditingRowAt: indexPath)
 					
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -939,8 +939,8 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				it("should not call any of its child method when corresponding child doesn't implement it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-					propagatingTableDelegate.tableView(tableView, didEndEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+					propagatingTableDelegate.tableView(tableView, didEndEditingRowAt: indexPath)
 					
 					for delegate in childDelegates {
 						expect(delegate.latestCalledDelegateMethod).to(beEmpty())
@@ -949,15 +949,15 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				it("should call its corresponding child method when the child implements it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-					propagatingTableDelegate.tableView(tableView, didEndEditingRowAtIndexPath: indexPath)
+					let indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+					propagatingTableDelegate.tableView(tableView, didEndEditingRowAt: indexPath)
 					
-					let expectedMethod = #selector(UITableViewDelegate.tableView(_:didEndEditingRowAtIndexPath:))
+					let expectedMethod = #selector(UITableViewDelegate.tableView(_:didEndEditingRowAt:))
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
-					guard let calledParameters = latestMethods[expectedMethod] as?  (tableView: UITableView, indexPath: NSIndexPath) else {
-						fail("tableView(_:didEndEditingRowAtIndexPath:) not called correctly")
+					guard let calledParameters = latestMethods[expectedMethod] as?  (tableView: UITableView, indexPath: IndexPath?) else {
+						fail("tableView(_:didEndEditingRowAt:) not called correctly")
 						return
 					}
 					

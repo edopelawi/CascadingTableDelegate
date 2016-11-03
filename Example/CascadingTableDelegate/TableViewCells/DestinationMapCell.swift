@@ -11,15 +11,15 @@ import MapKit
 
 class DestinationMapCell: UITableViewCell {
 
-	@IBOutlet private weak var mapView: MKMapView!
+	@IBOutlet fileprivate weak var mapView: MKMapView!
 	
-	private var latestCoordinate: CLLocationCoordinate2D?
-	private var latestRegionDistance: Double?
+	fileprivate var latestCoordinate: CLLocationCoordinate2D?
+	fileprivate var latestRegionDistance: Double?
 	
 	/// Preferred height to show this class' instance.
 	static func preferredHeight() -> CGFloat {
 		
-		let mainScreen = UIScreen.mainScreen()
+		let mainScreen = UIScreen.main
 		let displayWidth = mainScreen.bounds.width
 		
 		let horizontalPadding = CGFloat(10)
@@ -30,7 +30,7 @@ class DestinationMapCell: UITableViewCell {
 		return displayRatio * expectedWidth
 	}
 	
-	func configure(coordinate coordinate: CLLocationCoordinate2D, regionDistance: Double = 1200.0) {
+	func configure(coordinate: CLLocationCoordinate2D, regionDistance: Double = 1200.0) {
 		
 		let identicalCoordinate = (latestCoordinate?.latitude == coordinate.latitude) &&
 		(latestCoordinate?.longitude == coordinate.longitude)
