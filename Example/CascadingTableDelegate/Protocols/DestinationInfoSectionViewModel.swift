@@ -42,11 +42,7 @@ extension DestinationInfoSectionViewModel {
 		
 		let observerIndex = self.infoSectionObservers.index { (anotherObserver) -> Bool in
 			
-			var checkedObserver = observer
-			var currentObserver = anotherObserver
-			
-			// TODO: Update this later
-			return false
+			return observer === anotherObserver
 		}
 		
 		if let index = observerIndex {
