@@ -13,7 +13,7 @@
 
 ## Why is this library made?
 
-In common iOS development, `UITableView` has became the bread and butter for building a rich, large pages. This page, for example:
+In common iOS development, `UITableView` has became the bread and butter for building a rich pages with repetitive elements. This page, for example:
 
 ![Sample Page](ReadmeImages/sample-page-screenshot.jpg)
 
