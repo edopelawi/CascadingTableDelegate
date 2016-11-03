@@ -8,7 +8,8 @@ cache: cocoapods
 podfile: Example/Podfile
 before_install:
 - gem install cocoapods # Since Travis is not always on latest version
-# - pod install --project-directory=Example # This is not mandatory, since the Pods already added to Git
+- pod update # Remove this when the pods already updated, to reduce build time
+- pod install --project-directory=Exampl
 script:
 - set -o pipefail && xcodebuild
   -workspace Example/CascadingTableDelegate.xcworkspace
