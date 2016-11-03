@@ -38,10 +38,10 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 			var expectedTableView: UITableView!
 			
 			beforeEach({
-				expectedTableView = UITableView(frame: CGRectZero)
+				expectedTableView = UITableView()
 			})
 			
-			context("in .Row propagation mode", {
+			context("in .row propagation mode", {
 				
 				var numberOfRows: Int!
 				let sectionIndex = 20
@@ -50,7 +50,7 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 					
 					childDelegates.forEach({ $0.resetRecordedParameters() })
 					
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					
 					numberOfRows = propagatingTableDelegate.tableView(
 						expectedTableView,
@@ -70,13 +70,13 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 				})
 			})
 			
-			context("in .Section propagation mode", { 
+			context("in .section propagation mode", { 
 				
 				beforeEach({
 					
 					childDelegates.forEach({ $0.resetRecordedParameters() })
 					
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				it("should return 0 when passed with invalid section number", closure: { 
@@ -156,19 +156,19 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 			var expectedTableView: UITableView!
 			
 			beforeEach({ 
-				expectedTableView = UITableView(frame: CGRectZero)
+				expectedTableView = UITableView()
 			})
 			
-			context("in .Section propagation mode with invalid index path ", {
+			context("in .section propagation mode with invalid index path ", {
 				
-				var invalidPath: NSIndexPath!
+				var invalidPath: IndexPath!
 				var cellResult: UITableViewCell!
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 					
-					invalidPath = NSIndexPath(forRow: 0, inSection: 99)
-					cellResult = propagatingTableDelegate.tableView(expectedTableView, cellForRowAtIndexPath: invalidPath)
+					invalidPath = IndexPath(row: 0, section: 99)
+					cellResult = propagatingTableDelegate.tableView(expectedTableView, cellForRowAt: invalidPath)
 				})
 				
 				it("should not call any of its child delegates' method", closure: { 
@@ -183,17 +183,17 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 				})
 			})
 			
-			context("in .Section propagation mode with valid index path", { 
+			context("in .section propagation mode with valid index path", { 
 				
-				var validPath: NSIndexPath!
+				var validPath: IndexPath!
 				var cellResult: UITableViewCell!
 				
 				beforeEach({
 					
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 					
-					validPath = NSIndexPath(forItem: 0, inSection: 0)
-					cellResult = propagatingTableDelegate.tableView(expectedTableView, cellForRowAtIndexPath: validPath)
+					validPath = IndexPath(row: 0, section: 0)
+					cellResult = propagatingTableDelegate.tableView(expectedTableView, cellForRowAt: validPath)
 				})
 				
 				it("should call the corresponding method to child with same index of the section using passed parameters", closure: {
@@ -202,13 +202,13 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 					let calledMethods = childDelegate.latestCalledDelegateMethod
 					
 					guard let calledMethod = calledMethods.keys.first,
-						let calledParameters = calledMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+						let calledParameters = calledMethods[calledMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 							
 							fail("tableView(_:indexPath:) not called correctly")
 							return
 					}
 					
-					expect(calledMethod).to(equal(#selector(UITableViewDataSource.tableView(_:cellForRowAtIndexPath:))))
+					expect(calledMethod).to(equal(#selector(UITableViewDataSource.tableView(_:cellForRowAt:))))
 					expect(calledParameters.tableView).to(equal(expectedTableView))
 					expect(calledParameters.indexPath).to(equal(validPath))
 				})
@@ -221,17 +221,17 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 				})
 			})
 			
-			context("in .Row propagation mode with invalid index path", {
+			context("in .row propagation mode with invalid index path", {
 				
-				var invalidPath: NSIndexPath!
+				var invalidPath: IndexPath!
 				var cellResult: UITableViewCell!
 				
 				beforeEach({
 					
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					
-					invalidPath = NSIndexPath(forRow: 99, inSection: 0)
-					cellResult = propagatingTableDelegate.tableView(expectedTableView, cellForRowAtIndexPath: invalidPath)
+					invalidPath = IndexPath(row: 99, section: 0)
+					cellResult = propagatingTableDelegate.tableView(expectedTableView, cellForRowAt: invalidPath)
 				})
 				
 				it("should not call any of its child delegate's methods", closure: {
@@ -245,16 +245,16 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 				})
 			})
 			
-			context("in .Row propagation mode with valid index path", { 
+			context("in .row propagation mode with valid index path", { 
 				
-				var validPath: NSIndexPath!
+				var validPath: IndexPath!
 				var cellResult: UITableViewCell!
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					
-					validPath = NSIndexPath(forRow: 0, inSection: 0)
-					cellResult = propagatingTableDelegate.tableView(expectedTableView, cellForRowAtIndexPath: validPath)
+					validPath = IndexPath(row: 0, section: 0)
+					cellResult = propagatingTableDelegate.tableView(expectedTableView, cellForRowAt: validPath)
 				})
 				
 				it("should call corresponding method on child delegate with same index with the row using passed parameters", closure: { 
@@ -263,12 +263,12 @@ class PropagatingTableDelegateDataSourceRequiredSpec: QuickSpec {
 					let calledMethods = childDelegate.latestCalledDelegateMethod
 					
 					guard let calledMethod = calledMethods.keys.first,
-						let calledParameters = calledMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-							fail("tableView(_:cellForRowAtIndexPath:) not called correctly")
+						let calledParameters = calledMethods[calledMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+							fail("tableView(_:cellForRowAt:) not called correctly")
 							return
 					}
 					
-					expect(calledMethod).to(equal(#selector(UITableViewDataSource.tableView(_:cellForRowAtIndexPath:))))
+					expect(calledMethod).to(equal(#selector(UITableViewDataSource.tableView(_:cellForRowAt:))))
 					expect(calledParameters.tableView).to(equal(expectedTableView))
 					expect(calledParameters.indexPath).to(equal(validPath))
 				})

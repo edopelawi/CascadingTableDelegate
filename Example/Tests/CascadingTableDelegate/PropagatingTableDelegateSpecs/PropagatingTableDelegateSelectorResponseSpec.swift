@@ -19,12 +19,12 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 			propagatingTableDelegate = PropagatingTableDelegate(index: 0, childDelegates: [])
 		})
 		
-		describe("respondsToSelector(_:) for tableView(_:estimatedHeightForRowAtIndexPath:)") { 
+		describe("responds(to:) for tableView(_:estimatedHeightForRowAt:)") { 
 			
 			var selector: Selector!
 			
 			beforeEach({
-				selector = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAtIndexPath:))
+				selector = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:))
 			})
 			
 			it("should return false if none of its child implements it", closure: { 
@@ -34,7 +34,7 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 					CascadingTableDelegateBareStub(index: 0, childDelegates: [])
 				]
 				
-				let result = propagatingTableDelegate.respondsToSelector(selector)
+				let result = propagatingTableDelegate.responds(to: selector)
 				
 				expect(result).to(beFalse())
 			})
@@ -46,13 +46,13 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 					CascadingTableDelegateCompleteStub(index: 0, childDelegates: [])
 				]
 				
-				let result = propagatingTableDelegate.respondsToSelector(selector)
+				let result = propagatingTableDelegate.responds(to: selector)
 				
 				expect(result).to(beTrue())
 			})
 		}
 		
-		describe("respondsToSelector(_:) for tableView(_:estimatedHeightForHeaderInSection:)") {
+		describe("responds(to:_:) for tableView(_:estimatedHeightForHeaderInSection:)") {
 			
 			var selector: Selector!
 			
@@ -68,7 +68,7 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 				]
 				
 				
-				let result = propagatingTableDelegate.respondsToSelector(selector)
+				let result = propagatingTableDelegate.responds(to: selector)
 				
 				expect(result).to(beFalse())
 			})
@@ -80,13 +80,13 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 					CascadingTableDelegateCompleteStub(index: 0, childDelegates: [])
 				]
 				
-				let result = propagatingTableDelegate.respondsToSelector(selector)
+				let result = propagatingTableDelegate.responds(to: selector)
 				
 				expect(result).to(beTrue())
 			})
 		}
 		
-		describe("respondsToSelector(_:) for tableView(_:estimatedHeightForFooterInSection:)") {
+		describe("responds(to:) for tableView(_:estimatedHeightForFooterInSection:)") {
 			
 			var selector: Selector!
 			
@@ -102,7 +102,7 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 				]
 				
 				
-				let result = propagatingTableDelegate.respondsToSelector(selector)
+				let result = propagatingTableDelegate.responds(to: selector)
 				
 				expect(result).to(beFalse())
 			})
@@ -114,7 +114,7 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 					CascadingTableDelegateCompleteStub(index: 0, childDelegates: [])
 				]
 				
-				let result = propagatingTableDelegate.respondsToSelector(selector)
+				let result = propagatingTableDelegate.responds(to: selector)
 				
 				expect(result).to(beTrue())
 			})

@@ -8,6 +8,26 @@
 
 import Foundation
 import CascadingTableDelegate
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 protocol DestinationReviewUserSectionViewModel: class {
 	
@@ -16,10 +36,10 @@ protocol DestinationReviewUserSectionViewModel: class {
 	var remainingRowViewModels: Int { get }
 	
 	/// Executed when user-related review data is changed in this instance.
-	var reviewUserDataChanged: (Void -> Void)? { get set }
+	var reviewUserDataChanged: ((Void) -> Void)? { get set }
 	
 	/// Retrieve more rows and add it to `rowViewModels`, then execute `onCompleted` when it's ready.
-	func retrieveMoreRowViewModels(onCompleted: (Void -> Void)?)
+	func retrieveMoreRowViewModels(_ onCompleted: ((Void) -> Void)?)
 }
 
 class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
@@ -31,14 +51,14 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		}
 	}
 	
-	private var footerView: ReviewSectionFooterView
+	fileprivate var footerView: ReviewSectionFooterView
 	
 	convenience init(viewModel: DestinationReviewUserSectionViewModel) {
 		
 		self.init()
 		
 		self.viewModel = viewModel
-		self.reloadModeOnChildDelegatesChanged = .Section(animation: .Automatic)
+		self.reloadModeOnChildDelegatesChanged = .section(animation: .automatic)
 		
 		configureViewModelObserver()
 		updateChildDelegates()
@@ -53,22 +73,22 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		configureFooterViewObserver()
 	}
 	
-	override func prepare(tableView tableView: UITableView) {
+	override func prepare(tableView: UITableView) {
 		super.prepare(tableView: tableView)
 		registerNib(tableView: tableView)
 	}
 	
 	// MARK: - Private methods
 	
-	private func registerNib(tableView tableView: UITableView) {
+	fileprivate func registerNib(tableView: UITableView) {
 		
 		let rowIdentifier = DestinationReviewUserRowDelegate.cellIdentifier
 		let nib = UINib(nibName: rowIdentifier, bundle: nil)
 		
-		tableView.registerNib(nib, forCellReuseIdentifier: rowIdentifier)
+		tableView.register(nib, forCellReuseIdentifier: rowIdentifier)
 	}
 	
-	private func configureViewModelObserver() {
+	fileprivate func configureViewModelObserver() {
 
 		viewModel?.reviewUserDataChanged = { [weak self] in
 			self?.updateChildDelegates()
@@ -76,7 +96,7 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 	}
 	
 	
-	private func updateChildDelegates() {
+	fileprivate func updateChildDelegates() {
 
 		guard let childViewModels = viewModel?.rowViewModels else {
 			return
@@ -85,14 +105,14 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		childDelegates = childViewModels.map({ DestinationReviewUserRowDelegate(viewModel: $0) })
 	}
 	
-	private func configureFooterViewObserver() {
+	fileprivate func configureFooterViewObserver() {
 		
 		footerView.onButtonTapped = { [weak self] in
 			self?.retrieveMoreViewModels()
 		}
 	}
 	
-	private func retrieveMoreViewModels() {
+	fileprivate func retrieveMoreViewModels() {
 		
 		footerView.startActivityIndicator()
 		
@@ -106,21 +126,21 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 
 extension DestinationReviewUserSectionDelegate {
 	
-	override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return CGFloat.min
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return CGFloat.leastNormalMagnitude
 	}
 	
-	override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		
-		return viewModel?.remainingRowViewModels > 0 ? ReviewSectionFooterView.preferredHeight() : CGFloat.min
+		return viewModel?.remainingRowViewModels > 0 ? ReviewSectionFooterView.preferredHeight() : CGFloat.leastNormalMagnitude
 	}
 	
-	override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		
 		return viewModel?.remainingRowViewModels > 0 ? footerView : nil
 	}
 	
-	override func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+	override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
 		
 		guard let view = view as? ReviewSectionFooterView else {
 			return

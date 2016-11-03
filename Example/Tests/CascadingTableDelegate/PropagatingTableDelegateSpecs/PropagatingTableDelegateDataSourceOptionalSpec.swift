@@ -33,28 +33,28 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			)
 		}
 		
-		describe("numberOfSectionsInTableView(_:)") { 
+		describe("numberOfSections(in: _:)") { 
 			
 			var tableView: UITableView!
 			
 			beforeEach({ 
-				tableView = UITableView(frame: CGRectZero)
+				tableView = UITableView()
 			})
 			
-			it("should return the number of child delegates in .Section propagation mode", closure: {
+			it("should return the number of child delegates in .section propagation mode", closure: {
 				
-				propagatingTableDelegate.propagationMode = .Section
+				propagatingTableDelegate.propagationMode = .section
 				
-				let numberOfSections = propagatingTableDelegate.numberOfSectionsInTableView(tableView)
+				let numberOfSections = propagatingTableDelegate.numberOfSections(in: tableView)
 				
 				expect(numberOfSections).to(equal(childDelegates.count))
 			})
 			
-			it("should return 0 for .Row propagation mode", closure: { 
+			it("should return 0 for .row propagation mode", closure: { 
 				
-				propagatingTableDelegate.propagationMode = .Row
+				propagatingTableDelegate.propagationMode = .row
 				
-				let numberOfSections = propagatingTableDelegate.numberOfSectionsInTableView(tableView)
+				let numberOfSections = propagatingTableDelegate.numberOfSections(in: tableView)
 				
 				expect(numberOfSections).to(equal(0))
 			})
@@ -65,12 +65,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			var tableView: UITableView!
 			
 			beforeEach({
-				tableView = UITableView(frame: CGRectZero)
+				tableView = UITableView()
 			})
 			
-			it("should return nil for .Row propagation mode", closure: { 
+			it("should return nil for .row propagation mode", closure: { 
 				
-				propagatingTableDelegate.propagationMode = .Row
+				propagatingTableDelegate.propagationMode = .row
 				
 				let sectionNumber = 0
 				let headerTitle = propagatingTableDelegate.tableView(tableView, titleForHeaderInSection: sectionNumber)
@@ -78,13 +78,13 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				expect(headerTitle).to(beNil())
 			})
 			
-			context("on .Section propagation mode with invalid section number", { 
+			context("on .section propagation mode with invalid section number", { 
 				
 				var headerTitle: String?
 				
 				beforeEach({
 					
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 					
 					let sectionNumber = 99
 					headerTitle = propagatingTableDelegate.tableView(tableView, titleForHeaderInSection: sectionNumber)
@@ -102,13 +102,13 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 
 			})
 			
-			context("on .Section propagation mode where the corresponding child  doesn't implement it", {
+			context("on .section propagation mode where the corresponding child  doesn't implement it", {
 				
 				var headerTitle: String?
 				
 				beforeEach({ 
 				
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 					
 					let sectionNumber = bareChildDelegateIndex
 					headerTitle = propagatingTableDelegate.tableView(tableView, titleForHeaderInSection: sectionNumber)
@@ -125,14 +125,14 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode where the corresponding child implements it", { 
+			context("on .section propagation mode where the corresponding child implements it", { 
 				
 				var sectionNumber: Int!
 				var expectedTitle: String?
 				var headerTitle: String?
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 					
 					sectionNumber = completeChildDelegateIndex
 					
@@ -169,12 +169,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			var tableView: UITableView!
 			
 			beforeEach({ 
-				tableView = UITableView(frame: CGRectZero)
+				tableView = UITableView()
 			})
 			
-			it("should return nil for .Row propagation mode", closure: { 
+			it("should return nil for .row propagation mode", closure: { 
 				
-				propagatingTableDelegate.propagationMode = .Row
+				propagatingTableDelegate.propagationMode = .row
 				
 				let sectionNumber = 0
 				let footerTitle = propagatingTableDelegate.tableView(tableView, titleForFooterInSection: sectionNumber)
@@ -182,13 +182,13 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				expect(footerTitle).to(beNil())
 			})
 			
-			context("on .Section propagation mode with invalid section number", { 
+			context("on .section propagation mode with invalid section number", { 
 				
 				var footerTitle: String?
 				
 				beforeEach({ 
 					
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 					
 					let sectionNumber = 99
 					footerTitle = propagatingTableDelegate.tableView(tableView, titleForFooterInSection: sectionNumber)
@@ -205,13 +205,13 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode where the corresponding child doesn't implement it", {
+			context("on .section propagation mode where the corresponding child doesn't implement it", {
 				
 				var footerTitle: String?
 				
 				beforeEach({ 
 					
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 					
 					let sectionNumber = bareChildDelegateIndex
 					footerTitle = propagatingTableDelegate.tableView(tableView, titleForFooterInSection: sectionNumber)
@@ -228,14 +228,14 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode where the corresponding child implements it", { 
+			context("on .section propagation mode where the corresponding child implements it", { 
 				
 				var sectionNumber: Int!
 				var expectedTitle: String?
 				var footerTitle: String?
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 					
 					sectionNumber = completeChildDelegateIndex
 					expectedTitle = "Goodbye!"
@@ -266,28 +266,28 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			
 		})
 		
-		describe("tableView(_:canEditRowAtIndexPath:)", {
+		describe("tableView(_:canEditRowAt:)", {
 			
 			var tableView: UITableView!
 			
 			beforeEach({ 
-				tableView = UITableView(frame: CGRectZero)
+				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", { 
+			context("on .row propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("with invalid indexPath row value", {
 					
-					var invalidIndexPath: NSIndexPath!
+					var invalidIndexPath: IndexPath!
 					var result: Bool!
 					
 					beforeEach({ 
-						invalidIndexPath = NSIndexPath(forRow: 99, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, canEditRowAtIndexPath: invalidIndexPath)
+						invalidIndexPath = IndexPath(row: 99, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, canEditRowAt: invalidIndexPath)
 					})
 					
 					it("should return false", closure: {
@@ -303,12 +303,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				context("with valid indexPath row value where corresponding child doesn't implement it", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					var result: Bool!
 					
 					beforeEach({ 
-						indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, canEditRowAtIndexPath: indexPath)
+						indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, canEditRowAt: indexPath)
 					})
 					
 					it("should return false", closure: { 
@@ -324,18 +324,18 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				context("with valid indexPath row value where corresponding child implements it", { 
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					var expectedResult: Bool!
 					var result: Bool!
 					
 					beforeEach({ 
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
 						expectedResult = true
 						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
 						
-						result = propagatingTableDelegate.tableView(tableView, canEditRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, canEditRowAt: indexPath)
 					})
 					
 					it("should return result from the corresponding childs' method", closure: {
@@ -347,12 +347,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
 						guard let calledMethod = latestMethods.keys.first,
-							let parameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							let parameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 								fail("tableView(_:canEditRowAtIndexPath) is not called properly")
 								return
 						}
 						
-						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canEditRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canEditRowAt:))
 						expect(calledMethod).to(equal(expectedMethod))
 						expect(parameters.tableView).to(equal(tableView))
 						expect(parameters.indexPath).to(equal(indexPath))
@@ -360,20 +360,20 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", { 
+			context("on .section propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid indexPath section value", { 
 					
-					var invalidIndexPath: NSIndexPath!
+					var invalidIndexPath: IndexPath!
 					var result: Bool!
 					
 					beforeEach({ 
-						invalidIndexPath = NSIndexPath(forRow: 0, inSection: 99)
-						result = propagatingTableDelegate.tableView(tableView, canEditRowAtIndexPath: invalidIndexPath)
+						invalidIndexPath = IndexPath(row: 0, section: 99)
+						result = propagatingTableDelegate.tableView(tableView, canEditRowAt: invalidIndexPath)
 					})
 					
 					it("should return false", closure: { 
@@ -389,12 +389,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				context("with valid indexPath section value where corresponding child doesn't implement it", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					var result: Bool!
 					
 					beforeEach({ 
-						indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-						result = propagatingTableDelegate.tableView(tableView, canEditRowAtIndexPath: indexPath)
+						indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, canEditRowAt: indexPath)
 					})
 					
 					it("should return false", closure: { 
@@ -410,17 +410,17 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				context("with valid indexPath section value where corresonding child implements it", { 
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					var expectedResult: Bool!
 					var result: Bool!
 					
 					beforeEach({ 
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
 						expectedResult = true
 						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
 						
-						result = propagatingTableDelegate.tableView(tableView, canEditRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, canEditRowAt: indexPath)
 					})
 					
 					it("should call corresponding child's method with passed parameter", closure: { 
@@ -428,12 +428,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
 						guard let calledMethod = latestMethods.keys.first,
-							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 								fail("tableView(_:canEditRowAtIndexPath) is not called correctly")
 								return
 						}
 						
-						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canEditRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canEditRowAt:))
 						
 						expect(calledMethod).to(equal(expectedMethod))
 						expect(calledParameters.tableView).to(equal(tableView))
@@ -447,28 +447,28 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_:canMoveRowAtIndexPath:)", {
+		describe("tableView(_:canMoveRowAt:)", {
 		
 			var tableView: UITableView!
 			
 			beforeEach({ 
-				tableView = UITableView(frame: CGRectZero)
+				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("with invalid indexPath row value", {
 					
-					var invalidIndexPath: NSIndexPath!
+					var invalidIndexPath: IndexPath!
 					var result: Bool!
 					
 					beforeEach({
-						invalidIndexPath = NSIndexPath(forRow: 99, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: invalidIndexPath)
+						invalidIndexPath = IndexPath(row: 99, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAt: invalidIndexPath)
 					})
 					
 					it("should return false", closure: {
@@ -484,12 +484,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				context("with valid indexPath row value where corresponding child doesn't implement it", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					var result: Bool!
 					
 					beforeEach({
-						indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: indexPath)
+						indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAt: indexPath)
 					})
 					
 					it("should return false", closure: {
@@ -505,18 +505,18 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				context("with valid indexPath row value where corresponding child implements it", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					var expectedResult: Bool!
 					var result: Bool!
 					
 					beforeEach({
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
 						expectedResult = true
 						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
 						
-						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAt: indexPath)
 					})
 					
 					it("should return result from the corresponding childs' method", closure: {
@@ -528,12 +528,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
 						guard let calledMethod = latestMethods.keys.first,
-							let parameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							let parameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 								fail("tableView(_:canMoveRowAtIndexPath) is not called properly")
 								return
 						}
 						
-						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canMoveRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canMoveRowAt:))
 						expect(calledMethod).to(equal(expectedMethod))
 						expect(parameters.tableView).to(equal(tableView))
 						expect(parameters.indexPath).to(equal(indexPath))
@@ -541,20 +541,20 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid indexPath section value", {
 					
-					var invalidIndexPath: NSIndexPath!
+					var invalidIndexPath: IndexPath!
 					var result: Bool!
 					
 					beforeEach({
-						invalidIndexPath = NSIndexPath(forRow: 0, inSection: 99)
-						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: invalidIndexPath)
+						invalidIndexPath = IndexPath(row: 0, section: 99)
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAt: invalidIndexPath)
 					})
 					
 					it("should return false", closure: {
@@ -570,12 +570,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				context("with valid indexPath section value where corresponding child doesn't implement it", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					var result: Bool!
 					
 					beforeEach({
-						indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-						result = propagatingTableDelegate.tableView(tableView, canEditRowAtIndexPath: indexPath)
+						indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+						result = propagatingTableDelegate.tableView(tableView, canEditRowAt: indexPath)
 					})
 					
 					it("should return false", closure: {
@@ -591,17 +591,17 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				context("with valid indexPath section value where corresonding child implements it", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					var expectedResult: Bool!
 					var result: Bool!
 					
 					beforeEach({
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
 						expectedResult = true
 						childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
 						
-						result = propagatingTableDelegate.tableView(tableView, canMoveRowAtIndexPath: indexPath)
+						result = propagatingTableDelegate.tableView(tableView, canMoveRowAt: indexPath)
 					})
 					
 					it("should call corresponding child's method with passed parameter", closure: {
@@ -609,12 +609,12 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
 						guard let calledMethod = latestMethods.keys.first,
-							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
+							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
 								fail("tableView(_:canEditRowAtIndexPath) is not called correctly")
 								return
 						}
 						
-						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canMoveRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDataSource.tableView(_:canMoveRowAt:))
 						
 						expect(calledMethod).to(equal(expectedMethod))
 						expect(calledParameters.tableView).to(equal(tableView))
@@ -628,28 +628,28 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 			})
 		})
 		
-		describe("tableView(_:commitEditingStyle:forRowAtIndexPath:)", {
+		describe("tableView(_:commit:forRowAt:)", {
 			
 			var tableView: UITableView!
 			
 			beforeEach({ 
-				tableView = UITableView(frame: CGRectZero)
+				tableView = UITableView()
 			})
 			
-			context("on .Row propagation mode", { 
+			context("on .row propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				it("should not call its child methods if the corresponding child doesn't implement it", closure: { 
 					
-					let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+					let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
 					
 					propagatingTableDelegate.tableView(
 						tableView,
-						commitEditingStyle: UITableViewCellEditingStyle.None,
-						forRowAtIndexPath: indexPath
+						commit: UITableViewCellEditingStyle.none,
+						forRowAt: indexPath
 					)
 					
 					for delegate in childDelegates {
@@ -659,47 +659,47 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				it("should call the corresponding child's method with the parameters if the child implements it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+					let indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 					
 					propagatingTableDelegate.tableView(
 						tableView,
-						commitEditingStyle: UITableViewCellEditingStyle.None,
-						forRowAtIndexPath: indexPath
+						commit: UITableViewCellEditingStyle.none,
+						forRowAt: indexPath
 					)
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
 					guard let calledMethod = latestMethods.keys.first,
-						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: NSIndexPath) else {
+						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: IndexPath) else {
 							
 							fail("tableView(_:editingStyle:indexPath:) is not called correctly")
 							return
 					}
 					
-					let expectedMethod = #selector(UITableViewDataSource.tableView(_:commitEditingStyle:forRowAtIndexPath:))
+					let expectedMethod = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
 					
 					expect(calledMethod).to(equal(expectedMethod))
 					
 					expect(calledParameters.tableView).to(equal(tableView))
-					expect(calledParameters.editingStyle).to(equal(UITableViewCellEditingStyle.None))
+					expect(calledParameters.editingStyle).to(equal(UITableViewCellEditingStyle.none))
 					expect(calledParameters.indexPath).to(equal(indexPath))
 				})
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				it("should not call its child methods if the corresponding child doesn't implement it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+					let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
 					
 					propagatingTableDelegate.tableView(
 						tableView,
-						commitEditingStyle: UITableViewCellEditingStyle.None,
-						forRowAtIndexPath: indexPath
+						commit: UITableViewCellEditingStyle.none,
+						forRowAt: indexPath
 					)
 					
 					for delegate in childDelegates {
@@ -709,29 +709,29 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 				
 				it("should call the corresponding child's method with the parameters if the child implements it", closure: {
 					
-					let indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+					let indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 					
 					propagatingTableDelegate.tableView(
 						tableView,
-						commitEditingStyle: UITableViewCellEditingStyle.None,
-						forRowAtIndexPath: indexPath
+						commit: UITableViewCellEditingStyle.none,
+						forRowAt: indexPath
 					)
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
 					guard let calledMethod = latestMethods.keys.first,
-						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: NSIndexPath) else {
+						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: IndexPath) else {
 							
 							fail("tableView(_:editingStyle:indexPath:) is not called correctly")
 							return
 					}
 					
-					let expectedMethod = #selector(UITableViewDataSource.tableView(_:commitEditingStyle:forRowAtIndexPath:))
+					let expectedMethod = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
 					
 					expect(calledMethod).to(equal(expectedMethod))
 					
 					expect(calledParameters.tableView).to(equal(tableView))
-					expect(calledParameters.editingStyle).to(equal(UITableViewCellEditingStyle.None))
+					expect(calledParameters.editingStyle).to(equal(UITableViewCellEditingStyle.none))
 					expect(calledParameters.indexPath).to(equal(indexPath))
 				})
 			})
@@ -743,7 +743,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 //		
 //		pending("tableView(_:sectionForSectionIndexTitle:atIndex:)", {})
 //		
-//		pending("tableView(_:moveRowAtIndexPath:toIndexPath:)", {})
+//		pending("tableView(_:moveRowAt:toIndexPath:)", {})
 		
 	}
 	

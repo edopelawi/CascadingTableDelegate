@@ -11,13 +11,13 @@ import CascadingTableDelegate
 
 class DestinationViewController: UIViewController {
 
-	@IBOutlet weak private var tableView: UITableView!
-	@IBOutlet private weak var footerButton: UIButton!
+	@IBOutlet weak fileprivate var tableView: UITableView!
+	@IBOutlet fileprivate weak var footerButton: UIButton!
 	
-	private let refreshControl = UIRefreshControl()
-	private let viewModel = DestinationViewModel()
+	fileprivate let refreshControl = UIRefreshControl()
+	fileprivate let viewModel = DestinationViewModel()
 	
-	private var rootDelegate: CascadingRootTableDelegate?
+	fileprivate var rootDelegate: CascadingRootTableDelegate?
 	
 	convenience init() {
 		self.init(nibName: "DestinationViewController", bundle: nil)
@@ -36,46 +36,46 @@ class DestinationViewController: UIViewController {
 		createRootDelegate()
     }
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		navigationController?.navigationBarHidden = false
+		navigationController?.isNavigationBarHidden = false
 		refreshData()
 	}
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return .LightContent
+	override var preferredStatusBarStyle : UIStatusBarStyle {
+		return .lightContent
 	}
 	
-	@IBAction func scrollToTop(sender: AnyObject) {		
-		let topIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-		tableView.scrollToRowAtIndexPath(topIndexPath, atScrollPosition: .Middle, animated: true)
+	@IBAction func scrollToTop(_ sender: AnyObject) {		
+		let topIndexPath = IndexPath(row: 0, section: 0)
+		tableView.scrollToRow(at: topIndexPath, at: .middle, animated: true)
 	}
 	
 	// MARK: - Private methods
 	
-	private func updateTitle() {
+	fileprivate func updateTitle() {
 		title = viewModel.destinationTitle ?? "Destination"
 	}
 	
-	private func configureRefreshControl() {
+	fileprivate func configureRefreshControl() {
 		
-		refreshControl.addTarget(self, action: #selector(DestinationViewController.refreshData), forControlEvents: .ValueChanged)
+		refreshControl.addTarget(self, action: #selector(DestinationViewController.refreshData), for: .valueChanged)
 		
 		tableView.addSubview(refreshControl)
 	}
 	
-	private func configureNavBarStyle() {
+	fileprivate func configureNavBarStyle() {
 		
 		let navigationBar = self.navigationController?.navigationBar
 		
 		navigationBar?.barTintColor = UIColor.cst_DarkBlueGrey
-		navigationBar?.tintColor = UIColor.whiteColor()
-		navigationBar?.titleTextAttributes = [ NSForegroundColorAttributeName: UIColor.whiteColor() ]
+		navigationBar?.tintColor = UIColor.white
+		navigationBar?.titleTextAttributes = [ NSForegroundColorAttributeName: UIColor.white ]
 		
-		navigationBar?.barStyle = .Black
+		navigationBar?.barStyle = .black
 	}
 
-	private func createRootDelegate() {				
+	fileprivate func createRootDelegate() {				
 		
 		let childDelegates: [CascadingTableDelegate] = [
 			DestinationHeaderSectionDelegate(viewModel: viewModel),
@@ -91,36 +91,36 @@ class DestinationViewController: UIViewController {
 		)
 	}
 	
-	@objc private func refreshData() {
+	@objc fileprivate func refreshData() {
 		
 		viewModel.refreshData { [weak self] in
 			self?.updateTitle()
 			self?.stopRefreshControl()
 		}
 		
-		if refreshControl.refreshing {
+		if refreshControl.isRefreshing {
 			return
 		}
 		
 		startRefreshControl()
 	}
 	
-	private func startRefreshControl() {
+	fileprivate func startRefreshControl() {
 		
 		tableView.showRefreshControl()
 		
 		refreshControl.beginRefreshing()
-		refreshControl.hidden = false
+		refreshControl.isHidden = false
 	}
 	
-	private func stopRefreshControl() {
+	fileprivate func stopRefreshControl() {
 		
-		let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC)))
-		let dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+		let delayTime = DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+		let dispatchQueue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
 		
-		dispatch_after(delayTime, dispatchQueue) {
+		dispatchQueue.asyncAfter(deadline: delayTime) {
 			
-			dispatch_async(dispatch_get_main_queue(), {
+			DispatchQueue.main.async(execute: {
 				self.refreshControl.endRefreshing()
 			})
 		}

@@ -18,13 +18,13 @@ extension String {
 	
 	- returns: `CGFloat` value.
 	*/
-	func displayHeight(width width: CGFloat, font: UIFont) -> CGFloat {
+	func displayHeight(width: CGFloat, font: UIFont) -> CGFloat {
 		
 		let maxSize = CGSize(width: width, height: CGFloat.infinity)
 		
-		let actualSize = self.boundingRectWithSize(
-			maxSize,
-			options: [ .UsesFontLeading, .UsesLineFragmentOrigin ],
+		let actualSize = self.boundingRect(
+			with: maxSize,
+			options: [ .usesFontLeading, .usesLineFragmentOrigin ],
 			attributes: [ NSFontAttributeName: font ],
 			context: nil
 		)

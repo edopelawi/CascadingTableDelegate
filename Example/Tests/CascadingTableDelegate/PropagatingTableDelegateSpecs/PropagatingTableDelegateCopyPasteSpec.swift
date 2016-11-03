@@ -32,7 +32,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
             )
         }
         
-		describe("tableView(_:shouldShowMenuForRowAtIndexPath:)", {
+		describe("tableView(_:shouldShowMenuForRowAt:)", {
             
             var tableView: UITableView!
             
@@ -40,10 +40,10 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", {
+            context("on .row propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 context("with invalid indexPath row value", {
@@ -51,8 +51,8 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 999, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 999, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAt: indexPath)
                     })
                     
                     it("shoul return false ", closure: {
@@ -71,8 +71,8 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAt: indexPath)
                     })
                     
                     it("should return false", closure: {
@@ -91,15 +91,15 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     var expectedResult: Bool!
                     var result: Bool!
                     
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     beforeEach({
                         
                         expectedResult = true
                         childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
                         
-                        indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
-                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
+                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAt: indexPath)
                     })
                     
                     
@@ -109,12 +109,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     it("should call the child's method using passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:shouldShowMenuForRowAtIndexPath:) not called properly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:shouldShowMenuForRowAt:) not called properly")
                             return
                         }
                         
@@ -125,10 +125,10 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                 })
             })
             
-            context("on .Section propagation mode", {
+            context("on .section propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 context("with invalid indexPath section value", {
@@ -136,8 +136,8 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: 999)
-                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 0, section: 999)
+                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAt: indexPath)
                     })
                     
                     it("shoul return false ", closure: {
@@ -156,8 +156,8 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     var result: Bool!
                     
                     beforeEach({
-                        let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAtIndexPath: indexPath)
+                        let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAt: indexPath)
                     })
                     
                     it("should return false", closure: {
@@ -176,15 +176,15 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     var expectedResult: Bool!
                     var result: Bool!
                     
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     beforeEach({
                         
                         expectedResult = true
                         childDelegates[completeChildDelegateIndex].returnedBool = expectedResult
                         
-                        indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
-                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAtIndexPath: indexPath)
+                        indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
+                        result = propagatingTableDelegate.tableView(tableView, shouldShowMenuForRowAt: indexPath)
                     })
                     
                     
@@ -194,12 +194,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     it("should call the child's method using passed parameter", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAtIndexPath:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: NSIndexPath) else {
-                            fail("tableView(_:shouldShowMenuForRowAtIndexPath:) not called properly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, indexPath: IndexPath) else {
+                            fail("tableView(_:shouldShowMenuForRowAt:) not called properly")
                             return
                         }
                         
@@ -212,7 +212,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
 
         })
         
-		describe("tableView(_:canPerformAction:forRowAtIndexPath:withSender:)", {
+		describe("tableView(_:canPerformAction:forRowAt:withSender:)", {
             
             var tableView: UITableView!
             
@@ -220,10 +220,10 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", {
+            context("on .row propagation mode", {
                 
                 beforeEach({ 
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 context("with invalid indexPath row value", { 
@@ -232,12 +232,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     beforeEach({ 
                     
-                        let indexPath = NSIndexPath(forRow: 999, inSection: 0)
+                        let indexPath = IndexPath(row: 999, section: 0)
                         
                         result = propagatingTableDelegate.tableView(
                             tableView,
                             canPerformAction: #selector(UIResponder.copy(_:)),
-                            forRowAtIndexPath: indexPath,
+                            forRowAt: indexPath,
                             withSender: tableView
                         )
                     })
@@ -261,12 +261,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     beforeEach({
                         
-                        let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+                        let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
                         
                         result = propagatingTableDelegate.tableView(
                             tableView,
                             canPerformAction: #selector(UIResponder.copy(_:)),
-                            forRowAtIndexPath: indexPath,
+                            forRowAt: indexPath,
                             withSender: tableView
                         )
                     })
@@ -289,7 +289,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     var expectedResult: Bool!
                     var action: Selector!
                     var sender: AnyObject?
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     var result: Bool!
                     
@@ -301,12 +301,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                         action = #selector(UIResponder.copy(_:))
                         sender = NSObject()
                         
-                        indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+                        indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
                         
                         result = propagatingTableDelegate.tableView(
                             tableView,
                             canPerformAction: action,
-                            forRowAtIndexPath: indexPath,
+                            forRowAt: indexPath,
                             withSender: sender
                         )
                     })
@@ -319,12 +319,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     it("should call child's method using passed parameters", closure: { 
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAtIndexPath:withSender:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: NSIndexPath, sender: AnyObject?) else {
-                            fail("tableView(_:canPerformAction:forRowAtIndexPath:withSender:) is not called correctly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: IndexPath, sender: AnyObject?) else {
+                            fail("tableView(_:canPerformAction:forRowAt:withSender:) is not called correctly")
                             return
                         }
                         
@@ -337,10 +337,10 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                 
             })
             
-            context("on .Section propagation mode", {
+            context("on .section propagation mode", {
                 
                 beforeEach({
-                    propagatingTableDelegate.propagationMode = .Section
+                    propagatingTableDelegate.propagationMode = .section
                 })
                 
                 context("with invalid indexPath row value", {
@@ -349,12 +349,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     beforeEach({
                         
-                        let indexPath = NSIndexPath(forRow: 0, inSection: 999)
+                        let indexPath = IndexPath(row: 0, section: 999)
                         
                         result = propagatingTableDelegate.tableView(
                             tableView,
                             canPerformAction: #selector(UIResponder.copy(_:)),
-                            forRowAtIndexPath: indexPath,
+                            forRowAt: indexPath,
                             withSender: tableView
                         )
                     })
@@ -378,12 +378,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     beforeEach({
                         
-                        let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+                        let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
                         
                         result = propagatingTableDelegate.tableView(
                             tableView,
                             canPerformAction: #selector(UIResponder.copy(_:)),
-                            forRowAtIndexPath: indexPath,
+                            forRowAt: indexPath,
                             withSender: tableView
                         )
                     })
@@ -406,7 +406,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     var expectedResult: Bool!
                     var action: Selector!
                     var sender: AnyObject?
-                    var indexPath: NSIndexPath!
+                    var indexPath: IndexPath!
                     
                     var result: Bool!
                     
@@ -418,12 +418,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                         action = #selector(UIResponder.copy(_:))
                         sender = NSObject()
                         
-                        indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+                        indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
                         
                         result = propagatingTableDelegate.tableView(
                             tableView,
                             canPerformAction: action,
-                            forRowAtIndexPath: indexPath,
+                            forRowAt: indexPath,
                             withSender: sender
                         )
                     })
@@ -436,12 +436,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     
                     it("should call child's method using passed parameters", closure: {
                         
-                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAtIndexPath:withSender:))
+                        let expectedMethod = #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:))
                         
                         let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                         
-                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: NSIndexPath, sender: AnyObject?) else {
-                            fail("tableView(_:canPerformAction:forRowAtIndexPath:withSender:) is not called correctly")
+                        guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: IndexPath, sender: AnyObject?) else {
+                            fail("tableView(_:canPerformAction:forRowAt:withSender:) is not called correctly")
                             return
                         }
                         
@@ -455,7 +455,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
             })
         })
         
-		describe("tableView(_:performAction:forRowAtIndexPath:withSender:)", {
+		describe("tableView(_:performAction:forRowAt:withSender:)", {
             
             var tableView: UITableView!
             
@@ -463,7 +463,7 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                 tableView = UITableView()
             })
             
-            context("on .Row propagation mode", { 
+            context("on .row propagation mode", { 
                 
                 var action: Selector!
                 var sender: AnyObject?
@@ -473,17 +473,17 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                     action = #selector(UIResponder.copy(_:))
                     sender = NSObject()
                     
-                    propagatingTableDelegate.propagationMode = .Row
+                    propagatingTableDelegate.propagationMode = .row
                 })
                 
                 it("should not call any of its child method for invalid indexPath row value", closure: { 
                     
-                    let indexPath = NSIndexPath(forRow: 999, inSection: 0)
+                    let indexPath = IndexPath(row: 999, section: 0)
                     
                     propagatingTableDelegate.tableView(
                         tableView,
                         performAction: action,
-                        forRowAtIndexPath: indexPath,
+                        forRowAt: indexPath,
                         withSender: sender
                     )
                     
@@ -494,12 +494,12 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                 
                 it("should not call any of its child method when corresponding child doesn't implement it", closure: { 
                     
-                    let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+                    let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
                     
                     propagatingTableDelegate.tableView(
                         tableView,
                         performAction: action,
-                        forRowAtIndexPath: indexPath,
+                        forRowAt: indexPath,
                         withSender: sender
                     )
                     
@@ -510,22 +510,22 @@ class PropagatingTableDelegateCopyPasteSpec: QuickSpec {
                 
                 it("should call corresponding child's method with passed parameters if it implements the method", closure: { 
                     
-                    let indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+                    let indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
                     
                     propagatingTableDelegate.tableView(
                         tableView,
                         performAction: action,
-                        forRowAtIndexPath: indexPath,
+                        forRowAt: indexPath,
                         withSender: sender
                     )
                     
-                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:performAction:forRowAtIndexPath:withSender:))
+                    let expectedMethod = #selector(UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:))
                     
                     let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
                     
-                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: NSIndexPath, sender: AnyObject?) else {
+                    guard let calledParameters = latestMethods[expectedMethod] as? (tableView: UITableView, action: Selector, indexPath: IndexPath, sender: AnyObject?) else {
                         
-                        fail("tableView(_:performAction:forRowAtIndexPath:withSender:) not called correctly")
+                        fail("tableView(_:performAction:forRowAt:withSender:) not called correctly")
                         return
                     }
                     

@@ -15,13 +15,13 @@ class CascadingTableDelegateCompleteStub: NSObject {
 	var childDelegates: [CascadingTableDelegate]
 	weak var parentDelegate: CascadingTableDelegate?
 	
-	private var _prepareCalled = false
+	fileprivate var _prepareCalled = false
 	
-	private var _passedTableViewOnPrepare: UITableView?
+	fileprivate var _passedTableViewOnPrepare: UITableView?
 	
-	private let _returnedTableCell = UITableViewCell()
+	fileprivate let _returnedTableCell = UITableViewCell()
 	
-	private var _latestCalledDelegateMethod = [Selector: Any]()
+	fileprivate var _latestCalledDelegateMethod = [Selector: Any]()
 	
 	var returnedTableCell: UITableViewCell = UITableViewCell()
 	
@@ -33,15 +33,15 @@ class CascadingTableDelegateCompleteStub: NSObject {
 	
 	var returnedBool: Bool = false
 	
-	var returnedFloat: CGFloat = CGFloat.min
+	var returnedFloat: CGFloat = CGFloat.leastNormalMagnitude
 	
 	var returnedViewOptional: UIView? = nil
 	
-	var returnedIndexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+	var returnedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
 	
-	var returnedIndexPathOptional: NSIndexPath? = nil
+	var returnedIndexPathOptional: IndexPath? = nil
 	
-	var returnedCellEditingStyle: UITableViewCellEditingStyle = .None
+	var returnedCellEditingStyle: UITableViewCellEditingStyle = .none
 	
 	var returnedRowActions: [UITableViewRowAction]? = nil
 	
@@ -68,7 +68,7 @@ extension CascadingTableDelegateCompleteStub: CascadingTableDelegateStub {
 		return _latestCalledDelegateMethod
 	}
 	
-	func prepare(tableView tableView: UITableView) {
+	func prepare(tableView: UITableView) {
 		_prepareCalled = true
 		_passedTableViewOnPrepare = tableView
 	}
@@ -85,7 +85,7 @@ extension CascadingTableDelegateCompleteStub: CascadingTableDelegateStub {
 
 extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		let selector = #selector(UITableViewDataSource.tableView(_:numberOfRowsInSection:))
 		
@@ -94,25 +94,25 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		return returnedInt
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let selector = #selector(UITableViewDataSource.tableView(_:cellForRowAtIndexPath:))
+		let selector = #selector(UITableViewDataSource.self.tableView(_:cellForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedTableCell
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		
-		let selector = #selector(UITableViewDataSource.numberOfSectionsInTableView(_:))
+		let selector = #selector(UITableViewDataSource.numberOfSections(in:))
 		
 		_latestCalledDelegateMethod = [ selector: tableView ]
 		
 		return returnedInt
 	}
 	
-	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
 		let selector = #selector(UITableViewDataSource.tableView(_:titleForHeaderInSection:))
 		
@@ -121,7 +121,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		return returnedStringOptional
 	}
 	
-	func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+	func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 		
 		let selector = #selector(UITableViewDataSource.tableView(_:titleForFooterInSection:))
 		
@@ -130,53 +130,53 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		return returnedStringOptional
 	}
 	
-	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		
-		let selector = #selector(UITableViewDataSource.tableView(_:canEditRowAtIndexPath:))
-		
-		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
-		
-		return returnedBool
-	}
-	
-	func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-		
-		let selector = #selector(UITableViewDataSource.tableView(_:canMoveRowAtIndexPath:))
+		let selector = #selector(UITableViewDataSource.tableView(_:canEditRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedBool
 	}
 	
-	func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+	func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
 		
-		let selector = #selector(UITableViewDataSource.sectionIndexTitlesForTableView(_:))
+		let selector = #selector(UITableViewDataSource.tableView(_:canMoveRowAt:))
+		
+		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
+		
+		return returnedBool
+	}
+	
+	func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+		
+		let selector = #selector(UITableViewDataSource.sectionIndexTitles(`for`:))
 		
 		_latestCalledDelegateMethod = [ selector: tableView ]
 		
 		return returnedStringArrayOptional
 	}
 	
-	func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+	func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
 		
-		let selector = #selector(UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:atIndex:))
+		let selector = #selector(UITableViewDataSource.tableView(_:sectionForSectionIndexTitle:at:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, title, index) ]
 		
 		return returnedInt
 	}
 	
-	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		
-		let selector = #selector(UITableViewDataSource.tableView(_:commitEditingStyle:forRowAtIndexPath:))
+		let selector = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, editingStyle, indexPath) ]
 	}
 	
 	
-	func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 		
-		let selector = #selector(UITableViewDataSource.tableView(_:moveRowAtIndexPath:toIndexPath:))
+		let selector = #selector(UITableViewDataSource.tableView(_:moveRowAt:to:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, sourceIndexPath, destinationIndexPath) ]
 	}
@@ -188,58 +188,58 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 	
 	
-	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:willDisplayCell:forRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:))
 
 		_latestCalledDelegateMethod = [ selector: (tableView, cell, indexPath) ]
 	}
 	
-	func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+	func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:willDisplayHeaderView:forSection:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, view, section) ]
 	}
 	
-	func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+	func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:willDisplayFooterView:forSection:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, view, section) ]
 	}
 	
-	func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:didEndDisplayingCell:forRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:didEndDisplaying:forRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, cell, indexPath) ]
 	}
 	
-	func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+	func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:didEndDisplayingHeaderView:forSection:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, view, section) ]
 	}
 	
-	func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+	func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:didEndDisplayingFooterView:forSection:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, view, section) ]
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:heightForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedFloat
 	}
 	
-	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:heightForHeaderInSection:))
 		
@@ -248,7 +248,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		return returnedFloat
 	}
 	
-	func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:heightForFooterInSection:))
 		
@@ -257,9 +257,9 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		return returnedFloat
 	}
 	
-	func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
@@ -267,7 +267,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 	}
 	
 	
-	func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+	func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:))
 		
@@ -276,7 +276,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		return returnedFloat
 	}
 	
-	func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+	func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:))
 		
@@ -286,7 +286,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 	}
 	
 	
-	func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:viewForHeaderInSection:))
 		
@@ -295,7 +295,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		return returnedViewOptional
 	}
 	
-	func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:viewForFooterInSection:))
 		
@@ -304,168 +304,168 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		return returnedViewOptional
 	}
 	
-	func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWithIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWith:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath)  ]
 	}
 	
 	
-	func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:shouldHighlightRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedBool
 	}
 	
-	func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:didHighlightRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:didHighlightRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 	}
 	
-	func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 	}
 	
-	func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+	func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:willSelectRowAtIndexPath:))
-		
-		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
-		
-		return returnedIndexPathOptional
-	}
-	
-	func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-		
-		let selector = #selector(UITableViewDelegate.tableView(_:willDeselectRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:willSelectRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedIndexPathOptional
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:didSelectRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:willDeselectRowAt:))
+		
+		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
+		
+		return returnedIndexPathOptional
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		let selector = #selector(UITableViewDelegate.tableView(_:didSelectRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 	}
 	
-	func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:didDeselectRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:didDeselectRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 	}
 	
-	func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:editingStyleForRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:editingStyleForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedCellEditingStyle
 	}
 	
-	func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+	func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 
 		return returnedStringOptional
 	}
 	
-	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:editActionsForRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:editActionsForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedRowActions
 	}
 	
-	func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:shouldIndentWhileEditingRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedBool
 	}
 	
-	func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:willBeginEditingRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:willBeginEditingRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 	}
 	
-	func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:didEndEditingRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:didEndEditingRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 	}
 	
-	func tableView(tableView: UITableView, targetIndexPathForMoveFromRowAtIndexPath sourceIndexPath: NSIndexPath, toProposedIndexPath proposedDestinationIndexPath: NSIndexPath) -> NSIndexPath {
+	func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, sourceIndexPath, proposedDestinationIndexPath) ]
 		
-		return NSIndexPath(forRow: 0, inSection: 0)
+		return IndexPath(row: 0, section: 0)
 	}
 	
-	func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+	func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:indentationLevelForRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:indentationLevelForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedInt
 	}
 	
-	func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:shouldShowMenuForRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
 		return returnedBool
 	}
 	
-	func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+	func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAtIndexPath:withSender:))
+		let selector = #selector(UITableViewDelegate.tableView(_:canPerformAction:forRowAt:withSender:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, action, indexPath, sender)]
 		
 		return returnedBool
 	}
 	
-	func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+	func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:performAction:forRowAtIndexPath:withSender:))
+		let selector = #selector(UITableViewDelegate.tableView(_:performAction:forRowAt:withSender:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, action, indexPath, sender) ]
 	}
 	
 	@available(iOS 9.0, *)
-	func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:canFocusRowAtIndexPath:))
+		let selector = #selector(UITableViewDelegate.tableView(_:canFocusRowAt:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 		
@@ -473,9 +473,9 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 	}
 	
 	@available(iOS 9.0, *)
-	func tableView(tableView: UITableView, shouldUpdateFocusInContext context: UITableViewFocusUpdateContext) -> Bool {
+	func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:shouldUpdateFocusInContext:))
+		let selector = #selector(UITableViewDelegate.tableView(_:shouldUpdateFocusIn:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, context) ]
 		
@@ -483,17 +483,17 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 	}
 	
 	@available(iOS 9.0, *)
-	func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+	func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
 		
-		let selector = #selector(UITableViewDelegate.tableView(_:didUpdateFocusInContext:withAnimationCoordinator:))
+		let selector = #selector(UITableViewDelegate.tableView(_:didUpdateFocusIn:with:))
 		
 		_latestCalledDelegateMethod = [ selector: (tableView, context, coordinator) ]
 	}
 	
 	@available(iOS 9.0, *)
-	func indexPathForPreferredFocusedViewInTableView(tableView: UITableView) -> NSIndexPath? {
+	func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
 		
-		let selector = #selector(UITableViewDelegate.indexPathForPreferredFocusedViewInTableView(_:))
+		let selector = #selector(UITableViewDelegate.indexPathForPreferredFocusedView(`in`:))
 		
 		_latestCalledDelegateMethod = [ selector: tableView ]
 		

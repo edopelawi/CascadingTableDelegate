@@ -20,7 +20,7 @@ class DestinationReviewUserRowDelegate: CascadingBareTableDelegate {
 	/// Cell identifier that will be used by this instance. Kindly register this on section-level delegate that will use this class' instance.
 	static let cellIdentifier = DestinationReviewUserCell.nibIdentifier()
 	
-	private var viewModel: DestinationReviewUserRowViewModel?
+	fileprivate var viewModel: DestinationReviewUserRowViewModel?
 	
 	convenience init(viewModel: DestinationReviewUserRowViewModel) {
 		self.init(index: 0, childDelegates: [])
@@ -31,24 +31,24 @@ class DestinationReviewUserRowDelegate: CascadingBareTableDelegate {
 
 extension DestinationReviewUserRowDelegate {		
 	
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let identifier = DestinationReviewUserRowDelegate.cellIdentifier
-		return tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+		return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 		
 		let userReview = viewModel?.userReview ?? ""
 		return DestinationReviewUserCell.preferredHeight(userReview: userReview)
 	}
 	
-	func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 		
 		return DestinationReviewUserCell.preferredHeight(userReview: "")
 	}
 	
-	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
 		
 		guard let cell = cell as? DestinationReviewUserCell,
 			let viewModel = viewModel else {

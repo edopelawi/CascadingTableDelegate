@@ -10,7 +10,7 @@ import UIKit
 
 class DestinationTopPhotoCell: UITableViewCell {
 
-	@IBOutlet private weak var photoImageView: UIImageView!
+	@IBOutlet fileprivate weak var photoImageView: UIImageView!
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
@@ -24,7 +24,7 @@ class DestinationTopPhotoCell: UITableViewCell {
 	*/
 	static func preferredHeight() -> CGFloat {
 		
-		let screenWidth = UIScreen.mainScreen().bounds.width
+		let screenWidth = UIScreen.main.bounds.width
 		let ratio = CGFloat(262.0 / 375.0)
 		
 		return screenWidth * ratio
@@ -35,7 +35,7 @@ class DestinationTopPhotoCell: UITableViewCell {
 	
 	- parameter image: `UIImage` optional.
 	*/
-	func configure(image image: UIImage?) {
+	func configure(image: UIImage?) {
 		photoImageView.image = image
 	}
     

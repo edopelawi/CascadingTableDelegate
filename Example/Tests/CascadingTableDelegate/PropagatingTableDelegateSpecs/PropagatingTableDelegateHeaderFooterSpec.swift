@@ -37,12 +37,12 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 		
 		describe("tableView(_:viewForHeaderInSection:)", {
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				var result: UIView?
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					
 					result = propagatingTableDelegate.tableView(tableView, viewForHeaderInSection: 0)
 				})
@@ -59,10 +59,10 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 				
 			})
 			
-			context("on .Section propagation mode", { 
+			context("on .section propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid section value", {
@@ -112,7 +112,7 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 					
 					beforeEach({ 
 						sectionIndex = completeChildDelegateIndex
-						expectedResult = UIView(frame: CGRectZero)
+						expectedResult = UIView()
 						
 						childDelegates[sectionIndex].returnedViewOptional = expectedResult
 						
@@ -144,12 +144,12 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 		
 		describe("tableView(_:viewForFooterInSection:)", {
 
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				var result: UIView?
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					
 					result = propagatingTableDelegate.tableView(tableView, viewForFooterInSection: 0)
 				})
@@ -167,10 +167,10 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 			})
 			
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid section value", {
@@ -220,7 +220,7 @@ class PropagatingTableDelegateHeaderFooterSpec: QuickSpec {
 					
 					beforeEach({
 						sectionIndex = completeChildDelegateIndex
-						expectedResult = UIView(frame: CGRectZero)
+						expectedResult = UIView()
 						
 						childDelegates[sectionIndex].returnedViewOptional = expectedResult
 						

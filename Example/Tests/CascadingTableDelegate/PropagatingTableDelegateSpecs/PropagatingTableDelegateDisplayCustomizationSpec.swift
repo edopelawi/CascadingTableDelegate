@@ -33,7 +33,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 			)
 		}
 		
-		describe("tableView(_:willDisplayCell:forRowAtIndexPath:)", {
+		describe("tableView(_:willDisplay:forRowAt:)", {
 			
 			var tableView: UITableView!
 			var tableCell: UITableViewCell!
@@ -43,22 +43,22 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				tableCell = UITableViewCell()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("with invalid indexPath row value", {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: 99, inSection: 0)
+						let indexPath = IndexPath(row: 99, section: 0)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							willDisplayCell: tableCell,
-							forRowAtIndexPath: indexPath
+							willDisplay: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -73,12 +73,12 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				context("where corresponding child doesn't implement the method", {
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+						let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							willDisplayCell: tableCell,
-							forRowAtIndexPath: indexPath
+							willDisplay: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -92,15 +92,15 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				
 				context("where corresponding child implements the method", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							willDisplayCell: tableCell,
-							forRowAtIndexPath: indexPath)
+							willDisplay: tableCell,
+							forRowAt: indexPath)
 					})
 					
 					it("should call the child's method using the passed parameters", closure: {
@@ -108,13 +108,13 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
 						guard let calledMethod = latestMethods.keys.first,
-							let calledParameters =  latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: NSIndexPath) else {
+							let calledParameters =  latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: IndexPath) else {
 								
-								fail("tableView(_:willDisplayCell:forRowAtIndexPath:) not called correctly")
+								fail("tableView(_:willDisplay:forRowAt:) not called correctly")
 								return
 						}
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:willDisplayCell:forRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:))
 						
 						expect(calledMethod).to(equal(expectedMethod))
 						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
@@ -125,21 +125,21 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid indexPath section value ", {
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: 99)
+						let indexPath = IndexPath(row: 0, section: 99)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							willDisplayCell: tableCell,
-							forRowAtIndexPath: indexPath
+							willDisplay: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -154,12 +154,12 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				context("where corresponding child doesn't implement the method", {
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+						let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							willDisplayCell: tableCell,
-							forRowAtIndexPath: indexPath
+							willDisplay: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -173,15 +173,15 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				
 				context("where corresponing child implements the method", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							willDisplayCell: tableCell,
-							forRowAtIndexPath: indexPath
+							willDisplay: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -190,13 +190,13 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
 						guard let calledMethod = latestMethods.keys.first,
-							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: NSIndexPath) else {
+							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: IndexPath) else {
 								
-								fail("tableView(_:willDisplayCell:forRowAtIndexPath:) is not called correctly")
+								fail("tableView(_:willDisplay:forRowAt:) is not called correctly")
 								return
 						}
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:willDisplayCell:forRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:))
 						
 						expect(calledMethod).to(equal(expectedMethod))
 						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
@@ -217,10 +217,10 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				headerView = UIView()
 			})
 			
-			context("on .Row propagation mode", { 
+			context("on .row propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					propagatingTableDelegate.tableView(
 						tableView,
 						willDisplayHeaderView: headerView,
@@ -235,10 +235,10 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", { 
+			context("on .section propagation mode", { 
 				
 				beforeEach({ 
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				it("should not call any of its method for invalid section number", closure: {
@@ -301,10 +301,10 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				footerView = UIView()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					propagatingTableDelegate.tableView(
 						tableView,
 						willDisplayFooterView: footerView,
@@ -319,10 +319,10 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				it("should not call any of its method for invalid section number", closure: {
@@ -374,7 +374,7 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 			})
 		})
 
-		describe("tableView(_:didEndDisplayingCell:forRowAtIndexPath:)", {
+		describe("tableView(_:didEndDisplaying:forRowAt:)", {
 			
 			var tableView: UITableView!
 			var tableCell: UITableViewCell!
@@ -384,22 +384,22 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				tableCell = UITableViewCell()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 				})
 				
 				context("with invalid indexPath row value", {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: 99, inSection: 0)
+						let indexPath = IndexPath(row: 99, section: 0)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							didEndDisplayingCell: tableCell,
-							forRowAtIndexPath: indexPath
+							didEndDisplaying: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -415,12 +415,12 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 					
 					beforeEach({
 						
-						let indexPath = NSIndexPath(forRow: bareChildDelegateIndex, inSection: 0)
+						let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							didEndDisplayingCell: tableCell,
-							forRowAtIndexPath: indexPath
+							didEndDisplaying: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -434,16 +434,16 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				
 				context("where corresponding child implements the method", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
 						
-						indexPath = NSIndexPath(forRow: completeChildDelegateIndex, inSection: 0)
+						indexPath = IndexPath(row: completeChildDelegateIndex, section: 0)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							didEndDisplayingCell: tableCell,
-							forRowAtIndexPath: indexPath)
+							didEndDisplaying: tableCell,
+							forRowAt: indexPath)
 					})
 					
 					it("should call the child's method using the passed parameters", closure: {
@@ -451,13 +451,13 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
 						guard let calledMethod = latestMethods.keys.first,
-							let calledParameters =  latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: NSIndexPath) else {
+							let calledParameters =  latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: IndexPath) else {
 								
-								fail("tableView(_:didEndDisplayingCell:forRowAtIndexPath:) not called correctly")
+								fail("tableView(_:didEndDisplaying:forRowAt:) not called correctly")
 								return
 						}
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:didEndDisplayingCell:forRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:didEndDisplaying:forRowAt:))
 						
 						expect(calledMethod).to(equal(expectedMethod))
 						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
@@ -468,21 +468,21 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				context("with invalid indexPath section value ", {
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: 99)
+						let indexPath = IndexPath(row: 0, section: 99)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							didEndDisplayingCell: tableCell,
-							forRowAtIndexPath: indexPath
+							didEndDisplaying: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -497,12 +497,12 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				context("where corresponding child doesn't implement the method", {
 					
 					beforeEach({
-						let indexPath = NSIndexPath(forRow: 0, inSection: bareChildDelegateIndex)
+						let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							didEndDisplayingCell: tableCell,
-							forRowAtIndexPath: indexPath
+							didEndDisplaying: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -516,15 +516,15 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				
 				context("where corresponing child implements the method", {
 					
-					var indexPath: NSIndexPath!
+					var indexPath: IndexPath!
 					
 					beforeEach({
-						indexPath = NSIndexPath(forRow: 0, inSection: completeChildDelegateIndex)
+						indexPath = IndexPath(row: 0, section: completeChildDelegateIndex)
 						
 						propagatingTableDelegate.tableView(
 							tableView,
-							didEndDisplayingCell: tableCell,
-							forRowAtIndexPath: indexPath
+							didEndDisplaying: tableCell,
+							forRowAt: indexPath
 						)
 					})
 					
@@ -533,13 +533,13 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 						let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 						
 						guard let calledMethod = latestMethods.keys.first,
-							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: NSIndexPath) else {
+							let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, tableCell: UITableViewCell, indexPath: IndexPath) else {
 								
-								fail("tableView(_:didEndDisplayingCell:forRowAtIndexPath:) is not called correctly")
+								fail("tableView(_:didEndDisplaying:forRowAt:) is not called correctly")
 								return
 						}
 						
-						let expectedMethod = #selector(UITableViewDelegate.tableView(_:didEndDisplayingCell:forRowAtIndexPath:))
+						let expectedMethod = #selector(UITableViewDelegate.tableView(_:didEndDisplaying:forRowAt:))
 						
 						expect(calledMethod).to(equal(expectedMethod))
 						expect(calledParameters.tableView).to(beIdenticalTo(tableView))
@@ -560,10 +560,10 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				headerView = UIView()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					propagatingTableDelegate.tableView(
 						tableView,
 						didEndDisplayingHeaderView: headerView,
@@ -578,10 +578,10 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				it("should not call any of its child method for invalid section number", closure: {
@@ -642,10 +642,10 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				footerView = UIView()
 			})
 			
-			context("on .Row propagation mode", {
+			context("on .row propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Row
+					propagatingTableDelegate.propagationMode = .row
 					propagatingTableDelegate.tableView(
 						tableView,
 						didEndDisplayingFooterView: footerView,
@@ -660,10 +660,10 @@ class PropagatingTableDelegateDisplayCustomizationSpec: QuickSpec {
 				})
 			})
 			
-			context("on .Section propagation mode", {
+			context("on .section propagation mode", {
 				
 				beforeEach({
-					propagatingTableDelegate.propagationMode = .Section
+					propagatingTableDelegate.propagationMode = .section
 				})
 				
 				it("should not call any of its method for invalid section number", closure: {
