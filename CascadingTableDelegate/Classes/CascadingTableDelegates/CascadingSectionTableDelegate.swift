@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-A `CascadingTableDelegate`-compliant class that will propagate any `UITableViewDelegate` or `UITableViewDataSource` method it received to its class, based on received `NSIndexPath`'s `row` value.
+A `CascadingTableDelegate`-compliant class that will propagate any `UITableViewDelegate` or `UITableViewDataSource` method it received to its class, based on received `IndexPath`'s `row` value.
 
 In a way, this instance's child `CascadingTableDelegate`s acts as row-based `UITableViewDelegate`s and `UITableViewDataSource`s.
 
@@ -20,70 +20,70 @@ It is advised for the `childDelegates` to implement the `estimatedHeightFor...` 
 - warning: Currently, this class doesn't implement:
 - `sectionIndexTitlesForTableView(_:)`
 - `tableView(_:sectionForSectionIndexTitle:atIndex:)`
-- `tableView(_:moveRowAtIndexPath:toIndexPath:)`
+- `tableView(_:moveRowAt:toIndexPath:)`
 - `tableView(_:shouldUpdateFocusInContext:)`
 - `tableView(_:didUpdateFocusInContext: withAnimationCoordinator:)`
 - `indexPathForPreferredFocusedViewInTableView(_:)`
-- `tableView(_:targetIndexPathForMoveFromRowAtIndexPath: toProposedIndexPath:)`
+- `tableView(_:targetIndexPathForMoveFromRowAt: toProposedIndexPath:)`
 
 since it's unclear how to propagate those methods to its childs. Should you need to implement those, kindly subclass this class.
 */
-public class CascadingSectionTableDelegate: PropagatingTableDelegate {
+open class CascadingSectionTableDelegate: PropagatingTableDelegate {
 	
 	/// Reload mode that used when this instance's `childDelegates` are changed.
 	public enum ReloadMode {
 		
 		/// Does not reload.
-		case None
+		case none
 		
 		/// Calls `currentTableView`'s `reloadData` method.
-		case Whole
+		case whole
 	
 		/// Calls `currentTableView`s `reloadSections(_:withRowAnimation:)` using this instance's `index` and corresponding `animation`.
-		case Section(animation: UITableViewRowAnimation)
+		case section(animation: UITableViewRowAnimation)
 	}
 	
 	// MARK: - Public properties
 	
-	/// This value will always be set as `.Row`, no matter what new value is assigned.
-	override public var propagationMode: PropagatingTableDelegate.PropagationMode {
+	/// This value will always be set as `.row`, no matter what new value is assigned.
+	override open var propagationMode: PropagatingTableDelegate.PropagationMode {
 		
 		didSet {
 			
-			if propagationMode != .Row {
-				propagationMode = .Row
+			if propagationMode != .row {
+				propagationMode = .row
 			}
 		}
 	}
 	
-	override public var childDelegates: [CascadingTableDelegate] {
+	override open var childDelegates: [CascadingTableDelegate] {
 		didSet {
 			reloadCurrentTableView()
 		}
 	}
 	
 	/// Marks whether this instance should reload its `currentTableView` if its `childDelegates` changed. Defaults to `None`.
-	public var reloadModeOnChildDelegatesChanged: ReloadMode = .None
+	open var reloadModeOnChildDelegatesChanged: ReloadMode = .none
 	
 	/// Current `UITableView` that weakly held by this instance.
-	public var currentTableView: UITableView? {
+	open var currentTableView: UITableView? {
 		return tableView
 	}
 	
 	// MARK: - Private properties
 	
-	private weak var tableView: UITableView?
+	fileprivate weak var tableView: UITableView?
 	
 	// MARK: - Initializers
 	
 	required public init(index: Int, childDelegates: [CascadingTableDelegate]) {
 		
 		super.init(index: index, childDelegates: childDelegates)
-		self.propagationMode = .Row
+		self.propagationMode = .row
 	}
 	
 	/**
-	Overidden convenience initialzer from `PropagatingTableDelegate`. Any given `propagationMode` will changed to `.Row`.
+	Overidden convenience initialzer from `PropagatingTableDelegate`. Any given `propagationMode` will changed to `.row`.
 	*/
 	convenience init(index: Int, childDelegates: [CascadingTableDelegate], propagationMode: PropagatingTableDelegate.PropagationMode) {
 		
@@ -97,7 +97,7 @@ public class CascadingSectionTableDelegate: PropagatingTableDelegate {
 	
 	- parameter tableView: `UITableView` instance.
 	*/
-	override public func prepare(tableView tableView: UITableView) {
+	override open func prepare(tableView: UITableView) {
 		
 		super.prepare(tableView: tableView)
 		
@@ -106,18 +106,18 @@ public class CascadingSectionTableDelegate: PropagatingTableDelegate {
 	
 	// MARK: - Private methods
 	
-	private func reloadCurrentTableView() {
+	fileprivate func reloadCurrentTableView() {
 		
 		switch reloadModeOnChildDelegatesChanged {
 			
-		case .Whole:
+		case .whole:
 			currentTableView?.reloadData()
 			
-		case .Section(let animation):
-			let indexes = NSIndexSet(index: self.index)
-			currentTableView?.reloadSections(indexes, withRowAnimation: animation)
+		case .section(let animation):
+			let indexes = IndexSet(integer: self.index)
+			currentTableView?.reloadSections(indexes, with: animation)
 			
-		case .None:
+		case .none:
 			break
 			
 		}
