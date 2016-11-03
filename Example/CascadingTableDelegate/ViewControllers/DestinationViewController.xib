@@ -21,7 +21,7 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="zUW-bE-uw6">
                     <color key="backgroundColor" red="0.18039216101169586" green="0.21568627655506134" blue="0.25098040699958801" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIq-my-6Ct" userLabel="Static Footer View">
+                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIq-my-6Ct" userLabel="Static Footer View">
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTK-Jn-A4G" userLabel="Footer Button">
                             <color key="backgroundColor" red="0.17254902420000001" green="0.88235294819999999" blue="0.88627451660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

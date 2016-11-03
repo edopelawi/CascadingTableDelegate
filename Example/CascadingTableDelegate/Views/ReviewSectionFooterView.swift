@@ -28,9 +28,14 @@ class ReviewSectionFooterView: UIView {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		showMoreButton?.setRoundedCorner()
 		activityIndicator?.isHidden = true
 	}
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		showMoreButton?.setRoundedCorner()
+	}
+	
 	
 	/// Factory method of this class.
 	static func view() -> ReviewSectionFooterView {

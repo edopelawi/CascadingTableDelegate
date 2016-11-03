@@ -31,8 +31,6 @@ class DestinationViewController: UIViewController {
 		configureRefreshControl()
 		configureNavBarStyle()
 		
-		footerButton.setRoundedCorner()
-		
 		createRootDelegate()
     }
 	
@@ -40,6 +38,11 @@ class DestinationViewController: UIViewController {
 		super.viewWillAppear(animated)
 		navigationController?.isNavigationBarHidden = false
 		refreshData()
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		footerButton.setRoundedCorner()
 	}
 	
 	override var preferredStatusBarStyle : UIStatusBarStyle {
