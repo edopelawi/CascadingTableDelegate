@@ -29,19 +29,16 @@ class DestinationHeaderSectionDelegate: NSObject {
 	var childDelegates: [CascadingTableDelegate]
 	weak var parentDelegate: CascadingTableDelegate?
 	
-	var viewModel: DestinationHeaderSectionViewModel? {
-		didSet {
-			configureViewModelObserver()
-			currentTableView?.reloadData()
-		}
-	}
+	fileprivate var viewModel: DestinationHeaderSectionViewModel?
 	
 	fileprivate weak var currentTableView: UITableView?
 	
 	convenience init(viewModel: DestinationHeaderSectionViewModel? = nil) {
+		
 		self.init(index: 0, childDelegates: [])
+		
+		viewModel?.add(observer: self)
 		self.viewModel = viewModel
-		configureViewModelObserver()
 	}
 	
 	required init(index: Int, childDelegates: [CascadingTableDelegate]) {
@@ -49,20 +46,22 @@ class DestinationHeaderSectionDelegate: NSObject {
 		self.childDelegates = childDelegates
 	}
 	
-	// MARK: - Private methods
+	deinit {
+		viewModel?.remove(observer: self)
+	}
 	
-	fileprivate func configureViewModelObserver() {
+}
 
-		viewModel?.headerDataChanged = { [weak self] in
-			
-			guard let index = self?.index,
-				let tableView = self?.currentTableView else {
+extension DestinationHeaderSectionDelegate: DestinationHeaderSectionViewModelObserver {
+
+	func headerSectionDataChanged() {
+		
+		guard let tableView = currentTableView else {
 				return
-			}
-			
-			let indexes = IndexSet(integer: index)
-			tableView.reloadSections(indexes, with: .automatic)
 		}
+		
+		let indexes = IndexSet(integer: index)
+		tableView.reloadSections(indexes, with: .automatic)
 	}
 }
 
