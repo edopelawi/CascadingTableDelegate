@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.0.1](https://github.com/edopelawi/CascadingTableDelegate/tree/2.0.1) (2016-11-04)
+[Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.0...2.0.1)
+
+**Merged pull requests:**
+
+- Update README.md and CONTRIBUTING.md [\#2](https://github.com/edopelawi/CascadingTableDelegate/pull/2) ([edopelawi](https://github.com/edopelawi))
+- Change sample code's view models to implement Observer pattern [\#1](https://github.com/edopelawi/CascadingTableDelegate/pull/1) ([edopelawi](https://github.com/edopelawi))
+
 ## [2.0.0](https://github.com/edopelawi/CascadingTableDelegate/tree/2.0.0) (2016-11-03)
 [Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/1.2.0...2.0.0)
 
