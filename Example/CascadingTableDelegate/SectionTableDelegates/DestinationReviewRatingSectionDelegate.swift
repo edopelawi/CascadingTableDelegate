@@ -9,13 +9,6 @@
 import Foundation
 import CascadingTableDelegate
 
-protocol DestinationReviewRatingSectionViewModel: class {
-	
-	var averageRating: Int { get }
-	
-	/// Executed when this instance's review rating data is updated.
-	var reviewRatingDataUpdated: ((Void) -> Void)? { get set }
-}
 
 class DestinationReviewRatingSectionDelegate: NSObject {
 	
@@ -23,19 +16,18 @@ class DestinationReviewRatingSectionDelegate: NSObject {
 	var childDelegates: [CascadingTableDelegate]
 	weak var parentDelegate: CascadingTableDelegate?
 	
-	var viewModel: DestinationReviewRatingSectionViewModel? {
-		didSet {
-			configureViewModelObserver()
-		}
-	}
+	fileprivate var viewModel: DestinationReviewSectionViewModel?
 	
 	fileprivate var headerview: SectionHeaderView
 	fileprivate weak var currentTableView: UITableView?
 	
-	convenience init(viewModel: DestinationReviewRatingSectionViewModel? = nil) {
+	convenience init(viewModel: DestinationReviewSectionViewModel? = nil) {
 		self.init(index: 0, childDelegates: [])
+		
+		
+		viewModel?.add(observer: self)
 		self.viewModel = viewModel
-		configureViewModelObserver()
+		
 	}
 	
 	required init(index: Int, childDelegates: [CascadingTableDelegate]) {
@@ -46,19 +38,20 @@ class DestinationReviewRatingSectionDelegate: NSObject {
 		headerview = SectionHeaderView.view(headerText: "REVIEW")
 	}
 	
-	fileprivate func configureViewModelObserver() {
+}
+
+extension DestinationReviewRatingSectionDelegate: DestinationReviewSectionViewModelObserver {
+	
+	func reviewSectionDataChanged() {
 		
-		viewModel?.reviewRatingDataUpdated = { [weak self] in
-			
-			guard let index = self?.index,
-				let tableView = self?.currentTableView else {
+		guard let tableView = currentTableView else {
 				return
-			}
-			
-			let indexes = IndexSet(integer: index)
-			tableView.reloadSections(indexes, with: .automatic)			
 		}
+		
+		let indexes = IndexSet(integer: index)
+		tableView.reloadSections(indexes, with: .automatic)
 	}
+	
 }
 
 extension DestinationReviewRatingSectionDelegate: CascadingTableDelegate {

@@ -14,10 +14,9 @@ class DestinationViewModel {
 	// MARK: - Public properties
 	
 	var destinationTitle: String?
-	var headerDataChanged: ((Void) -> Void)?
-	var reviewRatingDataUpdated: ((Void) -> Void)?
-	var reviewUserDataChanged: ((Void) -> Void)?
 	
+	var headerSectionObservers = [DestinationHeaderSectionViewModelObserver]()
+	var reviewSectionObservers = [DestinationReviewSectionViewModelObserver]()
 	var infoSectionObservers = [DestinationInfoSectionViewModelObserver]()
 	
 	// MARK: - Private properties
@@ -102,11 +101,9 @@ class DestinationViewModel {
 	}
 	
 	fileprivate func executeUpdateClosures() {
-				
-		headerDataChanged?()
-		reviewRatingDataUpdated?()
-		reviewUserDataChanged?()
 		
+		notifyHeaderSectionObservers()
+		notifyReviewSectionObservers()		
 		notifyInfoSectionObservers()
 	}
 }
@@ -143,15 +140,13 @@ extension DestinationViewModel: DestinationInfoSectionViewModel {
 	
 }
 
-extension DestinationViewModel: DestinationReviewRatingSectionViewModel {
+
+extension DestinationViewModel: DestinationReviewSectionViewModel {
+
 	
 	var averageRating: Int {
 		return _averageRating
 	}
-	
-}
-
-extension DestinationViewModel: DestinationReviewUserSectionViewModel {
 	
 	var rowViewModels: [DestinationReviewUserRowViewModel] {
 
@@ -172,7 +167,7 @@ extension DestinationViewModel: DestinationReviewUserSectionViewModel {
 			self.generateMoreRowViewModels()
 			
 			DispatchQueue.main.async(execute: {
-				self.reviewUserDataChanged?()
+				self.notifyReviewSectionObservers()
 				onCompleted?()
 			})
 		}
@@ -187,7 +182,7 @@ extension DestinationViewModel: DestinationReviewUserSectionViewModel {
 			rating: 4
 		)
 		
-		let newReviews = [DestinationReviewUserRowViewModel](repeating: userReview, count: 2)
+		let newReviews = [DestinationReviewUserRowViewModel](repeating: userReview, count: remainingRowViewModels)
 		
 		_rowViewModels.append(contentsOf: newReviews)
 		_remainingRowViewModels = 0
