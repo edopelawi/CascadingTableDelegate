@@ -94,7 +94,7 @@ Here's a snippet how the long page above is divided into section delegates in th
 
 ![Section Delegates](ReadmeImages/section-delegates.jpg)
 
-All the section delegate classes then added as child to a single `CascadingRootTableDelegate`. For the details, just clone this repo and run the sample project! 😁
+All the section delegate classes then added as child to a single `CascadingRootTableDelegate`. Any change on the sequence or composition of its `childDelegates` will affect the displayed table. Clone this repo and try it out in sample project! 😁
 
 ## Pros and Cons
 
