@@ -47,7 +47,7 @@ extension DestinationHeaderSectionViewModel {
 		}
 	}
 	
-	/// Notify each of this `headerSectionObservers`' `headerSectionDataChanged()`.
+	/// Call each of this `headerSectionObservers`' `headerSectionDataChanged()`.
 	func notifyHeaderSectionObservers() {
 		
 		self.headerSectionObservers.forEach { observer in

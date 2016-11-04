@@ -16,7 +16,7 @@ struct DestinationInfo {
 
 protocol DestinationInfoSectionViewModelObserver: class {
 	
-	/// Executed when any property info of the listened `DestinationInfoSectionViewModel` is updated.
+	/// Executed when any property info of the observed `DestinationInfoSectionViewModel` is updated.
 	func infoSectionDataChanged()
 }
 
@@ -34,10 +34,12 @@ protocol DestinationInfoSectionViewModel: class {
 
 extension DestinationInfoSectionViewModel {
 	
+	/// Add passed `observer` to this instance's `infoSectionObservers`.
 	func add(observer: DestinationInfoSectionViewModelObserver) {
 		self.infoSectionObservers.append(observer)
 	}
 	
+	/// Remove passed `observer` from this instance's `infoSectionObservers`.
 	func remove(observer: DestinationInfoSectionViewModelObserver) {
 		
 		let observerIndex = self.infoSectionObservers.index { (anotherObserver) -> Bool in
@@ -50,8 +52,7 @@ extension DestinationInfoSectionViewModel {
 		}
 	}
 	
-	
-	/// Notify all
+	/// Notify each of this `reviewSectionObservers`' `reviewSectionDataChanged()`.
 	func notifyInfoSectionObservers() {
 		self.infoSectionObservers.forEach { observer in
 			observer.infoSectionDataChanged()

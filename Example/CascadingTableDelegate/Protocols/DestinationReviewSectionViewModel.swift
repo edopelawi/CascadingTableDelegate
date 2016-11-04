@@ -52,7 +52,7 @@ extension DestinationReviewSectionViewModel {
 		}
 	}
 	
-	/// Notify each of this `reviewSectionObservers`' `reviewSectionDataChanged()`.
+	/// Call each of this `reviewSectionObservers`' `reviewSectionDataChanged()`.
 	func notifyReviewSectionObservers() {
 		
 		self.reviewSectionObservers.forEach { observer in
