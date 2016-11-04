@@ -80,6 +80,8 @@ class DestinationViewController: UIViewController {
 
 	fileprivate func createRootDelegate() {				
 		
+		// Feel free to remove, add, copy, or change this array's value. The rootTableDelegate will do the heavy-lifting and display the correct result for you :)
+		
 		let childDelegates: [CascadingTableDelegate] = [
 			DestinationHeaderSectionDelegate(viewModel: viewModel),
 			DestinationInfoMapSectionDelegate(viewModel: viewModel),
