@@ -183,7 +183,7 @@ extension DestinationViewModel: DestinationReviewSectionViewModel {
 			rating: 4
 		)
 		
-		let newReviews = [DestinationReviewUserRowViewModel](repeating: userReview, count: 2)
+		let newReviews = [DestinationReviewUserRowViewModel](repeating: userReview, count: remainingRowViewModels)
 		
 		_rowViewModels.append(contentsOf: newReviews)
 		_remainingRowViewModels = 0
