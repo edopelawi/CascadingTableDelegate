@@ -8,60 +8,22 @@
 
 import Foundation
 import CascadingTableDelegate
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
-
-protocol DestinationReviewUserSectionViewModel: class {
-	
-	var rowViewModels: [DestinationReviewUserRowViewModel] { get }
-	
-	var remainingRowViewModels: Int { get }
-	
-	/// Executed when user-related review data is changed in this instance.
-	var reviewUserDataChanged: ((Void) -> Void)? { get set }
-	
-	/// Retrieve more rows and add it to `rowViewModels`, then execute `onCompleted` when it's ready.
-	func retrieveMoreRowViewModels(_ onCompleted: ((Void) -> Void)?)
-}
 
 class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 	
-	var viewModel: DestinationReviewUserSectionViewModel? {
-		didSet {
-			configureViewModelObserver()
-			updateChildDelegates()
-		}
-	}
+	fileprivate var viewModel: DestinationReviewSectionViewModel?
 	
 	fileprivate var footerView: ReviewSectionFooterView
 	
-	convenience init(viewModel: DestinationReviewUserSectionViewModel) {
+	convenience init(viewModel: DestinationReviewSectionViewModel) {
 		
 		self.init()
 		
+		viewModel.add(observer: self)
 		self.viewModel = viewModel
-		self.reloadModeOnChildDelegatesChanged = .section(animation: .automatic)
-		
-		configureViewModelObserver()
 		updateChildDelegates()
+		
+		self.reloadModeOnChildDelegatesChanged = .section(animation: .automatic)
 	}
 	
 	required init(index: Int = 0, childDelegates: [CascadingTableDelegate] = []) {
@@ -71,6 +33,10 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		super.init(index: index, childDelegates: childDelegates)				
 		
 		configureFooterViewObserver()
+	}
+	
+	deinit {
+		viewModel?.remove(observer: self)
 	}
 	
 	override func prepare(tableView: UITableView) {
@@ -87,14 +53,6 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		
 		tableView.register(nib, forCellReuseIdentifier: rowIdentifier)
 	}
-	
-	fileprivate func configureViewModelObserver() {
-
-		viewModel?.reviewUserDataChanged = { [weak self] in
-			self?.updateChildDelegates()
-		}
-	}
-	
 	
 	fileprivate func updateChildDelegates() {
 
@@ -121,7 +79,13 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		})
 	}
 	
+}
+
+extension DestinationReviewUserSectionDelegate: DestinationReviewSectionViewModelObserver {
 	
+	func reviewSectionDataChanged() {
+		updateChildDelegates()
+	}
 }
 
 extension DestinationReviewUserSectionDelegate {
@@ -132,12 +96,20 @@ extension DestinationReviewUserSectionDelegate {
 	
 	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		
-		return viewModel?.remainingRowViewModels > 0 ? ReviewSectionFooterView.preferredHeight() : CGFloat.leastNormalMagnitude
+		if let remainingViewModels = viewModel?.remainingRowViewModels, remainingViewModels > 0 {
+			return ReviewSectionFooterView.preferredHeight()
+		}
+		
+		return CGFloat.leastNormalMagnitude
 	}
 	
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		
-		return viewModel?.remainingRowViewModels > 0 ? footerView : nil
+		if let remainingViewModels = viewModel?.remainingRowViewModels, remainingViewModels > 0 {
+			return footerView
+		}
+		
+		return nil
 	}
 	
 	override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
