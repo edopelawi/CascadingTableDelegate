@@ -14,8 +14,8 @@ class DestinationViewModel {
 	// MARK: - Public properties
 	
 	var destinationTitle: String?
-	var headerDataChanged: ((Void) -> Void)?
 	
+	var headerSectionObservers = [DestinationHeaderSectionViewModelObserver]()
 	var reviewSectionObservers = [DestinationReviewSectionViewModelObserver]()
 	var infoSectionObservers = [DestinationInfoSectionViewModelObserver]()
 	
@@ -101,9 +101,8 @@ class DestinationViewModel {
 	}
 	
 	fileprivate func executeUpdateClosures() {
-				
-		headerDataChanged?()
 		
+		notifyHeaderSectionObservers()
 		notifyReviewSectionObservers()		
 		notifyInfoSectionObservers()
 	}
