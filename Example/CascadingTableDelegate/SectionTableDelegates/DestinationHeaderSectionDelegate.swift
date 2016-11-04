@@ -9,19 +9,6 @@
 import UIKit
 import CascadingTableDelegate
 
-protocol DestinationHeaderSectionViewModel: class {
-	
-	var topPhoto: UIImage? { get }
-	
-	var destinationName: String? { get }
-	var locationName: String? { get }
-	
-	var description: String? { get }
-	
-	/// Executed when any of this instance's header-related property updated.
-	var headerDataChanged: ((Void) -> Void)? { get set }
-}
-
 class DestinationHeaderSectionDelegate: NSObject {
 
 	enum Row: Int {
