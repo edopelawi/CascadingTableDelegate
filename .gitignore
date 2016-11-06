@@ -45,3 +45,9 @@ Example/Pods/*
 Example/Pods/*
 
 !Example/Pods/Pods.xcodeproj/
+!Example/Pods/Headers/
+
+!Example/Pods/Target\ Support\ Files/
+Example/Pods/Target\ Support\ Files/*
+
+!Example/Pods/Target\ Support\ Files/CascadingTableDelegate/
