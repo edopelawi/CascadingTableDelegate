@@ -16,7 +16,7 @@ Still, there are some rules that need to be followed for contributing:
 
 Before submitting a pull request please make sure **`./run-tests.sh`** is passing (exits with 0), otherwise we won't be able to pull your code.
 
-To be able to run `./run-tests.sh`, you'll need to install [xcpretty](https://github.com/supermarin/xcpretty).
+To be able to run `./run-tests.sh`, you'll need to install [xcpretty](https://github.com/supermarin/xcpretty):
 
 `sudo gem install xcpretty`
 
