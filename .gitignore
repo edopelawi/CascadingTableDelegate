@@ -24,6 +24,7 @@ DerivedData
 .bundle
 
 Carthage
+
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
@@ -31,5 +32,16 @@ Carthage
 # Note: if you ignore the Pods directory, make sure to uncomment
 # `pod install` in .travis.yml
 #
-Pods
+
 Podfile.lock
+
+# TODO: This tedious line below is needed to allow CascadingTableDelegate built via Carthage, without burdening the
+# user to install the Test pods. Should you find a better way to do this, Kindly make a pull request! :)
+
+!Example/Pods/
+Example/Pods/*
+
+!Example/Pods/
+Example/Pods/*
+
+!Example/Pods/Pods.xcodeproj/
