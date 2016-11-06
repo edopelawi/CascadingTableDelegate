@@ -88,5 +88,5 @@ Below are the list of default return values of `UITableViewDelegate` and `UITabl
 ### Reorder
 
 - `tableView(_:indentationLevelForRowAt:)`
-	- 0.
+	- `0`.
 
