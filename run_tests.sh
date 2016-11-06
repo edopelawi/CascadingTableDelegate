@@ -1,3 +1,4 @@
+pod install --project-directory=Example
 xcodebuild \
   -workspace Example/CascadingTableDelegate.xcworkspace \
   -scheme CascadingTableDelegate-Example \
