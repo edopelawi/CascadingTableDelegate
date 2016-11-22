@@ -1,5 +1,16 @@
 # Change Log
 
+## [2.0.2](https://github.com/edopelawi/CascadingTableDelegate/tree/2.0.2) (2016-11-06)
+[Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.1...2.0.2)
+
+**Merged pull requests:**
+
+- Grammar check on the documentations [\#5](https://github.com/edopelawi/CascadingTableDelegate/pull/5) ([edopelawi](https://github.com/edopelawi))
+- Add `pod install` step in `run\_tests.sh` [\#4](https://github.com/edopelawi/CascadingTableDelegate/pull/4) ([edopelawi](https://github.com/edopelawi))
+- Fix carthage issue on 2.0.1 [\#3](https://github.com/edopelawi/CascadingTableDelegate/pull/3) ([edopelawi](https://github.com/edopelawi))
+- Update README.md and CONTRIBUTING.md [\#2](https://github.com/edopelawi/CascadingTableDelegate/pull/2) ([edopelawi](https://github.com/edopelawi))
+- Change sample code's view models to implement Observer pattern [\#1](https://github.com/edopelawi/CascadingTableDelegate/pull/1) ([edopelawi](https://github.com/edopelawi))
+
 ## [2.0.1](https://github.com/edopelawi/CascadingTableDelegate/tree/2.0.1) (2016-11-04)
 [Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.0...2.0.1)
 
