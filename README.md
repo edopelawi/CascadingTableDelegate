@@ -137,7 +137,7 @@ There are three optional `UITableViewDelegate` methods that used to estimate hei
 - `tableView(_:estimatedHeightForHeaderInSection:)`, and
 - `tableView(_:estimatedHeightForFooterInSection:)`.
 
-`CascadingRootTableDelegate` and `CascadingSectionTableDelegate` implements those calls for propagating it to the `childDelegates`. And since both of them implements those, the `UITableView` will **always** call those methods when rendering its rows, headers, and footers.
+`CascadingRootTableDelegate` and `CascadingSectionTableDelegate` implements those calls for propagating it to the `childDelegates`. And since both of them implements those methods, they will allow `UITableView` to **always** call those methods to **every `childDelegates`**, should they found any of their child implements those methods.
 
 To prevent layout breaks, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate` will call its childDelegate's `tableView(_:heightFor...:)` counterpart for the unimplemented methods, so the `UITableView` will render it correctly. If your `tableView(_:heightFor...:)` methods use heavy calculations, it is advised to implement the `tableView(_:estimatedHeightFor...:)` counterpart of them.
 
