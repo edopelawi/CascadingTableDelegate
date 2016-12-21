@@ -115,7 +115,7 @@ open class PropagatingTableDelegate: NSObject {
 			#selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:))
 		]
 		
-		guard specialSelectors.contains(aSelector) else {
+		guard specialSelectors.contains(aSelector), !childDelegates.isEmpty else {
 			return super.responds(to: aSelector)
 		}
 		
