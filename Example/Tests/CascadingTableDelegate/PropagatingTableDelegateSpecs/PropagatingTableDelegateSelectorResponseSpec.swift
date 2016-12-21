@@ -27,6 +27,14 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 				selector = #selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:))
 			})
 			
+			it("should return true if it has no child, because it implements the method by default", closure: {
+				
+				propagatingTableDelegate.childDelegates = []
+				let result = propagatingTableDelegate.responds(to: selector)
+				
+				expect(result).to(beTrue())
+			})
+			
 			it("should return false if none of its child implements it", closure: { 
 				
 				propagatingTableDelegate.childDelegates = [
@@ -58,6 +66,14 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 			
 			beforeEach({
 				selector = #selector(UITableViewDelegate.tableView(_:estimatedHeightForHeaderInSection:))
+			})
+			
+			it("should return true if it has no child, because it implements the method by default", closure: {
+				
+				propagatingTableDelegate.childDelegates = []
+				let result = propagatingTableDelegate.responds(to: selector)
+				
+				expect(result).to(beTrue())
 			})
 			
 			it("should return false if none of its child implements it", closure: {
@@ -92,6 +108,14 @@ class PropagatingTableDelegateSelectorResponseSpec: QuickSpec {
 			
 			beforeEach({
 				selector = #selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:))
+			})
+			
+			it("should return true if it has no child, because it implements the method by default", closure: {
+				
+				propagatingTableDelegate.childDelegates = []
+				let result = propagatingTableDelegate.responds(to: selector)
+				
+				expect(result).to(beTrue())
 			})
 			
 			it("should return false if none of its child implements it", closure: {

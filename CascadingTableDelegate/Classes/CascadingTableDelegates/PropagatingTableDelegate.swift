@@ -107,7 +107,7 @@ open class PropagatingTableDelegate: NSObject {
 	
 	open override func responds(to aSelector: Selector) -> Bool {
 	
-		// TODO: Revisit this later if the estimated-height methods still causes layout breaks for the childDelegates.
+		// TODO: This method was implemented to prevent layout breaks caused by the `estimatedHeightFor...:` methods. Revisit this later whether it's still necessary or not.
 		
 		let specialSelectors: [Selector] = [
 			#selector(UITableViewDelegate.tableView(_:estimatedHeightForRowAt:)),
@@ -115,7 +115,7 @@ open class PropagatingTableDelegate: NSObject {
 			#selector(UITableViewDelegate.tableView(_:estimatedHeightForFooterInSection:))
 		]
 		
-		guard specialSelectors.contains(aSelector) else {
+		guard specialSelectors.contains(aSelector), !childDelegates.isEmpty else {
 			return super.responds(to: aSelector)
 		}
 		
