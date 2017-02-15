@@ -43,11 +43,11 @@ class DestinationInfoListSectionDelegate: CascadingSectionTableDelegate {
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return childDelegates.isEmpty ? CGFloat.leastNormalMagnitude : headerViewHeight
+		return childDelegates.isEmpty ? CGFloat(1.1) : headerViewHeight
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return CGFloat.leastNormalMagnitude
+		return CGFloat(1.1)
 	}
 }
 

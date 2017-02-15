@@ -96,7 +96,7 @@ extension DestinationReviewRatingSectionDelegate: UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return CGFloat.leastNormalMagnitude
+		return CGFloat(1.1)
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

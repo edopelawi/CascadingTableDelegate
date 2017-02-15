@@ -91,7 +91,7 @@ extension DestinationReviewUserSectionDelegate: DestinationReviewSectionViewMode
 extension DestinationReviewUserSectionDelegate {
 	
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return CGFloat.leastNormalMagnitude
+		return CGFloat(1.1)
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -100,7 +100,7 @@ extension DestinationReviewUserSectionDelegate {
 			return ReviewSectionFooterView.preferredHeight()
 		}
 		
-		return CGFloat.leastNormalMagnitude
+		return CGFloat(1.1)
 	}
 	
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
