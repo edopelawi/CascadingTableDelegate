@@ -13,6 +13,7 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 	
 	fileprivate var viewModel: DestinationReviewSectionViewModel?
 	
+	fileprivate var headerView: EmptyContentView
 	fileprivate var footerView: ReviewSectionFooterView
 	
 	convenience init(viewModel: DestinationReviewSectionViewModel) {
@@ -28,6 +29,7 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 	
 	required init(index: Int = 0, childDelegates: [CascadingTableDelegate] = []) {
 		
+		headerView = EmptyContentView.view()
 		footerView = ReviewSectionFooterView.view()
 		
 		super.init(index: index, childDelegates: childDelegates)				
@@ -91,7 +93,11 @@ extension DestinationReviewUserSectionDelegate: DestinationReviewSectionViewMode
 extension DestinationReviewUserSectionDelegate {
 	
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return CGFloat.leastNormalMagnitude
+		return CGFloat(1.1)
+	}
+	
+	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		return headerView
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -100,7 +106,7 @@ extension DestinationReviewUserSectionDelegate {
 			return ReviewSectionFooterView.preferredHeight()
 		}
 		
-		return CGFloat.leastNormalMagnitude
+		return CGFloat(1.1)
 	}
 	
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

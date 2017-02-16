@@ -19,6 +19,8 @@ class DestinationReviewRatingSectionDelegate: NSObject {
 	fileprivate var viewModel: DestinationReviewSectionViewModel?
 	
 	fileprivate var headerview: SectionHeaderView
+	fileprivate var footerView: EmptyContentView
+	
 	fileprivate weak var currentTableView: UITableView?
 	
 	convenience init(viewModel: DestinationReviewSectionViewModel? = nil) {
@@ -36,6 +38,7 @@ class DestinationReviewRatingSectionDelegate: NSObject {
 		self.childDelegates = childDelegates
 		
 		headerview = SectionHeaderView.view(headerText: "REVIEW")
+		footerView = EmptyContentView.view()
 	}
 	
 }
@@ -90,13 +93,17 @@ extension DestinationReviewRatingSectionDelegate: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return headerview
 	}
+		
+	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+		return footerView
+	}
 	
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return SectionHeaderView.preferredHeight()
 	}
 	
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return CGFloat.leastNormalMagnitude
+		return CGFloat(1.1)
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -35,7 +35,7 @@ class CascadingTableDelegatePartialHeightStub: NSObject {
 	
 	var returnedBool: Bool = false
 	
-	var returnedFloat: CGFloat = CGFloat.leastNormalMagnitude
+	var returnedFloat: CGFloat = CGFloat(1.1)
 	
 	var returnedViewOptional: UIView? = nil
 	
