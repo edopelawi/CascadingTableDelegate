@@ -1,5 +1,18 @@
 # Change Log
 
+## [2.0.4](https://github.com/edopelawi/CascadingTableDelegate/tree/2.0.4) (2017-02-19)
+[Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.3...2.0.4)
+
+**Closed issues:**
+
+- crash when press "Show me he good stuff" button [\#9](https://github.com/edopelawi/CascadingTableDelegate/issues/9)
+
+**Merged pull requests:**
+
+- InternalInconsistencyException fix for sample project [\#10](https://github.com/edopelawi/CascadingTableDelegate/pull/10) ([edopelawi](https://github.com/edopelawi))
+
+# Change Log
+
 ## [2.0.3](https://github.com/edopelawi/CascadingTableDelegate/tree/2.0.3) (2016-12-21)
 [Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.2...2.0.3)
 
