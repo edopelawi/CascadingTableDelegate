@@ -67,7 +67,7 @@ public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelega
 
 Long story short, this protocol *allows us to propagate* any `UITableViewDelegate` or `UITableViewDataSource` method call it receives to its child, based on the `section` or `row` value of the passed `IndexPath`.
 
-###But UITableViewDelegate and UITableViewDataSource has tons of methods! Who will propagate all those calls?
+### But UITableViewDelegate and UITableViewDataSource has tons of methods! Who will propagate all those calls?
 
 Worry not, this library did the heavy lifting by creating **two ready-to-use classes**, `CascadingRootTableDelegate` and `CascadingSectionTableDelegate`. Both implements `CascasdingTableDelegate` protocol and the propagating logic, but with different use case:
 
