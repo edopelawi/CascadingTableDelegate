@@ -76,7 +76,7 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		
 		footerView.startActivityIndicator()
 		
-		viewModel?.retrieveMoreRowViewModels({ [weak self] _ in
+		viewModel?.retrieveMoreRowViewModels({ [weak self] in
 			self?.footerView.stopActivityIndicator()
 		})
 	}

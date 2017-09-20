@@ -27,11 +27,11 @@ class DestinationInfoListRowDelegate: CascadingBareTableDelegate {
 		return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 	}
 	
-	func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+	@objc func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 		return DestinationInfoCell.preferredHeight(infoType: info?.type, infoText: info?.text)
 	}		
 	
-	func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+	@objc func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
 		
 		guard let cell = cell as? DestinationInfoCell else {
 			return
