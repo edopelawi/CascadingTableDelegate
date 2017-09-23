@@ -76,11 +76,11 @@ extension DestinationReviewRatingSectionDelegate: CascadingTableDelegate {
 
 extension DestinationReviewRatingSectionDelegate: UITableViewDataSource {
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	@objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	@objc func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let identifier = DestinationReviewRatingCell.nibIdentifier()
 		return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
@@ -90,28 +90,28 @@ extension DestinationReviewRatingSectionDelegate: UITableViewDataSource {
 
 extension DestinationReviewRatingSectionDelegate: UITableViewDelegate {
 	
-	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	@objc func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return headerview
 	}
 		
-	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+	@objc func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		return footerView
 	}
 	
-	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	@objc func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return SectionHeaderView.preferredHeight()
 	}
 	
-	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+	@objc func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return CGFloat(1.1)
 	}
 	
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+	@objc func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		
 		return DestinationReviewRatingCell.preferredHeight()
 	}
 	
-	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+	@objc func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		
 		guard let cell = cell as? DestinationReviewRatingCell else {
 			return
