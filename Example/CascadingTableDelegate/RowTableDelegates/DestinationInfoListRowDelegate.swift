@@ -21,7 +21,7 @@ class DestinationInfoListRowDelegate: CascadingBareTableDelegate {
 		self.info = info
 	}
 	
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	@objc override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let identifier = DestinationInfoListRowDelegate.cellIdentifier
 		return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
