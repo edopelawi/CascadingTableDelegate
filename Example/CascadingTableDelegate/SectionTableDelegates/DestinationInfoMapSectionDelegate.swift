@@ -52,35 +52,35 @@ extension DestinationInfoMapSectionDelegate: DestinationInfoSectionViewModelObse
 
 extension DestinationInfoMapSectionDelegate {
 
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	@objc override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
 	}
 	
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	@objc override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let identifier = DestinationMapCell.nibIdentifier()
 		return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 	}
 	
-	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	@objc func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return headerView
 	}
 	
-	func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+	@objc func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 		
 		return DestinationMapCell.preferredHeight()
 	}
 	
 	
-	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	@objc func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return SectionHeaderView.preferredHeight()
 	}
 	
-	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+	@objc func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return CGFloat(1.1)
 	}
 	
-	func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+	@objc func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
 		
 		if let mapCell = cell as? DestinationMapCell,
 			let locationCoordinate = viewModel?.locationCoordinate {
