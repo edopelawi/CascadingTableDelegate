@@ -6,8 +6,7 @@ osx_image: xcode9
 language: objective-c
 cache: cocoapods
 podfile: Example/Podfile
-before_script:
-  - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+before_script: 'echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config'
 before_install:
 - gem install cocoapods # Since Travis is not always on latest version
 - pod repo update # Uncomment this when the pod install failed because of the stale pod repo
