@@ -7,6 +7,6 @@ target 'CascadingTableDelegate_Example' do
     inherit! :search_paths
 
     pod 'Quick', '1.1.0'
-    pod 'Nimble', '7.0.1'
+    pod 'Nimble', :git=>"git@github.com:Quick/Nimble.git", :commit=>"a63252b16eba6cdebec4e4936388c90552165a68" #TODO: Replace this with 7.0.2 after it's released.
   end
 end
