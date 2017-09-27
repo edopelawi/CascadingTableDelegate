@@ -6,11 +6,13 @@ osx_image: xcode9
 language: objective-c
 cache: cocoapods
 podfile: Example/Podfile
+
+# TODO: Uncomment these lines after Quick and Nimble updated their pod versions.
+
 before_install:
-- echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - gem install cocoapods # Since Travis is not always on latest version
-- pod repo update # Uncomment this when the pod install failed because of the stale pod repo
-- pod install --project-directory=Example --verbose
+# - pod repo update # Uncomment this when the pod install failed because of the stale pod repo
+# - pod install --project-directory=Example --verbose
 script:
 # - set -o pipefail && xcodebuild
 #   -workspace Example/CascadingTableDelegate.xcworkspace
