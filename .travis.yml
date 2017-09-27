@@ -12,9 +12,9 @@ before_install:
 - pod repo update # Uncomment this when the pod install failed because of the stale pod repo
 - pod install --project-directory=Example --verbose
 script:
-- set -o pipefail && xcodebuild
-  -workspace Example/CascadingTableDelegate.xcworkspace
-  -scheme CascadingTableDelegate-Example
-  -destination 'platform=iOS Simulator,name=iPhone 5s'
-  clean test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+# - set -o pipefail && xcodebuild
+#   -workspace Example/CascadingTableDelegate.xcworkspace
+#   -scheme CascadingTableDelegate-Example
+#   -destination 'platform=iOS Simulator,name=iPhone 5s'
+#   clean test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
 - pod lib lint
