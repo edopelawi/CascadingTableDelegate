@@ -6,7 +6,7 @@ target 'CascadingTableDelegate_Example' do
   target 'CascadingTableDelegate_Tests' do
     inherit! :search_paths
 
-    pod 'Quick', :git=>"git@github.com:Quick/Quick.git", :commit=>"3665ae9570b682a562df847cccbb46811864676a" #TODO: Replace this with proper version when it's released later.
-    pod 'Nimble', :git=>"git@github.com:Quick/Nimble.git", :commit=>"a63252b16eba6cdebec4e4936388c90552165a68" #TODO: Replace this with 7.0.2 after it's released.
+    pod 'Quick', "1.2.0"
+    pod 'Nimble', "7.0.2"
   end
 end
