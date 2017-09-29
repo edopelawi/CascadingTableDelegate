@@ -180,7 +180,7 @@ pod "CascadingTableDelegate", "~> 3.0"
 To install CascadingTableDelegate using [Carthage](https://github.com/Carthage/Carthage), simply add the following line to your Cartfile:
 
 ```
-github "edopelawi/CascadingTableDelegate" ~> 23.0
+github "edopelawi/CascadingTableDelegate" ~> 3.0
 ```
 
 ## Author
