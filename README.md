@@ -157,7 +157,13 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-This version supports Swift 3, which available in Xcode 8. For Swift 2.2 / Xcode 7.x support, kindly check the 1.x versions 🙂
+Below is the list of versions with its corresponding Swift version:
+
+| Swift Version | CascadingTableDelegate Version | 
+| --- | --- |
+| 4.x | 3.x |
+| 3.x | 2.x |
+| 2.2 | 1.x |
 
 ## Installation
 
@@ -166,7 +172,7 @@ This version supports Swift 3, which available in Xcode 8. For Swift 2.2 / Xcode
 To install CascadingTableDelegate using [CocoaPods](http://cocoapods.org), simply add the following line to your Podfile:
 
 ```ruby
-pod "CascadingTableDelegate", "~> 2.0"
+pod "CascadingTableDelegate", "~> 3.0"
 ```
 
 ### Carthage
@@ -174,7 +180,7 @@ pod "CascadingTableDelegate", "~> 2.0"
 To install CascadingTableDelegate using [Carthage](https://github.com/Carthage/Carthage), simply add the following line to your Cartfile:
 
 ```
-github "edopelawi/CascadingTableDelegate" ~> 2.0
+github "edopelawi/CascadingTableDelegate" ~> 23.0
 ```
 
 ## Author

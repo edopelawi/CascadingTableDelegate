@@ -29,7 +29,7 @@ protocol DestinationReviewSectionViewModel: class {
 	var reviewSectionObservers: [DestinationReviewSectionViewModelObserver] { get set }
 	
 	/// Retrieve more rows and add it to `rowViewModels`, then execute `onCompleted` when it's ready.
-	func retrieveMoreRowViewModels(_ onCompleted: ((Void) -> Void)?)
+	func retrieveMoreRowViewModels(_ onCompleted: (() -> Void)?)
 }
 
 extension DestinationReviewSectionViewModel {

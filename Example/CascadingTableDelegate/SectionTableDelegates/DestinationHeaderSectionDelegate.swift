@@ -86,11 +86,11 @@ extension DestinationHeaderSectionDelegate: CascadingTableDelegate {
 
 extension DestinationHeaderSectionDelegate: UITableViewDataSource {
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	@objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return Row.allValues.count
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	@objc func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		
 		guard let row = Row(rawValue: (indexPath as IndexPath).row) else {

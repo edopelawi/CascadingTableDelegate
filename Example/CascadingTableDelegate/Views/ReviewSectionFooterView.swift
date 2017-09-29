@@ -24,7 +24,7 @@ class ReviewSectionFooterView: UIView {
 	}
 	
 	/// Executed when this instance's button tapped.
-	var onButtonTapped: ((Void) -> Void)?
+	var onButtonTapped: (() -> Void)?
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()

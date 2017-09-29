@@ -73,7 +73,7 @@ class DestinationViewController: UIViewController {
 		
 		navigationBar?.barTintColor = UIColor.cst_DarkBlueGrey
 		navigationBar?.tintColor = UIColor.white
-		navigationBar?.titleTextAttributes = [ NSForegroundColorAttributeName: UIColor.white ]
+		navigationBar?.titleTextAttributes = [ NSAttributedStringKey.foregroundColor: UIColor.white ]
 		
 		navigationBar?.barStyle = .black
 	}
