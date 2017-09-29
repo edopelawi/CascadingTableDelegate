@@ -1,5 +1,18 @@
 # Change Log
 
+## [3.0.0](https://github.com/edopelawi/CascadingTableDelegate/tree/3.0.0) (2017-09-29)
+[Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.4...3.0.0)
+
+**Closed issues:**
+
+- Update Project For Xcode 9 & Swift 4 [\#14](https://github.com/edopelawi/CascadingTableDelegate/issues/14)
+
+**Merged pull requests:**
+
+- Swift 4 update [\#15](https://github.com/edopelawi/CascadingTableDelegate/pull/15) ([edopelawi](https://github.com/edopelawi))
+
+# Change Log
+
 ## [2.0.4](https://github.com/edopelawi/CascadingTableDelegate/tree/2.0.4) (2017-02-19)
 [Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.3...2.0.4)
 
