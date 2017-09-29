@@ -1,7 +1,7 @@
 # CascadingTableDelegate
 
 [![CI Status](http://img.shields.io/travis/edopelawi/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/edopelawi/CascadingTableDelegate)
-[![Swift 3](https://img.shields.io/badge/Swift-3.0-brightgreen.svg)](https://swift.org)
+[![Swift 4](https://img.shields.io/badge/Swift-4.0-brightgreen.svg)](https://swift.org)
 [![Platform](https://img.shields.io/cocoapods/p/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 
 [![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
@@ -159,7 +159,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 Below is the list of versions with its corresponding Swift version:
 
-| Swift Version | CascadingTableDelegate Version | 
+| Swift Version | CascadingTableDelegate Version |
 | --- | --- |
 | 4.x | 3.x |
 | 3.x | 2.x |
