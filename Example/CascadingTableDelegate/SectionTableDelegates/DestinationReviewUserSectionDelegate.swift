@@ -76,7 +76,7 @@ class DestinationReviewUserSectionDelegate: CascadingSectionTableDelegate {
 		
 		footerView.startActivityIndicator()
 		
-		viewModel?.retrieveMoreRowViewModels({ [weak self] _ in
+		viewModel?.retrieveMoreRowViewModels({ [weak self] in
 			self?.footerView.stopActivityIndicator()
 		})
 	}
@@ -92,15 +92,15 @@ extension DestinationReviewUserSectionDelegate: DestinationReviewSectionViewMode
 
 extension DestinationReviewUserSectionDelegate {
 	
-	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	@objc override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return CGFloat(1.1)
 	}
 	
-	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	@objc override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return headerView
 	}
 	
-	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+	@objc override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		
 		if let remainingViewModels = viewModel?.remainingRowViewModels, remainingViewModels > 0 {
 			return ReviewSectionFooterView.preferredHeight()
@@ -109,7 +109,7 @@ extension DestinationReviewUserSectionDelegate {
 		return CGFloat(1.1)
 	}
 	
-	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+	@objc override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		
 		if let remainingViewModels = viewModel?.remainingRowViewModels, remainingViewModels > 0 {
 			return footerView
@@ -118,7 +118,7 @@ extension DestinationReviewUserSectionDelegate {
 		return nil
 	}
 	
-	override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+	@objc override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
 		
 		guard let view = view as? ReviewSectionFooterView else {
 			return

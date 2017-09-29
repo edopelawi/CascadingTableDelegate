@@ -38,15 +38,15 @@ class DestinationInfoListSectionDelegate: CascadingSectionTableDelegate {
 		tableView.register(nib, forCellReuseIdentifier: identifier)
 	}
 	
-	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	@objc override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return childDelegates.isEmpty ? nil : headerView
 	}
 	
-	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	@objc override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return childDelegates.isEmpty ? CGFloat(1.1) : headerViewHeight
 	}
 	
-	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+	@objc override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return CGFloat(1.1)
 	}
 }

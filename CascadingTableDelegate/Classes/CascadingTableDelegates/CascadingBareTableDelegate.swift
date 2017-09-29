@@ -34,7 +34,7 @@ open class CascadingBareTableDelegate: NSObject {
 
 extension CascadingBareTableDelegate: CascadingTableDelegate {
 
-	open func prepare(tableView: UITableView) {
+	@objc open func prepare(tableView: UITableView) {
 		
 		childDelegates.forEach { child in
 			child.prepare(tableView: tableView)
@@ -44,11 +44,11 @@ extension CascadingBareTableDelegate: CascadingTableDelegate {
 
 extension CascadingBareTableDelegate: UITableViewDataSource {
 	
-	open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	@objc open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 0
 	}
 	
-	open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	@objc open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		return UITableViewCell()
 	}
 }

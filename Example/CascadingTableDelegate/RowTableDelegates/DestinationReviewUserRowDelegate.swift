@@ -31,24 +31,24 @@ class DestinationReviewUserRowDelegate: CascadingBareTableDelegate {
 
 extension DestinationReviewUserRowDelegate {		
 	
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	@objc override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let identifier = DestinationReviewUserRowDelegate.cellIdentifier
 		return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 	}
 	
-	func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+	@objc func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 		
 		let userReview = viewModel?.userReview ?? ""
 		return DestinationReviewUserCell.preferredHeight(userReview: userReview)
 	}
 	
-	func tableView(_ tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+	@objc func tableView(_ tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 		
 		return DestinationReviewUserCell.preferredHeight(userReview: "")
 	}
 	
-	func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+	@objc func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
 		
 		guard let cell = cell as? DestinationReviewUserCell,
 			let viewModel = viewModel else {

@@ -37,7 +37,7 @@ class DestinationViewModel {
 	// MARK: - Public methods
 	
 	/// Refreshes data that held by this instance, and invokes passed `completionHandler` when done.
-	func refreshData(_ completionHandler: ((Void) -> Void)?) {
+	func refreshData(_ completionHandler: (() -> Void)?) {
 		
 		let delayTime = DispatchTime.now() + 2.0
 		let dispatchQueue = DispatchQueue.global(qos: .userInitiated)
@@ -157,7 +157,7 @@ extension DestinationViewModel: DestinationReviewSectionViewModel {
 		return _remainingRowViewModels
 	}
 	
-	func retrieveMoreRowViewModels(_ onCompleted: ((Void) -> Void)?) {
+	func retrieveMoreRowViewModels(_ onCompleted: (() -> Void)?) {
 		
 		let delayTime = DispatchTime.now() + 2.0
 		let queue = DispatchQueue.global(qos: .userInitiated)
