@@ -1,5 +1,16 @@
 # Change Log
 
+## [3.0.1](https://github.com/edopelawi/CascadingTableDelegate/tree/3.0.1) (2018-01-04)
+[Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/3.0.0...3.0.1)
+
+**Closed issues:**
+
+- Build Fails with Carthage Version 0.26.2 [\#16](https://github.com/edopelawi/CascadingTableDelegate/issues/16)
+
+**Merged pull requests:**
+
+- Fix Carthage Build Error [\#17](https://github.com/edopelawi/CascadingTableDelegate/pull/17) ([leedsalex](https://github.com/leedsalex))
+
 ## [3.0.0](https://github.com/edopelawi/CascadingTableDelegate/tree/3.0.0) (2017-09-29)
 [Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.4...3.0.0)
 
@@ -11,8 +22,6 @@
 
 - Swift 4 update [\#15](https://github.com/edopelawi/CascadingTableDelegate/pull/15) ([edopelawi](https://github.com/edopelawi))
 
-# Change Log
-
 ## [2.0.4](https://github.com/edopelawi/CascadingTableDelegate/tree/2.0.4) (2017-02-19)
 [Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.3...2.0.4)
 
@@ -23,8 +32,6 @@
 **Merged pull requests:**
 
 - InternalInconsistencyException fix for sample project [\#10](https://github.com/edopelawi/CascadingTableDelegate/pull/10) ([edopelawi](https://github.com/edopelawi))
-
-# Change Log
 
 ## [2.0.3](https://github.com/edopelawi/CascadingTableDelegate/tree/2.0.3) (2016-12-21)
 [Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/2.0.2...2.0.3)
