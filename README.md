@@ -1,7 +1,7 @@
 # CascadingTableDelegate
 
 [![CI Status](http://img.shields.io/travis/edopelawi/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/edopelawi/CascadingTableDelegate)
-[![Swift 4.2](https://img.shields.io/badge/Swift-4.2-brightgreen.svg)](https://swift.org)
+[![Swift 5.0](https://img.shields.io/badge/Swift-5.0-brightgreen.svg)](https://swift.org)
 [![Platform](https://img.shields.io/cocoapods/p/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 
 [![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
@@ -161,6 +161,7 @@ Below is the list of versions with its corresponding Swift version:
 
 | Swift Version | CascadingTableDelegate Version |
 | --- | --- 		|
+| 5.0 | 4.x	 	|
 | 4.2 | 3.2.x 	|
 | 4.0 | 3.0.x 	|
 | 3.x | 2.x 		|
