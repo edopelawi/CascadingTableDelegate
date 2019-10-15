@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CascadingTableDelegate'
-  s.version          = '3.2.0'
+  s.version          = '4.0.0'
   s.summary          = 'A no-nonsense way to write cleaner `UITableViewDelegate` and `UITableViewDataSource`.'
 
   s.description      = <<-DESC
@@ -14,10 +14,12 @@ CascadingTableDelegate allows you to propagate `UITableViewDelegate` and `UITabl
   s.source           = { :git => 'https://github.com/edopelawi/CascadingTableDelegate.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/edopelawi'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'CascadingTableDelegate/Classes/**/*'
 
   s.frameworks = 'UIKit'
 
+  s.swift_versions = [4.0, 4.2, 5.0]
+  
 end
