@@ -1,5 +1,13 @@
 # Change Log
 
+## [3.2.0](https://github.com/edopelawi/CascadingTableDelegate/tree/3.2.0) (2019-10-14)
+[Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/1.0.0...3.2.0)
+
+
+**Merged pull requests:**
+
+- Migrate codebase to Swift 4.2 [\#23](https://github.com/edopelawi/CascadingTableDelegate/pull/23) ([edopelawi](https://github.com/edopelawi))
+
 ## [3.0.1](https://github.com/edopelawi/CascadingTableDelegate/tree/3.0.1) (2018-01-04)
 [Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/3.0.0...3.0.1)
 
