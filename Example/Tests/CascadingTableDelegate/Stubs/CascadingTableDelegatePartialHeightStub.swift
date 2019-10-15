@@ -43,7 +43,7 @@ class CascadingTableDelegatePartialHeightStub: NSObject {
 	
 	var returnedIndexPathOptional: IndexPath? = nil
 	
-	var returnedCellEditingStyle: UITableViewCellEditingStyle = .none
+	var returnedCellEditingStyle: UITableViewCell.EditingStyle = .none
 	
 	var returnedRowActions: [UITableViewRowAction]? = nil
 	

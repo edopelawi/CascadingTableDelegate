@@ -121,7 +121,7 @@ class CascadingSectionTableDelegateSpec: QuickSpec {
 			
 			it("should only call its tableView's `reloadSections(_:withRowAnimation)` using its index for `Section(animation:)` ", closure: {
 				
-				let expectedAnimation = UITableViewRowAnimation.automatic
+				let expectedAnimation = UITableView.RowAnimation.automatic
 				let expectedIndex = NSIndexSet(index: sectionTableDelegate.index)
 				
 				sectionTableDelegate.reloadModeOnChildDelegatesChanged = .section(animation: expectedAnimation)

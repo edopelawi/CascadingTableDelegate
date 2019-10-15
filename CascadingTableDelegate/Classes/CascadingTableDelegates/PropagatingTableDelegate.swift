@@ -226,7 +226,7 @@ extension PropagatingTableDelegate: UITableViewDataSource {
 		return childDelegates[childIndex].tableView?(tableView, canMoveRowAt: indexPath) ?? false
 	}
 	
-	@objc open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+	@objc open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		
 		guard let childIndex = getValidChildIndex(indexPath: indexPath) else {
 			return
@@ -306,11 +306,11 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 		
 	
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-			return UITableViewAutomaticDimension
+			return UITableView.automaticDimension
 		}
 		
 		
-		return childDelegates[validIndex].tableView?(tableView, heightForRowAt: indexPath) ?? UITableViewAutomaticDimension
+		return childDelegates[validIndex].tableView?(tableView, heightForRowAt: indexPath) ?? UITableView.automaticDimension
 	}
 	
 	@objc open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -334,12 +334,12 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 	@objc open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
-			return UITableViewAutomaticDimension
+			return UITableView.automaticDimension
 		}
 		
 		return childDelegates[validIndex].tableView?(tableView, estimatedHeightForRowAt: indexPath) ??
 		childDelegates[validIndex].tableView?(tableView, heightForRowAt: indexPath) ??
-		UITableViewAutomaticDimension
+		UITableView.automaticDimension
 	}
 	
 	@objc open func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
@@ -386,7 +386,7 @@ extension PropagatingTableDelegate: UITableViewDelegate {
 	
 	// MARK: - Editing
 	
-	@objc open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+	@objc open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
 		
 		guard let validIndex = getValidChildIndex(indexPath: indexPath) else {
 			return .none

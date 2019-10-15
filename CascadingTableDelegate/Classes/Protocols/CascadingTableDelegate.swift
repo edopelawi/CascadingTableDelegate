@@ -23,13 +23,13 @@ public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelega
 	var childDelegates: [CascadingTableDelegate] { get set }
 	
 	/**
-	Weak reference to this instance's parent `CascadingTableDelegate`.
+	Weak reference to this instance's parent `CascadingTableDelegate`. Please implement this variable with `weak` modifier.
 	
 	- note: In implementation, it's best to let the parent set this property.
 	
-	- warning: Autocompleting this field in Xcode might not add the `weak` keyword. Kindly add this manually to prevent retain cycle from happening.
+	- warning: Implementing this variable without `weak` modifier will cause retain cycle.
 	*/
-	weak var parentDelegate: CascadingTableDelegate? { get set }
+	var parentDelegate: CascadingTableDelegate? { get set }
 	
 	/**
 	Base initializer for this instance.

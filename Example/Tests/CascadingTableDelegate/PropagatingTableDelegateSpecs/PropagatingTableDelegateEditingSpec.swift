@@ -49,7 +49,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				context("with invalid indexPath's row value", {
 					
-					var result: UITableViewCellEditingStyle!
+					var result: UITableViewCell.EditingStyle!
 					
 					beforeEach({
 						let indexPath = IndexPath(row: 999, section: 0)
@@ -57,7 +57,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					})
 					
 					it("should return .none as result", closure: { 
-						expect(result).to(equal(UITableViewCellEditingStyle.none))
+						expect(result).to(equal(UITableViewCell.EditingStyle.none))
 					})
 					
 					it("should not call any of its child's methods", closure: { 
@@ -71,7 +71,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				context("when corresponding child doesn't implement the method", { 
 					
-					var result: UITableViewCellEditingStyle!
+					var result: UITableViewCell.EditingStyle!
 					
 					beforeEach({
 						let indexPath = IndexPath(row: bareChildDelegateIndex, section: 0)
@@ -79,7 +79,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					})
 					
 					it("should return .none as result", closure: {
-						expect(result).to(equal(UITableViewCellEditingStyle.none))
+						expect(result).to(equal(UITableViewCell.EditingStyle.none))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -93,14 +93,14 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				context("when correspinding child implements the method", { 
 					
-					var expectedResult: UITableViewCellEditingStyle!
-					var result: UITableViewCellEditingStyle!
+					var expectedResult: UITableViewCell.EditingStyle!
+					var result: UITableViewCell.EditingStyle!
 					
 					var indexPath: IndexPath!
 					
 					beforeEach({
 						
-						expectedResult = UITableViewCellEditingStyle.insert
+						expectedResult = UITableViewCell.EditingStyle.insert
 						
 						childDelegates[completeChildDelegateIndex].returnedCellEditingStyle = expectedResult
 						
@@ -139,7 +139,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				context("with invalid indexPath's section value", {
 					
-					var result: UITableViewCellEditingStyle!
+					var result: UITableViewCell.EditingStyle!
 					
 					beforeEach({
 						let indexPath = IndexPath(row: 0, section: 999)
@@ -147,7 +147,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					})
 					
 					it("should return .none as result", closure: {
-						expect(result).to(equal(UITableViewCellEditingStyle.none))
+						expect(result).to(equal(UITableViewCell.EditingStyle.none))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -161,7 +161,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				context("when corresponding child doesn't implement the method", {
 					
-					var result: UITableViewCellEditingStyle!
+					var result: UITableViewCell.EditingStyle!
 					
 					beforeEach({
 						let indexPath = IndexPath(row: 0, section: bareChildDelegateIndex)
@@ -169,7 +169,7 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 					})
 					
 					it("should return .none as result", closure: {
-						expect(result).to(equal(UITableViewCellEditingStyle.none))
+						expect(result).to(equal(UITableViewCell.EditingStyle.none))
 					})
 					
 					it("should not call any of its child's methods", closure: {
@@ -183,14 +183,14 @@ class PropagatingTableDelegateEditingSpec: QuickSpec {
 				
 				context("when correspinding child implements the method", {
 					
-					var expectedResult: UITableViewCellEditingStyle!
-					var result: UITableViewCellEditingStyle!
+					var expectedResult: UITableViewCell.EditingStyle!
+					var result: UITableViewCell.EditingStyle!
 					
 					var indexPath: IndexPath!
 					
 					beforeEach({
 						
-						expectedResult = UITableViewCellEditingStyle.insert
+						expectedResult = UITableViewCell.EditingStyle.insert
 						
 						childDelegates[completeChildDelegateIndex].returnedCellEditingStyle = expectedResult
 						
