@@ -37,7 +37,7 @@ extension DestinationHeaderSectionViewModel {
 	/// Remove passed `observer` from this instance's `headerSectionObservers`.
 	func remove(observer: DestinationHeaderSectionViewModelObserver) {
 		
-		let observerIndex = self.headerSectionObservers.index { anotherObserver -> Bool in
+		let observerIndex = self.headerSectionObservers.firstIndex { anotherObserver -> Bool in
 			
 			return observer === anotherObserver
 		}
