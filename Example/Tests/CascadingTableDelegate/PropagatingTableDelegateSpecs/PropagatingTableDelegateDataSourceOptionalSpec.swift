@@ -648,7 +648,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					
 					propagatingTableDelegate.tableView(
 						tableView,
-						commit: UITableViewCellEditingStyle.none,
+						commit: UITableViewCell.EditingStyle.none,
 						forRowAt: indexPath
 					)
 					
@@ -663,14 +663,14 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					
 					propagatingTableDelegate.tableView(
 						tableView,
-						commit: UITableViewCellEditingStyle.none,
+						commit: UITableViewCell.EditingStyle.none,
 						forRowAt: indexPath
 					)
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
 					guard let calledMethod = latestMethods.keys.first,
-						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: IndexPath) else {
+						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCell.EditingStyle, indexPath: IndexPath) else {
 							
 							fail("tableView(_:editingStyle:indexPath:) is not called correctly")
 							return
@@ -681,7 +681,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					expect(calledMethod).to(equal(expectedMethod))
 					
 					expect(calledParameters.tableView).to(equal(tableView))
-					expect(calledParameters.editingStyle).to(equal(UITableViewCellEditingStyle.none))
+					expect(calledParameters.editingStyle).to(equal(UITableViewCell.EditingStyle.none))
 					expect(calledParameters.indexPath).to(equal(indexPath))
 				})
 			})
@@ -698,7 +698,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					
 					propagatingTableDelegate.tableView(
 						tableView,
-						commit: UITableViewCellEditingStyle.none,
+						commit: UITableViewCell.EditingStyle.none,
 						forRowAt: indexPath
 					)
 					
@@ -713,14 +713,14 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					
 					propagatingTableDelegate.tableView(
 						tableView,
-						commit: UITableViewCellEditingStyle.none,
+						commit: UITableViewCell.EditingStyle.none,
 						forRowAt: indexPath
 					)
 					
 					let latestMethods = childDelegates[completeChildDelegateIndex].latestCalledDelegateMethod
 					
 					guard let calledMethod = latestMethods.keys.first,
-						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: IndexPath) else {
+						let calledParameters = latestMethods[calledMethod] as? (tableView: UITableView, editingStyle: UITableViewCell.EditingStyle, indexPath: IndexPath) else {
 							
 							fail("tableView(_:editingStyle:indexPath:) is not called correctly")
 							return
@@ -731,7 +731,7 @@ class CascadingTableDelegateDataSourceOptionalSpec: QuickSpec {
 					expect(calledMethod).to(equal(expectedMethod))
 					
 					expect(calledParameters.tableView).to(equal(tableView))
-					expect(calledParameters.editingStyle).to(equal(UITableViewCellEditingStyle.none))
+					expect(calledParameters.editingStyle).to(equal(UITableViewCell.EditingStyle.none))
 					expect(calledParameters.indexPath).to(equal(indexPath))
 				})
 			})

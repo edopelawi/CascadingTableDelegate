@@ -25,7 +25,7 @@ extension String {
 		let actualSize = self.boundingRect(
 			with: maxSize,
 			options: [ .usesFontLeading, .usesLineFragmentOrigin ],
-			attributes: [ NSAttributedStringKey.font: font ],
+			attributes: [ NSAttributedString.Key.font: font ],
 			context: nil
 		)
 		

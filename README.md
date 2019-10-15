@@ -1,7 +1,7 @@
 # CascadingTableDelegate
 
 [![CI Status](http://img.shields.io/travis/edopelawi/CascadingTableDelegate.svg?style=flat)](https://travis-ci.org/edopelawi/CascadingTableDelegate)
-[![Swift 4](https://img.shields.io/badge/Swift-4.0-brightgreen.svg)](https://swift.org)
+[![Swift 4.2](https://img.shields.io/badge/Swift-4.2-brightgreen.svg)](https://swift.org)
 [![Platform](https://img.shields.io/cocoapods/p/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
 
 [![Version](https://img.shields.io/cocoapods/v/CascadingTableDelegate.svg?style=flat)](http://cocoapods.org/pods/CascadingTableDelegate)
@@ -147,7 +147,7 @@ For details of every method's default return value (that has one), please refer 
 
 #### 3. `weak` declaration for `parentDelegate`
 
-Somehow, Xcode won't add `weak` modifier when you're implementing your own `CascadingTableDelegate` and autocompleting the `parentDelegate` property. Kindly add the `weak` modifier manually to prevent retain cycles 😁
+Swift won't allow us to add `weak` modifier in protocols, but we need it for `CascadingTableDelegate`'s `parentDelegate` property. Kindly add the `weak` modifier manually in the front of `parentDelegate` property of your `CascasdingTableDelegate`-compliant class to prevent retain cycles! 😁
 
 Still, if you still think typing it manually is a tedious job, just subclass the `CascadingBareTableDelegate` out. It's a bare implementation of the `CascadingTableDelegate`, without the propagating logic 🙂
 
@@ -160,10 +160,11 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 Below is the list of versions with its corresponding Swift version:
 
 | Swift Version | CascadingTableDelegate Version |
-| --- | --- |
-| 4.x | 3.x |
-| 3.x | 2.x |
-| 2.2 | 1.x |
+| --- | --- 		|
+| 4.2 | 3.2.x 	|
+| 4.0 | 3.0.x 	|
+| 3.x | 2.x 		|
+| 2.2 | 1.x 		|
 
 ## Installation
 
@@ -172,7 +173,7 @@ Below is the list of versions with its corresponding Swift version:
 To install CascadingTableDelegate using [CocoaPods](http://cocoapods.org), simply add the following line to your Podfile:
 
 ```ruby
-pod "CascadingTableDelegate", "~> 3.0"
+pod "CascadingTableDelegate", "~> 3.2"
 ```
 
 ### Carthage

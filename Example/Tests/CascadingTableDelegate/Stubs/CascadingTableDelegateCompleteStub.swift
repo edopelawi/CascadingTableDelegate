@@ -41,7 +41,7 @@ class CascadingTableDelegateCompleteStub: NSObject {
 	
 	var returnedIndexPathOptional: IndexPath? = nil
 	
-	var returnedCellEditingStyle: UITableViewCellEditingStyle = .none
+	var returnedCellEditingStyle: UITableViewCell.EditingStyle = .none
 	
 	var returnedRowActions: [UITableViewRowAction]? = nil
 	
@@ -166,7 +166,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDataSource {
 		return returnedInt
 	}
 	
-	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		
 		let selector = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
 		
@@ -368,7 +368,7 @@ extension CascadingTableDelegateCompleteStub: UITableViewDelegate {
 		_latestCalledDelegateMethod = [ selector: (tableView, indexPath) ]
 	}
 	
-	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
 		
 		let selector = #selector(UITableViewDelegate.tableView(_:editingStyleForRowAt:))
 		
