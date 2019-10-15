@@ -12,7 +12,7 @@ podfile: Example/Podfile
 
 before_install:
 - gem install cocoapods # Since Travis is not always on latest version
-- pod repo update # Uncomment this when the pod install failed because of the stale pod repo
+# - pod repo update # Uncomment this when the pod install failed because of the stale pod repo
 - pod install --project-directory=Example --verbose
 script:
 - set -o pipefail && xcodebuild
