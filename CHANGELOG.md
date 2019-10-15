@@ -1,5 +1,16 @@
 # Change Log
 
+## [4.0.0](https://github.com/edopelawi/CascadingTableDelegate/tree/4.0.0) (2019-10-14)
+[Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/1.0.0...4.0.0)
+
+**Closed issues:**
+
+- Update to Swift 5.x [\#24](https://github.com/edopelawi/CascadingTableDelegate/issues/24)
+
+**Merged pull requests:**
+
+- Update syntax to support Swift 5 [\#25](https://github.com/edopelawi/CascadingTableDelegate/pull/25) ([edopelawi](https://github.com/edopelawi))
+
 ## [3.2.0](https://github.com/edopelawi/CascadingTableDelegate/tree/3.2.0) (2019-10-14)
 [Full Changelog](https://github.com/edopelawi/CascadingTableDelegate/compare/1.0.0...3.2.0)
 
