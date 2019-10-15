@@ -18,6 +18,6 @@ script:
 - set -o pipefail && xcodebuild
   -workspace Example/CascadingTableDelegate.xcworkspace
   -scheme CascadingTableDelegate-Example
-  -destination 'platform=iOS Simulator,name=iPhone 5s'
+  -destination 'platform=iOS Simulator,name=iPhone 8'
   clean test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
 - pod lib lint
