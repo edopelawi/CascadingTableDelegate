@@ -42,7 +42,7 @@ extension DestinationReviewSectionViewModel {
 	/// Remove passed `observer` from this instance's `reviewSectionObservers`.
 	func remove(observer: DestinationReviewSectionViewModelObserver) {
 	
-		let observerIndex = self.reviewSectionObservers.index { anotherObserver -> Bool in
+		let observerIndex = self.reviewSectionObservers.firstIndex { anotherObserver -> Bool in
 			
 			return observer === anotherObserver
 		}
