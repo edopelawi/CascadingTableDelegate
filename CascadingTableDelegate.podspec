@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CascadingTableDelegate'
-  s.version          = '3.0.1'
+  s.version          = '3.2.0'
   s.summary          = 'A no-nonsense way to write cleaner `UITableViewDelegate` and `UITableViewDataSource`.'
 
   s.description      = <<-DESC
