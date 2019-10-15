@@ -41,7 +41,7 @@ class DestinationMapCell: UITableViewCell {
 			return
 		}
 		
-		let newRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionDistance, regionDistance)
+		let newRegion = MKCoordinateRegion.init(center: coordinate, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
 		
 		mapView.setRegion(newRegion, animated: false)
 		

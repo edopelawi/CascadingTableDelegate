@@ -44,7 +44,7 @@ protocol CascadingTableDelegateStub: CascadingTableDelegate {
 	var returnedIndexPathOptional: IndexPath? { get set }
 	
 	/// Holds returned `UITableViewCellEditingStyle` value that returned in any method that returns that type.
-	var returnedCellEditingStyle: UITableViewCellEditingStyle { get set }
+	var returnedCellEditingStyle: UITableViewCell.EditingStyle { get set }
 	
 	/// Holds returned `[UITableViewRowAction]` optional that returned in any method that returns that type.
 	var returnedRowActions: [UITableViewRowAction]? { get set }

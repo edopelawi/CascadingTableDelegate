@@ -19,7 +19,7 @@ class ReviewSectionFooterView: UIView {
 			return showMoreButton?.titleLabel?.text
 		}
 		set {
-			showMoreButton?.setTitle(newValue, for: UIControlState())
+			showMoreButton?.setTitle(newValue, for: UIControl.State())
 		}
 	}
 	

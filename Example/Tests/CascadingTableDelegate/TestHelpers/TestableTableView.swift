@@ -26,13 +26,13 @@ class TestableTableView: UITableView {
 	var passedReloadSectionsIndexSet: IndexSet?
 	
 	/// `UITableViewRowAnimation` that has been passed to the latest `reloadSections(_:withRowAnimation:)` call. Will be `nil` if it's not called yet.
-	var passedReloadSectionsAnimation: UITableViewRowAnimation?
+	var passedReloadSectionsAnimation: UITableView.RowAnimation?
 	
     convenience init() {
         self.init(frame: CGRect.zero, style: .plain)
     }
     
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
     }
     
@@ -46,7 +46,7 @@ class TestableTableView: UITableView {
     }
 	
 	/// This method won't call its superclass' `reloadSections(_:withRowAnimation:)`
-	override func reloadSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
+	override func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
 		reloadSectionsCalled = true
 		
 		passedReloadSectionsIndexSet = sections

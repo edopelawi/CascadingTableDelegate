@@ -40,7 +40,7 @@ open class CascadingSectionTableDelegate: PropagatingTableDelegate {
 		case whole
 	
 		/// Calls `currentTableView`s `reloadSections(_:withRowAnimation:)` using this instance's `index` and corresponding `animation`.
-		case section(animation: UITableViewRowAnimation)
+		case section(animation: UITableView.RowAnimation)
 	}
 	
 	// MARK: - Public properties
